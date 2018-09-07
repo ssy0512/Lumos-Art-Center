@@ -32,6 +32,7 @@
 </div>
 	
 <div class="container">
+	<tiles:insertAttribute name="slidebanner"/>
     <tiles:insertAttribute name="body"/>
 </div>
 
