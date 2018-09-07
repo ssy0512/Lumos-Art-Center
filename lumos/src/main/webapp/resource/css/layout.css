@@ -1,0 +1,362 @@
+@CHARSET "UTF-8";
+
+.header{
+    width:100%;
+}
+
+.container{
+    clear:both;
+    width:100%;
+}
+
+.footer{
+    clear:both;
+    width:100%;
+}
+
+/* header */
+.header-top{
+    width: 100%;
+    height: 50px;
+    clear: both;
+}
+
+/* HOME  ART SHOP 디자인 */
+.header-left{
+    width: 50%;
+    height: 50px;
+    float: left;
+}
+
+ul.header-left{
+  width:100%;
+  list-style: none;
+}
+
+ul.header-left li{
+  line-height: 50px;
+  color: #555;
+  text-decoration: none;
+  margin: 0;
+  display: inline;
+  padding: 0 10px 0 20px;
+  font-weight: bold;
+}
+
+/* 로그인 회원가입 ... */
+.header-right{
+    width: 50%;
+    height: 50px;
+    float: right;
+    text-align:right;
+}
+ul.header-right{
+  width:100%;
+  list-style: none;
+  padding: 0 10px;
+}
+
+ul.header-right li{
+  line-height: 50px;
+  display: inline-block;
+  color: #555;
+  text-decoration: none;
+  padding: 0 10px;
+}
+
+/* body */
+.body-container{
+    clear:both;
+    box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
+    min-height: 500px;
+    width: 1100px;
+    margin: 0px auto;
+}
+
+.body-left{
+    float:left;
+    width: 230px;
+}
+
+.body-right{
+    float:left;
+    width: 850px;
+    padding : 0px 10px;    
+}
+
+.body-content-container{
+    clear:both;
+    box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
+    min-height: 500px;
+    padding-top: 5px;
+}
+
+/* footer */
+.footer{
+	width:100%;
+	height:150px;
+}
+
+/* footer의 메뉴부분 (사이트맵 이용약관 · 정책  개인정보관리방침 홈페이지저작권보호정책 )*/
+.footer-menu{
+	width:100%;
+	height:40px;
+	background-color: #d9d9d9;
+	font-weight: 600;
+	font-size: 15px;
+	text-align: center;
+}
+
+.footer-menu li{
+	padding-right:35px;
+	height:40px;
+	display: inline-block;
+}
+
+.footer-menu li a{
+	text-decoration: none;	
+}
+
+.footer-menu li p{
+	display:table-cell;
+	height:40px;
+	vertical-align: middle;
+}
+
+/*footer하단 사업장 부분*/
+.footer-bottom{
+	width:100%;
+	height:110px;
+	background-color: #f3f3f3;
+}
+
+
+
+/*footer하단 사업장 부분 - 로고 자리*/
+.footer-bottom-left{
+	width:15%;
+	display:table-cell;
+	height:100%;
+	vertical-align: middle;
+	float:left;
+}
+
+
+/*footer하단 사업장 부분 - 사업장 자리*/
+.footer-bottom-right{
+	float:left;
+	width:85%;
+	height:100%;
+	color: #999999;
+}
+
+.footer-bottom-right a{
+	color: #0097a7;
+}
+
+.footer-bottom-right p{
+	display:table-cell;
+	height:110px;
+	vertical-align: middle;
+}
+/* left menu */
+.list-group{
+    box-sizing: border-box;
+    padding-left: 0;
+    margin-bottom: 20px;
+    width: 210px;    
+    min-height: 500px;
+    border-radius: 4px;    
+    box-shadow: 0 1px 2px rgba(0,0,0,.075);
+}
+
+.list-group .lefthead {
+    color: #ffffff;    
+    background-color: #337ab7;    
+    border-color: #337ab7;
+    font-family: "Malgun Gothic", "Nanum Gothic", "Dotum";
+    font-size: 14px;
+    font-weight: bold;    
+}
+
+.list-group .lefthead i {
+    background: #ffffff;
+    display: inline-block;
+    margin: 0 10px 0 3px;
+    position: relative;
+    top: 2px;
+    width: 3px;
+    height: 15px;    
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.list-group a{
+    text-decoration: none;
+    color: #555555;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    color: #424951;
+    font-weight: bold;
+    background: none;
+    background-color: #F6F6F6;
+    border-color: #D5D5D5;
+    text-shadow: 0 -1px 0 #286090;
+}
+
+a.list-group-item:hover{
+    background-color: #F6F6F6;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.list-group-item:last-child {
+    /* margin-top: -2px; */
+    margin-bottom: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+a.list-group-item, button.list-group-item {
+    color: #555;
+}
+
+.body-title {
+    color: #424951;
+    padding-bottom: 5px;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #dddddd;
+}
+.body-title h3 {
+    font-size: 24px;
+    min-width: 300px;
+    font-family: "Malgun Gothic", "Nanum Gothic", "Dotum";
+    font-weight: bold;
+    margin: 0 0 -5px 0;
+    padding-bottom: 5px;
+    display: inline-block;
+    border-bottom: 3px solid #424951;
+}
+
+/* menu */
+.menu {	
+	height: 100px;
+	width: 850px; 
+	margin:0 auto;	
+}
+
+.menu li {
+	position: relative;
+	list-style: none;
+	float: left;
+	display: block;
+	height: 100px; 
+	padding : 0px 20px 0px 20px;
+}
+
+/* Links */
+
+.menu li a {
+	display: block;
+	padding: 0 14px;
+	line-height: 100px;
+	text-decoration: none;
+	
+	text-align : center;
+	
+	font-weight: bold;
+	font-size: 18px;
+
+	color: white;
+
+	-webkit-transition: color .2s ease-in-out;
+	-moz-transition: color .2s ease-in-out;
+	-o-transition: color .2s ease-in-out;
+	-ms-transition: color .2s ease-in-out;
+	transition: color .2s ease-in-out;
+}
+
+.menu li:first-child a { border-left: none; }
+.menu li:last-child a{ border-right: none; }
+
+.menu li:hover > a { color: white; }
+.menu ul li:hover > a { color: #aa1717; }
+
+/* Sub Menu */
+
+.menu ul {
+	position: absolute; 
+	top: 100px;
+	left: 0;
+	border : 1px solid #aa1717;
+	border-top : none;
+	opacity: 0;
+	
+	background: white;
+
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+
+	-webkit-transition: opacity .25s ease .1s;
+	-moz-transition: opacity .25s ease .1s;
+	-o-transition: opacity .25s ease .1s;
+	-ms-transition: opacity .25s ease .1s;
+	transition: opacity .25s ease .1s;
+}
+
+.menu li:hover > ul { opacity: 1;overflow: visible;	z-index : 999;
+}
+
+
+.menu ul li {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+	width : 140px;
+	-webkit-transition: height .25s ease .1s;
+	-moz-transition: height .25s ease .1s;
+	-o-transition: height .25s ease .1s;
+	-ms-transition: height .25s ease .1s;
+	transition: height .25s ease .1s;
+}
+
+.menu li:hover > ul li {
+	height: 38px;
+	overflow: visible;
+	padding: 0;
+}
+
+.menu ul li a {
+	text-align:center;
+	width: 140px;
+	line-height : 30px;
+	padding: 4px 20px 4px 20px;
+	margin: 0;
+	color : #434343;
+	border: none;
+	border-bottom: 1px solid #353539;
+}
+
+.menu ul li:last-child a { border: none; }
+
+
+/* information*/
+.alert-info {
+    border: 1px solid #9acfea;
+    border-radius: 4px;
+    background-color: #d9edf7;
+    color: #31708f;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
