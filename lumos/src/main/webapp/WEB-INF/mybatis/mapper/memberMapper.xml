@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+    
+    <update id="updateLastLoginDate" parameterType="String">
+        UPDATE member1 SET lastLoginDate=SYSDATE 
+                    WHERE userId=#{userId}
+    </update>
+    
+   
+   <select id="readMember" resultType="com.sp.member.Member" parameterType="String">
+   SELECT userId, userName, userPwd, 
+               NVL(enabled, 0) enabled, 
+               createdDate, modifyDate, lastLoginDate
+            FROM member1
+            WHERE userId = #{userId} 
+   </select>
+   
+   
+    <!-- 어쏘러티(권한) 테이블 -->    
+	<insert id="insertAuthority" parameterType="com.sp.member.Member">
+	    INSERT INTO memberAuthority(userId, authority)
+	        VALUES (#{userId}, #{authority})
+	</insert>
+     
+	<select id="listAuthority" parameterType="String" resultType="com.sp.member.Member">
+	    SELECT userId, authority
+	        FROM memberAuthority WHERE userId=#{userId}
+	</select>
+	
+	<update id="updateAuthority" parameterType="com.sp.member.Member">
+	     UPDATE memberAuthority SET authority=#{authority}
+	         WHERE userId=#{userId} AND authority=#{oldAuthority}
+	</update>
+	
+</mapper>

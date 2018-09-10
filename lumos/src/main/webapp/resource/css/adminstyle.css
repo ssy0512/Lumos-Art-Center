@@ -11,10 +11,10 @@ body {
 }
 
 a {
+	font-size: 14px;
     cursor: pointer;
-    color: #434343;
+    color: #000000;
     text-decoration: none;
-    /*line-height: 150%;*/
 }
 a:hover, a:active {
     color: #aa1717;
@@ -50,7 +50,7 @@ a:hover, a:active {
     font-size: 15px; 
     border:none;
     color:#ffffff;
-    background:#aa1717;
+    background:#507CD1;
     width: 360px;
     height: 50px;
     line-height: 50px;

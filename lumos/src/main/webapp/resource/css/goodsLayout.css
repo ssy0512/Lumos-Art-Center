@@ -1,0 +1,234 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 맑은고딕;
+}
+
+.header {
+    width:100%;
+    min-width:1480px;
+    text-align:left;
+}
+
+.header-top {
+    margin:0px auto;
+    width: 100%;
+    height: 35px;
+    clear: both;
+}
+
+.header-left {
+    width: 50%;
+    height: 35px;
+    float: left;
+}
+
+.header-left p a {
+     font-size: 16px; font-weight: 700;
+     margin-right: 5px;
+}
+
+
+
+.header-right {
+    width: 50%;
+    height: 35px;
+    float: left;
+}
+
+.header-right div a{
+ color: #434343;
+}
+
+.footer{
+	width:100%;
+	min-width:1480px;
+	height:150px;
+}
+
+/* footer의 메뉴부분 (사이트맵 이용약관 · 정책  개인정보관리방침 홈페이지저작권보호정책 )*/
+.goods-footer-menu{
+	width:100%;
+	height:40px;
+	background-color: #aa1717;
+	font-weight: 600;
+	font-size: 15px;
+	text-align: center;
+}
+
+.goods-footer-menu li{
+	padding-right:35px;
+	height:40px;
+	display: inline-block;
+}
+
+.goods-footer-menu li a{
+	text-decoration: none;	
+}
+
+.goods-footer-menu li p{
+	display:table-cell;
+	height:40px;
+	vertical-align: middle;
+	color: #ffffff;
+}
+
+/* menu */
+.menu {
+    margin:0px auto;
+    width: 100%;
+    height:110px;
+    clear: both;
+    background-color: white;
+    border: 2px solid #aa1717;
+}
+
+.menu-left{
+	width: 20%;
+    height:110px;
+    float: left;
+}
+
+.menu-left a{
+	color : #aa1717;
+	font-size: 30px;
+	font-weight: 900;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	margin-top: 35px;
+}
+
+.menu-center{
+	width:55%;
+	height:110px;
+    float: left;
+}
+
+.menu-right{
+	width: 25%;
+    height:110px;
+    float: left;
+}
+
+.mainSearchDiv{
+	width:250px;
+	height:35px;
+	margin: 35px auto 0;
+}
+
+.mainSearch{
+	float: left;
+	border:2px solid #aa1717;
+	border-radius:15px;
+	width:200px;
+	height:30px;
+}
+
+.mainSearchDiv a{
+	 display: inline-block;
+	 margin-left:10px;
+	 margin-top: 4px;
+}	
+
+.mainSearchImg{
+}
+
+.nav-align{
+	width:550px;	
+	margin: 0 auto;
+}
+
+ul.nav {
+  display: table-cell;
+  height:110px;
+  vertical-align: middle;
+  padding: 0;
+  list-style: none;
+}
+
+ul.nav li { 
+	height:40px;
+	display: inline;
+}
+
+ul.nav li a {
+  float: left;
+  line-height: 40px;
+  font-weight : 900;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0;
+  padding: 0 30px;
+  color: #434343;
+}
+
+ul.nav .current a, ul.nav li:hover > a {
+  color: #ffffff;
+  font-weight : 900;
+  text-decoration: none;
+  background: #aa1717;
+}
+
+
+/*footer하단 사업장 부분*/
+.footer-bottom{
+	width:100%;
+	height:110px;
+	background-color: #f3f3f3;
+}
+
+
+
+/*footer하단 사업장 부분 - 로고 자리*/
+.footer-bottom-left{
+	width:15%;
+	display:table-cell;
+	height:100%;
+	vertical-align: middle;
+	float:left;
+}
+
+
+/*footer하단 사업장 부분 - 사업장 자리*/
+.footer-bottom-right{
+	float:left;
+	width:85%;
+	height:100%;
+	color: #999999;
+}
+
+.footer-bottom-right a{
+	color: #0097a7;
+}
+
+.footer-bottom-right p{
+	display:table-cell;
+	height:110px;
+	vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+/* main body */
+
+
+.container {
+    clear:both;
+    width:100%;
+    text-align:left;
+}
+
+.body-container {
+    clear:both;
+    margin: 0px auto 15px;
+    min-height: 450px;
+}
+
