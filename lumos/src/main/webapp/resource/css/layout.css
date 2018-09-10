@@ -13,6 +13,7 @@
 .footer{
     clear:both;
     width:100%;
+    min-width: 1438px;
 }
 
 /* header */
@@ -135,7 +136,7 @@ ul.header-right li{
 
 /*footer하단 사업장 부분 - 로고 자리*/
 .footer-bottom-left{
-	width:15%;
+	width:20%;
 	display:table-cell;
 	height:100%;
 	vertical-align: middle;
@@ -146,7 +147,7 @@ ul.header-right li{
 /*footer하단 사업장 부분 - 사업장 자리*/
 .footer-bottom-right{
 	float:left;
-	width:85%;
+	width:80%;
 	height:100%;
 	color: #999999;
 }
