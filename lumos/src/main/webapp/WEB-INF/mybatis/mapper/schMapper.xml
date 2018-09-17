@@ -3,13 +3,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sch">
 	<select id="listConcertMonth" parameterType="map" resultType="com.sp.sch.Schedule">
-		SELECT c.hallNum, concertNum, concertName, ch.hallName, concertStart, concertEnd		            
-		FROM concert c
-		JOIN concertHall ch ON c.hallNum=ch.hallNum
-		WHERE (concertStart &gt;= TO_DATE(#{startDay}, 'YYYYMMDD')
-		             AND concertStart &lt;= TO_DATE(#{endDay}, 'YYYYMMDD')  )
-		             OR ( TO_CHAR(concertEnd,'YYYYMM')=#{endCount} )
-		  ORDER BY concertStart ASC, concertNum DESC 
+		SELECT * FROM(
+			SELECT sessionNum,c.concertName,ch.hallName,sessionDate,sessionTime,cs.concertNum		            
+				,ROW_NUMBER() OVER(partition by sessionDate order by sessionDate) cnt
+			FROM concertSession cs
+			JOIN concert c on cs.concertNum=c.concertNum
+			JOIN concertHall ch ON c.hallNum=ch.hallNum
+			)
+		WHERE (sessionDate &gt;= TO_DATE(#{startDay}, 'YYYYMMDD')
+		             AND sessionDate &lt;= TO_DATE(#{endDay}, 'YYYYMMDD')  )
+		       AND cnt=1
+		ORDER BY sessionDate ASC, concertNum DESC 
 	</select>
 <!-- 
 	<select id="listYear" parameterType="map" resultType="com.sp.sch.Schedule">

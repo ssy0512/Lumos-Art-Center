@@ -72,11 +72,13 @@ public class ConcertController {
 			// 스케쥴 가져오기
 			String startDay = String.format("%04d%02d%02d", syear, smonth, sdate);
 			String endDay = String.format("%04d%02d%02d", eyear, emonth, edate);
-			String endCount = String.format("%04d%02d", eyear, emonth);
+			String endMonth = String.format("%04d%02d", eyear, emonth);
+			String startMonth = String.format("%04d%02d", syear, smonth);
 			Map<String, Object> map = new HashMap<>();
 			map.put("startDay", startDay);
 			map.put("endDay", endDay);
-			map.put("endCount",endCount);
+			map.put("endMonth",endMonth);
+			map.put("startMonth",startMonth);
 			
 			List<Schedule> list = service.listMonth(map);
 			
@@ -85,35 +87,30 @@ public class ConcertController {
 
 			// 1일 앞의 전달 날짜 및 일정 출력
 			// startDay만 처리하고 endDay는 처리하지 않음(반복도 처리하지않음)
-			
+			// 날짜, 일정 넣기
 			for (int i = 1; i < week; i++) {
 				s = String.format("%04d%02d%02d", syear, smonth, sdate);
 				days[0][i - 1] = "<span class='textDate preMonthDate' data-date='" + s + "' >" + sdate + "</span>";
-
 				for (Schedule dto : list) {
-					String sd = dto.getConcertStart().substring(5,10);
+					int today = Integer.parseInt(s.substring(4));
+					String sd = dto.getSessionDate().substring(5,10);
 					int sd2=Integer.parseInt(sd.replaceAll("-", ""));
-					int cn = Integer.parseInt(s.substring(4));
 					
-					String ed = dto.getConcertEnd().substring(5,10);
-					int ed2=Integer.parseInt(ed.replaceAll("-", ""));
-					
-					/*if (sd2 == cn) {
-						for(int j=1;j<ed2){
-							days[0][i - 1] += "<span class='scheduleSubject' data-date='" + s + "' data-num='"
-									+ dto.getConcertNum() + "' >"+dto.getHallName()+"&nbsp;&nbsp;"+ dto.getConcertName() + "</span>";
-						}
-					} else if (sd2 > cn) {
+					if (sd2 == today) {
+							days[0][i - 1] += "<span class='scheduleSubject' data-date='" + sd2 + "' data-num='"
+									+ dto.getConcertNum() + "' onclick='goArticle("+dto.getConcertNum()+")'>"
+									+dto.getHallName()+"&nbsp;&nbsp;"+ dto.getConcertName() + "</span>";
+					} else if (sd2 > today) {
 						break;
-					}*/
+					}
+				
 				}
-
-
 				sdate++;
 			}
+			
 			// year년도 month월 날짜 및 일정 출력
+			// 날짜,일정 넣기
 			int row, n = 0;
-
 			jump: for (row = 0; row < days.length; row++) {
 				for (int i = week - 1; i < 7; i++) {
 					n++;
@@ -126,79 +123,83 @@ public class ConcertController {
 					} else {
 						days[row][i] = "<span class='textDate nowDate' data-date='" + s + "' >" + n + "</span>";
 					}
-
+					
 					for (Schedule dto : list) {
-						String sd = dto.getConcertStart().substring(5,10);
+						int today = Integer.parseInt(s.substring(4));
+						String sd = dto.getSessionDate().substring(5,10);
 						int sd2=Integer.parseInt(sd.replaceAll("-", ""));
-						int cn = Integer.parseInt(s.substring(4));
-						String ed = dto.getConcertEnd().substring(5,10);
-						int ed2=Integer.parseInt(ed.replaceAll("-", ""));
 						
-						/* 
-						 if(s==concertStart){
-						   int ii=i;
-						   int rr=row;
-						   for(int j=concertStart;j<=concertEnd;j++){
-						  	  days[rr][ii]+= "<span class='scheduleSubject' data-date='" + j + "' data-num='"
-									+ dto.getConcertNum() + "' >"+dto.getHallName()+"&nbsp;&nbsp;"+ dto.getConcertName() + "</span>";
-							ii++;
-							if(ii>6) {ii=0; rr++; if(rr>=days.length) break;}
-						   }
-						 
-						 }
-						 */
-
-						if (sd2 == cn) {
-							int ii=i;
-							int rr=row;
-							for(int j=sd2;j<=ed2;j++){
-
-								days[rr][ii]+= "<span class='scheduleSubject' data-date='" + j + "' data-num='"
+						// 공연 시작날짜가 month안에 있을때
+						if (sd2 == today) {
+								days[row][i]+= "<span class='scheduleSubject' data-date='" + sd2+ "' data-num='"
 										+ dto.getConcertNum() + "' onclick='goArticle("+dto.getConcertNum()+")'>"+dto.getHallName()+"&nbsp;&nbsp;"+ dto.getConcertName() + "</span>";
-								ii++;
-								
-								System.out.println(rr+"+"+ii);
-								if(ii>6) { 
-									ii=0; 
-									rr++; 
-									if(rr>=days.length) 
-										break;
-								}
 							}
 						}
-					}
-
 					if (n == cal.getActualMaximum(Calendar.DATE)) {
 						week = i + 1;
 						break jump;
 					}
+					
 				}
 				week = 1;
 			}
 
 			// year년도 month월 마지막 날짜 이후 일정 출력
+			// 일 넣기
 			if (week != 7) {
 				n = 0;
 				for (int i = week; i < 7; i++) {
 					n++;
 					s = String.format("%04d%02d%02d", eyear, emonth, n);
 					days[row][i] = "<span class='textDate nextMonthDate' data-date='" + s + "' >" + n + "</span>";
-
+				
 					for (Schedule dto : list) {
+						int today = Integer.parseInt(s.substring(4));
+						String sd = dto.getSessionDate().substring(5,10);
+						int sd2=Integer.parseInt(sd.replaceAll("-", ""));
+						
+						// 공연 시작날짜가 표시된 마지막주 안에 있을때
+						if (sd2 == today) {
+								days[row][i]+= "<span class='scheduleSubject' data-date='" + sd2+ "' data-num='"
+										+ dto.getConcertNum() + "' onclick='goArticle("+dto.getConcertNum()+")'>"+dto.getHallName()+"&nbsp;&nbsp;"+ dto.getConcertName() + "</span>";
+						} else if (sd2 > today) {
+							break;
+						}
+					}
+				}
+			}
+			// 일정 넣기
+/*			week=rweek;
+			if (week != 7) {
+				n = 0;
+				for (int i = week; i < 7; i++) {
+					n++;
+					s = String.format("%04d%02d%02d", eyear, emonth, n);
+					
+					for (Schedule dto : list) {
+						int today = Integer.parseInt(s.substring(4));
 						String sd = dto.getConcertStart().substring(5,10);
 						int sd2=Integer.parseInt(sd.replaceAll("-", ""));
-						int cn = Integer.parseInt(s.substring(4));
+						
+						int sddate = Integer.parseInt(dto.getConcertStart().substring(8,10));
+						
+						int ii=i;
 
-						if (sd2 == cn) {
-							days[row][i]+= "<span class='scheduleSubject' data-date='" + s + "' data-num='"
+						// 공연 시작날짜가 표시된 마지막주 안에 있을때
+						if (sd2 == today) {
+							for(int j=sddate;j<7;j++) {
+								
+								days[row][ii]+= "<span class='scheduleSubject' data-date='" + s + "' data-num='"
 									+ dto.getConcertNum() + "' >" +dto.getHallName()+"&nbsp;&nbsp;"+ dto.getConcertName() + "</span>";
-						} else if (sd2 > cn) {
+								ii++;
+							}
+						} else if (sd2 > today) {
 							break;
 						}
 					}
 
 				}
-			}
+			}*/
 
 			model.addAttribute("year", year);
 			model.addAttribute("month", month);
