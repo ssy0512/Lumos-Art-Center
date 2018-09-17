@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exhibit">
+	<select id="readExhibit" parameterType="Integer" resultType="com.sp.exhibit.Exhibit">
+		SELECT exhibitNum,exhibitName,TO_CHAR(exhibitStart, 'YYYY-MM-DD')
+		exhibitStart,content,host,supervise,admitStart,admitEnd,ratingName,
+		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, HallName, exHallLocate, exProfileImage,genre
+		FROM EXHIBIT e
+		JOIN exhibitHall h ON e.hallNum=h.hallNum
+        JOIN rating h ON e.ratingNum=h.ratingNum
+        WHERE exhibitNum=#{num}
+	</select>
+</mapper>

@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+/* 기간선택 */
+.sch_period {
+	padding: 20px 195px 20px 93px;
+	border-top: 1px solid #cccdcf;
+    overflow: hidden;
+}
+
+/* 장소선택 */
+.sch_group {
+	overflow: hidden;
+    border-top: 1px solid #cccdcf;
+    border-bottom: 1px solid #cccdcf;
+    background-color: #f5f6f9;	
+}
+
+
+/* 1. 기간선택 (sch_period내부) */
+/* 년 표시 */
+.sch_year {
+	float: left;
+	position: relative;
+    width: 137px;
+    margin-right: 25px;
+}
+
+.sch_year a {
+	position: absolute;
+    top: 0;
+    display: block;
+    width: 26px;
+    height: 33px;
+}
+
+.sch_showyear {
+	display: block;
+    padding: 0 26px;
+    color: #222;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 33px;
+    text-align: center;
+}
+
+/* 기간 탭 */
+.sch_period li{
+	float: left;
+    width: 64px;
+    height: 33px;
+    list-style: none;
+}
+
+.sch_period li.active_p{
+    background-color: #aa1717;
+}
+
+.sch_period li.active_p > a{
+    color: white;
+    border: 1px solid #aa1717;
+}
+
+.sch_period li a{
+	display: block;
+    margin-left: -1px;
+    color: #222;
+    border: 1px solid #cccdcf;
+    line-height: 31px;
+    text-align: center;
+}
+
+/* 공연명으로 검색 */
+.sch_name {
+    float: right;
+    padding: 1px;
+    border: 1px solid #cccdcf;
+}
+
+.sch_name input {
+	width: 141px;
+    height: 29px;
+    padding: 0 0 0 12px;
+    border: 0 none;
+    background-color: #fff;
+    line-height: 29px;
+    vertical-align: middle;
+}
+
+.sch_name button {
+	width: 38px;
+    height: 29px;
+    border: 0 none;
+    vertical-align: middle;
+}
+
+.hide {
+	display: none;
+}
+
+/* 2. 장소선택 (sch_group내부)*/
+.sch_txt {
+	float: left;
+    width: 319px;
+    height: 85px;
+    border-right: 1px solid #cccdcf;
+    font-size: 0;
+    text-align: center;
+    line-height: 85px;
+}
+
+.sch_txt p {
+	color: #9f2b2c;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.sch_hallGroup ul {
+	height: 85px;
+    overflow: hidden;
+}
+
+.sch_hallGroup ul li{
+	float: left;
+    padding-left: 25px;
+    list-style: none;
+}
+
+
+/* item */
+.sch_item {
+	position: relative;
+    margin-right: 20px;
+    width: 240px;
+    padding: 15px 0;
+    display: block;
+    float: left;
+}
+
+.sch_itemPoster {
+	width: 240px;
+    height: 320px;
+    background-color: #ccc;
+}
+
+.sch_itemPoster a img{
+	width: 240px;
+    height: 320px;
+}
+
+.sch_itemContent {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #333;
+    letter-spacing: 0px;
+    word-break: keep-all;
+}
+
+.sch_itemContent_sbj {
+	margin-top : 10px;
+	height: 50px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+}
+
+.sch_itemContent_1 {
+	margin: 0;
+	margin-top : 15px;
+    padding: 0;
+    list-style: none;
+    color: #999;
+    letter-spacing: 0px;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.sch_itemContent_2 {
+	margin: 0;
+    padding: 0;
+    list-style: none;
+    color: #999;
+    letter-spacing: 0px;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

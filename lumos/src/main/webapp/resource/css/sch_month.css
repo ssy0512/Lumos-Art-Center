@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+
+.sch_month {
+    padding: 29px 116px 19px 116px;
+    height : 140px;
+}
+
+.tab_year {
+	float: left;
+    position: relative;
+    margin: 0px 10px;
+    padding-bottom:20px;
+}
+
+.place_info {
+    padding-top: 3px;
+    overflow: hidden;
+}
+
+.fr {
+    float: right;
+}
+
+.tab_month{
+	clear:both;
+	margin:11px 10px 0px 10px;
+}
+
+.tab_month li{
+	float : left;
+	width : 64px;
+	height : 33px;
+	margin : auto;
+	list-style: none;
+}
+
+.tab_month li a{
+	text-decoration: none;
+	display: block;
+    margin-left: -1px;
+    color: #222;
+    border: 1px solid #cccdcf;
+    line-height: 31px;
+    text-align: center;
+}
+
+ul.tab_month li:hover >a  {
+	background-color:#aa1717;
+	color: white;
+	text-decoration: none;
+}
+
+ul.tab_month li.active{
+	padding-top: 0px;
+}
+
+ul.tab_month li.active >a{
+	background-color:#aa1717;
+	color: white;
+}
+
+.place_info li {
+	list-style: none;
+    float: left;
+    padding: 5px 20px 0 16px;
+    background-position: 0 50%;
+    color: #424951;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.titleDate {
+	display: inline-block;
+	font-weight: 600; 
+	font-size: 27px;
+	padding:0px 10px;
+	text-align:left;
+	position: relative;
+	top: 4px;
+}
+
+.prebtnDate{
+	display: inline-block;
+	font-size: 18px;
+	color:#434343;
+    background-color:#fff;
+    text-align:left;
+    cursor: pointer;
+}
+
+.nextbtnDate{
+	display: inline-block;
+	font-size: 18px;
+	color:#434343;
+    background-color:#fff;
+    text-align:left;
+    cursor: pointer;
+}
+
+.textDate {
+      font-weight: 500; cursor: pointer;  display: block; color:#434343;
+}
+.preMonthDate, .nextMonthDate {
+      color:#aaaaaa;
+}
+.nowDate {
+      color:#111111;
+}
+.saturdayDate{
+      color:#0000ff;
+}
+.sundayDate{
+      color:#ff0000;
+}
+
+.scheduleSubject {
+   display:block;
+   /*width:100%;*/
+   width:110px;
+   margin:1.5px 0;
+   font-size:13px;
+   color:#555555;
+   background:#eeeeee;
+   cursor: pointer;
+   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.scheduleMore {
+   display:block;
+   width:110px;
+   margin:0 0 1.5px;
+   font-size:13px;
+   color:#555555;
+   cursor: pointer;
+   text-align:right;
+}

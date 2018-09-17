@@ -11,9 +11,6 @@
 			<ul class="header-left">
 				<li><a href="<%=cp%>/">HOME</a></li>
 				<li><a href="<%=cp%>/goods"  style="color: #aa1717;">ART SHOP</a></li>
-				<c:if test="${sessionScope.member.userId=='admin'}">
-					<li><a href="<%=cp%>/admin/main">관리자 페이지</a></li>
-				</c:if>
 			</ul>
 	    </div>
 	   
@@ -41,8 +38,8 @@
 	 	<ul class="menu">
  			<li><a href="<%=cp%>/">공연예매</a>
 		        <ul>
-		        	<li><a href="<%=cp%>/">공연일정</a></li>
-	        		<li><a href="<%=cp%>/">공연장 안내</a></li>
+		        	<li><a href="<%=cp%>/concert/main">공연일정</a></li>
+	        		<li><a href="<%=cp%>/concert/info">공연장 안내</a></li>
 		        </ul>
 		    </li>
 		    <li><a href="<%=cp%>/">전시예매</a>

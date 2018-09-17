@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+ul.tabs {
+		margin: 10px 0;
+		padding: 0;
+		float: left;
+		list-style: none;
+		height: 50px;
+		border-bottom: 1px solid #dddddd;
+		width: 100%;
+}
+
+ul.tabs li {
+	padding-top : 4px;
+	height: 50px;
+	float: left;
+}
+
+ul.tabs li a{
+	    display: block;
+		margin: 0;
+		cursor: pointer;
+		height: 46px;
+		line-height: 46px;
+		overflow: hidden;
+		background: #ffffff;
+		width: 340px;
+		text-align: center;
+		font-size: 15px;
+		border: 1px solid #cccdcf;
+		border-bottom-color: #222;
+		margin-left: -1px;
+}
+
+ul.tabs li:hover > a{
+	text-decoration: none;
+}	
+
+ul.tabs li.active {
+	    padding-top : 0px;
+}
+
+ul.tabs li.active > a{
+		line-height: 50px;
+		height: 50px;
+	    position: relative;
+		font-size: 17px;
+	    font-weight: 700;
+		border: 1px solid #222;
+		border-bottom-color: #fff;
+		border-bottom-color:  transparent;
+}

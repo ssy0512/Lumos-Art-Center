@@ -18,6 +18,7 @@
 		
 		<!-- 모든 사용자 접근허용 -->
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
+		<intercept-url pattern="/concert/**" access="permitAll"/>
 		<intercept-url pattern="/main" access="permitAll"/>
 		<intercept-url pattern="/member/login" access="permitAll"/>
 		<intercept-url pattern="/member/member" access="permitAll"/>
