@@ -27,7 +27,7 @@
 }
 
 .pickBtn {
-		width: 150px;
+	width: 150px;
 	height : 33px;
     color: #696969;
     font-weight: 700;
@@ -42,6 +42,24 @@
 	color: #ffffff;
 	background-color: #c0c0c0;
 }
+
+.pickedBtn {
+	width: 150px;
+	height : 33px;
+    color: #ffffff;
+    font-weight: 700;
+    float: right;
+    border: 1px solid gray;
+    background-color: #c0c0c0;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.pageTitleAndButton .pickedBtn:hover {
+	color: #c0c0c0;
+	background-color: #ffffff;
+}
+
 
 /* 최상단 div (포스터 + 상세정보) */
 .exhibit_detail{

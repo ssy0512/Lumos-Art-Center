@@ -45,11 +45,10 @@ public class ExhibitServiceImpl implements ExhibitService{
 		int result=0;
 		try {
 			result=dao.insertData("exhibit.insertBoardLike", map);
-		} catch (SQLIntegrityConstraintViolationException e) {
+		} catch (Exception e) {
 			result = deleteBoardLike(map);
 			System.out.println(e.toString());
-		} catch (Exception e) {
-			System.out.println(e.toString());
+			return result;
 		}
 		return result;
 	}
@@ -59,6 +58,17 @@ public class ExhibitServiceImpl implements ExhibitService{
 		int result=0;
 		try {
 			result=dao.insertData("exhibit.deleteBoardLike", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int countBoardLike(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.selectOne("exhibit.countBoardLike", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

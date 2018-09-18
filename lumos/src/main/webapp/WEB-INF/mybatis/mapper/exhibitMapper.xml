@@ -23,4 +23,8 @@
 	<delete id="deleteBoardLike" parameterType="map">
 		DELETE FROM exhibitInterest WHERE exhibitNum=#{exhibitNum} AND userId=#{userId}
 	</delete>
+	
+	<select id="countBoardLike" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM exhibitInterest WHERE exhibitNum=#{exhibitNum} AND userId=#{userId}
+	</select>
 </mapper>

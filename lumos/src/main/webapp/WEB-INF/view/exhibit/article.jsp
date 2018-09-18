@@ -7,12 +7,14 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitArticle.css" type="text/css">
 <script type="text/javascript">
+function login() {
+	location.href="<%=cp%>/member/login";
+}
+
 $(function(){
+	isExhibitInterest(${dto.exhibitNum});
+	
 	$(".btnSendInterest").click(function(){
-		return;
-		if(! confirm("관심 작품으로 등록하시겠습니까? "))
-			return;
-		
 		var url="<%=cp%>/exhibit/insertExhibitInterest";
 		var num="${dto.exhibitNum}";
 		
@@ -22,7 +24,10 @@ $(function(){
 			,data:{num:num}
 			,dataType:"json"
 			,success:function(data) {
-
+				var state=data.state;
+				if(state=="true") {
+					isExhibitInterest(num);
+				}
 			}
 			,beforeSend : function(jqXHR) {
 		        jqXHR.setRequestHeader("AJAX", true);
@@ -37,7 +42,41 @@ $(function(){
 		});
 		
 	});
+	
+	
+	function isExhibitInterest(num) {
+		var url="<%=cp%>/exhibit/isExhibitInterest";
+		$.ajax({
+			type:"post"
+			,url:url
+			,data:{num:num}
+			,dataType:"json"
+			,success:function(data) {
+				var state=data.state;
+				if(state=="true") {
+					$(".btnSendInterest").removeClass("pickBtn");
+					$(".btnSendInterest").addClass("pickedBtn");
+					$(".btnSendInterest").find("span").html("나의 관심 작품");
+				} else {
+					$(".btnSendInterest").removeClass("pickedBtn");
+					$(".btnSendInterest").addClass("pickBtn");
+					$(".btnSendInterest").find("span").html("관심 작품 등록하기");
+				}
+			}
+			,beforeSend : function(jqXHR) {
+		        jqXHR.setRequestHeader("AJAX", true);
+		    }
+		    ,error:function(jqXHR) {
+		    	if(jqXHR.status==403) {
+		    		login();
+		    		return;
+		    	}
+		    	console.log(jqXHR.responseText);
+		    }
+		});
+	}
 });
+
 </script>
 
 <%-- 포스터 + 상세정보 --%>
@@ -51,9 +90,9 @@ $(function(){
 				</button>
 			</c:if>
 			<c:if test="${sessionScope.member.userId!='admin'}">
-				<button type="button" class="pickBtn btnSendInterest">
+				<button type="button" class="btnSendInterest">
 					<img src="<%=cp %>/resource/images/lumos/pick_icon.png" style="margin-bottom: 3px;">
-					<span style="display:inline-block; margin-top: 2px;">관심 작품 등록</span>
+					<span style="display:inline-block; margin-top: 2px;"></span>
 				</button>
 			</c:if>
 		</div>
