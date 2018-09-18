@@ -5,16 +5,30 @@
 <%
 	String cp=request.getContextPath();
 %>
-
 <script type="text/javascript">
-var currentDay = new Date();  
-var currentYear = currentDay.getFullYear();
-var sch_hall="";
-
-$(function(){
-	if($(".tabs .active").attr("data-tab")=="schedule"){
-		getYear(currentYear);
-		posterlist();
+$(function () {
+	var f=document.exhibitScheduleSearchForm;
+	var type = f.period_type.value;
+	
+	$("#type-"+type).addClass("active_p");
+	
+	var hList = f.sch_hall.value.split(',');
+	$(".sch_hallGroup ul li a").each(function () {
+		$(this).addClass("off");
+	});
+	
+	if(f.sch_hall.value.length==0){
+		$("#hall-all a").removeClass("off");
+		$("#hall-all a").addClass("on");
+	} else {
+	    for ( var i in hList ) {
+	      	$("#hall-"+hList[i]+" a").removeClass("off");
+	      	$("#hall-"+hList[i]+" a").addClass("on");
+	    }
+	}
+	
+	if(f.searchValue.value){
+		$(".sch_name input").val(f.searchValue.value);
 	}
 });
 </script>
@@ -39,12 +53,12 @@ $(function(){
 <div class="sch_period">
 	<div class="sch_year">
 		<a style="left:0; background: url(<%=cp %>/resource/images/lumos/bg_btn_prev.gif) no-repeat 50% 50%;" data-yearNum="-1"></a>
-		<span class="sch_showyear"></span>
+		<span class="sch_showyear">${year}</span>
 		<a style="right:0; background: url(<%=cp %>/resource/images/lumos/bg_btn_next.gif) no-repeat 50% 50%;" data-yearNum="1"></a>
 	</div>
 	<ul class="sch_period_type">
 		<li id="type-all" data-type="all"><a>전체</a></li>
-		<li id="type-thisweek" data-type="thisweek" class="active_p"><a>이번주</a></li>
+		<li id="type-thisweek" data-type="thisweek"><a>이번주</a></li>
 		<li id="type-nextweek" data-type="nextweek"><a>다음주</a></li>
 		<li id="type-month" data-type="month"><a>1개월</a></li>
 		<li id="type-threemonths" data-type="threemonths"><a>3개월</a></li>
@@ -58,19 +72,38 @@ $(function(){
 
 <div class="sch_group">
 	<div class="sch_txt">
-		<p></p>
+		<p>${sDate}~${eDate}</p>
 	</div>
 	<div class="sch_hallGroup">
 		<ul>
-			<li id = "hall-all"  data-hall="all"><a class="on">전체</a></li>
+			<li id = "hall-all"  data-hall="all"><a>전체</a></li>
 			<c:forEach var="hallName" items="${hallList}">
-				<li id = "hall-${hallName}" data-hall="${hallName}" class="notAll"><a class="off">${hallName}</a></li>
+				<li id = "hall-${hallName}" data-hall="${hallName}" class="notAll"><a>${hallName}</a></li>
 			</c:forEach>
 		</ul>
 	</div>
 </div>
 
 <div id="exhibitScheduleContent" style="width: 1040px;">
-
+	<c:forEach var="vo" items="${list}">
+		<div class="sch_item">
+			<div class="sch_itemPoster">
+				<a href="<%=cp %>/exhibit/scheduleToArticle?num=${vo.exhibitNum}&${query}">
+					<img src="<%=cp %>/resource/images/lumos/${vo.exProfileImage}">
+				</a>
+			</div>
+			<div class="sch_itemContent">
+				<h2 class="sch_itemContent_sbj"><a href="<%=cp %>/exhibit/scheduleToArticle?num=${vo.exhibitNum}&${query}">${vo.exhibitName}</a></h2>
+				<p class="sch_itemContent_1">${vo.hallName}&nbsp;${vo.exHallLocate}</p>
+				<p class="sch_itemContent_2">${vo.exhibitStart} ~ ${vo.exhibitEnd}</p>
+			</div>
+		</div>
+	</c:forEach>
 </div>
 
+<form name="exhibitScheduleSearchForm" action="" method="post">
+	<input type="hidden" name="period_type" value="${period_type}">
+	<input type="hidden" name="year" value="${year}">
+	<input type="hidden" name="sch_hall" value="${sch_hall}">
+    <input type="hidden" name="searchValue" value="${searchValue}">
+</form>

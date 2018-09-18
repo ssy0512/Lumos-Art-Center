@@ -16,9 +16,16 @@
 	<http auto-config="true">
 		<csrf disabled="true"/>
 		
+		<!-- 스마트 에디터 -->
+		<headers>
+            <frame-options policy="SAMEORIGIN" />
+            <hsts disabled="true"/>
+        </headers>
+		
 		<!-- 모든 사용자 접근허용 -->
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/concert/**" access="permitAll"/>
+		<intercept-url pattern="/exhibit/**" access="permitAll"/>
 		<intercept-url pattern="/main" access="permitAll"/>
 		<intercept-url pattern="/member/login" access="permitAll"/>
 		<intercept-url pattern="/member/member" access="permitAll"/>

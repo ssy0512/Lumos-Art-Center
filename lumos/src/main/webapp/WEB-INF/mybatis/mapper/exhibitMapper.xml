@@ -5,10 +5,22 @@
 	<select id="readExhibit" parameterType="Integer" resultType="com.sp.exhibit.Exhibit">
 		SELECT exhibitNum,exhibitName,TO_CHAR(exhibitStart, 'YYYY-MM-DD')
 		exhibitStart,content,host,supervise,admitStart,admitEnd,ratingName,
-		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, HallName, exHallLocate, exProfileImage,genre
+		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, hallName, exHallLocate, exProfileImage,genre
 		FROM EXHIBIT e
 		JOIN exhibitHall h ON e.hallNum=h.hallNum
         JOIN rating h ON e.ratingNum=h.ratingNum
         WHERE exhibitNum=#{num}
 	</select>
+	
+	<update id="updateExhibit" parameterType="com.sp.exhibit.Exhibit">
+		UPDATE exhibit SET content=#{content} WHERE exhibitNum=#{exhibitNum}
+	</update>
+	
+	<insert id="insertBoardLike" parameterType="map">
+		INSERT INTO exhibitInterest (exhibitNum, userId) VALUES(#{exhibitNum},#{userId})
+	</insert>
+	
+	<delete id="deleteBoardLike" parameterType="map">
+		DELETE FROM exhibitInterest WHERE exhibitNum=#{exhibitNum} AND userId=#{userId}
+	</delete>
 </mapper>

@@ -10,9 +10,12 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitScheduleList.css" type="text/css">
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
+var currentDay = new Date();  
+var currentYear = currentDay.getFullYear();
+
 $(function(){
 	$("#tab-schedule").addClass("active");
-	listPage();
+	listPageS();
 	
 	// 클릭으로 탭 전환
 	$("ul.tabs li").click(function() {
@@ -23,16 +26,22 @@ $(function(){
 		});
 		
 		$("#tab-"+tab).addClass("active");
+		
+		if(tab=="schedule"){
+			listPageS();
+			return;
+		}
 		listPage();
 	});
 });
 
 
 //글리스트 및 글쓰기폼, 글보기, 글수정폼 ajax
-function ajaxHTML(url, type) {
+function ajaxHTML(url, type, query) {
 	$.ajax({
 		type:type
 		,url:url
+		,data:query
 		,success:function(data) {
 			$("#tab-content").html(data);
 		}
@@ -54,8 +63,19 @@ function listPage() {
 	var $tab = $(".tabs .active");
 	var tab = $tab.attr("data-tab");
 	var url = "<%=cp%>/exhibit/"+tab+"/list";
+	var query = "";
 	
-	ajaxHTML(url, "get");
+	ajaxHTML(url, "get", query);
+}
+
+function listPageS() {
+	var url="<%=cp%>/exhibit/schedule/list";
+	var query=$('form[name=exhibitScheduleSearchForm]').serialize();
+	if(! query) {
+		query="year="+currentYear;
+	}
+	
+	ajaxHTML(url, "get", query);
 }
 
 //---------------------------------------------------------------------------
@@ -63,7 +83,10 @@ function listPage() {
 
 // 클릭으로 검색 기간 전환
 $("body").on("click", "ul.sch_period_type li", function() {
-	type = $(this).attr("data-type");
+	var type = $(this).attr("data-type");
+	var schf=document.exhibitScheduleSearchForm;
+	
+	schf.period_type.value=type;
 	
 	$("ul.sch_period_type li").each(function () {
 		$(this).removeClass("active_p");
@@ -73,38 +96,43 @@ $("body").on("click", "ul.sch_period_type li", function() {
 	
 	// 기간이 전체인 경우 외에는 전부 올해로 자동 전환
 	if(type == "all"){
-		posterlist($(".sch_showyear").html());
+		schf.year.value=$(".sch_showyear").html();
 	} else {
-		getYear(currentYear);
-		posterlist();
+		schf.year.value=currentYear;
 	}
 	
+	listPageS();
 });
 
 
 //클릭으로 이전년도 다음년도 가기
 $("body").on("click", ".sch_year a", function() {
+	var schf=document.exhibitScheduleSearchForm;
+	
 	//이전년도:-1, 다음년도:1
 	var num = $(this).attr("data-yearNum")*1;
 	
 	//현재 화면에 표시중인 년도
-	var year = $(".sch_showyear").html()*1;
-	
+	var year = $(".sch_showyear").html()*1;	
 	year = year+num;
+	
+	schf.year.value=year;
 	
 	//기간 전체로 변경
 	$("ul.sch_period_type li").each(function () {
 		$(this).removeClass("active_p");
 	});
 	$("#type-all").addClass("active_p");
+	schf.period_type.value='all';
 	
-	getYear(year);
-	posterlist();
+	listPageS();
 });
 
 
 //전시장 전체 선택
 $("body").on("click", "#hall-all", function() {
+	var schf=document.exhibitScheduleSearchForm;
+	
 	//전체버튼 외 다른 버튼 off로 전환	
 	$(".sch_hallGroup ul li a.on").each(function () {
 		$(this).removeClass("on");
@@ -116,15 +144,16 @@ $("body").on("click", "#hall-all", function() {
 	$(this).children().addClass("on");
 	
 	//검색할 전시장 조건 없애기 
-	sch_hall="";
-	
+	schf.sch_hall.value='';
 	//현재 선택중인 기간에서 모든 전시장으로 검색
-	posterlist();
+	listPageS();
 });
 
 //전시장 선택(전체버튼 제외)
 $("body").on("click", ".sch_hallGroup ul li.notAll", function() {
+	var schf=document.exhibitScheduleSearchForm;
 	var $onoff = $(this).children();
+	var hallList = schf.sch_hall;
 	
 	$("#hall-all").children().removeClass("on");
 	$("#hall-all").children().addClass("off");
@@ -137,23 +166,24 @@ $("body").on("click", ".sch_hallGroup ul li.notAll", function() {
 		$onoff.addClass("on");
 	}
 	
-	
-	sch_hall="";
+	hallList.value="";
 	$(".sch_hallGroup ul li a.on").each(function () {
-		sch_hall+=$(this).parent().attr("data-hall")+",";
+		hallList.value+=$(this).parent().attr("data-hall")+",";
 	});
 	
-	sch_hall=sch_hall.substring(0,sch_hall.length-1);
-	
+	hallList.value=hallList.value.substring(0,hallList.value.length-1);
+
 	//모두 선택 해제된 경우 전체버튼 활성화
-	if(sch_hall.length==0){
+	if(hallList.value.length==0){
 		$("#hall-all").children().removeClass("off");
 		$("#hall-all").children().addClass("on");
 	}
-	posterlist();
+	
+	listPageS();
 });
 
 function search() {
+	var schf=document.exhibitScheduleSearchForm;
 	var $searchValue = $(".sch_name input");
 	$searchValue.val($.trim($searchValue.val()));
 	var searchValue = $searchValue.val();
@@ -163,7 +193,8 @@ function search() {
 		return;
 	}
 	
-	posterlist();
+	schf.searchValue.value=searchValue;
+	listPageS();
 }
 
 	
@@ -178,6 +209,9 @@ function posterlist() {
 	var searchValue = $searchValue.val();
 	
 	var query="period_type="+type+"&year="+year+"&sch_hall="+sch_hall+"&searchValue="+searchValue;
+	if($("#now_sch_period").val()){
+		query=$("#now_sch_period").val();
+	}
 	
 	$.ajax({
 		type:"get"
@@ -201,6 +235,7 @@ function posterlist() {
 	});
 }
 
+// 화면에 보이는 년도 변경
 function getYear(year) {
 	$(".sch_showyear").html(year);
 }
