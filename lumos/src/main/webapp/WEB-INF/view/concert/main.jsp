@@ -281,5 +281,5 @@ function deleteButtonShowHide() {
 	   	<li id="tab-month" data-tab="month"><a>월간일정</a></li>
 	   	<li id="tab-year" data-tab="year"><a>연간일정</a></li>
  	</ul>
- 	<div id="tab-content" style="padding: 5px; margin-top: 15px;"></div>
+ 	<div id="tab-content" style=" margin-top: 15px;"></div>
 </div>
