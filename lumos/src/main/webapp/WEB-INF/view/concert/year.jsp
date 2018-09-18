@@ -35,22 +35,10 @@
 						<span class="nextbtnYear" style="background-color: #eeeeee;">＞</span>
 					</div>
 				</th>
-				<th width="122" style="color: #434343;">기간</th>
-				<th width="116" style="color: #434343;">장르</th>
+				<th width="140" style="color: #434343;">기간</th>
+				<th width="140" style="color: #434343;">장르</th>
 				<th style="color: #434343;">공연명</th>
-				<th width="180" align="left">
-					<form name="searchForm" action="<%=cp%>/concert/year" method="post">
-						<select name="searchKey" class="selectBox">
-							<option value="all">전체</option>
-							<option value="A">A홀</option>
-							<option value="B">B홀</option>
-							<option value="C">C홀</option>
-							<option value="D">D홀</option>
-							<option value="E">E홀</option>
-							<option value="F">F홀</option>
-						</select>
-					</form>
-				</th>
+				<th width="140">장소</th>
 			</tr>
 			<c:forEach var="cnt" begin="1" end="12">
 				<c:set var="flag" value="0" />
@@ -62,9 +50,9 @@
 							<td style="font-size: 27px;" class="first">${cnt }월</td>
 							<td>${dto.concertStart}~${dto.concertEnd}</td>
 							<td>${dto.genre}</td>
-							<td style="text-align: left; padding-left: 18px;" >
+							<td style="text-align: left; padding-left: 20px;" >
 								<span style="cursor: pointer;" onclick='goArticle(${dto.getConcertNum()});'>${dto.concertName}</span></td>
-							<td style="text-align: left; padding-left: 50px;">
+							<td >
 								${dto.hallName}</td>
 						</tr>
 					</c:if>
@@ -76,7 +64,7 @@
 						<td style="font-size: 27px;" rowspan="1">${cnt }월</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
-						<td style="text-align: left; padding-left: 18px;">공연 일정이
+						<td style="text-align: left; padding-left: 20px;">공연 일정이
 							없습니다.</td>
 						<td>&nbsp;</td>
 					</tr>
