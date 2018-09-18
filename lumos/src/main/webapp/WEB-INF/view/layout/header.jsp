@@ -11,6 +11,9 @@
 			<ul class="header-left">
 				<li><a href="<%=cp%>/">HOME</a></li>
 				<li><a href="<%=cp%>/goods"  style="color: #aa1717;">ART SHOP</a></li>
+				<c:if test="${sessionScope.member.userId=='admin'}">
+					<li><a href="<%=cp%>/admin/main">관리자 페이지</a></li>
+				</c:if>
 			</ul>
 	    </div>
 	   
