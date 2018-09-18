@@ -15,21 +15,24 @@
 		       AND cnt=1
 		ORDER BY sessionDate ASC, concertNum DESC 
 	</select>
-<!-- 
+
 	<select id="listYear" parameterType="map" resultType="com.sp.sch.Schedule">
-		SELECT num, subject, sday, eday, color,
-		               TO_CHAR(created, 'YYYY-MM-DD') created
-		  FROM schedule
-		  WHERE userId = #{userId} AND
-		   (
-		      (
-		         TO_DATE(sday, 'YYYYMMDD') = TO_DATE(#{date}, 'YYYYMMDD')
-		         OR (eday IS NOT NULL AND TO_DATE(sday, 'YYYYMMDD') &gt;= TO_DATE(#{date}, 'YYYYMMDD') AND TO_DATE(eday, 'YYYYMMDD') &lt;= TO_DATE(#{date}, 'YYYYMMDD'))
-		      ) OR (
-		           repeat=1 AND MOD(MONTHS_BETWEEN(TO_DATE(sday, 'YYYYMMDD'), TO_DATE(#{date}, 'YYYYMMDD'))/12, repeat_cycle) = 0 			
-		      )
-		   )
-		  ORDER BY num DESC
+<!-- 		SELECT concertNum, concertName,genre,ch.hallName
+			,TO_CHAR(concertStart,'RR-MM') concertStart,TO_CHAR(concertEnd,'RR-MM') concertEnd
+		FROM concert c
+		JOIN concertHall ch ON c.hallNum=ch.hallNum
+        WHERE TO_CHAR(concertStart,'YYYYMM')&gt;= TO_CHAR(#{startDay},'YYYYMM')
+        	AND TO_CHAR(concertEnd,'YYYYMM') &lt;= TO_CHAR(#{endDay},'YYYYMM')
+   		ORDER BY ch.hallName ASC, concertStart ASC -->
+   		
+   		SELECT concertNum, concertName,genre,ch.hallName
+			,TO_CHAR(concertStart,'MM-DD') concertStart,TO_CHAR(concertEnd,'MM-DD') concertEnd,
+			TO_CHAR(concertEnd,'MM') endmonth, TO_CHAR(concertStart,'MM') startmonth
+		FROM concert c
+		JOIN concertHall ch ON c.hallNum=ch.hallNum
+        WHERE TO_CHAR(concertEnd,'YYYY') &lt;= #{year}
+   		ORDER BY concertEnd ASC, ch.hallName ASC
+   		
 	</select>
- -->
+
 </mapper>

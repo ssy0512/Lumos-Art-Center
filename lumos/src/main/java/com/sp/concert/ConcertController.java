@@ -1,5 +1,6 @@
 package com.sp.concert;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -72,13 +73,9 @@ public class ConcertController {
 			// 스케쥴 가져오기
 			String startDay = String.format("%04d%02d%02d", syear, smonth, sdate);
 			String endDay = String.format("%04d%02d%02d", eyear, emonth, edate);
-			String endMonth = String.format("%04d%02d", eyear, emonth);
-			String startMonth = String.format("%04d%02d", syear, smonth);
 			Map<String, Object> map = new HashMap<>();
 			map.put("startDay", startDay);
 			map.put("endDay", endDay);
-			map.put("endMonth",endMonth);
-			map.put("startMonth",startMonth);
 			
 			List<Schedule> list = service.listMonth(map);
 			
@@ -168,38 +165,6 @@ public class ConcertController {
 					}
 				}
 			}
-			// 일정 넣기
-/*			week=rweek;
-			if (week != 7) {
-				n = 0;
-				for (int i = week; i < 7; i++) {
-					n++;
-					s = String.format("%04d%02d%02d", eyear, emonth, n);
-					
-					for (Schedule dto : list) {
-						int today = Integer.parseInt(s.substring(4));
-						String sd = dto.getConcertStart().substring(5,10);
-						int sd2=Integer.parseInt(sd.replaceAll("-", ""));
-						
-						int sddate = Integer.parseInt(dto.getConcertStart().substring(8,10));
-						
-						int ii=i;
-
-						// 공연 시작날짜가 표시된 마지막주 안에 있을때
-						if (sd2 == today) {
-							for(int j=sddate;j<7;j++) {
-								
-								days[row][ii]+= "<span class='scheduleSubject' data-date='" + s + "' data-num='"
-									+ dto.getConcertNum() + "' >" +dto.getHallName()+"&nbsp;&nbsp;"+ dto.getConcertName() + "</span>";
-								ii++;
-							}
-						} else if (sd2 > today) {
-							break;
-						}
-					}
-
-				}
-			}*/
 
 			model.addAttribute("year", year);
 			model.addAttribute("month", month);
@@ -226,40 +191,36 @@ public class ConcertController {
 
 			if(year<1900)
 				year=y;
-
-			String days[][][] = new String[12][6][7];
 			
-			int row, col, month_of_day;
-			String s;
-			for(int m = 1; m<=12; m++) {
-				cal.set(year, m-1, 1);
-	            row = 0;
-	            col = cal.get(Calendar.DAY_OF_WEEK)-1;
-	            month_of_day=cal.getActualMaximum(Calendar.DATE);
-	            for(int i = 1; i<=month_of_day; i++)  {
-	            	s=String.format("%04d%02d%02d", year, m, i);
-	            	
-	            	if(col==0) {
-	            		days[m-1][row][col]="<span class='textDate sundayDate' data-date='"+s+"' >"+i+"</span>";
-					} else if(col==6) {
-						days[m-1][row][col]="<span class='textDate saturdayDate' data-date='"+s+"' >"+i+"</span>";
-					} else {
-						days[m-1][row][col]="<span class='textDate nowDate' data-date='"+s+"' >"+i+"</span>";
-					}            	
-
-	                col++;
-	                if(col > 6) {
-	                      col = 0;
-	                      row++;
-	                }
-	            }
-	        }
+			// 스케쥴 가져오기
 			
+/*			String startDay = String.format("%04d%02d%02d", syear, smonth, sdate);
+			String endDay = String.format("%04d%02d%02d", eyear, emonth, edate);
+			Map<String, Object> map = new HashMap<>();
+			map.put("startDay", startDay);
+			map.put("endDay", endDay);*/
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("year", year);
+			List<Schedule> list = service.listYear(map);
+			
+			List<String> listMap=new ArrayList<>();
+			
+			for (Schedule dto : list) {
+				int startmonth = Integer.parseInt(dto.getStartmonth());
+				int endmonth = Integer.parseInt(dto.getEndmonth());
+				for(int i=1;i<12;i++) {
+					if(i==endmonth || i==startmonth) {
+						
+					}
+				}
+				int startMonth=Integer.parseInt(dto.getConcertEnd().substring(2)); 
+			}
+			
+			model.addAttribute("list", list);
 			model.addAttribute("year", year);
-
 			model.addAttribute("todayYear", todayYear);
 			model.addAttribute("today", today);
-			model.addAttribute("days", days);			
 		} catch (Exception e) {
 		}
 		

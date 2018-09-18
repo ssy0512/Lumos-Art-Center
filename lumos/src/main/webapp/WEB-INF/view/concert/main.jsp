@@ -6,7 +6,6 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/sch_month.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitTabs.css" type="text/css">
-<link rel="stylesheet" href="<%=cp%>/resource/css/exhibitScehduleList.css" type="text/css">
 <script type="text/javascript">
 function ajaxText(url) {
 	$.ajax({
@@ -77,6 +76,8 @@ $(function(){
 		changeDate($month,year);
 	});
 	
+	
+	// 월간일정
 	// 년도-1 버튼눌렀을때
 	$("body").on("click", ".prebtnDate",function(){
 		var month = $("ul.tab_month li.active").attr("data-month");
@@ -92,10 +93,32 @@ $(function(){
 		var year = Number(datayear)+1;
 		changeDate(month,year);
 	});
+	
+	// 연간일정
+	// 년도-1 버튼눌렀을때
+	$("body").on("click", ".prebtnYear",function(){
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)-1;
+		changeYear(year);
+	});
+	
+	// 년도+1 버튼눌렀을때
+	$("body").on("click", ".nextbtnYear",function(){
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)+1;
+		changeYear(year);
+	});
 }); 
 
+// 월간일정
 function changeDate(month,year) {
 	var url="<%=cp%>/concert/month?year="+year+"&month="+month;
+	ajaxText(url);
+}
+
+// 연간일정
+function changeYear(year) {
+	var url="<%=cp%>/concert/year?year="+year;
 	ajaxText(url);
 }
 
@@ -281,5 +304,5 @@ function deleteButtonShowHide() {
 	   	<li id="tab-month" data-tab="month"><a>월간일정</a></li>
 	   	<li id="tab-year" data-tab="year"><a>연간일정</a></li>
  	</ul>
- 	<div id="tab-content" style=" margin-top: 15px;"></div>
+ 	<div id="tab-content" style="padding: 5px; margin-top: 15px;"></div>
 </div>
