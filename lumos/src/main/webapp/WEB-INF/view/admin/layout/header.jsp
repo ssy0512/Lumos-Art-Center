@@ -14,7 +14,7 @@
     <div class="header-right">
         <div style="padding-top: 20px; float: right;">
             <c:if test="${empty sessionScope.member}">
-                <a href="<%=cp%>/">로그인</a>
+                <a href="<%=cp%>/member/login">로그인</a>
                     &nbsp;|&nbsp;
                 <a href="<%=cp%>/">사이트맵</a>
                 	&nbsp;|&nbsp;
@@ -26,14 +26,12 @@
 
 <div class="menu">
     <ul class="nav">
-        <li><a href="#">매출관리</a></li>
-        <li><a href="#">일정관리</a></li>
+        <li><a href="<%=cp%>/admin/sales/salesSub/salesMain">매출관리</a></li>
+        <li><a href="<%=cp%>/admin/menu2/concertSchedule/main">일정관리</a></li>
         <li><a href="#">직원관리</a></li>
-        <li><a href="#">일반회원관리</a></li>
-        <li><a href="#">기업회원관리</a></li>
+        <li><a href="<%=cp%>/admin/membership/regular/regular">회원관리</a></li>
         <li><a href="#">대관관리</a></li>
-        <li><a href="#">대관관리</a></li>
-        <li><a href="#">고객관리</a></li>
+        <li><a href="<%=cp%>/admin/customer/question/questionAdmin">고객관리</a></li>
         <li><a href="#">굿즈관리</a></li>			
     </ul>      
 </div>

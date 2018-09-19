@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="question">
+
+<select id="seq" resultType="Integer">
+	SELECT question_seq.NEXTVAL FROM dual
+</select>
+
+<insert id="insertQuestion" parameterType="com.sp.admin.question.Questions">
+	INSERT INTO question 
+	(postNum,userId, title,content,groupNum,orderNo,
+	 depth,parent,qCategoryCode) VALUES (
+	 	#{postNum},#{userId},#{title},#{content},#{groupNum},
+	 	#{orderNo},#{depth},#{parent},#{qCategoryCode}
+	 )					
+</insert>
+
+<sql id="where-list">
+   <if test="searchKey=='userName' ">
+        userName=#{searchValue}
+   </if>
+   <if test="searchKey=='subject' ">
+        INSTR(subject, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='content' ">
+        DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='created' ">
+        (TO_CHAR(created, 'YYYY-MM-DD') = #{searchValue}
+         OR TO_CHAR(q.created, 'YYYYMMDD') = #{searchValue})
+   </if>
+</sql>
+
+<select id="listQuestion" parameterType="map"
+            resultType="com.sp.admin.question.Questions">
+		SELECT * FROM (
+		    SELECT ROWNUM rnum, tb.* FROM (
+			     SELECT postNum, userName, q.userId,
+                      title, TO_CHAR(q.created, 'YYYY-MM-DD')  created
+                      , groupNum, orderNo, depth, q.qCategoryCode,qCategoryName
+			        FROM question q 
+			        JOIN member1 m ON q.userId=m.userId
+			        JOIN qcategory c ON q.qCategoryCode=c.qCategoryCode
+                    <where>
+                         <if test="searchValue != null and searchValue != ''">
+			                  <include refid="where-list"/>
+		                 </if>
+	                </where>
+	                ORDER BY groupNum DESC, orderNo ASC
+	<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+	]]>
+</select>
+
+<select id="readQuestion" resultType="com.sp.admin.question.Questions" parameterType="Integer">
+		SELECT postNum, q.userId, userName, title, content, groupNum, 
+                 depth, orderNo, parent, q.created,q.qCategoryCode,qCategoryName
+				 FROM question q JOIN member1 m ON q.userId=m.userId
+				 JOIN qcategory c ON q.qCategoryCode=c.qCategoryCode
+                 WHERE postNum = #{postNum}
+</select>
+
+<!-- 이전글 -->
+<select id="preReadQuestion" resultType="com.sp.admin.question.Questions" 
+				parameterType="map">
+	SELECT tb.* FROM (
+			SELECT postNum, title 
+			         FROM question q JOIN member1 m ON q.userId=m.userId
+                    <where>
+                         <if test="searchValue != null and searchValue != '' ">
+			                  <include refid="where-list"/>
+		                 </if>
+		               <![CDATA[
+		                 AND (( groupNum = #{groupNum} AND orderNo < #{orderNo})
+                         OR (groupNum > #{groupNum} ))
+		                 ]]>
+	                </where>
+				ORDER BY groupNum ASC, orderNo DESC
+			) tb WHERE ROWNUM=1
+</select>
+
+<!-- 다음글 -->
+<select id="nextReadQuestion" resultType="com.sp.admin.question.Questions" 
+				parameterType="map">
+		SELECT tb.* FROM (
+			SELECT postNum, title 
+                 FROM question q JOIN member1 m ON q.userId=m.userId			
+                    <where>
+                         <if test="searchValue != null and searchValue != '' ">
+			                  <include refid="where-list"/>
+		                 </if>
+		               <![CDATA[
+		                 AND (( groupNum = #{groupNum} AND orderNo > #{orderNo})
+                         OR (groupNum < #{groupNum} ))
+		                 ]]>
+	                </where>
+				ORDER BY groupNum DESC, orderNo ASC
+			) tb WHERE ROWNUM=1
+</select>
+
+<select id="dataCount" resultType="Integer" parameterType="map">
+  SELECT NVL(COUNT(*), 0) 
+        FROM question q JOIN member1 m ON q.userId=m.userId
+  <where>
+  	<if test="searchValue!=null and searchValue != '' ">
+  	      <include refid="where-list"/>
+  	</if>
+  </where>
+</select>
+
+<update id="updateQuestion" parameterType="com.sp.admin.question.Questions">
+         UPDATE question SET subject=#{subject}, content=#{content}
+                    WHERE postNum = #{postNum}
+</update>
+
+<delete id="deleteQuestion" parameterType="Integer">
+             DELETE FROM question WHERE postNum IN 
+               (SELECT postNum FROM question START WITH  postNum = #{postNum}
+	            CONNECT BY PRIOR postNum = parent)
+</delete>
+
+<update id="updateOrderNo" parameterType="map">
+       UPDATE question SET orderNo=orderNo+1
+   	<![CDATA[
+          WHERE groupNum = #{groupNum} AND orderNo > #{orderNo}
+	]]>                    
+</update>
+</mapper>

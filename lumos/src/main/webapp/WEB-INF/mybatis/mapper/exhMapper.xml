@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exh">
+<!-- location용 -->
+	<insert id="insertlocation" parameterType="com.sp.admin.exh.ExhibitSch">
+		INSERT INTO location (locationNum, kind)
+			VALUES (locationNum_seq.NEXTVAL, #{kind})
+	</insert>
+	
+	<update id="updatelocation" parameterType="com.sp.admin.exh.ExhibitSch">
+		UPDATE location SET kind=#{kind}
+		WHERE locationNum=#{locationNum}
+	</update>
+	
+	<delete id="deletelocation" parameterType="Integer">
+		DELETE FROM location WHERE locationNum=#{locationNum}
+	</delete>
+	
+	<select id="readlocation" parameterType="Integer" resultType="com.sp.admin.exh.ExhibitSch">
+	SELECT locationNum, kind FROM location WHERE locationNum=#{locationNum}
+	</select>
+	
+	<select id="listlocation" resultType="com.sp.admin.exh.ExhibitSch">
+		SELECT locationNum, kind FROM location
+	</select>
+	
+	<!-- halltable -->
+	<insert id="insertHall" parameterType="com.sp.admin.exh.ExhibitSch">
+		INSERT INTO exhibitHall (hallNum,hallName,exhallLocate,exhallImage,color,locationNum)
+		VALUES
+		(exhibitHall_seq.NEXTVAL, #{hallName},#{exhallLocate},#{exhallImage},#{color},#{locationNum})
+	</insert>
+	<update id="updateHall" parameterType="com.sp.admin.exh.ExhibitSch">
+	UPDATE exhibitHall SET hallName=#{hallName},exhallLocate=#{exhallLocate},exhallImage=#{exhallImage},color=#{color},
+												locationNum=#{locationNum}
+		WHERE hallNum=#{hallNum}
+	</update>
+	<delete id="deleteHall" parameterType="Integer">
+		DELETE FROM exhibitHall WHERE hallNum=#{hallNum}
+	</delete>
+	
+	<select id="readHall" parameterType="Integer" resultType="com.sp.admin.exh.ExhibitSch">
+		SELECT hallNum, hallName, exhallLocate, exhallImage,color, locationNum FROM exhibitHall
+		WHERE hallNum=#{hallNum}
+	</select>
+	
+	<select id="listHall" resultType="com.sp.admin.exh.ExhibitJSON">
+		SELECT hallNum id, lh.locationNum,kind groupName,hallName resourceName,color eventColor
+		FROM exhibitHall lh 
+		JOIN location lc ON lh.locationNum=lc.locationNum
+		ORDER BY lh.locationNum,hallNum
+	</select>
+	
+	<select id="listHall2" resultType="com.sp.admin.exh.ExhibitSch">
+		SELECT hallNum,hallName FROM exhibitHall
+		WHERE locationNum=#{locationNum}
+		ORDER BY hallNum
+	</select>
+	
+	
+	
+	
+	<!-- 
+	<insert id="insertScheduler" parameterType="com.sp.admin.exh.ExhibitSch">
+	INSERT INTO exhibit(exhibitNum, exhibitName,exhibitStart,exhibitEnd,host,supervise,
+	content,admitStart,admitEnd,genre,ratingNum,hallNum) VALUES
+	(exhibit_seq.NEXTVAL, #{exhibitName},#{exhibitStart},#{exhibitEnd},#{host},#{supervise},)
+						  #{admitStart, jdbcType=VARCHAR}, #{admitEnd,jdbcType=VARCHAR},#{genre},#{ratingNum},#{hallNum})
+	</insert>
+	
+	<update id="updateScheduler" parameterType="com.sp.admin.exh.ExhibitSch">
+	UPDATE exhibit SET hallNum=#{hallNum},
+	              exhibitName=#{exhibitName}, exhibitStart=#{exhibitStart}, 
+	              exhibitEnd=#{exhibitEnd}, host=#{host}, supervise=#{supervise}, 
+	              content=#{content}, 
+	              admitStart=#{admitStart, jdbcType=VARCHAR},
+	              admitEnd=#{admitEnd, jdbcType=VARCHAR},
+	              genre=#{genre}, ratingNum=#{ratingNum}
+		      WHERE exhibitNum = #{exhibitNum} AND userId = #{userId}
+	</update>
+	<delete id="deleteScheduler" parameterType="map">
+		DELETE FROM exhibit WHERE exhibitNum=#{exhibitNum}
+	</delete>
+	
+	<select id="readScheduler" parameterType="Integer" resultType="com.sp.admin.exh.ExhibitSch">
+	SELECT exhibitNum,hallNum,host,supervise,exhibitStart,exhibitEnd,admitStart,admitEnd,
+			genre, rs.ratingNum,hallNum 
+			FROM exhibit 
+			JOIN rating r ON rs.ratingNum=r.ratingNum
+			WHERE exhibitNum=#{exhibitNum}
+	</select> -->
+	
+</mapper>
