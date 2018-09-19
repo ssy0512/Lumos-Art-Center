@@ -33,6 +33,7 @@
 		<intercept-url pattern="/member/logout" access="permitAll"/>
 		<intercept-url pattern="/resource/**" access="permitAll"/>
 		<intercept-url pattern="/uploads/**" access="permitAll"/>
+		<intercept-url pattern="/academy/**" access="permitAll"/>
 		<intercept-url pattern="/goods" access="permitAll"/>
 		
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> 

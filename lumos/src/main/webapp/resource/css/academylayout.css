@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+
+/* body */
+.body-content-container {
+	margin: 20px auto;
+	width: 1020px;
+    clear:both;
+    box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
+    min-height: 500px;
+}
+
+.body-academy-title {
+    color: #434343;
+    width: 1020px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: "Malgun Gothic", "Nanum Gothic", "Dotum";
+}
+
+.btn-academy-filter {
+	color: #434343;
+    font-weight: 500;
+    font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+    border: 1px solid #cccccc;
+    background-color: #fff;
+    text-align: center;
+    padding: 5px 15px 5px 15px;
+    /* border-radius: 4px; */
+    float: right;
+    margin-left: -1px;
+}
+
+
+/* 아카데미 list */
+.academy_desc {
+	word-break: break-all;
+    width: 210px;
+    height: 150px;
+    margin: 20px 15px 15px 15px;
+    text-align: left;
+    padding-bottom: 15px; 
+}
+
+.list-title {
+	font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 30px;
+}
+
+.academy_desc3-title {
+	font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 30px;
+}
+
+.academy_desc2 {
+	width: 200px;
+    padding-top: 25px;
+    border-top: 1px solid darkgrey;
+}
+
+.academy_desc3 {
+    width: 650px;
+    margin: 10px;
+    padding: 0px 5px 5px 5px;
+    float: right;
+}
+
+
+/* 리스트 span태그 */
+.list-ing {
+    width: 75px;
+    color: #ffffff;
+    border: 1px solid #aa1717;
+    background: #aa1717;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+}
+
+.list-ing-desc3 {
+    width: 200px;
+    color: #ffffff;
+    text-align: center;
+    margin: 20px;
+    border: 1px solid #aa1717;
+    background: #aa1717;
+    padding: 10px 15px 10px 15px;
+    border-radius: 5px;
+}
+
+.list-finish {
+	border-radius: 6px;
+    border: 1px solid darkgrey;
+    padding: 5px 15px 5px 15px;
+    color: darkgrey;
+}
+
+.totalCount {
+    float: right;
+    padding-top: 15px;
+}
+
