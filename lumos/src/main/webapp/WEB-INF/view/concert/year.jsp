@@ -47,7 +47,7 @@
 						<c:set var="flag" value="1" />
 						<tr align="center" bgcolor="#ffffff" height="35"
 							style="border-bottom: 1px solid #cccccc;"> 
-							<td style="font-size: 27px;" class="first">${cnt }월</td>
+							<td style="font-size: 24px;" class="first">${cnt }월</td>
 							<td>${dto.concertStart}~${dto.concertEnd}</td>
 							<td>${dto.genre}</td>
 							<td style="text-align: left; padding-left: 20px;" >
@@ -61,7 +61,7 @@
 				<c:if test="${flag == 0}">
 					<tr align="center" bgcolor="#ffffff" height="35"
 						style="border-bottom: 1px solid #cccccc;">
-						<td style="font-size: 27px;" rowspan="1">${cnt }월</td>
+						<td style="font-size: 24px;" rowspan="1">${cnt }월</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td style="text-align: left; padding-left: 20px;">공연 일정이
