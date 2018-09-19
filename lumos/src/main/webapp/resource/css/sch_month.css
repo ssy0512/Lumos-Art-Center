@@ -2,19 +2,28 @@
 
 .sch_month {
     padding: 29px 116px 19px 116px;
-    height : 140px;
+    height : 125px;
 }
 
 .tab_year {
-	float: left;
+    float: left;
     position: relative;
-    margin: 0px 10px;
-    padding-bottom:20px;
+    width: 137px;
+    margin-right: 25px;
+}
+
+.tab_year a {
+	position: absolute;
+    top: 0;
+    display: block;
+    width: 26px;
+    height: 33px;
 }
 
 .place_info {
-    padding-top: 3px;
+    position: relative;
     overflow: hidden;
+    margin-bottom : 11px;
 }
 
 .fr {
@@ -70,31 +79,13 @@ ul.tab_month li.active >a{
 }
 
 .titleDate {
-	display: inline-block;
-	font-weight: 600; 
-	font-size: 27px;
-	padding:0px 10px;
-	text-align:left;
-	position: relative;
-	top: 4px;
-}
-
-.prebtnDate{
-	display: inline-block;
-	font-size: 18px;
-	color:#434343;
-    background-color:#fff;
-    text-align:left;
-    cursor: pointer;
-}
-
-.nextbtnDate{
-	display: inline-block;
-	font-size: 18px;
-	color:#434343;
-    background-color:#fff;
-    text-align:left;
-    cursor: pointer;
+	display: block;
+    padding: 0 26px;
+    color: #222;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 33px;
+    text-align: center;
 }
 
 .prebtnYear{
@@ -133,7 +124,7 @@ ul.tab_month li.active >a{
 
 .scheduleSubject {
    display:block;
-   margin:1.5px 0; 
+   margin:1.5px 0;
    font-size:13px;
    color:#555555;
    background:#eeeeee;

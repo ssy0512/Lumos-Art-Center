@@ -16,9 +16,9 @@ $(function(){
 	<div id="tab-content" style="clear: both; padding: 0px 0px 90px;">
 		<div class="sch_month">
 			<div class="tab_year">
-				<span class=" prebtnDate">＜</span>
-				<span class="titleDate" id="current-year" data-year="${year}">${year}</span> 
-				<span class="nextbtnDate">＞</span>
+				<a style="left:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_prev.gif) no-repeat 50% 50%;" class="prebtnDate"></a>
+				<span id="current-year" data-year="${year}" class="titleDate">${year}</span> 
+				<a style="right:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_next.gif) no-repeat 50% 50%;" class="nextbtnDate"></a>
 			</div>
 			<ul class="place_info fr">
 				<li>A홀</li>

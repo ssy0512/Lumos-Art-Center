@@ -26,7 +26,23 @@ public class ConcertController {
 	}
 
 	@RequestMapping(value = "/concert/list", method = RequestMethod.GET)
-	public String list() {
+	public String list(
+			@RequestParam(name = "year", defaultValue = "0") int year,
+			Model model) {
+		try {
+			Calendar cal=Calendar.getInstance();
+			int y=cal.get(Calendar.YEAR);
+			
+			if(year<1900)
+				year=y;
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("year", year);
+			
+			model.addAttribute("year", year);
+		} catch (Exception e) {
+		}
+		
 		return "concert/list";
 	}
 
@@ -184,15 +200,21 @@ public class ConcertController {
 			Calendar cal=Calendar.getInstance();
 			int y=cal.get(Calendar.YEAR);
 			
+			int todayYear=cal.get(Calendar.YEAR);
+			String today=String.format("%04d%02d%02d",
+					cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DATE));
+
 			if(year<1900)
 				year=y;
-
+			
 			Map<String, Object> map = new HashMap<>();
 			map.put("year", year);
 			List<Schedule> list = service.listYear(map);
 			
 			model.addAttribute("list", list);
 			model.addAttribute("year", year);
+			model.addAttribute("todayYear", todayYear);
+			model.addAttribute("today", today);
 		} catch (Exception e) {
 		}
 		
