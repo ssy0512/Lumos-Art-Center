@@ -31,7 +31,7 @@
 		FROM concert c
 		JOIN concertHall ch ON c.hallNum=ch.hallNum
         WHERE TO_CHAR(concertEnd,'YYYY') = #{year}
-   		ORDER BY concertEnd ASC, ch.hallName ASC
+   		ORDER BY concertEnd ASC, ch.hallName ASC 
    		
 	</select>
 

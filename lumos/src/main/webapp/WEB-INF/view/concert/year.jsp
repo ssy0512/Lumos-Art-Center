@@ -46,7 +46,7 @@
 					<c:if test="${(cnt == dto.endmonth || cnt == dto.startmonth) || (cnt>=dto.startmonth && cnt<=dto.endmonth)}">
 						<c:set var="flag" value="1" />
 						<tr align="center" bgcolor="#ffffff" height="35"
-							style="border-bottom: 1px solid #cccccc;">
+							style="border-bottom: 1px solid #cccccc;"> 
 							<td style="font-size: 27px;" class="first">${cnt }월</td>
 							<td>${dto.concertStart}~${dto.concertEnd}</td>
 							<td>${dto.genre}</td>
