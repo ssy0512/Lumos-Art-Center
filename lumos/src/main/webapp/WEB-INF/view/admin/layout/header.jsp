@@ -31,7 +31,7 @@
         <li><a href="#">직원관리</a></li>
         <li><a href="<%=cp%>/admin/membership/regular/regular">회원관리</a></li>
         <li><a href="#">대관관리</a></li>
-        <li><a href="<%=cp%>/admin/customer/question/main">고객관리</a></li>
+        <li><a href="<%=cp%>/admin/customer/question/questionAdmin">고객관리</a></li>
         <li><a href="#">굿즈관리</a></li>			
     </ul>      
 </div>
