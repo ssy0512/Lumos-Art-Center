@@ -97,6 +97,24 @@ ul.tab_month li.active >a{
     cursor: pointer;
 }
 
+.prebtnYear{
+	display: inline-block;
+	font-size: 18px;
+	color:#434343;
+    background-color:#fff;
+    text-align:left;
+    cursor: pointer;
+}
+
+.nextbtnYear{
+	display: inline-block;
+	font-size: 18px;
+	color:#434343;
+    background-color:#fff;
+    text-align:left;
+    cursor: pointer;
+}
+
 .textDate {
       font-weight: 500; cursor: pointer;  display: block; color:#434343;
 }
@@ -121,4 +139,13 @@ ul.tab_month li.active >a{
    background:#eeeeee;
    cursor: pointer;
    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.scheduleMore {
+   display:block;
+   width:110px;
+   margin:0 0 1.5px;
+   font-size:13px;
+   color:#555555;
+   cursor: pointer;
+   text-align:right;
 }

@@ -30,7 +30,7 @@
 			TO_CHAR(concertEnd,'MM') endmonth, TO_CHAR(concertStart,'MM') startmonth
 		FROM concert c
 		JOIN concertHall ch ON c.hallNum=ch.hallNum
-        WHERE TO_CHAR(concertEnd,'YYYY') &lt;= #{year}
+        WHERE TO_CHAR(concertEnd,'YYYY') = #{year}
    		ORDER BY concertEnd ASC, ch.hallName ASC
    		
 	</select>
