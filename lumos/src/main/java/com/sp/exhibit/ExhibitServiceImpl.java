@@ -1,6 +1,6 @@
 package com.sp.exhibit;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +73,30 @@ public class ExhibitServiceImpl implements ExhibitService{
 			System.out.println(e.toString());
 		}
 		return result;
+	}
+
+	@Override
+	public List<Exhibit> listExHall() {
+		List<Exhibit> list = null;
+		try {
+			list=dao.selectList("exhibit.listExHall");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public Exhibit readExHall(int num) {
+		Exhibit dto=null;
+		
+		try{
+			// 게시물 가져오기
+			dto=dao.selectOne("exhibit.readExHall", num);
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return dto;
 	}
 }

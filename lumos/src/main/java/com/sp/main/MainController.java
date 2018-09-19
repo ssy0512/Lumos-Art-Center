@@ -11,4 +11,9 @@ public class MainController {
 	public String method() {
 		return ".mainMainLayout";
 	}
+	
+	@RequestMapping(value="/main/sitemap")
+	public String sitemap() {
+		return ".main.sitemap";
+	}
 }

@@ -1,5 +1,6 @@
 package com.sp.exhibit;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ExhibitService {
@@ -8,4 +9,6 @@ public interface ExhibitService {
 	public int insertBoardLike(Map<String, Object> map);
 	public int deleteBoardLike(Map<String, Object> map);
 	public int countBoardLike(Map<String, Object> map);
+	public List<Exhibit> listExHall();
+	public Exhibit readExHall(int num);
 }

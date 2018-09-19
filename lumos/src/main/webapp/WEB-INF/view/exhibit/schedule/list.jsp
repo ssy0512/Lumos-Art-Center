@@ -30,6 +30,7 @@ $(function () {
 	if(f.searchValue.value){
 		$(".sch_name input").val(f.searchValue.value);
 	}
+	deleteButtonShowHide();
 });
 </script>
 
@@ -49,8 +50,7 @@ $(function () {
     background: url(<%=cp %>/resource/images/lumos/bg_btn_checkOff.gif) no-repeat 0 50%;
 }
 </style>
-<div class="body-container">
-<div id="tab-content" style="padding-top: 22px;">
+
 <div class="sch_period">
 	<div class="sch_year">
 		<a style="left:0; background: url(<%=cp %>/resource/images/lumos/bg_btn_prev.gif) no-repeat 50% 50%;" data-yearNum="-1"></a>
@@ -90,7 +90,7 @@ $(function () {
 		<div class="sch_item">
 			<div class="sch_itemPoster">
 				<a href="<%=cp %>/exhibit/scheduleToArticle?num=${vo.exhibitNum}&${query}">
-					<img src="<%=cp %>/resource/images/lumos/${vo.exProfileImage}">
+					<img src="<%=cp %>/uploads/image/${vo.exProfileImage}">
 				</a>
 			</div>
 			<div class="sch_itemContent">
@@ -108,5 +108,3 @@ $(function () {
 	<input type="hidden" name="sch_hall" value="${sch_hall}">
     <input type="hidden" name="searchValue" value="${searchValue}">
 </form>
-</div>
-</div>

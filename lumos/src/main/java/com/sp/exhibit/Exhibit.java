@@ -6,6 +6,7 @@ public class Exhibit {
 	private String exhibitStart;
 	private String exhibitEnd;
 	private String hallName;
+	private int hallNum;
 	private String exHallLocate;
 	private String exProfileImage;
 	private String genre;
@@ -15,8 +16,20 @@ public class Exhibit {
 	private String ratingName;
 	private String host;
 	private String supervise;
+	private String exHallImage;
 	
-	
+	public String getExHallImage() {
+		return exHallImage;
+	}
+	public void setExHallImage(String exHallImage) {
+		this.exHallImage = exHallImage;
+	}
+	public int getHallNum() {
+		return hallNum;
+	}
+	public void setHallNum(int hallNum) {
+		this.hallNum = hallNum;
+	}
 	public int getExhibitNum() {
 		return exhibitNum;
 	}

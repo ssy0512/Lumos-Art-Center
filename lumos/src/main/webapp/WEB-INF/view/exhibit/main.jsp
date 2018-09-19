@@ -197,57 +197,13 @@ function search() {
 	listPageS();
 }
 
-	
-function posterlist() {
-	var year = $(".sch_showyear").html();
-	var url="<%=cp%>/exhibit/schedule/posterList";
-	var $type = $("ul.sch_period_type li.active_p");
-	var type = $type.attr("data-type");
-	
-	var $searchValue = $(".sch_name input");
-	$searchValue.val($.trim($searchValue.val()));
-	var searchValue = $searchValue.val();
-	
-	var query="period_type="+type+"&year="+year+"&sch_hall="+sch_hall+"&searchValue="+searchValue;
-	if($("#now_sch_period").val()){
-		query=$("#now_sch_period").val();
-	}
-	
-	$.ajax({
-		type:"get"
-		,url:url
-		,data:query
-		,success:function(data) {
-			$("#exhibitScheduleContent").html(data);
-			getYear(year);
-			getPeriod();
-		}
-		,beforeSend : function(jqXHR) {
-	        jqXHR.setRequestHeader("AJAX", true);
-	    }
-	    ,error:function(jqXHR) {
-	    	if(jqXHR.status==403) {
-	    		location.href="<%=cp%>/member/login";
-	    		return;
-	    	}
-	    	console.log(jqXHR.responseText);
-	    }
-	});
-}
-
-// 화면에 보이는 년도 변경
-function getYear(year) {
-	$(".sch_showyear").html(year);
-}
-
-function getPeriod() {
-	$(".sch_txt p").html($("#now_sch_period").val());
-}
 
 function deletePerformanceName() {
+	var schf=document.exhibitScheduleSearchForm;
 	$(".sch_name input").val("");
 	$(".delete").addClass("hide");
-	posterlist();
+	schf.searchValue.value="";
+	listPageS();
 }
 
 function deleteButtonShowHide() {
@@ -274,7 +230,7 @@ function deleteButtonShowHide() {
 			 	<li id="tab-annual" data-tab="annual"><a>연간일정</a></li>
 			 </ul>
 		</div>
-		<div id="tab-content" style="margin-top: 15px;">
+		<div id="tab-content">
 			&nbsp;
 		</div>
 	</div>

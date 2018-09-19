@@ -27,6 +27,7 @@
 		<intercept-url pattern="/concert/**" access="permitAll"/>
 		<intercept-url pattern="/exhibit/**" access="permitAll"/>
 		<intercept-url pattern="/main" access="permitAll"/>
+		<intercept-url pattern="/main/**" access="permitAll"/>
 		<intercept-url pattern="/member/login" access="permitAll"/>
 		<intercept-url pattern="/member/member" access="permitAll"/>
 		<intercept-url pattern="/member/userIdCheck" access="permitAll"/>

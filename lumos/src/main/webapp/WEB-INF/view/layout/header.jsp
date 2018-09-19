@@ -29,7 +29,7 @@
 					<li><a href="<%=cp%>/member/logout">로그아웃</a></li>
 				</c:if>
 				<li><a href="<%=cp%>/">고객센터</a></li>
-				<li><a href="<%=cp%>/">사이트맵</a></li>
+				<li><a href="<%=cp%>/main/sitemap">사이트맵</a></li>
 				<li><a href="<%=cp%>/">정보공개</a></li>
 			</ul>
 	    </div>
@@ -48,7 +48,7 @@
 		    <li><a href="<%=cp%>/exhibit/main">전시예매</a>
 		    	<ul>
 		        	<li><a href="<%=cp%>/exhibit/main">전시일정</a></li>
-	        		<li><a href="<%=cp%>/">전시장 안내</a></li>
+	        		<li><a href="<%=cp%>/exhibit/info">전시장 안내</a></li>
 		        </ul>
 		    </li>
 		    <li><a href="<%=cp%>/">아카데미</a>

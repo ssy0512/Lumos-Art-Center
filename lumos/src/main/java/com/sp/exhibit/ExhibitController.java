@@ -1,15 +1,13 @@
 package com.sp.exhibit;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.taglibs.standard.lang.jstl.ELException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,7 @@ public class ExhibitController {
 		return ".exhibit.main";
 	}
 	
-	@RequestMapping(value="/exhibit/update", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/exhibit/update", method=RequestMethod.GET)
 	public String updateForm(
 			@RequestParam int num,
 			HttpSession session,
@@ -48,7 +46,7 @@ public class ExhibitController {
 		return ".exhibit.created";
 	}
 	
-	@RequestMapping(value="/exhibit/update", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/exhibit/update", method=RequestMethod.POST)
 	public String updateSubmit(
 			@RequestParam int num,
 			Exhibit dto
@@ -115,5 +113,56 @@ public class ExhibitController {
 		model.put("state", state);
 
 		return model;
+	}
+	
+	@RequestMapping(value="/exhibit/info")
+	public String infoMain(
+			@RequestParam(value="num", defaultValue="0") int num,
+			Model model
+			) {
+		
+		List<Exhibit> list = exhibitService.listExHall();
+		
+		Exhibit dto = null;
+		if(num==0) {
+			dto = exhibitService.readExHall(list.get(0).getHallNum());
+		} else {
+			dto = exhibitService.readExHall(num);
+		}
+		
+		model.addAttribute("list", list);
+		model.addAttribute("dto", dto);
+		return ".exhibit.info.exInfo";
+	}
+	
+	@RequestMapping(value="/admin/exHallinfo/update", method=RequestMethod.GET)
+	public String updateHallInfoForm(
+			@RequestParam int num,
+			HttpSession session,
+			Model model
+			) {
+		
+		Exhibit dto = exhibitService.readExHall(num);
+		if(dto==null) {
+			return "redirect:/exhibit/info";
+		}
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
+		
+		return ".exhibit.info.created";
+	}
+	
+	@RequestMapping(value="/admin/exHallinfo/update", method=RequestMethod.POST)
+	public String updateHallInfoSubmit(
+			@RequestParam int num,
+			Exhibit dto
+			) throws Exception {
+		
+		dto.setHallNum(num);
+		exhibitService.updateBoard(dto);
+		// 수정 하기
+		
+		return "redirect:/exhibit/info";
 	}
 }

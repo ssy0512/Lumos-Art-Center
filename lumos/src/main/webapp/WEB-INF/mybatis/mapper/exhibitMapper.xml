@@ -27,4 +27,12 @@
 	<select id="countBoardLike" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*),0) FROM exhibitInterest WHERE exhibitNum=#{exhibitNum} AND userId=#{userId}
 	</select>
+	
+	<select id="listExHall" resultType="com.sp.exhibit.Exhibit">
+		SELECT hallName, hallNum FROM exhibitHall
+	</select>
+	
+	<select id="readExHall" parameterType="Integer"  resultType="com.sp.exhibit.Exhibit">
+		SELECT hallName, hallNum, exHallLocate, exHallImage FROM exhibitHall WHERE hallNum=#{num}
+	</select>
 </mapper>
