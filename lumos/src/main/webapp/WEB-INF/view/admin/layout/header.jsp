@@ -27,7 +27,7 @@
 <div class="menu">
     <ul class="nav">
         <li><a href="<%=cp%>/admin/sales/salesSub/salesMain">매출관리</a></li>
-        <li><a href="#">일정관리</a></li>
+        <li><a href="<%=cp%>/admin/menu2/concertSchedule/main">일정관리</a></li>
         <li><a href="#">직원관리</a></li>
         <li><a href="<%=cp%>/admin/membership/regular/regular">회원관리</a></li>
         <li><a href="#">대관관리</a></li>
