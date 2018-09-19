@@ -28,11 +28,10 @@
 			<tr align="center" bgcolor="#eeeeee" height="44"
 				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 				<th width="200">
-					<div class="tab_year"
-						style="padding-bottom: 5px; text-align: center; margin: 0px 28px;">
-						<span class="prebtnYear" style="background-color: #eeeeee;">＜</span>
+					<div class="tab_year" style="text-align: center; margin: 0px 28px;">
+						<a style="left:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_prev.gif) no-repeat 50% 50%;" class="prebtnYear" style="background-color: #eeeeee;"></a>
 						<span class="titleDate" id="current-year" data-year="${year}">${year}</span>
-						<span class="nextbtnYear" style="background-color: #eeeeee;">＞</span>
+						<a style="right:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_next.gif) no-repeat 50% 50%;" class="nextbtnYear" style="background-color: #eeeeee;"></a>
 					</div>
 				</th>
 				<th width="140" style="color: #434343;">기간</th>
