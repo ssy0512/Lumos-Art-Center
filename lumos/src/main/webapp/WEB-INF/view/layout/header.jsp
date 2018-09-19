@@ -45,7 +45,7 @@
 	        		<li><a href="<%=cp%>/concert/info">공연장 안내</a></li>
 		        </ul>
 		    </li>
-		    <li><a href="<%=cp%>/">전시예매</a>
+		    <li><a href="<%=cp%>/exhibit/main">전시예매</a>
 		    	<ul>
 		        	<li><a href="<%=cp%>/exhibit/main">전시일정</a></li>
 	        		<li><a href="<%=cp%>/">전시장 안내</a></li>
