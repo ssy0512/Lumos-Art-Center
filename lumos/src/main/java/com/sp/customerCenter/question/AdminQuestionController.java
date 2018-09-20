@@ -1,4 +1,4 @@
-package com.sp.admin.question;
+package com.sp.customerCenter.question;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.common.MyUtil;
 
-@Controller("question.adminQuestionController")
+@Controller("customerCenter.adminQuestionController")
 public class AdminQuestionController {
 //관리자단에서 보이는 리스트. 제목을 누르면 해당 글로 가게됨.
 	@Autowired
@@ -77,7 +77,7 @@ public class AdminQuestionController {
 	}
 	
 	
-	@RequestMapping(value="/questions/article",method=RequestMethod.POST)
+	@RequestMapping(value="/customerCenter/questions/article",method=RequestMethod.POST)
 	public String article(
 			@RequestParam(value="postNum") int postNum,
 			@RequestParam(value="page")String page,
@@ -108,6 +108,7 @@ public class AdminQuestionController {
 		model.addAttribute("page",page);
 		model.addAttribute("query",query);
 	
-		return "";
+		return "redirect:/customerCenter/questions/list?"+postNum;
+		//이부분 고치기.
 	}
 }

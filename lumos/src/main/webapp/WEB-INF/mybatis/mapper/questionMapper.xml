@@ -7,7 +7,7 @@
 	SELECT question_seq.NEXTVAL FROM dual
 </select>
 
-<insert id="insertQuestion" parameterType="com.sp.admin.question.Questions">
+<insert id="insertQuestion" parameterType="com.sp.customerCenter.question.Questions">
 	INSERT INTO question 
 	(postNum,userId, title,content,groupNum,orderNo,
 	 depth,parent,qCategoryCode) VALUES (
@@ -33,7 +33,7 @@
 </sql>
 
 <select id="listQuestion" parameterType="map"
-            resultType="com.sp.admin.question.Questions">
+            resultType="com.sp.customerCenter.question.Questions">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
 			     SELECT postNum, userName, q.userId,
@@ -54,7 +54,7 @@
 	]]>
 </select>
 
-<select id="readQuestion" resultType="com.sp.admin.question.Questions" parameterType="Integer">
+<select id="readQuestion" resultType="com.sp.customerCenter.question.Questions" parameterType="Integer">
 		SELECT postNum, q.userId, userName, title, content, groupNum, 
                  depth, orderNo, parent, q.created,q.qCategoryCode,qCategoryName
 				 FROM question q JOIN member1 m ON q.userId=m.userId
@@ -63,7 +63,7 @@
 </select>
 
 <!-- 이전글 -->
-<select id="preReadQuestion" resultType="com.sp.admin.question.Questions" 
+<select id="preReadQuestion" resultType="com.sp.customerCenter.question.Questions" 
 				parameterType="map">
 	SELECT tb.* FROM (
 			SELECT postNum, title 
@@ -82,7 +82,7 @@
 </select>
 
 <!-- 다음글 -->
-<select id="nextReadQuestion" resultType="com.sp.admin.question.Questions" 
+<select id="nextReadQuestion" resultType="com.sp.customerCenter.question.Questions" 
 				parameterType="map">
 		SELECT tb.* FROM (
 			SELECT postNum, title 
@@ -110,7 +110,7 @@
   </where>
 </select>
 
-<update id="updateQuestion" parameterType="com.sp.admin.question.Questions">
+<update id="updateQuestion" parameterType="com.sp.customerCenter.question.Questions">
          UPDATE question SET subject=#{subject}, content=#{content}
                     WHERE postNum = #{postNum}
 </update>

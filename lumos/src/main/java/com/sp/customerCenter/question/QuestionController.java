@@ -1,4 +1,4 @@
-package com.sp.admin.question;
+package com.sp.customerCenter.question;
 
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sp.common.MyUtil;
 import com.sp.member.SessionInfo;
 
-@Controller("question.questionController")
+@Controller("customerCenter.questionController")
 public class QuestionController {
 	@Autowired
 	private QuestionsService service;
 	@Autowired
 	private MyUtil util;
 	
-	@RequestMapping(value="/customerService/questions/list")
+	@RequestMapping(value="/customerCenter/questions/list")
 	public String list(
 			@RequestParam(value="page",defaultValue="1") int current_page,
 			@RequestParam(value="searchKey",defaultValue="title") String searchKey,
@@ -74,16 +74,17 @@ public class QuestionController {
 		model.addAttribute("page",current_page);
 		model.addAttribute("paging",paging);
 		model.addAttribute("total_page",total_page);
-		return "";
+		
+		return "customerCenter/questions/list";
 	}
-	@RequestMapping(value="/customerService/questions/created",method=RequestMethod.GET)
+	@RequestMapping(value="/customerCenter/questions/created",method=RequestMethod.GET)
 	public String createdForm(Model model) throws Exception{
 		model.addAttribute("page","1");
 		model.addAttribute("mode","created");
-		return "";
+		return "customerCenter/questions/created";
 	}
 	
-	@RequestMapping(value="/customerService/questions/created",method=RequestMethod.POST)
+	@RequestMapping(value="/customerCenter/questions/created",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdSubmit(Questions dto,HttpSession session)throws Exception{
 		
@@ -95,7 +96,7 @@ public class QuestionController {
 		model.put("state", state);
 		return model;
 	}
-	@RequestMapping(value="/customerService/questions/article",method=RequestMethod.POST)
+	@RequestMapping(value="/customerCenter/questions/article")
 	public String article(
 			@RequestParam(value="postNum") int postNum,
 			@RequestParam(value="page")String page,
@@ -112,9 +113,9 @@ public class QuestionController {
 		
 		Questions dto=service.readQeustion(postNum);
 		if(dto==null)
-			return "customerService/error";
+			return ".customerCenter.error";
 		
-		//dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
 		Map<String, Object> map=new HashMap<String,Object>();
 		map.put("searchKey", searchKey);
@@ -129,10 +130,10 @@ public class QuestionController {
 		model.addAttribute("nextReadQuestion",nextReadQuestion);
 		model.addAttribute("page",page);
 	
-		return "";
+		return "customerCenter/questions/article";
 	}
 	
-	@RequestMapping(value="/customerService/questions/delete",method=RequestMethod.GET)
+	@RequestMapping(value="/customerCenter/questions/delete",method=RequestMethod.POST)
 	public Map<String, Object> delete(
 			@RequestParam(value="postNum") int postNum,
 			HttpSession session
@@ -156,7 +157,7 @@ public class QuestionController {
 		
 	
 	
-	@RequestMapping(value="/customerService/questions/update",method=RequestMethod.GET)
+	@RequestMapping(value="/customerCenter/questions/update",method=RequestMethod.GET)
 	public String updateForm(
 			@RequestParam(value="postNum") int postNum,
 			@RequestParam(value="page",defaultValue="1")String page,
@@ -167,21 +168,21 @@ public class QuestionController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Questions dto=service.readQeustion(postNum);
 		if(dto==null) {
-			return "customerService/error";
+			return ".customerCenter.error";
 		}
 		
 		if(! info.getUserId().equals(dto.getUserId())) {
-			return "customerService/error";
+			return ".customerCenter.error";
 		}
 		
 		model.addAttribute("mode","update");
 		model.addAttribute("page",page);
 		model.addAttribute("dto",dto);
 		
-		return "";
+		return "customerCenter/questions/created";
 	}
 	
-	@RequestMapping(value="/customerService/questions/update",method=RequestMethod.POST)
+	@RequestMapping(value="/customerCenter/questions/update",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateSubmit(Questions dto, @RequestParam String page)throws Exception{
 		String state="true";
@@ -194,7 +195,7 @@ public class QuestionController {
 	}
 	
 	
-	@RequestMapping(value="/customerService/questions/reply", method=RequestMethod.GET)
+	@RequestMapping(value="/customerCenter/questions/reply", method=RequestMethod.GET)
 	public String replyForm (
 			@RequestParam (value="postNum")int postNum,
 			@RequestParam (value="page")String page,
@@ -203,12 +204,12 @@ public class QuestionController {
 			) throws Exception{
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(! info.getUserId().equals("admin")) {
-			return "customer/error";
+			return ".customerCenter.error";
 		}
 		
 		Questions dto=service.readQeustion(postNum);
 		if(dto==null) {
-			return "customerService/error";
+			return ".customerCenter.error";
 		}
 		String str="["+dto.getTitle()+"] 에 대한 관리자의 답변입니다. \n";
 		dto.setContent(str);
@@ -217,10 +218,10 @@ public class QuestionController {
 		model.addAttribute("page",page);
 		model.addAttribute("mode","reply");
 		
-		return "";
+		return "customerCenter/questions/created";
 	}
 	
-	@RequestMapping(value="/customerService/questions/reply",method=RequestMethod.POST)
+	@RequestMapping(value="/customerCenter/questions/reply",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> replySubmit(
 			Questions dto,

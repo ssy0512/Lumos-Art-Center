@@ -1,4 +1,4 @@
-package com.sp.admin.question;
+package com.sp.customerCenter.question;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sp.common.dao.CommonDAO;
 
-@Service("question.questionService")
+@Service("customerCenter.questionService")
 public class QuestionsServiceImpl implements QuestionsService{
 	@Autowired
 	private CommonDAO dao;

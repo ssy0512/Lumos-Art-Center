@@ -36,6 +36,7 @@
 		<intercept-url pattern="/uploads/**" access="permitAll"/>
 		<intercept-url pattern="/academy/**" access="permitAll"/>
 		<intercept-url pattern="/goods" access="permitAll"/>
+		<intercept-url pattern="/customerCenter/**" access="permitAll"/>
 		
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> 
 		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER')"/>

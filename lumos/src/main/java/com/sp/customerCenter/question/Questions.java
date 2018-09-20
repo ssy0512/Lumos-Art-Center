@@ -1,4 +1,4 @@
-package com.sp.admin.question;
+package com.sp.customerCenter.question;
 
 public class Questions {
 	public int postNum;

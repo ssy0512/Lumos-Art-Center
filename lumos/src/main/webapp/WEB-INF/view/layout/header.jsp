@@ -28,7 +28,7 @@
 					<li><a href="<%=cp%>/">마이페이지</a></li>
 					<li><a href="<%=cp%>/member/logout">로그아웃</a></li>
 				</c:if>
-				<li><a href="<%=cp%>/">고객센터</a></li>
+				<li><a href="<%=cp%>/customerCenter/main">고객센터</a></li>
 				<li><a href="<%=cp%>/main/sitemap">사이트맵</a></li>
 				<li><a href="<%=cp%>/">정보공개</a></li>
 			</ul>
