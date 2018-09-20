@@ -7,7 +7,7 @@
 %>
 <script type="text/javascript">
 	$(function() {
-		var f = document.exhibitScheduleSearchForm;
+		var f = document.concertScheduleSearchForm;
 		var type = f.period_type.value;
 
 		$("#type-" + type).addClass("active_p");
@@ -54,10 +54,10 @@
 <div class="body-container">
 	<div id="tab-content" style="padding-top: 22px;">
 		<div class="sch_period">
-			<div class="tab_year">
-				<a style="left:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_prev.gif) no-repeat 50% 50%;" class="prebtnDate"></a>
-				<span class="titleDate" id="current-year" data-year="${year}">${year}</span> 
-				<a style="right:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_next.gif) no-repeat 50% 50%;" class="nextbtnDate"></a>
+			<div class="sch_year">
+				<a style="left:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_prev.gif) no-repeat 50% 50%;" data-yearNum="-1"></a>
+				<span class="titleDate">${year}</span> 
+				<a style="right:0; background: url(<%=cp%>/resource/images/lumos/bg_btn_next.gif) no-repeat 50% 50%;" data-yearNum="1"></a>
 			</div>
 			<ul class="sch_period_type">
 				<li id="type-all" data-type="all"><a>전체</a></li>
@@ -67,10 +67,8 @@
 				<li id="type-threemonths" data-type="threemonths"><a>3개월</a></li>
 			</ul>
 			<div class="sch_name">
-				<input onkeyup="deleteButtonShowHide();" type="text"
-					placeholder="공연명으로 검색">
-				<button type="button" class="delete hide"
-					onclick="deletePerformanceName();"
+				<input onkeyup="deleteButtonShowHide();" type="text" placeholder="공연명으로 검색">
+				<button type="button" class="delete hide" onclick="deletePerformanceName();"
 					style="background: url(<%=cp%>/resource/images/lumos/btn_del.png) no-repeat 0 100%;"></button>
 				<button type="button" onclick="search();"
 					style="background: url(<%=cp%>/resource/images/lumos/bg_btn_sch_board.gif) no-repeat 0 100%;"></button>
@@ -90,8 +88,8 @@
 			</ul>
 		</div>
 	</div>
-
-	<div id="exhibitScheduleContent" style="width: 1040px;">
+<%-- 
+	<div id="concertScheduleContent" style="width: 1040px;">
 		<c:forEach var="vo" items="${list}">
 			<div class="sch_item">
 				<div class="sch_itemPoster">
@@ -112,8 +110,8 @@
 			</div>
 		</c:forEach>
 	</div>
-
-	<form name="exhibitScheduleSearchForm" action="" method="post">
+ --%>
+	<form name="concertScheduleSearchForm" action="" method="post">
 		<input type="hidden" name="period_type" value="${period_type}">
 		<input type="hidden" name="year" value="${year}"> <input
 			type="hidden" name="sch_hall" value="${sch_hall}"> <input
