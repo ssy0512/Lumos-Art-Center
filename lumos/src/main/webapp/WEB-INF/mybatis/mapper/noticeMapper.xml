@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+
+<insert id="insertNotice" parameterType="com.sp.notice.Notice">
+ 	INSERT INTO notice(noticeNum,userId, title, important, content ) VALUES 
+ 	              (notice_seq.NEXTVAL,#{userId},#{title},#{important},#{content})
+</insert>
+
+<sql id="where-list">
+	<if test="searchKey=='userName' ">
+		userName=#{searchValue}
+	</if>
+	
+	<if test="searchKey=='title' ">
+	INSTR(title, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='content' ">
+	DBMS_LOB.INSTR( content, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='created' ">
+	(TO_CHAR(created, 'YYYY-MM-DD') = #{searchValue}
+  		OR TO_CHAR(created, 'YYYYMMDD') = #{searchValue})
+	</if>
+</sql>
+
+<select id="listNoticeTop" resultType="com.sp.notice.Notice">
+SELECT noticeNum , important , n.userId ,title,content,hitcount,
+TO_CHAR(created, 'YYYY-MM-DD') created
+FROM notice n 
+JOIN member1 m ON n.userId=m.userId
+WHERE important = 1
+ORDER BY noticeNum DESC
+</select>
+
+
+
+<select id="dataCount" parameterType="map" resultType="Integer">
+SELECT NVL(COUNT(*), 0) FROM notice n 
+	JOIN member1 m ON n.userId=m.userId
+<where>
+<if test="searchValue != null and searchValue!='' ">
+<include refid="where-list"/>
+</if>
+</where>
+</select>
+
+
+<select id="listNotice" parameterType="map" resultType="com.sp.notice.Notice">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+	
+SELECT noticeNum,important,n.userId,title,content,hitcount,created
+	FROM notice n 
+		JOIN member1 m ON n.userId=m.userId 
+			WHERE important = 0 ORDER BY noticeNum DESC
+	<where>
+		<if test="searchValue != null and searchValue != ''">
+			<include refid="where-list"/>
+		</if>
+		
+	</where>
+	
+<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+	]]>
+</select>
+
+
+<select id="readNotice" resultType="com.sp.notice.Notice" parameterType="Integer">
+SELECT noticeNum , n.userId , important, title , content , hitcount,created 
+FROM notice n JOIN member1 m ON n.userId=m.userId
+WHERE noticeNum = #{noticeNum}
+</select>
+
+ <update id="updateHitCount" parameterType="Integer">
+        UPDATE notice SET hitcount=hitcount+1 WHERE noticeNum = #{noticeNum}
+    </update>
+
+   
+   <select id="preReadNotice" resultType="com.sp.notice.Notice"
+   					parameterType="map">
+   SELECT tb.* FROM(
+   	SELECT noticeNum , title FROM notice n 
+   	JOIN member1 m ON n.userId=m.userId
+   	<where>
+   		<if test="searchValue != null and searchValue != '' ">
+   			<include refid="where-list"/>
+   		</if>
+   	  	<![CDATA[
+             AND (noticeNum > #{noticeNum})
+         ]]>
+   	</where>
+  		 ORDER BY noticeNum ASC
+       ) tb WHERE ROWNUM=1
+   </select>
+    
+</mapper>
