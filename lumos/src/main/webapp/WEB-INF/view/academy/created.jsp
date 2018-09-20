@@ -60,12 +60,13 @@ function check() {
              			<span style="width: 500px; font-weight: 600; text-decoration: none; float: right;">| &nbsp;<font color="#aa1717">${dto.price}원</font></span></p>
              	</div>            		
                    	
-             <c:if test="${endDate<todayDate}">
-          		<p class="list-finish"><span>마&nbsp;감</span></p> 	             	
+             <c:if test="${mode=='finish'}">
+          		<p class="list-ing" style="color:darkgrey; background-color: #ffffff; border: 1px solid darkgrey;
+	             								height:40px; padding: 10px 15px 5px 15px;"><span>마&nbsp;감</span></p> 	             	
              </c:if> 
              	<div style="width: 240px; margin: 5px 0px 5px 0px; float: left;">
-             		<p class="list-ing-desc3">접수중</p>
-             	</div>      		             	
+             		<p class="list-ing" style="height:40px; padding: 10px 15px 5px 15px; margin: 25px 0px 25px 0px;">접수중</p>
+             	</div> 
                    		                   	
              	<div class="academy_desc4">	
                    	<p style="padding: 20px 0px; margin-bottom: 10px; font-size: 25px; font-weight: bold;">
@@ -78,7 +79,7 @@ function check() {
                    	</p>
                
                    	<p style="padding: 20px 0px 10px; font-size: 20px; text-align: center;">
-                   	  	 <button type="button" class="btn-Count" onclick="javascript:location.href='<%=cp%>/academy/created';">결&nbsp;&nbsp;&nbsp;제</button>
+                   	  	 <button type="button" class="btn-Count" onclick="javascript:location.href='<%=cp%>/academy/classapply';">결&nbsp;&nbsp;&nbsp;제</button>
                    	</p>
                 </c:if>   	                   	                   	
                    	
@@ -122,7 +123,7 @@ function check() {
 			         <c:if test="${mode=='update'}">
 			         	 <input type="hidden" name="academyNum" value="${dto.academyNum}">
 			        	 <input type="hidden" name="page" value="${page}">
-			        </c:if>
+			         </c:if>
 			      </div>
 			      </td>
 			    </tr>

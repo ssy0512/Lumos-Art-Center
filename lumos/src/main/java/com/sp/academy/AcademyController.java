@@ -36,7 +36,7 @@ public class AcademyController {
 			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(value="searchKey", defaultValue="academyName") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
-			@RequestParam(value="mode", defaultValue="") String mode,
+			@RequestParam(value="mode", defaultValue="ing") String mode,
 			HttpServletRequest req,
 			Model model) throws Exception {
 		
@@ -45,19 +45,16 @@ public class AcademyController {
 		int rows=4;
 		int total_page=0;
 		int dataCount=0;
+		int applyDateCount=0;
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue=URLDecoder.decode(searchValue, "utf-8");
 		}
 		
-		mode=req.getParameter("mode");
-		if(mode==null || mode.length()==0)
-			mode="ing";
-		
-		
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
+		map.put("mode", mode);
 		
 		dataCount=service.dataCount(map);
 		if(dataCount!= 0)
@@ -107,8 +104,8 @@ public class AcademyController {
 		String listUrl=cp+"/academy/list";
 		String articleUrl=cp+"/academy/article?page="+current_page;
 		if(searchValue.length()!=0) {
-			query="mode="+mode+"&searchKey="+searchKey+"&searchValue="+URLEncoder.encode(searchValue, "utf-8");
-		}
+			query="searchKey="+searchKey+"&searchValue="+URLEncoder.encode(searchValue, "utf-8");
+		} 
 		
 		if(query.length()!=0) {
 			listUrl=cp+"/academy/list?"+query;
@@ -119,6 +116,7 @@ public class AcademyController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("applyDateCount", applyDateCount);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
@@ -208,6 +206,37 @@ public class AcademyController {
 		service.updateInfo(dto, pathname);
 		
 		return "redirect:/academy/list?page"+page;
+	}
+	
+	@RequestMapping(value="/academy/mylecture")
+	public String mylecture(
+			@RequestParam(value="academyNum") int academyNum,
+			@RequestParam(value="page") String page,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null) {
+			return "redirect:/member/login";
+		}
+		
+		String query="";
+		
+		// 해당 레코드 가져 오기
+		Academy dto=service.readAcademy(academyNum);				
+		if(dto==null)
+			return "redirect:/academy/list?"+query;	
+		
+		if(academyNum==0) {
+			return "redirect:/academy/list?"+query;
+		} 
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("academyNum", academyNum);
+
+		model.addAttribute("dto", dto);
+		
+        return ".academy.mylecture";
 	}
 	
 }

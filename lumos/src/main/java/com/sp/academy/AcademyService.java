@@ -5,6 +5,7 @@ import java.util.Map;
 
 public interface AcademyService {
 	public int dataCount(Map<String, Object> map); 
+	public int dataCount(int num);
 	public List<Academy> listAcademy(Map<String, Object> map);
 	public Academy readAcademy(int num);
 	public Academy preReadAcademy(Map<String, Object> map);

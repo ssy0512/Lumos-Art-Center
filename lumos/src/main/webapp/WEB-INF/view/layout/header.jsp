@@ -51,7 +51,7 @@
 	        		<li><a href="<%=cp%>/exhibit/info">전시장 안내</a></li>
 		        </ul>
 		    </li>
-		    <li><a href="<%=cp%>/">아카데미</a>
+		    <li><a href="<%=cp%>/academy/list">아카데미</a>
 		    	<ul>
 		        	<li><a href="<%=cp%>/academy/list">수강신청</a></li>
 	        		<li><a href="<%=cp%>/">교육후기</a></li>

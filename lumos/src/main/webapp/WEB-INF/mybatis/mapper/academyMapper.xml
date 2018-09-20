@@ -4,16 +4,11 @@
 <mapper namespace="academy">
 
 	<sql id="date-list">
-		<if test="mode==equalsIgnoreCase('finish')">
+		<if test="mode=='ing'">
 	  	  <![CDATA[ 
-			SYSDATE =< A.endDate
+			SYSDATE <= A.endDate
 	 	  ]]>	
 	  </if>	  
-	  <if test="mode==equalsIgnoreCase('ing')">
-	  	  <![CDATA[ 
-			SYSDATE > A.endDate 
-	 	  ]]>	
-	  </if>
 	</sql>
 
 	<sql id="where-list">		  		
@@ -30,15 +25,12 @@
 	                JOIN roomInfo R ON A.roomNum=R.roomNum
 	                JOIN instructor I ON A.instNum=I.instNum
 						<where>
-					     	<if test="mode!=null and mode!='' ">
-								<include refid="date-list"/>					     	
-					     	</if>
-					     	<if test="mode==null and mode=='' ">
-								<include refid="date-list"/>					     	
-					     	</if>
-					     	<if test="searchValue!=null and searchValue!='' ">
-					     	    <include refid="where-list"/>
-					     	</if>
+					     <include refid="date-list"/>
+					     	
+					     <if test="searchValue!=null and searchValue!='' ">
+					     	 AND
+					     	 <include refid="where-list"/>
+					     </if>
 					    </where>	
 	</select>
 
@@ -53,13 +45,10 @@
 					                JOIN roomInfo R ON A.roomNum=R.roomNum
 					                JOIN instructor I ON A.instNum=I.instNum
 						            <where>
-								     	<if test="mode!=null and mode!='' ">
-											<include refid="date-list"/>					     	
-								     	</if>
-								     	<if test="mode==null and mode=='' ">
-											<include refid="date-list"/>					     	
-								     	</if>
+								     	<include refid="date-list"/>
+					     					
 								     	<if test="searchValue!=null and searchValue!='' ">
+								     	  	AND
 								     	    <include refid="where-list"/>
 								     	</if>
 								    </where>
@@ -79,48 +68,6 @@
 		                JOIN roomInfo R ON A.roomNum=R.roomNum
 		                JOIN instructor I ON A.instNum=I.instNum
 	                WHERE academyNum=#{academyNum}
-	</select>
-	
-	<select id="preReadAcademy" parameterType="map" resultType="com.sp.academy.Academy">
-		SELECT tb.* FROM (            
-		    SELECT academyNum, academyName
-		        FROM academy A
-		            JOIN roomInfo R ON A.roomNum=R.roomNum
-		            JOIN instructor I ON A.instNum=I.instNum 
-						<where>
-					     	<if test="mode!=null and mode!='' ">
-								<include refid="date-list"/>					     	
-					     	</if>
-					     	<if test="mode==null and mode=='' ">
-								<include refid="date-list"/>					     	
-					     	</if>
-					     	<if test="searchValue!=null and searchValue!='' ">
-					     	    <include refid="where-list"/>
-					     	</if>
-				<![CDATA[
-				    AND (academyNum > #{academyNum})
-				]]>
-				</where>
-				ORDER BY academyNum ASC
-			) tb WHERE ROWNUM=1    
-	</select>
-	
-	<select id="nextReadAcademy" parameterType="map" resultType="com.sp.academy.Academy">
-		SELECT tb.* FROM (            
-		    SELECT academyNum, academyName
-		        FROM academy A
-		            JOIN roomInfo R ON A.roomNum=R.roomNum
-		            JOIN instructor I ON A.instNum=I.instNum 
-				<where>
-	                <if test="searchValue != null and searchValue != '' ">
-	                  <include refid="where-list"/>
-	                </if>
-				<![CDATA[
-				    AND (academyNum < #{academyNum})
-				]]>
-				</where>
-				ORDER BY academyNum DESC
-			) tb WHERE ROWNUM=1    
 	</select>
 	
 	<update id="updateInfo" parameterType="com.sp.academy.Academy">

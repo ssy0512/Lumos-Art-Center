@@ -41,7 +41,6 @@ a:hover, a:active {
 }
 
 .list-title-boxTF {
-    font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
     border: 1px solid #ccc;
     padding: 3px 5px 5px;
     border-radius: 2px;
@@ -54,7 +53,6 @@ a:hover, a:active {
 .btn-search {
 	color: #aa1717;
     font-weight: bold;
-    font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
     border: 1px solid #ffffff;
     background-color: #fff;
     text-align: center;

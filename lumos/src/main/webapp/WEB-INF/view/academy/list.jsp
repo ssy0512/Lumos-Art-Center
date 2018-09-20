@@ -50,32 +50,14 @@ function searchList() {
 	f.submit();
 }
 
-function searchEndList() {
-    var date=new Date();
-	var year=date.getFullYear();
-	var month=date.getMonth()+1;
-	var day=date.getDate();
-	
-    if ((month+"").length < 2) {       
-    	month = "0" + month;
-    }
-	
-    if ((day+"").length < 2) {      
-        day = "0" + day;
-    }
-	
-	var today=year+"-"+month+"-"+day;
-	console.log(today);
-
-}
 
 </script>
 
 <div class="body-content-container">
      <div class="body-academy-title">
          <span class="academy-title">아카데미 수강신청 </span>       	
-         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list';">전체</button>
-         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode='ing'';">마감된 강의 제외</button>
+         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode=finish';">전체</button>
+         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode=ing';">마감된 강의 제외</button>
      </div>  
      
      <div>
@@ -117,7 +99,8 @@ function searchEndList() {
 			                <c:if test="${dto.mode=='ing'}">
 			                	<p class="list-ing"><span>접수중</span></p>  	
 			                </c:if>	
-		                   	<p class="font12 totalCount">(<b>1</b>/${dto.totalCount})</p>		                   	
+		                   	<p class="font12 totalCount">(<b>${applyDateCount}</b>/${dto.totalCount})</p>
+		                   		<input type="hidden" name="academyNum" value="${dto.academyNum}">		                   	
 		             	</div>
 		         </div>
 		     </td>

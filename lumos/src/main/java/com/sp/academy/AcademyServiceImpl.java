@@ -30,6 +30,19 @@ public class AcademyServiceImpl implements AcademyService {
 	}
 
 	@Override
+	public int dataCount(int academyNum) {
+		int result=0;
+		
+		try {
+			result=dao.selectOne("academy.applyDateCount", academyNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+	}
+	
+	@Override
 	public List<Academy> listAcademy(Map<String, Object> map) {
 		List<Academy> list=null;
 		

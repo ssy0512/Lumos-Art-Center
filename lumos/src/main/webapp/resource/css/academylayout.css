@@ -12,15 +12,13 @@
 .body-academy-title {
     color: #434343;
     width: 1020px;
-    font-size: 25px;
+    font-size: 17px;
     font-weight: bold;
-    font-family: "Malgun Gothic", "Nanum Gothic", "Dotum";
 }
 
 .btn-academy-filter {
 	color: #434343;
     font-weight: 500;
-    font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
     border: 1px solid #cccccc;
     background-color: #fff;
     text-align: center;
@@ -42,13 +40,13 @@
 }
 
 .list-title {
-	font-size: 25px;
+	font-size: 17px;
     font-weight: bold;
     padding-bottom: 30px;
 }
 
 .academy_desc3-title {
-	font-size: 25px;
+	font-size: 20px;
     font-weight: bold;
     padding-bottom: 30px;
 }
