@@ -88,29 +88,42 @@
 			</ul>
 		</div>
 	</div>
-<%-- 
-	<div id="concertScheduleContent" style="width: 1040px;">
-		<c:forEach var="vo" items="${list}">
-			<div class="sch_item">
-				<div class="sch_itemPoster">
-					<a
-						href="<%=cp %>/exhibit/scheduleToArticle?num=${vo.exhibitNum}&${query}">
-						<img src="<%=cp %>/resource/images/lumos/${vo.exProfileImage}">
-					</a>
-				</div>
-				<div class="sch_itemContent">
-					<h2 class="sch_itemContent_sbj">
-						<a
-							href="<%=cp %>/exhibit/scheduleToArticle?num=${vo.exhibitNum}&${query}">${vo.exhibitName}</a>
-					</h2>
-					<p class="sch_itemContent_1">${vo.hallName}&nbsp;${vo.exHallLocate}</p>
-					<p class="sch_itemContent_2">${vo.exhibitStart}~
-						${vo.exhibitEnd}</p>
-				</div>
-			</div>
-		</c:forEach>
+
+	<div class="concertScheduleContent" >
+		<ul class="concert_item">
+			<c:forEach var="vo" items="${list}">
+				<li class="resultList">
+					<div class="sch_itemPoster">
+						<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">
+							<!--  <img src="/resource/images/lumos/${vo.conProfileImage}">-->
+							<img src="<%=cp %>/resource/images/lumos/180119-100-niki.jpg">
+						</a>
+					</div>
+					<div class="sch_itemContent">
+						<span class="concertName">
+							<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">${vo.concertName}</a>
+						</span>
+						<dl class="concert_content">
+							<dt>기간</dt>
+							<dd>${vo.concertStart }~${vo.concertEnd }</dd>
+							<dt>장소</dt>
+							<dd>${vo.hallName }</dd>
+							<dd>장르</dd>
+							<dt>${vo.genre }(${vo.totalTime })</dt>
+							<dd>관람등급</dd>
+							<dt>${vo.ratingName}</dt>
+							<dd>티켓가격</dd>
+							<dt>${seatPriceList}</dt>
+						</dl>
+					</div>
+				</li>
+			</c:forEach>
+			<c:if test="${empty list }">
+					<li><div class="noData">등록된 공연이 없습니다.</div></li>
+			</c:if>
+		</ul>
 	</div>
- --%>
+	
 	<form name="concertScheduleSearchForm" action="" method="post">
 		<input type="hidden" name="period_type" value="${period_type}">
 		<input type="hidden" name="year" value="${year}"> <input

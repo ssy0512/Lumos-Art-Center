@@ -85,7 +85,7 @@ $(function(){
 		<div class="pageTitleAndButton">
 			<span>전시 상세 정보</span>
 			<c:if test="${sessionScope.member.userId=='admin'}">
-				<button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/exhibit/update?num=${dto.exhibitNum}'">
+				<button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/admin/exhibit/update?num=${dto.exhibitNum}'">
 					전시 상세정보 관리
 				</button>
 			</c:if>
