@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.sp.common.dao.CommonDAO;
 
-@Service("company.companyService")
-public class CompanyServiceImpl implements CompanyService {
+@Service("regular.regularService")
+public class RegularServiceImpl implements RegularService{
 	@Autowired
 	private CommonDAO dao;
-
+	
 	@Override
-	public int insertCompany(Company dto, String pathname) {
-		int result=0;
+	public int insertRegular(Regular dto, String pathname) {
+		int result = 0;
 		try {
-			result = dao.insertData("company.insertCompany", dto);
+			result = dao.insertData("regular.insertRegular", dto);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -25,11 +25,10 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public List<Company> listCompany(Map<String, Object> map) {
-		List<Company> list = null;
-		
+	public List<Regular> listRegular(Map<String, Object> map) {
+		List<Regular> list = null;
 		try {
-			list = dao.selectList("company.listCompany", map);
+			list = dao.selectList("regular.listRegular", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -38,10 +37,9 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		int result=0;
-		
+		int result = 0;
 		try {
-			result=dao.selectOne("company.dataCount", map);
+			result = dao.selectOne("regular.dataCount", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -49,11 +47,10 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Company readCompany(int companyIndex) {
-		Company dto = null;
-		
+	public Regular readRegular(int memberIndex) {
+		Regular dto = null;
 		try {
-			dto=dao.selectOne("company.readCompany", companyIndex);
+			dto=dao.selectOne("regular.readRegular", memberIndex);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -61,10 +58,10 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public int readUpdateCompany(Company dto) {
-		int result=0;
+	public int updateRegular(Regular dto) {
+		int result = 0;
 		try {
-			dto=dao.selectOne("company.readCompany", dto);
+			result = dao.selectOne("regular.readRegular", dto);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

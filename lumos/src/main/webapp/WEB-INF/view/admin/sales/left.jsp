@@ -17,10 +17,19 @@ $(function(){
 
 <div class="list-group">
     <div class="list-group-item-lefthead"><span>매출관리</span></div>
-     <a href="<%=cp%>/admin/sales/salesSub/salesMain" class="list-group-item">전체 매출 조회</a>
-     <a href="<%=cp%>/admin/sales/concert/concertSales" class="list-group-item">공연 매출 조회</a>
-     <a href="<%=cp%>/admin/sales/exhibit/exhibitSales" class="list-group-item">전시 매출 조회</a>
-     <a href="<%=cp%>/admin/sales/academy/academySales" class="list-group-item">아카데미 매출 조회</a>
-     <a href="#" class="list-group-item">상품 매출 조회</a>
-     <a href="#" class="list-group-item">통계</a>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/salesSub/salesMain';">전체 매출 조회</button>
+    </a>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/concert/concertSales';">공연 매출 조회</button>
+    </a>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/exhibit/exhibitSales';">전시 매출 조회</button>
+    </a>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/academy/academySales';">아카데미 매출 조회</button>
+    </a>
+    <a>
+    	<button onclick="javascript:location.href='#';">상품 매출 조회</button>
+    </a>
 </div> 

@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="membership">
+<mapper namespace="company">
 
-	<insert id="insertRegular" parameterType="com.sp.admin.membership.Company">
-		INSERT INTO company1(
+	<insert id="insertCompany" parameterType="com.sp.admin.membership.Company">
+		INSERT
+		INTO company1(
 			companyIndex, companyName, repname, repnumber, fax, businessNumber, address1, businessPost, address2
 		)
 		VALUES (
 			company_seq.NEXTVAL, #{companyName}, #{repname}, #{repnumber}, #{fax}, #{businessNumber}, #{address1}, #{businessPost}, #{address2}}
+		)
+ 		INTO companyCharge(
+			companyIndex, chargeId, chargeName, chargeTel, chargeEmail
+		)
+		VALUES (
+			company_seq.NEXTVAL, #{chargeId}, #{chargeName}, #{chargeTel}, #{chargeEmail}
 		)
 	</insert>
 
@@ -59,10 +66,11 @@
 	]]>
 	</select>
 	
-	<!-- 글보기 -->
-<!-- 	<select id="readCompany" resultType="com.sp.membership.Company" parameterType="Integer">
-		SELECT cp1.companyIndex, companyName, repname, repnumber, fax, businessNumber, address1
-		FROM company1 cp1 JOIN company c ON cp1.companyIndex=cp.companyIndex
+  	<select id="readCompany" resultType="com.sp.admin.membership.Company" parameterType="Integer">
+		SELECT cp1.companyIndex, companyName, repname, repnumber, fax, businessNumber, address1, cc.chargeId, cc.chargeName
+		FROM company1 cp1
+		JOIN companyCharge cc ON cp1.companyIndex=cc.companyIndex
+		LEFT OUTER JOIN companyCharge cc ON cp1.companyIndex = cc.companyIndex
 		WHERE cp1.companyIndex = #{companyIndex}
-	</select> -->
+	</select>
 </mapper>

@@ -17,6 +17,10 @@ $(function(){
 
 <div class="list-group">
     <div class="list-group-item-lefthead"><span>회원관리</span></div>
-     <a href="<%=cp%>/admin/membership/regular/regular" class="list-group-item">일반 회원</a>
-     <a href="<%=cp%>/admin/membership/company/companyList" class="list-group-item">기업 회원</a>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/membership/regular/regularList';">일반 회원</button>
+    </a>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">기업 회원</button>
+    </a>
 </div> 

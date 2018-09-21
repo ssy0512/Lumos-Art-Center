@@ -14,6 +14,8 @@ public class Company {
 	
 	private String chargeId;
 	private String chargeName;
+	private String chargeTel;
+	private String chargeEmail;
 	
 	public int getListNum() {
 		return listNum;
@@ -86,5 +88,17 @@ public class Company {
 	}
 	public void setChargeName(String chargeName) {
 		this.chargeName = chargeName;
+	}
+	public String getChargeTel() {
+		return chargeTel;
+	}
+	public void setChargeTel(String chargeTel) {
+		this.chargeTel = chargeTel;
+	}
+	public String getChargeEmail() {
+		return chargeEmail;
+	}
+	public void setChargeEmail(String chargeEmail) {
+		this.chargeEmail = chargeEmail;
 	}
 }

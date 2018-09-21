@@ -11,20 +11,42 @@
 	background-color: #e0e0e0;
 }
 </style>
+
 <script type="text/javascript">
-	function updateCompany(companyIndex) {
-		var page = "${page}";
-		var query = "companyIndex="+companyIndex+"&page="+page;
-		var url = "<%=cp%>/admin/membership/company/created?" + query;
+	function check() {
+		var form = document.companyForm;
 		
-		location.href=url;
+		var str = form.chargeName.value;
+		if(!str) {
+			form.chargeName.focus();
+			return false;
+		}
+		
+		str = form.chargeTel.value;
+		if(!str) {
+			form.chargeTel.focus();
+			return false;
+		}
+		
+		str = form.chargeEmail.value;
+		if(!str) {
+			form.chargeEmail.focus();
+			return false;
+		}
+		return true;
 	}
 </script>
+
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<div style="clear: both;">
-		<div style="height: 70px; background-color: #e8e8e8; text-align: center; margin-top: 30px;">
-			기업회원 정보
+		<div style="float: left;">
+			<button type="button"
+				onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
+				뒤로가기</button>
 		</div>
+		<div
+			style="height: 70px; background-color: #e8e8e8; text-align: center; margin-top: 30px;">
+			기업회원 정보 수정</div>
 	</div>
 
 	<div style="clear: both;">
@@ -62,17 +84,17 @@
 			</tr>
 			<tr class="regular-article-table-tr" style="height: 30px;">
 				<td>${dto.chargeId}</td>
-				<td>${dto.chargeName}</td>
-				<td>${dto.chargeTel}</td>
-				<td>${dto.chargeEmail}</td>
+				<td><input type="text" value="${dto.chargeName}"
+					required="required"></td>
+				<td><input type="text" value="${dto.chargeTel}"
+					required="required"></td>
+				<td><input type="text" value="${dto.chargeEmail}"
+					required="required"></td>
 			</tr>
 		</table>
 	</form>
 	</div>
-	<button type="button" class="btn btn-default btn-sm wbtn" style="float: left;"
-			onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';"> 뒤로가기
-	</button>
-	<button type="button" class="btn btn-default btn-sm wbtn" style="float: right;"
-			onclick="updateCompany();">수정
-	</button>
+	<button type="submit" class="btn-ok"> 확인 <span class="glyphicon glyphicon-ok"></span></button>
+    <button type="button" class="btn-cancel" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';"> 취소 </button>
+	
 </div>

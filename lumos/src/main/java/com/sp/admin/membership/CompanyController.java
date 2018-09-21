@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.common.MyUtil;
 
-@Controller("membership.companyController")
+@Controller("company.companyController")
 public class CompanyController {
 	@Autowired
 	private CompanyService service;

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="regular">
+	<insert id="insertRegular" parameterType="com.sp.admin.membership.Regular">
+		INSERT ALL
+		INTO member1(
+			memberIndex, userId, userName, createdDate, modifyDate, lastLoginDate
+		)
+		VALUES (
+			member_seq.NEXTVAL, #{userId}, #{userName}, #{createdDate}, #{modifyDate}, #{lastLoginDate}
+		)
+		INTO member2 (
+			userId, birth, email, phone, zip, address1, address2
+		)
+		VALUES (
+			#{userId}, #{birth}, #{email}, #{phone}, #{zip}, #{address1}, #{address2}
+		)
+	</insert>
+	
+	<sql id="where-list">
+		<if test="searchKey=='memberIndex'">
+			memberIndex=#{memberIndex}
+		</if>
+		<if test="searchKey=='userId'">
+			userId=#{userId}
+		</if>
+		<if test="searchKey=='userName'">
+			INSTR(userName, #{userName}) &gt; 0
+		</if>
+		<if test="searchKey=='phone'">
+			DBMS_LOB.INSTR(phone, #{phone}) &gt; 0
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) FROM member1 m1
+		JOIN member2 m2
+		ON m1.userId = m2.userId
+		<where>
+			<if test="searchValue!=null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<select id="listRegular" parameterType="map" resultType="com.sp.admin.membership.Regular">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT m1.memberIndex, m1.userId, m1.userName, TO_CHAR(m2.birth, 'YYYY-MM-DD') birth, m2.email, m2.phone, m2.zip, m2.address1, m2.address2
+					FROM member1 m1
+					JOIN member2 m2 ON m1.userId = m2.userId
+					LEFT OUTER JOIN (
+						SELECT birth, email, phone, zip, address1, address2
+						FROM member2
+						WHERE userId = #{userId, jdbcType = VARCHAR}
+					) m ON m1.userId = m2.userId
+				<where>
+					<if test="searchValue != null and searchValue != ''">
+						<include refid="where-list"/>
+					</if>
+				</where>
+				ORDER BY m1.memberIndex ASC
+	<![CDATA[
+			) tb WHERE ROWNUM <= ${end}
+		) WHERE rnum >= #{start}
+	]]>	
+	</select>
+	
+  	<select id="readRegular" resultType="com.sp.admin.membership.Regular" parameterType="Integer">
+		SELECT m1.memberIndex, m1.userId, m1.userName, m1.createdDate, m1.modifyDate, m1.lastLoginDate, TO_CHAR(m2.birth, 'YYYY-MM-DD') birth, m2.email, m2.phone, m2.zip, m2.address1, m2.address2
+		FROM member1 m1
+		JOIN member2 m2 ON m1.userId=m2.userId
+		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
+		WHERE m1.memberIndex=#{memberIndex}
+	</select>
+	
+<!-- 	<update id="updateRegular" parameterType="com.sp.membership.Regular">
+		UPDATE member1 SET userId=#{userId}
+		WHERE memberIndex=#{memberIndex}
+	</update> -->
+
+</mapper>
