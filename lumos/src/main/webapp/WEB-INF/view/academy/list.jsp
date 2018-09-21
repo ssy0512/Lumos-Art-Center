@@ -121,14 +121,21 @@ function searchList() {
 
 			<table style="width: 100%;">
 			   <tr height="35">
-				<td align="center" style="font-weight: bold;  padding: 50px;">
-			        <c:if test="${dataCount==0 }">
-			               	 검색된 결과가 없습니다.
-			         </c:if>	
-			        <c:if test="${dataCount!=0 }">
+			    <c:if test="${dataCount!=0 }">
+				<td align="center" style="height: 100%; font-weight: bold;  padding: 50px;">
 			               ${paging}
-			         </c:if>
 				</td>
+				</c:if>
+				<c:if test="${dataCount==0 }">
+					<td align="center" style="height: 300px; font-weight: bold;  padding: 50px;">
+			               	 검색된 결과가 없습니다.
+			        </td>
+			        <tr>
+			        	<td align="center">
+			        		<button type="button" class="btn-Count" onclick="javascript:location.href='<%=cp%>/academy/list';">뒤로가기</button>
+			        	</td>
+			        </tr>
+			    </c:if>
 			   </tr>
 			</table>
      </div>

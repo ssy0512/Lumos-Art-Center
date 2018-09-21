@@ -11,6 +11,15 @@ public class Academy {
 	private int instNum;
 	private long gap;
 	
+	private int applyNum;
+	private int addCount;		// 수강 신청 인원 
+
+	private String cardNum;
+	private String cardCompany;
+	private String expiryDate;	// 유효기간 
+	private String cvc;
+	private String payMonth;
+	
 	private String mode;
 	private String userId;
 	private String academyName;
@@ -30,7 +39,6 @@ public class Academy {
 	private String saveFilename;
 	private String originalFilename;
 	private MultipartFile upload; 
-	
 	
 	public String getUserId() {
 		return userId;
@@ -169,6 +177,48 @@ public class Academy {
 	}
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+	public int getApplyNum() {
+		return applyNum;
+	}
+	public void setApplyNum(int applyNum) {
+		this.applyNum = applyNum;
+	}
+	public int getAddCount() {
+		return addCount;
+	}
+	public void setAddCount(int addCount) {
+		this.addCount = addCount;
+	}
+	public String getCardNum() {
+		return cardNum;
+	}
+	public void setCardNum(String cardNum) {
+		this.cardNum = cardNum;
+	}
+	public String getCardCompany() {
+		return cardCompany;
+	}
+	public void setCardCompany(String cardCompany) {
+		this.cardCompany = cardCompany;
+	}
+	public String getExpiryDate() {
+		return expiryDate;
+	}
+	public void setExpiryDate(String expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+	public String getCvc() {
+		return cvc;
+	}
+	public void setCvc(String cvc) {
+		this.cvc = cvc;
+	}
+	public String getPayMonth() {
+		return payMonth;
+	}
+	public void setPayMonth(String payMonth) {
+		this.payMonth = payMonth;
 	}
 	
 }

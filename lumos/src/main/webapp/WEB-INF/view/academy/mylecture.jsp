@@ -23,10 +23,35 @@
     background-color: #fff;
 }
 
+.ui-widget-header {
+	    color: #222;
+    font-weight: bold;
+}
+
 </style>
 
 <script type="text/javascript">
 
+$(function () {
+	$("#apply").click(function() {
+		$("from[name=applyForm]").each(function() {
+			this.reset();
+		});
+		
+		$("#dlgmode").val("insert");
+		$("#btnProductSendOk").text("등록하기");
+		$("#btnProductSendCancel").text("등록취소");
+		
+		$('#apply-dialog').dialog({
+			  modal: true,
+			  height: 500,
+			  width: 600,
+			  title: '수강신청결제',
+			  close: function(event, ui) {
+			  }
+		});
+	});
+});
 	
 </script>
 
@@ -80,12 +105,12 @@
 					</p>
        			  </td>
        			  <td width="500px" style="padding-left: 15px;">
-       			  <fmt:formatNumber value="${dto.price}" pattern="#,###"/> 원</td>
+       			  <fmt:formatNumber value="${dto.price}" pattern="#,###"/>원</td>
      			</tr>
      			<tr>
      			  <td colspan="2" width="150px" height="50px">
      				<p style="padding: 20px 0px 10px; font-size: 20px; text-align: center;">
-	                   <button type="button" class="btn-Count" onclick="javascript:location.href='<%=cp%>/academy/mylecture';">결&nbsp;&nbsp;&nbsp;제</button>
+	                   <button type="button" class="btn-Count" id="apply">결&nbsp;&nbsp;&nbsp;제</button>
 	                </p>
        			  </td>
      			</tr>
@@ -178,4 +203,100 @@
 			</td>
 		</tr>
 	</table>
+	
+	 <%//대화창 body %>
+     <div id="apply-dialog" class="ui-widget-header" style="display: none; height: 420px;">
+		<form name="applyForm" method="post">
+			<table style="width: 560px; height:100px; border-spacing: 0px; border-collapse: collapse;">
+			  <tr>
+			  	 <td colspan="4" width="100px" height="50px" align="right" 
+			  	 					style="font-size: 15px; font-weight: 500; color: #3185ce; padding-right: 15px;">
+			          <b>|</b> 신용카드 카드선택/인증
+			     </td>
+			  </tr>
+			  <tr>   
+			  	 <td colspan="1" class="apply-td-left" width="150px" height="50px" align="right" style="border-top: 2px solid #434343;">
+			           상품
+			     </td>
+			     <td colspan="3" width="400px" align="left" style="padding-left: 15px; border-top: 2px solid #434343; border-bottom: 2px solid #ccc;">
+			      		<label style="font-weight: 600; font-size: 12px;">${dto.academyName}</label>
+			     </td>
+			  </tr>
+			  <tr>
+			      <td colspan="1" class="apply-td-left" width="100px" height="50px" align="right" style="border-top: 2px solid #ccc; border-bottom: 2px solid #434343;">
+			            <label style="font-weight: 600; font-size: 12px;">상품금액</label>
+			      </td>
+			      <td colspan="3" width="360px" align="left" style="padding-left: 15px; border-top: 2px solid #ccc; border-bottom: 2px solid #434343;">
+			      		<label style="font-weight: 600; font-size: 12px;">
+						<fmt:formatNumber value="${dto.price}" pattern="#,###"/>원</label>
+			      </td>
+			  </tr>
+			  <tr>
+			  	 <td colspan="4" width="100px" height="40px" align="left" 
+			  	 					style="font-size: 12px; font-weight: 500; padding-left: 15px; padding-top: 20px;">
+			      		<input type="radio" id="c1" name="cardCom" value="신한카드"><label for="c1" style="padding-right: 25px;"> 신한카드</label>
+			      		<input type="radio" id="c2" name="cardCom" value="삼성카드"><label for="c2" style="padding-right: 25px;"> 삼성카드</label> 
+			      		<input type="radio" id="c3" name="cardCom" value="롯데카드"><label for="c3" style="padding-right: 25px;"> 롯데카드</label> 
+			      		<input type="radio" id="c4" name="cardCom" value="KB카드"><label for="c4" style="padding-right: 25px;"> KB카드</label> 
+						<input type="radio" id="c4" name="cardCom" value="우리카드"><label for="c4" style="padding-right: 25px;"> 우리카드</label>
+						<span style="padding-left: 15px;"></span> 
+						<select name="card">
+						    <option value="">그 외의 카드</option>
+						    <option value="비씨카드">비씨카드</option>
+						    <option value="하나카드">하나카드</option>
+						    <option value="NH카드">NH카드</option>
+						    <option value="저축은행">저축은행</option>
+						    <option value="카카오뱅크">카카오뱅크</option>
+						</select>   
+			     </td>
+			  </tr>
+			  <tr>
+			  </table>
+			  <table style="width: 560px; margin: 22px 0px; border-spacing: 0px; border-collapse: collapse;">
+			  	<tr>
+			      <td colspan="1" class="apply-td-left" width="10px" height="50px" align="right" style="border-top: 2px solid #434343;">
+			            <label style="font-weight: 600; font-size: 12px;">카드번호</label>
+			      </td>
+			      <td colspan="3" width="200px" align="left" style="padding-left: 15px; border-top: 2px solid #434343;">
+			            <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			     	<span style="padding-left: 20px;">	
+			     		<select name="month">
+						    <option value="">할부개월</option>
+						    <option value="2개월">2개월</option>
+						    <option value="4개월">4개월</option>
+						    <option value="6개월">6개월</option>
+						    <option value="12개월">12개월</option>
+						    <option value="24개월">24개월</option>
+						</select>
+					</span>	
+			      </td>
+			  </tr>
+			  <tr>
+			       <td class="apply-td-left" width="120px" height="50px" align="right" style="border-top: 2px solid #ccc; border-bottom: 2px solid #434343;">
+			            <label style="font-weight: 600; font-size: 12px;">유효기간</label>
+			       </td>
+			       <td width="140px" align="left" style="padding-left: 15px; border-top: 2px solid #ccc; border-bottom: 2px solid #434343;">
+			            <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 30px; height: 25px;">
+			            / <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 30px; height: 25px;">
+			       </td>
+			       <td class="apply-td-left" width="120px" height="50px" align="right" style="border-bottom: 2px solid #434343;">
+			            <label style="font-weight: 600; font-size: 12px;">CVC</label>
+			       </td>
+			       <td width="200px" align="left" style="padding-left: 15px; border-bottom: 2px solid #434343;">
+			            <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			       </td>      
+			  </tr>
+			  <tr>
+			  		<td colspan="4" width="350px" height="100px" align="center"> 
+			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px;" id="apply">결&nbsp;&nbsp;&nbsp;제</button>
+			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px; padding-left: 15px;" id="apply">취&nbsp;&nbsp;&nbsp;소</button>
+			  		</td>
+			  </tr>    
+			</table>
+		</form>
+    </div>
+	
 </div>

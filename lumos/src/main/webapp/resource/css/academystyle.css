@@ -112,3 +112,19 @@ a:hover, a:active {
 .btn-info:hover, .btn-Count:hover {
 	cursor: pointer;
 }
+
+/* 아카데미 modal  ********************/
+
+.applyTF {
+    border:1px solid #999999;
+    padding:3px 5px 5px;
+    background-color:#ffffff;
+    font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+}
+
+.apply-td-left {
+	padding-right: 15px; 
+	font-weight: 600; 
+	font-size: 12px;
+	background-color: whitesmoke;
+}

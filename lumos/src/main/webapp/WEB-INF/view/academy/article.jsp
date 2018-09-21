@@ -94,7 +94,9 @@ function finishClass() {
                 <c:if test="${sessionScope.member!=userId}">    	
                    	<p style="border-top: 1px solid #666; border-bottom: 1px solid #666; padding: 20px 10px; font-size: 20px; font-weight: bold;">
                    	  	결제정보
-                   	  	<span style="float: right; color: #aa1717; padding-bottom: 10px;">${dto.price}원</span>
+                   	  	<span style="float: right; color: #aa1717; padding-bottom: 10px;">
+                   	  	  <fmt:formatNumber value="${dto.price}" pattern="#,###"/>원
+                   	  	</span>
                    	</p>
                		
                		<c:if test="${dto.mode=='ing'}">

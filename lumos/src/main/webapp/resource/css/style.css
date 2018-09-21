@@ -97,6 +97,7 @@ a:hover, a:active {
     font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
 }
 
+
 /* *********** 아카데미 style */ 
 .font12 {	
     font-size: 12px;
@@ -191,4 +192,5 @@ a:hover, a:active {
 .btn-info:hover, .btn-Count:hover, .btn-academy-filter:hover {
 	cursor: pointer;
 }
+
 
