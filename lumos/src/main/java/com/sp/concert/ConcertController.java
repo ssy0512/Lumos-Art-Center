@@ -111,7 +111,7 @@ public class ConcertController {
 			if(seatList.size()!=0 && dto.getSeatPriceList()==null) {
 				map.put("concertNum", dto.getConcertNum());
 				for(Concert dto2 : seatList) {
-					seatPriceList+=dto2.getSeatLevel()+String.format("%,d",dto2.getSeatPrice())+" / ";
+					seatPriceList+=dto2.getSeatLevel()+" "+String.format("%,d",dto2.getSeatPrice())+" / ";
 				}
 				seatPriceList=seatPriceList.substring(0,seatPriceList.length()-2);
 				
