@@ -16,7 +16,7 @@
             return false;
         }
 
-        f.action="<%=cp%>/exhibit/${mode}";
+        f.action="<%=cp%>/admin/exhibit/${mode}";
 
         return true;
     }
