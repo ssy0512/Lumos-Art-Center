@@ -124,6 +124,10 @@ $(function(){
 						<td>${dto.ratingName}</td>						
 					</tr>
 					<tr>
+						<th>관람시간</th>
+						<td>${dto.totalTime}분</td>						
+					</tr>
+					<tr>
 						<th>장르</th>
 						<td>${dto.genre}</td>						
 					</tr>

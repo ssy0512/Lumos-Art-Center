@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sp.exhibit.Exhibit;
 import com.sp.exhibit.schedule.DateUtil;
 import com.sp.member.SessionInfo;
 import com.sp.sch.Schedule;
@@ -356,6 +357,38 @@ public class ConcertController {
 		model.addAttribute("query", query);
 		model.addAttribute("dto", dto);
 		return ".concert.article";
+	}
+	
+	// 공연 상세 수정
+	@RequestMapping(value="/admin/concert/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int num,
+			HttpSession session,
+			Model model
+			) {
+		
+		Concert dto = concertService.readBoard(num);
+		if(dto==null) {
+			return "redirect:/concert/main";
+		}
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
+		
+		return ".concert.created";
+	}
+	
+	@RequestMapping(value="/admin/concert/update", method=RequestMethod.POST)
+	public String updateSubmit(
+			@RequestParam int num,
+			Concert dto
+			) throws Exception {
+		
+		dto.setConcertNum(num);
+		concertService.updateBoard(dto);
+		// 수정 하기
+		
+		return "redirect:/concert/main";
 	}
 	
 	//작품 찜하기

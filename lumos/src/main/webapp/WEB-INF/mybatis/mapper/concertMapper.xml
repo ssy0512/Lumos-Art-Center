@@ -86,6 +86,10 @@
         WHERE concertNum=#{num}
 	</select>
 	
+	<update id="updateConcert" parameterType="com.sp.concert.Concert">
+		UPDATE concert SET content=#{content} WHERE concertNum=#{concertNum}
+	</update>
+	
 	<select id="updateSeatPrice" parameterType="map">
 		UPDATE concert SET seatPriceList=#{seatPriceList} WHERE concertNum=#{concertNum}
 	</select>
