@@ -104,7 +104,7 @@ $(function(){
 				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png">
 			</c:if>
 			<div class="reserveButtonDiv">
-				<a>예매하기</a>
+				<a href="<%=cp %>/admin/concert/bookConcert?num=${dto.concertNum}">예매하기</a>
 			</div>
 		</div>
 		<div class="content right">
@@ -161,7 +161,7 @@ $(function(){
 </div>
 
 <%-- content --%>
-<div class="work_intro">
+<div class="work_intro" style="padding-bottom:80px;">
 	<div class="wrap">
 		<h1 style="margin-top: 60px;"></h1>
 		${dto.content}

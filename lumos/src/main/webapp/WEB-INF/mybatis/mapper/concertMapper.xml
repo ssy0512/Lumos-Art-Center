@@ -47,7 +47,7 @@
 	</sql>
 
 	<select id="listSchedule" parameterType="map" resultType="com.sp.concert.Concert">
-		SELECT c.concertNum,c.concertName, ch.hallName, c.conProfileImage, c.totalTime, c.genre, r.ratingName,seatPriceList,
+		SELECT c.concertNum,c.concertName, ch.hallName, c.conProfileImage, c.totalTime,c.content, c.genre, r.ratingName,seatPriceList,
 		TO_CHAR(c.concertStart, 'YYYY-MM-DD') concertStart, TO_CHAR(c.concertEnd, 'YYYY-MM-DD') concertEnd 
 		FROM concert c
 		JOIN concertHall ch ON c.hallNum=ch.hallNum
@@ -60,6 +60,7 @@
 				AND (INSTR(concertName, #{searchValue}) &gt; 0)
 			</if>
 		</where>
+		ORDER BY concertStart
 	</select>
 	
 	<select id="listHall" resultType="String">

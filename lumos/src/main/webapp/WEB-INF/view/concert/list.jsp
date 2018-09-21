@@ -89,7 +89,7 @@
 		</div>
 	</div>
 
-	<div class="concertScheduleContent" >
+	<div class="concertScheduleContent" style="padding-bottom:50px;">
 		<div class="concert_item">
 			<c:forEach var="vo" items="${list}">
 				<div class="resultList">
@@ -139,6 +139,22 @@
 								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.seatPriceList}</span>
 							</p>
 						</c:if>
+						<div class="reserveButtonDiv" style="width: 100px; float: right; margin-top: -43px;font-size:14pt;">
+				           	<c:choose>
+				           	<c:when test="${vo.concertEnd < today}">
+				             	<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}" style="width: 100px;float: right;color:darkgrey; background-color: #ffffff; border: 1px solid darkgrey;
+				             					height:40px; line-height: 41px;">
+				             		판매종료
+				             	</a> 	             	
+				            </c:when>                	 
+			             	<c:when test="${vo.concertStart <= ptoday && not empty vo.content}">		
+			                	<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}" style="width: 100px;height:40px; line-height: 41px;">예&nbsp;매</a>  	
+				            </c:when>
+				            <c:otherwise>
+				            	<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}" style="width: 100px;height:40px; line-height: 41px;color:#006fd2;background-color: #ffffff;border: 1px solid #006fd2;">예&nbsp;정</a>  	
+				            </c:otherwise>
+				            </c:choose>
+				         </div>  	
 					</div>
 				</div>
 			</c:forEach>

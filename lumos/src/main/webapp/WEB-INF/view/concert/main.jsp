@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitTabs.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitScheduleList.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/concertLayout.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/exhibitArticle.css" type="text/css">
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">

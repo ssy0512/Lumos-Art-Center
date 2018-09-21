@@ -122,12 +122,17 @@ public class ConcertController {
 			}
 		}
 		
+		int ttoday=Integer.parseInt(today.replaceAll("-", ""))+30;
+		String ptoday=String.valueOf(ttoday);
+		
 		model.addAttribute("sDate", map.get("sDate"));
 		model.addAttribute("eDate", map.get("eDate"));
 		model.addAttribute("hallList", hallList);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("query", query);
+		model.addAttribute("today",today);
+		model.addAttribute("ptoday",ptoday);
 
 		model.addAttribute("period_type", period_type);
 		model.addAttribute("sch_hall", sch_hall);
