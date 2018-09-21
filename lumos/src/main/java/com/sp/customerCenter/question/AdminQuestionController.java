@@ -108,7 +108,7 @@ public class AdminQuestionController {
 		model.addAttribute("page",page);
 		model.addAttribute("query",query);
 	
-		return "redirect:/customerCenter/questions/list?"+postNum;
+		return "customerCenter/questions/article";
 		//이부분 고치기.
 	}
 }

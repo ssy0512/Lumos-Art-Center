@@ -13,12 +13,15 @@
 
 <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 <tr height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
-    <td colspan="2" align="center">
+    <td width="50%" align="left" style="padding-left: 5px;">
+	     [${dto.qCategoryName}] 
+    </td>
 	   <c:if test="${dto.depth!=0}">
 	       [Re]
 	   </c:if>
+	   <td width="50%" align="left" style="padding-right: 120px;">
 	   ${dto.title}
-    </td>
+	   </td>
 </tr>
 
 <tr height="35" style="border-bottom: 1px solid #cccccc;">

@@ -11,6 +11,18 @@ import com.sp.common.dao.CommonDAO;
 
 @Service("customerCenter.questionService")
 public class QuestionsServiceImpl implements QuestionsService{
+	@Override
+	public List<Questions> listCategory() {
+		List<Questions> list=null;
+		try {
+			list=dao.selectList("question.listCategory");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+
 	@Autowired
 	private CommonDAO dao;
 	

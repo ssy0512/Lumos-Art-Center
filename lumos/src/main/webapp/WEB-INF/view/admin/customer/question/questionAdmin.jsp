@@ -51,7 +51,7 @@ function searchList(){
            <c:if test="${dto.depth!=0}">
             <img src='<%=cp%>/resource/images/re.gif'>
            </c:if>
-           <a href="javascript:articleBoard('${dto.postNum}', '${page}');">${dto.title}</a>
+           <a href="javascript:location.href='<%=cp%>/customerCenter/questions/articleForm('${dto.postNum}', '${page}')';">${dto.title}</a>
       </td>
       <td>${dto.userName}</td>
       <td>${dto.created}</td>
@@ -92,7 +92,7 @@ function searchList(){
         </form>
       </td>
       <td align="right" width="100">
-          <button type="button" class="btn" onclick="insertForm();">답글달기</button>
+          <button type="button" class="btn" onclick="location.href='<%=cp%>/customerCenter/questions/list';">답글달기</button>
       </td>
    </tr>
 </table>

@@ -9,7 +9,7 @@ public interface QuestionsService {
 	public List<Questions> listQuestion(Map<String, Object> map);
 	
 	public Questions readQeustion(int postNum);
-	
+	public List<Questions> listCategory();
 	
 	public Questions preReadQuestion(Map<String, Object> map);
 	public Questions nextReadQuestion(Map<String, Object> map);

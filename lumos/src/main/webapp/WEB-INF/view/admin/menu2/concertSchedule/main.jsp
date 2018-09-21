@@ -415,20 +415,20 @@ function articleForm(calEvent) {
     var end="";
     if(calEvent.end!=null)
     	end=calEvent.end.format();
-	var title=calEvent.title;
-	var resourceName=calEvent.resourceName;
-	var groupNum=calEvent.groupNum;
-	var groupName=calEvent.groupName;
+	var concertName=calEvent.title;
+	var hallName=calEvent.resourceName;
+	var locationNum=calEvent.groupNum;
+	var locationName=calEvent.groupName;
 	var userId=calEvent.userId;
 	var userName=calEvent.userName;
 	var inwon=calEvent.inwon;
-	var startDay=calEvent.startDay;
+	var concertStart=calEvent.startDay;
 	var startTime=calEvent.startTime;
 	if(startTime!=null)
 		startTime=startTime.substr(0, 5);
 	else
 		startTime="";
-	var endDay=calEvent.endDay;
+	var concertEnd=calEvent.endDay;
 
 	var endTime=calEvent.endTime;
 	if(endTime!=null) {

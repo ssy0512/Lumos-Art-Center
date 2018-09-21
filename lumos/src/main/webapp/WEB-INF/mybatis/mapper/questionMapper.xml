@@ -7,6 +7,8 @@
 	SELECT question_seq.NEXTVAL FROM dual
 </select>
 
+
+
 <insert id="insertQuestion" parameterType="com.sp.customerCenter.question.Questions">
 	INSERT INTO question 
 	(postNum,userId, title,content,groupNum,orderNo,
@@ -15,6 +17,12 @@
 	 	#{orderNo},#{depth},#{parent},#{qCategoryCode}
 	 )					
 </insert>
+
+<!-- 카테고리 셀렉트용 -->
+<select id="listCategory" resultType="com.sp.customerCenter.question.Questions">
+	SELECT qCategoryCode, qCategoryName FROM qCategory 
+</select>
+
 
 <sql id="where-list">
    <if test="searchKey=='userName' ">

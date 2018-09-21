@@ -27,6 +27,8 @@
 
         return true;
  }
+  
+
 </script>
 
 <div class="alert-info">
@@ -53,19 +55,16 @@
 	<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
       <td width="100" bgcolor="#eeeeee" style="text-align: center;">카테고리</td>
       <td style="padding-left:10px;"> 
-           <select name="qCategory" class="selectField">
-               <option value="1" ${dto.qCategoryCode=="1"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="2" ${dto.qCategoryCode=="2"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="3" ${dto.qCategoryCode=="3"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="4" ${dto.qCategoryCode=="4"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="5" ${dto.qCategoryCode=="5"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="6" ${dto.qCategoryCode=="6"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="7" ${dto.qCategoryCode=="7"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="8" ${dto.qCategoryCode=="8"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="9" ${dto.qCategoryCode=="9"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="10" ${dto.qCategoryCode=="10"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-               <option value="11" ${dto.qCategoryCode=="11"?"selected='selected'":"" }>${dto.qCategoryName}</option>
-           </select>
+      <select class="selectField" name="" id="listCategory">
+      	<c:forEach var="vo" items="${listCategory}">
+      		<option value="${vo.qCategoryCode}">${vo.qCategoryName}</option>
+      	</c:forEach>
+      </select>
+          <%-- 	<select name="selectBox" id="listCategory" class="selectField">
+          <c:forEach var="listCategory" items="${listCategory}">
+          	<option value="${dto.qCategoryCode}">${dto.qCategoryName}</option>
+          </c:forEach>
+          	</select> --%>
       </td>
   </tr>
   <tr align="left" style="border-bottom: 1px solid #cccccc;"> 
@@ -98,7 +97,9 @@
     </tr>
   </table>
 </form>
-<%-- <script type="text/javascript">
+<%-- 
+
+<script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
@@ -138,5 +139,4 @@ function setDefaultFont() {
 	var nFontSize = 24;
 	oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 }
-</script> 
- --%>
+</script>  --%>

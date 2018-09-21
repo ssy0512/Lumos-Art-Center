@@ -1,6 +1,7 @@
 package com.sp.customerCenter.question;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,10 @@ public class QuestionController {
 	}
 	@RequestMapping(value="/customerCenter/questions/created",method=RequestMethod.GET)
 	public String createdForm(Model model) throws Exception{
+		
+		List<Questions> listCategory = new ArrayList<>();
+		listCategory=service.listCategory();
+		model.addAttribute("listCategory",listCategory);
 		model.addAttribute("page","1");
 		model.addAttribute("mode","created");
 		return "customerCenter/questions/created";

@@ -17,7 +17,7 @@ $(function(){
 
 <div class="list-group">
     <div class="list-group-item-lefthead">
-    	<span>매출관리</span>
+    	<span>고객관리</span>
     </div>
      <a href="<%=cp%>/admin/customer/question/questionAdmin" class="list-group-item">1:1문의 관리</a>
      <a href="<%=cp%>/admin/customer/lost/main" class="list-group-item">유실물 목록 관리</a>
