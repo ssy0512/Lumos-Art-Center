@@ -11,5 +11,6 @@ public interface ExhibitService {
 	public int countBoardLike(Map<String, Object> map);
 	public List<Exhibit> listExHall();
 	public Exhibit readExHall(int num);
+	public int updateExHall(Exhibit dto);
 	public List<String> exhibitPrice(int num);
 }

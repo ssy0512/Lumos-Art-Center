@@ -101,6 +101,19 @@ public class ExhibitServiceImpl implements ExhibitService{
 	}
 	
 	@Override
+	public int updateExHall(Exhibit dto) {
+		int result=0;
+
+		try{
+			dao.updateData("exhibit.updateExHall", dto);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
+	@Override
 	public List<String> exhibitPrice(int num) {
 		List<String> list = null;
 		try {

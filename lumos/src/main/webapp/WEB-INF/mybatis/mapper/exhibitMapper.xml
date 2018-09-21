@@ -40,4 +40,8 @@
 	<select id="readExHall" parameterType="Integer"  resultType="com.sp.exhibit.Exhibit">
 		SELECT hallName, hallNum, exHallLocate, exHallImage FROM exhibitHall WHERE hallNum=#{num}
 	</select>
+	
+	<update id="updateExHall" parameterType="com.sp.exhibit.Exhibit">
+		UPDATE exhibitHall SET exHallImage=#{exHallImage} WHERE hallNum=#{hallNum}
+	</update>
 </mapper>

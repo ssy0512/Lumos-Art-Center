@@ -157,11 +157,13 @@ public class ExhibitController {
 	@RequestMapping(value="/admin/exHallinfo/update", method=RequestMethod.POST)
 	public String updateHallInfoSubmit(
 			@RequestParam int num,
+			@RequestParam String content,
 			Exhibit dto
 			) throws Exception {
 		
+		dto.setExHallImage(content);
 		dto.setHallNum(num);
-		exhibitService.updateBoard(dto);
+		exhibitService.updateExHall(dto);
 		// 수정 하기
 		
 		return "redirect:/exhibit/info";

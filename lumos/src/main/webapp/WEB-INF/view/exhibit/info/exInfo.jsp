@@ -54,7 +54,6 @@ $(function () {
 		<div class="clearD"></div>
 		<div class="content_sec">
 			${dto.exHallImage}
-			<img src="<%=cp%>/uploads/image/20180921160238395548251488792.jpg">
 		</div>
 	</div>
 </div>
