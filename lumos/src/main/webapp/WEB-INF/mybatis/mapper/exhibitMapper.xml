@@ -12,6 +12,11 @@
         WHERE exhibitNum=#{num}
 	</select>
 	
+	<select id="exhibitPrice" parameterType="Integer" resultType="String">
+		SELECT  audience||' '||exprice priceString FROM EXHIBITprice ep
+    JOIN AUDIENCELEVEL al ON ep.AUDIENCELEVELNUM = al.AUDIENCELEVELNUM WHERE ep.exhibitNum=1 ORDER BY ep.AUDIENCELEVELNUM ASC
+	</select>
+	
 	<update id="updateExhibit" parameterType="com.sp.exhibit.Exhibit">
 		UPDATE exhibit SET content=#{content} WHERE exhibitNum=#{exhibitNum}
 	</update>

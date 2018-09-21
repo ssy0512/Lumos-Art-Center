@@ -33,7 +33,7 @@
 		resultType="com.sp.exhibit.schedule.Schedule">
 		SELECT exhibitNum,exhibitName,TO_CHAR(exhibitStart, 'YYYY-MM-DD')
 		exhibitStart,
-		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, HallName, exHallLocate, exProfileImage 
+		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, hallName, exHallLocate, exProfileImage 
 		FROM EXHIBIT e
 		JOIN exhibitHall h ON e.hallNum=h.hallNum
 		<where>
@@ -45,6 +45,35 @@
 				AND (INSTR(exhibitName, #{searchValue}) &gt; 0)
 			</if>
 		</where>
+	</select>
+	
+	<select id="listMonthlySchedule" parameterType="map"
+		resultType="com.sp.exhibit.schedule.Schedule">
+		SELECT exhibitNum,exhibitName,TO_CHAR(exhibitStart, 'YYYY-MM-DD')
+		exhibitStart,
+		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, hallName, exHallLocate, exProfileImage 
+		FROM EXHIBIT e
+		JOIN exhibitHall h ON e.hallNum=h.hallNum
+		<where>
+			(exhibitStart &lt;=TO_DATE(#{endDay}))
+			AND (TO_DATE(TO_CHAR(exhibitEnd,'YYYYMMDD')||' '||admitEnd,'yyyy-mm-dd
+			hh24:mi:ss')&gt;TO_DATE(#{startDay}))
+			<include refid="where-sch_hall" />
+			<if test="searchValue!=null and searchValue!='' ">
+				AND (INSTR(exhibitName, #{searchValue}) &gt; 0)
+			</if>
+		</where>
+	</select>
+	
+	<select id="listAnnuallySchedule" parameterType="map" resultType="com.sp.exhibit.schedule.Schedule">
+		SELECT exhibitNum,exhibitName, hallName, 
+        TO_CHAR(exhibitStart,'MM-DD') exhibitStart,TO_CHAR(exhibitEnd,'MM-DD') exhibitEnd,
+			TO_CHAR(exhibitEnd,'MM') endmonth, TO_CHAR(exhibitStart,'MM') startmonth
+		FROM EXHIBIT e
+		JOIN exhibitHall h ON e.hallNum=h.hallNum
+        WHERE
+           TO_CHAR(exhibitEnd,'YYYY') = #{year}
+   		ORDER BY exhibitEnd ASC, hallName ASC 
 	</select>
 	
 	<select id="listHall" resultType="String">

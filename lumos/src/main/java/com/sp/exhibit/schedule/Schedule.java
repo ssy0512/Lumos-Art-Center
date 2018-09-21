@@ -8,7 +8,29 @@ public class Schedule {
 	private String hallName;
 	private String exHallLocate;
 	private String exProfileImage;
+	private String startmonth;
+	private String endmonth;
+	private String genre;
 	
+	
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public String getStartmonth() {
+		return startmonth;
+	}
+	public void setStartmonth(String startmonth) {
+		this.startmonth = startmonth;
+	}
+	public String getEndmonth() {
+		return endmonth;
+	}
+	public void setEndmonth(String endmonth) {
+		this.endmonth = endmonth;
+	}
 	public String getExProfileImage() {
 		return exProfileImage;
 	}

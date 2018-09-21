@@ -17,7 +17,15 @@ public class Exhibit {
 	private String host;
 	private String supervise;
 	private String exHallImage;
+	private String exPriceString;
 	
+	
+	public String getExPriceString() {
+		return exPriceString;
+	}
+	public void setExPriceString(String exPriceString) {
+		this.exPriceString = exPriceString;
+	}
 	public String getExHallImage() {
 		return exHallImage;
 	}

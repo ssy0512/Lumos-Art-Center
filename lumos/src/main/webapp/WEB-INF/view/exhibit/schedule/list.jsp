@@ -51,8 +51,6 @@ $(function () {
 }
 </style>
 
-<div class="body-container">
-	<div id="tab-content" style="padding-top: 22px;">
 <div class="sch_period">
 	<div class="sch_year">
 		<a style="left:0; background: url(<%=cp %>/resource/images/lumos/bg_btn_prev.gif) no-repeat 50% 50%;" data-yearNum="-1"></a>
@@ -92,7 +90,12 @@ $(function () {
 		<div class="sch_item">
 			<div class="sch_itemPoster">
 				<a href="<%=cp %>/exhibit/scheduleToArticle?num=${vo.exhibitNum}&${query}">
-					<img src="<%=cp %>/uploads/image/${vo.exProfileImage}">
+					<c:if test="${not empty vo.exProfileImage}">
+						<img src="<%=cp %>/uploads/image/${vo.exProfileImage}">
+					</c:if>
+					<c:if test="${empty vo.exProfileImage}">
+						<img class="noposter" src="<%=cp %>/resource/images/lumos/noposter.png">
+					</c:if>
 				</a>
 			</div>
 			<div class="sch_itemContent">
@@ -110,5 +113,3 @@ $(function () {
 	<input type="hidden" name="sch_hall" value="${sch_hall}">
     <input type="hidden" name="searchValue" value="${searchValue}">
 </form>
-</div>
-</div>

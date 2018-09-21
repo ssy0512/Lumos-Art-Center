@@ -99,4 +99,15 @@ public class ExhibitServiceImpl implements ExhibitService{
 		
 		return dto;
 	}
+	
+	@Override
+	public List<String> exhibitPrice(int num) {
+		List<String> list = null;
+		try {
+			list=dao.selectList("exhibit.exhibitPrice");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
 }

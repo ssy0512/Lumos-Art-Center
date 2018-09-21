@@ -97,7 +97,12 @@ $(function(){
 			</c:if>
 		</div>
 		<div class="poster left">
-			<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.exProfileImage}">
+			<c:if test="${not empty dto.exProfileImage}">
+				<img class="list_image_crop" src="<%=cp %>/uploads/image/${dto.exProfileImage}">
+			</c:if>
+			<c:if test="${empty dto.exProfileImage}">
+				<img class="list_image_crop noposter" src="<%=cp%>/resource/images/lumos/noposter.png">
+			</c:if>
 			<div class="reserveButtonDiv">
 				<a>예매하기</a>
 			</div>
@@ -128,7 +133,7 @@ $(function(){
 					</tr>
 					<tr>
 						<th>가격</th>
-						<td></td>						
+						<td>${dto.exPriceString}</td>						
 					</tr>
 					<tr>
 						<th>주최</th>

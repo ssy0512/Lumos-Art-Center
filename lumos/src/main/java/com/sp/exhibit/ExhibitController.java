@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -164,5 +165,20 @@ public class ExhibitController {
 		// 수정 하기
 		
 		return "redirect:/exhibit/info";
+	}
+	
+	@RequestMapping(value = "/exhibit/article", method = RequestMethod.GET)
+	public String article(
+			@RequestParam(value="num") int num,
+			HttpServletRequest req,
+			Model model
+			) {
+		Exhibit dto = exhibitService.readBoard(num);
+		if(dto==null) {
+			return "redirect:/exhibit/main";
+		}
+		
+		model.addAttribute("dto", dto);
+		return ".exhibit.article";
 	}
 }

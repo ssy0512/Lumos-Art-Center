@@ -20,7 +20,7 @@ import com.sp.exhibit.ExhibitService;
 
 
 
-@Controller("schedule.scheduleController")
+@Controller("exhibit.scheduleController")
 public class ScheduleController {
 	@Autowired
 	private ScheduleService service;
@@ -132,6 +132,14 @@ public class ScheduleController {
 		if(dto==null) {
 			return "redirect:/exhibit/main";
 		}
+		
+		List<String> listPrice = exhibitService.exhibitPrice(num);
+		String exPriceString="";
+		for( String s : listPrice) {
+			exPriceString+=s+" / ";
+		}
+		exPriceString=exPriceString.substring(0, exPriceString.length()-3);
+		dto.setExPriceString(exPriceString);
 		
 		model.addAttribute("query", query);
 		model.addAttribute("dto", dto);

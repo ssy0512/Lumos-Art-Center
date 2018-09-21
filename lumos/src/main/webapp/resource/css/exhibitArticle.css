@@ -90,6 +90,10 @@
     object-fit: cover;
 }
 
+.noposter {
+	border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
 
 /* 예매하기 버튼 */
 .reserveButtonDiv {

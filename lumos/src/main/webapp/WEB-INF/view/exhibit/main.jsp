@@ -7,6 +7,7 @@
 %>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitTabs.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/exhibitMonthly.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitScheduleList.css" type="text/css">
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
@@ -219,6 +220,121 @@ function deleteButtonShowHide() {
 }
 //---------------------------------------------------------------------------
 
+function ajaxText(url) {
+	$.ajax({
+		type:"get"
+		,url:url
+		,success:function(data) {
+			$("#tab-content").html(data);	
+		}
+		,beforeSend : function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+<!-- 월간일정 -->
+$(function(){
+	var today="${today}";
+	$("#largeCalendar .textDate").each(function (i) {
+        var s=$(this).attr("data-date");
+        if(s==today) {
+        	$(this).parent().css("background", "#ffffd9");
+        }
+    });
+});
+ 
+$(function(){
+	// 맞춤검색
+	// 년도-1 버튼눌렀을때
+	$("body").on("click", ".list .prebtnDate",function(){
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)-1;
+		changeList(year);
+	});
+	
+	// 년도+1 버튼눌렀을때
+	$("body").on("click", ".list .nextbtnDate",function(){
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)+1;
+		changeList(year);
+	});
+	
+	// 월을 눌렀을때
+	$("body").on("click", ".tab_month li", function() {
+		var $month = $(this).attr("data-month");
+		var year=$("#current-year").attr("data-year");
+		
+		$("ul.tab_month li").each(function(){
+			$(this).removeClass("active");
+		});
+		
+		$("#month-"+$month).addClass("active");
+		changeDate($month,year);
+	});
+	
+	// 월간일정
+	// 년도-1 버튼눌렀을때
+	$("body").on("click", ".prebtnDate",function(){
+		var month = $("ul.tab_month li.active").attr("data-month");
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)-1;
+		changeDate(month,year);
+	});
+	
+	// 년도+1 버튼눌렀을때
+	$("body").on("click", ".nextbtnDate",function(){
+		var month = $(".tab_month li.active").attr("data-month");
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)+1;
+		changeDate(month,year);
+	});
+	
+	// 연간일정
+	// 년도-1 버튼눌렀을때
+	$("body").on("click", ".prebtnYear",function(){
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)-1;
+		changeYear(year);
+	});
+	
+	// 년도+1 버튼눌렀을때
+	$("body").on("click", ".nextbtnYear",function(){
+		var datayear=$("#current-year").attr("data-year");
+		var year = Number(datayear)+1;
+		changeYear(year);
+	});
+}); 
+
+//맞춤검색
+function changeList(year) {
+	var url="<%=cp%>/concert/list?year="+year;
+	ajaxText(url);
+}
+
+// 월간일정
+function changeDate(month,year) {
+	var url="<%=cp%>/exhibit/monthly/list?year="+year+"&month="+month;
+	ajaxText(url);
+}
+
+// 연간일정
+function changeYear(year) {
+	var url="<%=cp%>/exhibit/annual/list?year="+year;
+	ajaxText(url);
+}
+
+//공연 제목 클릭 -----------------------
+function goArticle(num){
+	var date=$(this).attr("data-date");
+	var url="<%=cp%>/exhibit/article?num="+num;
+	location.href=url;
+}
+
+
 </script>
 
 <div class="body-container" style="width: 1020px;">
@@ -230,7 +346,9 @@ function deleteButtonShowHide() {
 			 	<li id="tab-annual" data-tab="annual"><a>연간일정</a></li>
 			 </ul>
 		</div>
-		<div id="tab-content" style="margin-top: 15px;"></div>
+		<div id="tab-content">
+			&nbsp;
+		</div>
 	</div>
 </div>
 
