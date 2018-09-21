@@ -131,7 +131,7 @@ function changeYear(year) {
 //공연 제목 클릭 -----------------------
 function goArticle(concertNum){
 	var date=$(this).attr("data-date");
-	var url="<%=cp%>/concert/article?concertNum="+concertNum;
+	var url="<%=cp%>/concert/article?num="+concertNum;
 	location.href=url;
 }
 

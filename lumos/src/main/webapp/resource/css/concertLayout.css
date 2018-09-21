@@ -2,15 +2,22 @@
 
 .concertScheduleContent{
 	padding-top: 51px;
-    text-align: right;
+    text-align: left;
     font-size: 0;
 }
 
-.concert_item{
-	border: 1px solid #e0e1e5;
-}
 
+.resultList{
+	height: 300px;
+    padding-bottom: 20px;
+}
+/* 
+    width: 220px;
+    height: 280px;
+ */
 .noData{
+	border-top: 1px solid #e0e1e5;
+	border-bottom: 1px solid #e0e1e5;
 	height: 166px;
     line-height: 166px;
     font-size: 15px;
@@ -18,32 +25,38 @@
     color:#434343;
 }
 
-.concert_item li:first-child{
+.concert_item div:first-child{
 	border-top: 0 none;
 }
 
-.concert_item li{
-	list-style:none;
-	padding: 26px 51px 25px 60px;
-    border-top: 1px solid #e0e1e5;
-    overflow: hidden;
+.resultList .list_image_crop{
+	width: 220px;
+    height: 280px;
+    object-fit: cover;
+    float:left;
 }
 
-.concert_item li.sch_itemContent{
+.sch_itemContent{
 	position: relative;
-    padding: 0 100px 0 69px;
-    overflow: hidden;
+    width: 750px;
+    height: 280px;
+    margin-left:50px;
+    border-bottom: 1px solid #e0e1e5;
+    float:left;
 }
-.concert_item li.sch_itemContent .concertName{
-	display: block;
-    height: 45px;
-    padding-bottom: 5px;
-    overflow: hidden;
-    font-weight:bold;
+
+.sch_itemContent .concertName{
+	font-size: 24px;
+    margin: 0px 0;
+    padding-bottom : 150px; 
+    line-height: 1.4;
 }
 
 .concert_content{
-	overflow: hidden;
+	width : 600px;
+	font-size: 13px;
+    font-weight: normal;
+    color: #434343;
 }
 
 .concert_content dt{

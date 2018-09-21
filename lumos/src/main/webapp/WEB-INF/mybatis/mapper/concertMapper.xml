@@ -32,8 +32,8 @@
 	
 	
 	
-	
-	<!-- 사용자 ui에서 공연 검색 -->
+	<!-- 사용자 ui -->
+	<!-- 공연 검색 -->
 	<sql id="where-sch_hall">
 		   <if test="listSch_hall != null and listSch_hall.size != 0">
 		        AND
@@ -47,12 +47,11 @@
 	</sql>
 
 	<select id="listSchedule" parameterType="map" resultType="com.sp.concert.Concert">
-		SELECT c.concertNum,c.concertName, ch.hallName, c.conProfileImage, c.totalTime, sp.seatPrice, sl.seatLevel,
+		SELECT c.concertNum,c.concertName, ch.hallName, c.conProfileImage, c.totalTime, c.genre, r.ratingName,seatPriceList,
 		TO_CHAR(c.concertStart, 'YYYY-MM-DD') concertStart, TO_CHAR(c.concertEnd, 'YYYY-MM-DD') concertEnd 
 		FROM concert c
 		JOIN concertHall ch ON c.hallNum=ch.hallNum
-		JOIN seatPrice sp ON c.concertNum=sp.concertNum
-		JOIN seatLevel sl ON sp.seatLevelNum=sl.seatLevelNum
+		JOIN rating r ON r.ratingNum=c.ratingNum
 		<where>
 			(c.concertStart &lt;=TO_DATE(#{eDate}))
 			AND (c.concertEnd &gt;= TO_DATE(#{sDate}))
@@ -66,4 +65,37 @@
 	<select id="listHall" resultType="String">
 		SELECT hallName FROM concertHall 
 	</select>
+	
+	
+	<select id="seatList" parameterType="map" resultType="com.sp.concert.Concert">
+		SELECT seatLevel, concertNum,seatPrice
+		FROM seatPrice sp
+		JOIN seatLevel  sl ON sp.seatLevelNum=sl.seatLevelNum
+		where concertNum=#{concertNum}
+		ORDER BY sp.seatLevelNum
+	</select>
+	
+	<!-- article -->
+	<select id="readConcert" parameterType="Integer" resultType="com.sp.concert.Concert">
+		SELECT c.concertNum,c.concertName,c.content,c.host,c.supervise,r.ratingName,c.totalTime,c.conProfileImage,
+		TO_CHAR(concertStart, 'YYYY-MM-DD') concertStart, TO_CHAR(concertEnd, 'YYYY-MM-DD') concertEnd,
+		 h.hallName, c.genre, seatPriceList
+		FROM concert c
+		JOIN concertHall h ON c.hallNum=h.hallNum
+        JOIN rating r ON c.ratingNum=r.ratingNum
+        WHERE concertNum=#{num}
+	</select>
+	
+	<select id="updateSeatPrice" parameterType="map">
+		UPDATE concert SET seatPriceList=#{seatPriceList} WHERE concertNum=#{concertNum}
+	</select>
+	
+	<insert id="insertBoardLike" parameterType="map">
+		INSERT INTO concertInterest (concertNum, userId) VALUES(#{concertNum},#{userId})
+	</insert>
+	
+	<select id="countBoardLike" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM concertInterest WHERE concertNum=#{concertNum} AND userId=#{userId}
+	</select>
+	
 </mapper>

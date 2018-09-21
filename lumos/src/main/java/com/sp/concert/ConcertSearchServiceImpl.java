@@ -38,17 +38,4 @@ public class ConcertSearchServiceImpl implements ConcertSearchService {
 		return list;
 	}
 
-	@Override
-	public int countSchedule(Map<String, Object> map) {
-		int result = 0;
-
-		try {
-			result = dao.selectOne("concert.countSchedule", map);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-
-		return result;
-	}
-
 }

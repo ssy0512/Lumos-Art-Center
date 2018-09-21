@@ -90,38 +90,62 @@
 	</div>
 
 	<div class="concertScheduleContent" >
-		<ul class="concert_item">
+		<div class="concert_item">
 			<c:forEach var="vo" items="${list}">
-				<li class="resultList">
-					<div class="sch_itemPoster">
-						<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">
-							<!--  <img src="/resource/images/lumos/${vo.conProfileImage}">-->
-							<img src="<%=cp %>/resource/images/lumos/180119-100-niki.jpg">
-						</a>
-					</div>
+				<div class="resultList">
+					<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">
+						<c:if test="${not empty vo.conProfileImage }">
+							<img class="list_image_crop" src="/resource/images/lumos/${vo.conProfileImage}">
+						</c:if>
+						<c:if test="${empty vo.conProfileImage }">
+							<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noimage.gif" style="border:1px solid #434343;">
+						</c:if>
+					</a>
 					<div class="sch_itemContent">
-						<span class="concertName">
-							<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">${vo.concertName}</a>
-						</span>
-						<dl class="concert_content">
-							<dt>기간</dt>
-							<dd>${vo.concertStart }~${vo.concertEnd }</dd>
-							<dt>장소</dt>
-							<dd>${vo.hallName }</dd>
-							<dd>장르</dd>
-							<dt>${vo.genre }(${vo.totalTime })</dt>
-							<dd>관람등급</dd>
-							<dt>${vo.ratingName}</dt>
-							<dd>티켓가격</dd>
-							<dt>${seatPriceList}</dt>
-						</dl>
+						<c:if test="${empty vo.seatPriceList }">
+							<p class="concertName" style="padding-bottom : 167px; ">
+								<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">${vo.concertName}</a>
+							</p>
+							<p class="concert_content">기간
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.concertStart }~${vo.concertEnd }</span>
+							</p>
+							<p class="concert_content">장소
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.hallName }</span>
+							</p>
+							<p class="concert_content">장르
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.genre }</span>
+							</p>
+							<p class="concert_content">관람등급
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.ratingName}</span>
+							</p>
+						</c:if>
+						<c:if test="${not empty vo.seatPriceList }">
+							<p class="concertName">
+								<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">${vo.concertName}</a>
+							</p>
+							<p class="concert_content">기간
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.concertStart }~${vo.concertEnd }</span>
+							</p>
+							<p class="concert_content">장소
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.hallName }</span>
+							</p>
+							<p class="concert_content">장르
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.genre }</span>
+							</p>
+							<p class="concert_content">관람등급
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.ratingName}</span>
+							</p>
+							<p class="concert_content">가격
+								<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${vo.seatPriceList}</span>
+							</p>
+						</c:if>
 					</div>
-				</li>
+				</div>
 			</c:forEach>
 			<c:if test="${empty list }">
-					<li><div class="noData">등록된 공연이 없습니다.</div></li>
+					<div class="noData" style=" border-top: 1px solid #e0e1e5;">등록된 공연이 없습니다.</div>
 			</c:if>
-		</ul>
+		</div>
 	</div>
 	
 	<form name="concertScheduleSearchForm" action="" method="post">
