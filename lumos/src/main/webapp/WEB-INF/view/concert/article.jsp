@@ -101,7 +101,7 @@ $(function(){
 				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.conProfileImage}">
 			</c:if>
 			<c:if test="${empty dto.conProfileImage }">
-				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noimage.gif" style="border:1px solid #434343;">
+				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png">
 			</c:if>
 			<div class="reserveButtonDiv">
 				<a>예매하기</a>

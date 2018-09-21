@@ -94,6 +94,10 @@
 		INSERT INTO concertInterest (concertNum, userId) VALUES(#{concertNum},#{userId})
 	</insert>
 	
+	<delete id="deleteBoardLike" parameterType="map">
+		DELETE FROM concertInterest WHERE concertNum=#{concertNum} AND userId=#{userId}
+	</delete>
+	
 	<select id="countBoardLike" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*),0) FROM concertInterest WHERE concertNum=#{concertNum} AND userId=#{userId}
 	</select>
