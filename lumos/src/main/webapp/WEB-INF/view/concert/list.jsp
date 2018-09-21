@@ -98,7 +98,7 @@
 							<img class="list_image_crop" src="/resource/images/lumos/${vo.conProfileImage}">
 						</c:if>
 						<c:if test="${empty vo.conProfileImage }">
-							<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noimage.gif" style="border:1px solid #434343;">
+							<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png" >
 						</c:if>
 					</a>
 					<div class="sch_itemContent">
