@@ -454,6 +454,23 @@ public class ConcertController {
 	@RequestMapping(value = "/concert/seatGuide", method = RequestMethod.GET)
 	public String infoMain(
 			@RequestParam(value="num", defaultValue="0") int num,
+			Model model) {
+		List<Concert> list = concertService.listConcertHall();
+		Concert dto = null;
+		if(num==0) {
+			dto = concertService.readConcertHall(list.get(0).getHallNum());
+		} else {
+			dto = concertService.readConcertHall(num);
+		}
+		
+		model.addAttribute("list", list);
+		model.addAttribute("dto", dto);
+		return ".concert.seatGuide";
+	}
+	
+	@RequestMapping(value = "/concert/seatInfo", method = RequestMethod.GET)
+	public String seatInfo(
+			@RequestParam(value="num", defaultValue="0") int num,
 			Model model
 			) {
 		
@@ -468,7 +485,7 @@ public class ConcertController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dto", dto);
-		return ".concert.seatGuide";
+		return "concert/seatInfo";
 	}
 	
 	@RequestMapping(value="/admin/concertHallinfo/update", method=RequestMethod.GET)
@@ -480,7 +497,7 @@ public class ConcertController {
 		
 		Concert dto = concertService.readConcertHall(num);
 		if(dto==null) {
-			return "redirect:/exhibit/info";
+			return "redirect:/concert/info";
 		}
 
 		model.addAttribute("dto", dto);
