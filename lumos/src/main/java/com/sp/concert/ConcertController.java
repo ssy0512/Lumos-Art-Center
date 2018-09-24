@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sp.exhibit.Exhibit;
 import com.sp.exhibit.schedule.DateUtil;
 import com.sp.member.SessionInfo;
 import com.sp.sch.Schedule;
@@ -453,7 +452,55 @@ public class ConcertController {
 	}
 	
 	@RequestMapping(value = "/concert/seatGuide", method = RequestMethod.GET)
-	public String info() {
+	public String infoMain(
+			@RequestParam(value="num", defaultValue="0") int num,
+			Model model
+			) {
+		
+		List<Concert> list = concertService.listConcertHall();
+		
+		Concert dto = null;
+		if(num==0) {
+			dto = concertService.readConcertHall(list.get(0).getHallNum());
+		} else {
+			dto = concertService.readConcertHall(num);
+		}
+		
+		model.addAttribute("list", list);
+		model.addAttribute("dto", dto);
 		return ".concert.seatGuide";
+	}
+	
+	@RequestMapping(value="/admin/concertHallinfo/update", method=RequestMethod.GET)
+	public String updateHallInfoForm(
+			@RequestParam int num,
+			HttpSession session,
+			Model model
+			) {
+		
+		Concert dto = concertService.readConcertHall(num);
+		if(dto==null) {
+			return "redirect:/exhibit/info";
+		}
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
+		
+		return ".concert.createdInfo";
+	}
+	
+	@RequestMapping(value="/admin/concertHallinfo/update", method=RequestMethod.POST)
+	public String updateHallInfoSubmit(
+			@RequestParam int num,
+			@RequestParam String content,
+			Concert dto
+			) throws Exception {
+		
+		dto.setContent(content);
+		dto.setHallNum(num);
+		concertService.updateConcertHall(dto);
+		// 수정 하기
+		
+		return "redirect:/concert/seatGuide";
 	}
 }

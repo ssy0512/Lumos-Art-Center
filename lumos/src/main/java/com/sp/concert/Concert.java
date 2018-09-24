@@ -1,6 +1,7 @@
 package com.sp.concert;
 
 public class Concert {
+	private int hallNum;
 	private String hallName;
 	private int concertNum;
 	private String concertName;
@@ -14,7 +15,14 @@ public class Concert {
 	private String content;
 	private String host,supervise;
 	private String seatPriceList;
+	private int totalSeat, nondisabled,disabled;
 	
+	public int getHallNum() {
+		return hallNum;
+	}
+	public void setHallNum(int hallNum) {
+		this.hallNum = hallNum;
+	}
 	public String getHallName() {
 		return hallName;
 	}
@@ -104,5 +112,23 @@ public class Concert {
 	}
 	public void setSeatPriceList(String seatPriceList) {
 		this.seatPriceList = seatPriceList;
+	}
+	public int getTotalSeat() {
+		return totalSeat;
+	}
+	public void setTotalSeat(int totalSeat) {
+		this.totalSeat = totalSeat;
+	}
+	public int getNondisabled() {
+		return nondisabled;
+	}
+	public void setNondisabled(int nondisabled) {
+		this.nondisabled = nondisabled;
+	}
+	public int getDisabled() {
+		return disabled;
+	}
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
 	}
 }

@@ -107,4 +107,15 @@
 		SELECT NVL(COUNT(*),0) FROM concertInterest WHERE concertNum=#{concertNum} AND userId=#{userId}
 	</select>
 	
+	<select id="listConcertHall" resultType="com.sp.concert.Concert">
+		SELECT hallName, hallNum FROM concertHall
+	</select>
+	
+	<select id="readConcertHall" parameterType="Integer"  resultType="com.sp.concert.Concert">
+		SELECT hallName, hallNum, totalSeat, content,disabled,nondisabled FROM concertHall WHERE hallNum=#{num}
+	</select>
+	
+	<update id="updateConcertHall" parameterType="com.sp.concert.Concert">
+		UPDATE concertHall SET content=#{content} WHERE hallNum=#{hallNum}
+	</update>
 </mapper>

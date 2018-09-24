@@ -74,7 +74,7 @@ public class ConcertServiceImpl implements ConcertService{
 	}
 
 	@Override
-	public List<Concert> listExHall() {
+	public List<Concert> listConcertHall() {
 		List<Concert> list = null;
 		try {
 			list=dao.selectList("concert.listConcertHall");
@@ -85,7 +85,7 @@ public class ConcertServiceImpl implements ConcertService{
 	}
 
 	@Override
-	public Concert readExHall(int num) {
+	public Concert readConcertHall(int num) {
 		Concert dto=null;
 		
 		try{
@@ -117,6 +117,19 @@ public class ConcertServiceImpl implements ConcertService{
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			return result;
+		}
+		return result;
+	}
+
+	@Override
+	public int updateConcertHall(Concert dto) {
+		int result=0;
+
+		try{
+			dao.updateData("concert.updateConcertHall", dto);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
 		}
 		return result;
 	}
