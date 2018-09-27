@@ -76,9 +76,3 @@ $(function () {
 </div>
 	<div id="event_info"></div>
 </div>
-<%-- 할인정보 --%>
-<div class="eventNotice">
-	<div class="wrap">
-		<jsp:include page="/WEB-INF/view/layout/eventNotice.jsp"></jsp:include>
-	</div>
-</div>
