@@ -16,7 +16,7 @@
 					onclick="javascript:location.href='<%=cp%>/admin/community/event/created'">
 					이벤트 등록</button>
 			</c:if>
-			<table style="width: 630px; margin: 50px auto; float: left; border-spacing: 0px; padding:50px;">
+			<table style="width: 630px; margin: 50px auto; float: left; border-spacing: 0px;">
 			<c:forEach var="dto" items="${list }" varStatus="status">
 				<c:if test="${status.index!=0 && status.index%2==0}">
         	 		<c:out value="</tr><tr>" escapeXml="false"/>
@@ -24,7 +24,7 @@
         		<td width="210">
 					<div style="width: 495px;height: 273px;margin: 0px 10px;">
 						<a href="<%=cp %>/community/event/article?eventNum=${dto.eventNum}">
-							<img src="<%=cp%>/resource/images/lumos/${dto.originalFilename}" style="width:495px;height: 158.2px;">
+							<img src="<%=cp%>/resource/images/lumos/${dto.saveFilename}" style="width:495px;height: 158.2px;">
 						</a>
 					
 					<p class="event_title"style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"> 

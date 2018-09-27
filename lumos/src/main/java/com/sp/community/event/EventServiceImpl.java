@@ -48,41 +48,17 @@ public class EventServiceImpl implements EventService{
 		}
 		return result;
 	}
-	
+
 	@Override
-	public int insertFile(Event dto) {
-		int result=0;
-		try {
-			result=dao.insertData("event.insertFile", dto);
-		} catch (Exception e) {
+	public Event readBoard(int num) {
+		Event dto=null;
+		try{
+			// 게시물 가져오기
+			dto=dao.selectOne("event.readEvent", num);
+		} catch(Exception e) {
 			System.out.println(e.toString());
 		}
-		return result;
-	}	
-	@Override
-	public List<Event> listFile(int num) {
-		List<Event> listFile=null;
-		
-		try {
-			listFile=dao.selectList("notice.listFile", num);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		return listFile;
+		return dto;
 	}
-
-	@Override
-	public Event readFile(int fileNum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int deleteFile(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	
 }
