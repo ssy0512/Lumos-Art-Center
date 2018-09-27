@@ -54,7 +54,7 @@
 		    <li><a href="<%=cp%>/academy/list">아카데미</a>
 		    	<ul>
 		        	<li><a href="<%=cp%>/academy/list">수강신청</a></li>
-	        		<li><a href="<%=cp%>/">교육후기</a></li>
+	        		<li><a href="<%=cp%>/academy/review/list">교육후기</a></li>
 		        </ul>
 		    </li>
 		    <li><a href="<%=cp%>/community/event/eventTab">커뮤니티</a>

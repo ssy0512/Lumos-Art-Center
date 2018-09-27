@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academyReview">
+	<insert id="insertReview" parameterType="com.sp.academy.review.AcademyReview">
+		INSERT INTO classReview(classReviewNum, userId, subject, content, academyNum) 
+    		values(classReview_seq.NEXTVAL, #{userId}, #{subject}, #{content}, #{academyNum})
+	</insert>
+
+	<sql id="where-list">
+	  <if test="searchKey=='subject'">
+	       INSTR(subject, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='content'">
+	      DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='created'">
+	      (TO_CHAR(b.created, 'YYYY-MM-DD') = #{searchValue}
+            OR TO_CHAR(b.created, 'YYYYMMDD') = #{searchValue})
+	  </if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map"
+	            resultType="Integer">
+	  SELECT NVL(COUNT(*), 0) FROM classReview c
+	        JOIN member1 m
+	        ON c.userId=m.userId
+	     <where>
+	     	<if test="searchValue!=null and searchValue!='' ">
+	     	    <include refid="where-list"/>
+	     	</if>
+	     </where>   
+	</select>
+	
+	<select id="listReview" parameterType="map"
+	            resultType="com.sp.academy.review.AcademyReview">
+		SELECT * FROM (
+		    SELECT ROWNUM rnum, tb.* FROM (
+		        SELECT c.classReviewNum, m.userId, m.userName, subject, content, a.academyNum,
+		        a.academyName,
+		        TO_CHAR(c.created, 'YYYY-MM-DD') created, HitCount
+		        FROM classReview c 
+		            JOIN member1 m ON c.userId=m.userId
+		            JOIN academy a ON c.academyNum=a.academyNum
+                    <where>
+                         <if test="searchValue != null and searchValue != ''">
+			                  <include refid="where-list"/>
+		                 </if>
+	                </where>
+	                ORDER BY classReviewNum DESC
+	<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+	]]>
+	</select>
+
+	<select id="sbList" parameterType="map"
+	            resultType="com.sp.academy.review.AcademyReview">
+		SELECT * FROM academy WHERE academyName>'가'
+	</select>
+	
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE classReview SET hitCount=hitCount+1 WHERE classReviewNum=#{classReviewNum}
+	</update>
+	
+	<select id="readReview" resultType="com.sp.academy.review.AcademyReview" parameterType="Integer">
+		SELECT c.classReviewNum, m.userId, m.userName, subject, content, a.academyNum,
+		        a.academyName,
+		        TO_CHAR(c.created, 'YYYY-MM-DD') created, HitCount,
+                NVL(classreviewLike, 0) classreviewLike
+		    FROM classReview c 
+		         JOIN member1 m ON c.userId=m.userId
+		         JOIN academy a ON c.academyNum=a.academyNum
+            LEFT OUTER JOIN (
+						SELECT classReviewNum, COUNT(*) classreviewLike FROM classreviewLike
+						GROUP BY classReviewNum    
+           ) RC ON c.classReviewNum=RC.classReviewNum
+        WHERE c.classReviewNum=#{classReviewNum}   
+	</select>
+	
+	<select id="preReview" resultType="com.sp.academy.review.AcademyReview" parameterType="map">
+		SELECT tb.* FROM (
+			SELECT c.classReviewNum, subject, a.academyName
+			      FROM classReview c 
+			      JOIN member1 m ON c.userId=m.userId
+			      JOIN academy a ON c.academyNum=a.academyNum
+                    <where>
+                         <if test="searchValue != null and searchValue != '' ">
+			                  <include refid="where-list"/>
+		                 </if>
+		               <![CDATA[
+		                 AND (classReviewNum > #{classReviewNum})
+		                 ]]>
+	                </where>
+				ORDER BY classReviewNum ASC
+			) tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReview" resultType="com.sp.academy.review.AcademyReview" parameterType="map">
+		SELECT tb.* FROM (
+			SELECT c.classReviewNum, subject, a.academyName
+			      FROM classReview c 
+			      JOIN member1 m ON c.userId=m.userId
+			      JOIN academy a ON c.academyNum=a.academyNum
+                    <where>
+                         <if test="searchValue != null and searchValue != '' ">
+			                  <include refid="where-list"/>
+		                 </if>
+		               <![CDATA[
+		                 AND (classReviewNum < #{classReviewNum})
+		                 ]]>
+	                </where>
+				ORDER BY classReviewNum DESC
+			) tb WHERE ROWNUM=1
+	</select>
+	
+	<update id="updateReview" parameterType="Integer">
+		UPDATE classReview SET subject=#{subject}, content=#{content}, academyNum=#{academyNum} WHERE classReviewNum=#{classReviewNum}
+	</update>
+	
+	<delete id="deleteReview" parameterType="Integer">
+        DELETE FROM classReview WHERE classReviewNum=#{classReviewNum}
+    </delete>
+    
+    <insert id="insertReviewLike" parameterType="map">
+    		INSERT INTO classreviewLike(classReviewNum, userId) VALUES (#{classReviewNum}, #{userId})
+    </insert>
+
+
+</mapper>
