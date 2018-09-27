@@ -11,6 +11,7 @@
 function check() {
 	// 입력 내용
 	  var f = document.boardForm;
+	var sel=$("select option:selected").val();
 	
 	var str = f.title.value;
     if(!str) {
@@ -19,6 +20,8 @@ function check() {
         return;
     }
 
+    f.selected.value=sel;
+    
     str = f.eventStart.value;
 	str = str.trim();
     if(!str || !isValidDateFormat(str)) {
@@ -101,6 +104,16 @@ $(function(){
 					<tr style="height:40px">
 						<th>당첨자 발표</th>
 						<td><input type="text" name="eventWin" id="eventWin" readonly="readonly" value="${dto.eventWin}" class="boxTF"></td>						
+					</tr>
+					<tr style="height:40px">
+						<th>이벤트 방식</th>
+						<td>
+							<select name="choose" class="boxTF">
+								<option value="reply" <c:if test="${dto.selectOption}">selected="selected"</c:if>>댓글 이벤트</option>
+						    	<option value="review" <c:if test="${dto.selectOption}">selected="selected"</c:if>>리뷰 이벤트</option>
+							</select>
+							<input type="hidden"  name="selected" value="">
+						</td>
 					</tr>
 					<tr style="height:40px">
 						<th>이벤트 이미지</th>

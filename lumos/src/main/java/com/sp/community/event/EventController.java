@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.member.SessionInfo;
 
@@ -51,17 +53,37 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/admin/community/event/created" , method=RequestMethod.POST)
-	public String createdSubmit(Event dto,HttpSession session) throws Exception{
+	public String createdSubmit(
+			@RequestParam(value="selected") String selectOption,
+			Event dto,
+			HttpSession session) throws Exception{
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "event";		
+		String pathname = root + "uploads" + File.separator + "image";		
 		
+		dto.setSelectOption(selectOption);
 		dto.setUserId(info.getUserId());
 		service.insertEvent(dto,pathname);
 		
 		return "redirect:/community/event/eventTab";
+	}
+	
+	@RequestMapping(value = "/community/event/article", method = RequestMethod.GET)
+	public String article(			
+			@RequestParam(value="eventNum") int eventNum,
+			HttpServletRequest req,
+			Model model
+			) throws Exception {
+		
+		Event dto=service.readBoard(eventNum);
+		if(dto==null) {
+			return "redirect:/community/event/eventTab";
+		}
+		
+		model.addAttribute("dto",dto);
+		return ".community.event.article";
 	}
 	
 	@RequestMapping(value="/community/event/past")

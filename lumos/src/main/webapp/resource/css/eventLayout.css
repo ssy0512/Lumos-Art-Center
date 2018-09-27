@@ -106,3 +106,61 @@
     word-break: keep-all;
     list-style: none;
 }
+
+<!-- aritcle -->
+.pageTitleAndButton {
+	height : 55px;
+	font-size: 25px;
+    font-weight: bold;
+    font-family: "Malgun Gothic", "Nanum Gothic", "Dotum";
+}
+
+.pageTitleAndButton .adBtn {
+	width: 150px;
+	height : 33px;
+    color: #ffffff;
+    font-weight: 700;
+    float: right;
+    border: 1px solid #aa1717;
+    background-color: #aa1717;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.pageTitleAndButton .adBtn:hover {
+	color: #aa1717;
+	background-color: #ffffff;
+}
+
+.event_info{
+	max-width: 1920px;
+    min-height: 500px;
+    margin: 0 auto;
+    margin-top: 25px;
+    position: relative;
+}
+
+.wrap {
+	width: 1020px;
+    margin: 0 auto;
+}
+
+.selectOption{
+	margin-top:50px;
+	margin:0px 468px;
+}
+
+.selectOption p{
+	text-align:center;
+	border:1px solid #cccccc;
+	 border-radius:4px;
+	 font-family:"Malgun Gothic", "¸¼Àº °íµñ", NanumGothic, ³ª´®°íµñ, µ¸¿ò, sans-serif;
+	  font-weight:bold;
+	 font-size:11px; 
+	 padding:3px 10px 5px;
+}
+
+.event_content{
+	margin-top:60px;
+	padding:30px 0px;
+}

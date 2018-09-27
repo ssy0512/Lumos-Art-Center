@@ -9,6 +9,7 @@ public class Event {
 	private String userId;
 	private String content;
 	private String originalFilename, saveFilename;
+	private String selectOption;
 	// 스프링에서 파일 받기
 	private MultipartFile upload; 
 	
@@ -71,6 +72,12 @@ public class Event {
 	}
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
+	}
+	public String getSelectOption() {
+		return selectOption;
+	}
+	public void setSelectOption(String selectOption) {
+		this.selectOption = selectOption;
 	}
 	
 }
