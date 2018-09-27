@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="event">
+	<select id="seq" resultType="Integer">
+		SELECT event_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertEvent" parameterType="com.sp.community.event.Event">
+		INSERT INTO event(eventNum, userId, title, content, eventStart, eventEnd,eventWin, originalFilename, saveFilename) VALUES
+		(#{eventNum}, #{userId}, #{title}, #{content}, #{eventStart}, #{eventEnd}, #{eventWin}, 
+			#{originalFilename}, #{saveFilename})
+	</insert>
+	
+	<select id="eventList" parameterType="map" resultType="com.sp.community.event.Event"> 
+		SELECT title, saveFilename, TO_CHAR(eventStart,'YYYY-MM-DD') eventStart, 
+			TO_CHAR(eventEnd,'YYYY-MM-DD') eventEnd, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin
+		FROM event
+		WHERE TO_CHAR(eventEnd,'YYYY-MM-DD') &lt;= #{today} 
+	</select>
+</mapper>

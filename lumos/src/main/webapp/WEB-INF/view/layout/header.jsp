@@ -57,12 +57,11 @@
 	        		<li><a href="<%=cp%>/">교육후기</a></li>
 		        </ul>
 		    </li>
-		    <li><a href="<%=cp%>/">커뮤니티</a>
+		    <li><a href="<%=cp%>/community/event/eventTab">커뮤니티</a>
 		    	<ul>
-		        	<li><a href="<%=cp%>/">공지사항</a></li>
 	        		<li><a href="<%=cp%>/">공연후기</a></li>
 	        		<li><a href="<%=cp%>/">전시후기</a></li>
-	        		<li><a href="<%=cp%>/">이벤트</a></li>
+	        		<li><a href="<%=cp%>/community/event/eventTab">이벤트</a></li>
 		        </ul>
 		    </li>
 		    <li><a href="<%=cp%>/">이용안내</a>
