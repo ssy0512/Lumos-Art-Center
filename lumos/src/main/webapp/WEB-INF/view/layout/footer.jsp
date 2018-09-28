@@ -9,7 +9,7 @@
 <div class="footer-menu">
 	<ul>
 		<li>
-			<p><a href="">사이트맵</a></p>
+			<p><a href="<%=cp%>/main/sitemap">사이트맵</a></p>
 		</li>
 		<li>
 			<p><a href="">이용약관 · 정책</a></p>

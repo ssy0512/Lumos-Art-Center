@@ -109,8 +109,8 @@ $(function(){
 						<th>이벤트 방식</th>
 						<td>
 							<select name="choose" class="boxTF">
-								<option value="reply" <c:if test="${dto.selectOption}">selected="selected"</c:if>>댓글 이벤트</option>
-						    	<option value="review" <c:if test="${dto.selectOption}">selected="selected"</c:if>>리뷰 이벤트</option>
+								<option value="reply" <c:if test="${selectOption==dto.selectOption}">selected="selected"</c:if>>댓글 이벤트</option>
+						    	<option value="review" <c:if test="${selectOption==dto.selectOption}">selected="selected"</c:if>>리뷰 이벤트</option>
 							</select>
 							<input type="hidden"  name="selected" value="">
 						</td>

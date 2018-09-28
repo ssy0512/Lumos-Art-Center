@@ -60,5 +60,39 @@ public class EventServiceImpl implements EventService{
 		}
 		return dto;
 	}
+
+	@Override
+	public Event readUpdateBoard(int num) {
+		Event dto=null;
+		try{
+			// 게시물 가져오기
+			dto=dao.selectOne("event.readEvent", num);
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
+	}
+
+	@Override
+	public int updateBoard(Event dto, String pathname) {
+		int result=0;
+		
+		try {
+			String saveFilename=fileManager.doFileUpload(dto.getUpload(), pathname);
+			if(saveFilename != null) {
+				if(dto.getSaveFilename()!=null)
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				
+				dto.setSaveFilename(saveFilename);
+				dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+			}
+			
+			dao.updateData("event.updateBoard",dto);
+			result=1;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 	
 }

@@ -12,7 +12,7 @@
 		<div class="wrap">
 			<c:if test="${sessionScope.member.userId=='admin'}">
 				<button type="button" class="adBtn"
-					style="margin-top: 3px; margin-right: 10px;"
+					style="margin-top: 10px; margin-right: 10px;" 
 					onclick="javascript:location.href='<%=cp%>/admin/community/event/created'">
 					이벤트 등록</button>
 			</c:if>
@@ -31,9 +31,9 @@
 						<a href="<%=cp %>/community/event/article?eventNum=${dto.eventNum}"
 						 style="overflow: hidden;text-overflow: ellipsis; ">${dto.title}</a>
 					</p>
-					<p class="event_content">이벤트 기간 |
+					<p>이벤트 기간 |
 						${dto.eventStart}~${dto.eventEnd}</p>
-					<p class="event_content">당첨자 발표 | ${dto.eventWin}</p>
+					<p >당첨자 발표 | ${dto.eventWin}</p>
 					</div>
 				</td>
 			</c:forEach>

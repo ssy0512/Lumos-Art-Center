@@ -71,19 +71,43 @@ public class EventController {
 	}
 	
 	@RequestMapping(value = "/community/event/article", method = RequestMethod.GET)
-	public String article(			
+	public String article(
 			@RequestParam(value="eventNum") int eventNum,
-			HttpServletRequest req,
-			Model model
-			) throws Exception {
+			Model model) throws Exception  {
 		
-		Event dto=service.readBoard(eventNum);
-		if(dto==null) {
+		Event dto = service.readBoard(eventNum);
+		if(dto==null)
 			return "redirect:/community/event/eventTab";
-		}
 		
-		model.addAttribute("dto",dto);
+		model.addAttribute("dto", dto);
+
 		return ".community.event.article";
+	}
+	
+	@RequestMapping(value = "/admin/community/event/update", method = RequestMethod.GET)
+	public String updateForm(
+			@RequestParam(value="eventNum") int eventNum,
+			Model model) throws Exception  {
+		
+		Event dto = service.readUpdateBoard(eventNum);
+		if(dto==null)
+			return "redirect:/community/event/eventTab";
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode","update");
+		
+		return ".community.event.article";
+	}
+	
+	@RequestMapping(value = "/admin/community/event/update", method = RequestMethod.POST)
+	public String updateSubmit(Event dto,HttpSession session) throws Exception  {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "image";		
+
+		service.updateBoard(dto, pathname);
+		
+		return "redirect:/community/event/eventTab";
 	}
 	
 	@RequestMapping(value="/community/event/past")
