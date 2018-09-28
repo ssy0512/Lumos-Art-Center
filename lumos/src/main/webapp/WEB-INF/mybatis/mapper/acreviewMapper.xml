@@ -114,7 +114,7 @@
 			) tb WHERE ROWNUM=1
 	</select>
 	
-	<update id="updateReview" parameterType="Integer">
+	<update id="updateReview" parameterType="map">
 		UPDATE classReview SET subject=#{subject}, content=#{content}, academyNum=#{academyNum} WHERE classReviewNum=#{classReviewNum}
 	</update>
 	

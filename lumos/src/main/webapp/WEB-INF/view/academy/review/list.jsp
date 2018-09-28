@@ -28,7 +28,7 @@
 		          ${dataCount}개(${page}/${total_page} 페이지)
 		      </td>
 		      <td align="right">
-		          <form name="searchForm" action="<%=cp%>/bbs/list" method="post">
+		          <form name="searchForm" action="<%=cp%>/academy/review/list" method="post">
 		              <select name="searchKey" class="selectField" style="width: 80px; height: 30px;">
 		                  <option value="subject">제목</option>
 		                  <option value="userName">작성자</option>
@@ -72,17 +72,17 @@
 		 
 		<table style="width: 900px; margin: 0px auto; border-spacing: 0px;">
 		   <tr height="35">
-			<td align="center" style="padding-top: 55px;">
+			<td align="center" style="padding-top: 40px;">
 			        <c:if test="${dataCount==0 }">등록된 게시물이 없습니다.</c:if>
 			        <c:if test="${dataCount!=0 }">${paging}</c:if>
 			 </td>
 		   </tr>
 		</table>
 		
-		<table style="width: 900px; margin: 10px auto; border-spacing: 0px;">
+		<table style="width: 900px; margin: 10px auto; border-spacing: 0px; padding-bottom: 40px;">
 		   <tr height="40">
 		      <td align="left" width="100">
-		          <button type="button" class="list-ing" style="width: 71px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/academy/review/list';">새로고침</button>
+		      	  <button type="button" class="list-ing" style="width: 71px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/academy/review/list';">새로고침</button>
 		      </td>
 		      <c:if test="${not empty sessionScope.member}"> 
 		      <td align="right" width="100">

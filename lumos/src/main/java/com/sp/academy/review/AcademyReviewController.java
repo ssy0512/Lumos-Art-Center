@@ -119,9 +119,9 @@ public class AcademyReviewController {
 			HttpSession session) throws Exception {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-			if(info==null) {
-				return "redirect:/member/login";
-			}
+		if(info==null) {
+			return "redirect:/member/login";
+		}
 			
 		dto.setUserId(info.getUserId());
 		dto.setAcademyNum(academyNum);
@@ -184,7 +184,7 @@ public class AcademyReviewController {
 			return "redirect:/academy/view/list?page="+page;
 		
 		if(! info.getUserId().equals(dto.getUserId())) {
-			return "redirect:/bbs/list?page="+page;
+			return "redirect:/academy/view/list?page="+page;
 		}
 		
 		List<Academy> sbList=new ArrayList<>();
@@ -203,13 +203,12 @@ public class AcademyReviewController {
 	 
 	@RequestMapping(value="/academy/review/update", method=RequestMethod.POST)
 	public String updateSubmit(
+			@RequestParam(value="academyNum") int academyNum,
 			AcademyReview dto,
-			@RequestParam(value="academyNum", defaultValue="") int academyNum,
 			@RequestParam String page
 			) throws Exception {
 		
 		dto.setAcademyNum(academyNum);
-		
 		service.updateReview(dto);
 		
 		return "redirect:/academy/review/list?="+page;

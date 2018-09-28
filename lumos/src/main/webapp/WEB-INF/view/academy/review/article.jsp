@@ -30,7 +30,6 @@ function deleteReview() {
 	if(confirm("게시물을 삭제 하시겠습니까?")) {
 			location.href=url;
 	}
-
 }
 
 </script>
@@ -86,8 +85,8 @@ function deleteReview() {
 			  </tr>
 			  <tr align="center" style="border-bottom: 2px solid #aa1717"> 
 			      <td colspan="3" valign="top" style="padding: 40px;"> 
-			        <button type="button" class="btn btnSendReviewLike">
-			        <span style="font-family: Wingdings;">C</span>&nbsp;&nbsp;<span id="reviewLikeCount">좋아요</span></button>
+			        <button type="button" style="width: 70px; background-color: #ffffff;" class="list-ing btnSendReviewLike">
+			        <span style="color: #aa1717;">♥</span>&nbsp;&nbsp;<span id="reviewLikeCount" style="color: #aa1717;">0</span></button>
 			      </td>
 			  </tr>
 			  </table>

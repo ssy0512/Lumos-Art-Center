@@ -15,8 +15,8 @@ function sendOk() {
 	var aca = $("#selectBox option:selected").val();
     
 	f.academyNum.value=aca;
-    var str = f.academyNum.value;
-    //alert(str);
+    var sb = f.academyNum.value;
+    // lert(sb);
     
 	var str = f.subject.value;
     if(!str) {
@@ -54,12 +54,13 @@ function sendOk() {
 			      <td style="padding-left:10px;"> 
 					<c:if test="${! empty sbList}">
 						<select name="selectBox" id="selectBox" style="width: 200px; height: 30px;" class="list-title-boxTF">
-      						<c:forEach var="sbList" items="${sbList}" varStatus="i">
-        						 <option value="${sbList.academyNum}">${sbList.academyName}</option>
+      						<c:forEach var="sbList" items="${sbList}" varStatus="status">
+        						 <option value="${sbList.academyNum}"
+        						 	<c:if test="${sbList.academyNum==dto.academyNum}">selected="selected"</c:if>
+        						 	>${sbList.academyName}</option>
       						</c:forEach>
    						</select>
 					</c:if>
-					<input type="hidden" name="academyNum" value="">
 			      </td>
 			  </tr>
 			  
@@ -96,6 +97,9 @@ function sendOk() {
 			         	 <input type="hidden" name="classReviewNum" value="${dto.classReviewNum}">
 			         	 <input type="hidden" name="academyNum" value="${dto.academyNum}">
 			        	 <input type="hidden" name="page" value="${page}">
+			        </c:if>
+			        <c:if test="${mode=='created'}">
+			        	<input type="hidden" name="academyNum" value="">
 			        </c:if>
 			      </td>
 			    </tr>
