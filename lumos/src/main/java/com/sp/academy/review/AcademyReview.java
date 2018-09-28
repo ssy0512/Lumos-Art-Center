@@ -6,7 +6,7 @@ public class AcademyReview {
 	
 	private int listNum;
 	private int hitCount;
-	private int boardLikeCount;
+	private int reviewLikeCount;
 	
 	private String userName;
 	private String userId;
@@ -40,11 +40,11 @@ public class AcademyReview {
 	public void setHitCount(int hitCount) {
 		this.hitCount = hitCount;
 	}
-	public int getBoardLikeCount() {
-		return boardLikeCount;
+	public int getReviewLikeCount() {
+		return reviewLikeCount;
 	}
-	public void setBoardLikeCount(int boardLikeCount) {
-		this.boardLikeCount = boardLikeCount;
+	public void setReviewLikeCount(int reviewLikeCount) {
+		this.reviewLikeCount = reviewLikeCount;
 	}
 	public String getUserName() {
 		return userName;

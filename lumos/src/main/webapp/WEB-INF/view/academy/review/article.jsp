@@ -32,6 +32,41 @@ function deleteReview() {
 	}
 }
 
+$(function(){
+	$(".btnSendReviewLike").click(function(){
+		var url="<%=cp%>/academy/review/insertReviewLike";
+		var num="${dto.classReviewNum}";
+		
+		// alert(num);
+		$.ajax({
+			type:"post"
+			,url:url
+			,data:{classReviewNum:num}
+			,dataType:"json"
+			,success:function(data) {
+				var state=data.state;
+				if(state=="true") {
+					var count = data.reviewLikeCount;
+					$("#reviewLikeCount").text(count);
+				} else if(state=="false") {
+					alert("좋아요는 한 번만 가능합니다.");
+				}
+			}
+			,beforeSend : function(jqXHR) {
+		        jqXHR.setRequestHeader("AJAX", true);
+		    }
+		    ,error:function(jqXHR) {
+		    	if(jqXHR.status==403) {
+		    		login();
+		    		return;
+		    	}
+		    	console.log(jqXHR.responseText);
+		    }
+		});
+	});
+});
+
+
 </script>
 
 
@@ -81,12 +116,13 @@ function deleteReview() {
 			  <tr align="left" style=""> 
 			      <td colspan="3" valign="top" style="padding: 40px;"> 
 			        ${dto.content}
+			        
 			      </td>
 			  </tr>
 			  <tr align="center" style="border-bottom: 2px solid #aa1717"> 
 			      <td colspan="3" valign="top" style="padding: 40px;"> 
 			        <button type="button" style="width: 70px; background-color: #ffffff;" class="list-ing btnSendReviewLike">
-			        <span style="color: #aa1717;">♥</span>&nbsp;&nbsp;<span id="reviewLikeCount" style="color: #aa1717;">0</span></button>
+			        <span style="color: #aa1717;">♥</span>&nbsp;&nbsp;<span id="reviewLikeCount" style="color: #aa1717;">${dto.reviewLikeCount}</span></button>
 			      </td>
 			  </tr>
 			  </table>

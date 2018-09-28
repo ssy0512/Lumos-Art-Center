@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.academy.Academy;
 import com.sp.common.MyUtil;
@@ -226,5 +227,33 @@ public class AcademyReviewController {
 		return "redirect:/academy/review/list?page="+page;
 	}
 
+	@RequestMapping(value="/academy/review/insertReviewLike", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertReviewLike(
+			@RequestParam(value="classReviewNum") int classReviewNum,
+			HttpSession session) throws Exception {
+		
+		String state="true";
+		int reviewLikeCount=0;
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		Map<String, Object> paramMap=new HashMap<>();
+		paramMap.put("classReviewNum", classReviewNum);
+		paramMap.put("userId", info.getUserId());
+		
+		int result=service.insertReviewLike(paramMap);
+		if(result==0) {
+			state="false";
+		}
+		
+		reviewLikeCount=service.reviewLikeCount(classReviewNum);
+		
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		model.put("reviewLikeCount", reviewLikeCount);
+		
+		return model;
+		
+	}
 	
 }

@@ -123,8 +123,12 @@
     </delete>
     
     <insert id="insertReviewLike" parameterType="map">
-    		INSERT INTO classreviewLike(classReviewNum, userId) VALUES (#{classReviewNum}, #{userId})
+    	INSERT INTO classReviewLike(classReviewNum, userId) VALUES (#{classReviewNum}, #{userId})
     </insert>
+    
+    <select id="reviewLikeCount" parameterType="Integer" resultType="Integer">
+    	SELECT COUNT(*) FROM classReviewLike WHERE classReviewNum=#{classReviewNum}
+    </select>
 
 
 </mapper>
