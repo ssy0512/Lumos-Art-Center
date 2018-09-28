@@ -75,6 +75,8 @@ $(function(){
 		    }
 		});
 	}
+	
+	
 });
 
 </script>
@@ -93,6 +95,9 @@ $(function(){
 				<button type="button" class="btnSendInterest">
 					<img src="<%=cp %>/resource/images/lumos/pick_icon.png" style="margin-bottom: 3px;">
 					<span style="display:inline-block; margin-top: 2px;"></span>
+				</button>
+				<button type="button" class="pickBtn" style="width: 110px; margin-right: 10px;" onclick="javascript:location.href='<%=cp%>/exhibitReview/created?num=${dto.exhibitNum}'">
+					<span style="display:inline-block; margin-top: 2px;">관람평 쓰기</span>
 				</button>
 			</c:if>
 		</div>

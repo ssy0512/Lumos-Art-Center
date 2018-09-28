@@ -183,4 +183,60 @@ public class ExhibitController {
 		model.addAttribute("dto", dto);
 		return ".exhibit.article";
 	}
+	
+	@RequestMapping(value = "/exhibitReview/created", method = RequestMethod.GET)
+	public String createdReviewForm(
+			@RequestParam(value="num") int num,
+			HttpSession session,
+			Model model) throws Exception {
+		Exhibit dto = exhibitService.readBoard(num);
+		if(dto==null) {
+			return "redirect:/exhibit/main";
+		}
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("userId", info.getUserId());
+		paramMap.put("exhibitNum", num);
+		
+		ExReview rdto = exhibitService.readExReviewForUpdate(paramMap);
+		if(rdto==null) {
+			model.addAttribute("mode", "created");
+		} else {
+			model.addAttribute("rdto", rdto);
+			model.addAttribute("mode", "update");
+		}
+		
+		model.addAttribute("dto", dto);
+		return ".exhibit.createdReview";
+	}
+	
+	@RequestMapping(value = "/exhibitReview/created", method = RequestMethod.POST)
+	public String createdReviewSubmit(
+			@RequestParam(value="num") int num,
+			ExReview dto,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		dto.setUserId(info.getUserId());
+		
+		dto.setExhibitNum(num);
+		exhibitService.insertExReview(dto);
+		
+		model.addAttribute("dto", dto);
+		return "redirect:/exhibit/main";
+	}
+	
+	@RequestMapping(value = "/exhibitReview/update", method = RequestMethod.POST)
+	public String updateReviewSubmit(
+			@RequestParam(value="num") int num,
+			ExReview dto,
+			Model model) throws Exception {
+		
+		dto.setExreviewNum(num);
+		exhibitService.updateExReview(dto);
+		
+		return "redirect:/exhibit/main";
+	}
 }

@@ -14,7 +14,7 @@
 	
 	<select id="exhibitPrice" parameterType="Integer" resultType="String">
 		SELECT  audience||' '||exprice priceString FROM EXHIBITprice ep
-    JOIN AUDIENCELEVEL al ON ep.AUDIENCELEVELNUM = al.AUDIENCELEVELNUM WHERE ep.exhibitNum=1 ORDER BY ep.AUDIENCELEVELNUM ASC
+    JOIN AUDIENCELEVEL al ON ep.AUDIENCELEVELNUM = al.AUDIENCELEVELNUM WHERE ep.exhibitNum=#{exhibitNum} ORDER BY ep.AUDIENCELEVELNUM ASC
 	</select>
 	
 	<update id="updateExhibit" parameterType="com.sp.exhibit.Exhibit">
@@ -43,5 +43,19 @@
 	
 	<update id="updateExHall" parameterType="com.sp.exhibit.Exhibit">
 		UPDATE exhibitHall SET exHallImage=#{exHallImage} WHERE hallNum=#{hallNum}
+	</update>
+	
+	<insert id="insertExReview" parameterType="com.sp.exhibit.ExReview">
+		INSERT INTO exreview (exreviewNum, userId,subject,content,exhibitNum,score) 
+				 VALUES(EXREVIEW_SEQ.NEXTVAL,#{userId},#{subject},#{content},#{exhibitNum},#{score})
+	</insert>
+	
+	<select id="readExReviewForUpdate" parameterType="map"  resultType="com.sp.exhibit.ExReview">
+		SELECT exreviewNum, subject, content, score FROM exreview WHERE exhibitNum=#{exhibitNum} and userId=#{userId}
+	</select>
+	
+	<update id="updateExReview" parameterType="com.sp.exhibit.ExReview">
+		UPDATE exreview SET subject=#{subject}, content=#{content}, score=#{score}
+			WHERE exreviewNum=#{exreviewNum}
 	</update>
 </mapper>

@@ -75,6 +75,25 @@
     	<put-attribute name="body" value="/WEB-INF/view/admin/{1}.jsp" />
 	</definition>
 
+   <!-- 공연전시 회원 마이페이지 -->
+	<definition name=".mypageLayout" template="/WEB-INF/view/mypage/layout/myPageLayout.jsp">
+	    <put-attribute name="title" value="spring" />
+	  	<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+	  	<put-attribute name="mypageheader" value="/WEB-INF/view/mypage/layout/myHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+	</definition>
+	<!-- 순서가 바뀌면 안됨(* 많은것이 위에) -->
+	<definition name=".mypage.*.*.*" extends=".mypageLayout">
+		<put-attribute name="body" value="/WEB-INF/view/mypage/{1}/{2}/{3}.jsp"/>
+	</definition>
+	<definition name=".mypage.*.*" extends=".mypageLayout">
+		<put-attribute name="body" value="/WEB-INF/view/mypage/{1}/{2}.jsp"/>
+	</definition>
+	<definition name=".mypage.*" extends=".mypageLayout">
+    	  <put-attribute name="body" value="/WEB-INF/view/mypage/{1}.jsp" />
+	</definition>
+
   <!-- 순서가 바뀌면 안됨(* 많은것이 위에) -->
    <!-- 3단 일반 -->
 	<definition name=".mainLayout" template="/WEB-INF/view/layout/layout3.jsp">

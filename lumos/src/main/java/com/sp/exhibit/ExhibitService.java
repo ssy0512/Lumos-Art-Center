@@ -13,4 +13,7 @@ public interface ExhibitService {
 	public Exhibit readExHall(int num);
 	public int updateExHall(Exhibit dto);
 	public List<String> exhibitPrice(int num);
+	public ExReview readExReviewForUpdate(Map<String, Object> map);
+	public int updateExReview(ExReview dto);
+	public int insertExReview(ExReview dto);
 }

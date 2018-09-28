@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+.wrap {
+	width: 1020px;
+    margin: 0 auto;
+}
+
+.wrap .title {
+	font-size: 30px;
+	font-weight: 300;
+	padding-bottom: 10px;
+}
+
+.titleDiv {
+    border-bottom: 1px solid #e5000c;
+}
+
+.titleDiv .title img {
+    float: right;
+}
+
+.bodyDiv table {
+	 border-collapse: collapse;
+}
+
+.bodyDiv table th {
+	text-align: left;
+    font-weight: 400;
+    padding: 20px 0;
+}
+
+.border_b {
+	border-bottom: 1px solid #ccc;
+}
+
+.f_red {
+	color: #e5002c!important;
+}
+
+.starBox {
+	width: 160px;
+	height: 35px;
+	border: 1px solid gray;
+	border-radius: 4px;
+	padding: 4px 6px;
+}
+
+input[type="text"], textarea {
+	border-radius: 4px;
+	padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #999;
+    font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+    font-size: 14px;
+}
+
+.eBtn {
+	width: 80px;
+	height : 30px;
+    color: #aa1717;
+    font-weight: 700;
+    border: 1px solid #aa1717;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.eBtn:hover {
+	color: #ffffff;
+	background-color: #aa1717;
+}

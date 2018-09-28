@@ -117,10 +117,47 @@ public class ExhibitServiceImpl implements ExhibitService{
 	public List<String> exhibitPrice(int num) {
 		List<String> list = null;
 		try {
-			list=dao.selectList("exhibit.exhibitPrice");
+			list=dao.selectList("exhibit.exhibitPrice",num);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 		return list;
+	}
+
+	@Override
+	public ExReview readExReviewForUpdate(Map<String, Object> map) {
+		ExReview dto = null;
+		try {
+			dto = dao.selectOne("exhibit.readExReviewForUpdate", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
+	}
+
+	@Override
+	public int updateExReview(ExReview dto) {
+		int result=0;
+
+		try{
+			dao.updateData("exhibit.updateExReview", dto);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int insertExReview(ExReview dto) {
+		int result=0;
+
+		try{
+			dao.updateData("exhibit.insertExReview", dto);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 }
