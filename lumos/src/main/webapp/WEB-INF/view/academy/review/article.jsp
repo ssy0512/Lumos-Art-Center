@@ -32,8 +32,17 @@ function deleteReview() {
 	}
 }
 
+function login() {
+	location.href="<%=cp%>/member/login";
+}
+
 $(function(){
 	$(".btnSendReviewLike").click(function(){
+		
+		<c:if test="${empty sessionScope.member}"> 
+			alert("로그인이 필요합니다.")
+		</c:if>
+			
 		var url="<%=cp%>/academy/review/insertReviewLike";
 		var num="${dto.classReviewNum}";
 		

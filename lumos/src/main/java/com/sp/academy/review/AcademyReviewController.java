@@ -161,6 +161,9 @@ public class AcademyReviewController {
 		AcademyReview preReviewDto=service.preReview(map);
 		AcademyReview nextReviewDto=service.nextReview(map);
 		
+		int reviewLikeCount=service.reviewLikeCount(classReviewNum);
+		dto.setReviewLikeCount(reviewLikeCount);
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("preReviewDto", preReviewDto);
 		model.addAttribute("nextReviewDto", nextReviewDto);
