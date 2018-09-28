@@ -9,7 +9,7 @@
 	<insert id="insertEvent" parameterType="com.sp.community.event.Event">
 		INSERT INTO event(eventNum, userId, title, content, eventStart, eventEnd,eventWin, originalFilename, saveFilename, selectOption) VALUES
 		(#{eventNum}, #{userId}, #{title}, #{content}, #{eventStart}, #{eventEnd}, #{eventWin}, 
-			#{originalFilename}, #{saveFilename}, #{selectOption})
+			#{originalFilename, jdbcType=VARCHAR}, #{saveFilename, jdbcType=VARCHAR}, #{selectOption})
 	</insert>
 	
 	<select id="eventList" parameterType="map" resultType="com.sp.community.event.Event"> 
@@ -20,10 +20,21 @@
 	</select>
 	
 	<select id="readEvent" parameterType="Integer" resultType="com.sp.community.event.Event">
-		SELECT eventNum, title, saveFilename, TO_CHAR(eventStart,'YYYY-MM-DD') eventStart, 
+		SELECT eventNum, title,originalFilename, saveFilename, TO_CHAR(eventStart,'YYYY-MM-DD') eventStart, 
 			TO_CHAR(eventEnd,'YYYY-MM-DD') eventEnd, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin,
 			content, selectOption
 		FROM event
 		WHERE eventNum=#{eventNum}
 	</select>
+	
+	<update id="updateEvent" parameterType="com.sp.community.event.Event">
+		UPDATE event SET title=#{title},content=#{content},selectOption=#{selectOption},
+			eventStart=#{eventStart},eventEnd=#{eventEnd},eventWin=#{eventWin},
+			saveFilename=#{saveFilename, jdbcType=VARCHAR},originalFilename=#{originalFilename, jdbcType=VARCHAR}
+		WHERE eventNum=#{eventNum}
+	</update>
+	
+	<delete id="deleteEvent">
+		DELETE FROM event WHERE eventNum=#{eventNum}
+	</delete>
 </mapper>

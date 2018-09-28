@@ -81,7 +81,7 @@ $(function(){
 		</div>
 		<div class="poster left">
 			<c:if test="${not empty dto.originalFilename }">
-				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.originalFilename}">
+				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.saveFilename}">
 			</c:if>
 			<c:if test="${empty dto.originalFilename }">
 				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png" >
@@ -109,12 +109,18 @@ $(function(){
 						<th>이벤트 방식</th>
 						<td>
 							<select name="choose" class="boxTF">
-								<option value="reply" <c:if test="${selectOption==dto.selectOption}">selected="selected"</c:if>>댓글 이벤트</option>
-						    	<option value="review" <c:if test="${selectOption==dto.selectOption}">selected="selected"</c:if>>리뷰 이벤트</option>
+								<option value="reply" <c:if test="${dto.selectOption=='reply'}">selected="selected"</c:if>>댓글 이벤트</option>
+						    	<option value="review" <c:if test="${dto.selectOption=='review'}">selected="selected"</c:if>>리뷰 이벤트</option>
 							</select>
 							<input type="hidden"  name="selected" value="">
 						</td>
 					</tr>
+					<c:if test="${mode=='update' }">
+						<tr style="height:40px">
+							<th>저장된 이미지</th>
+							<td> ${dto.originalFilename }</td>						
+						</tr>
+					</c:if>
 					<tr style="height:40px">
 						<th>이벤트 이미지</th>
 						<td> <input type="file" name="upload" class="boxTF" style="border:none;"></td>						
@@ -134,7 +140,9 @@ $(function(){
 			<button type="button" class="eBtn" onclick="javascript:location.href='<%=cp%>/community/event/eventTab';">${mode=='update'?'수정취소':'등록취소'}</button>
 			
 			 <c:if test="${mode=='update'}">
-			         <input type="hidden" name="num" value="${dto.eventNum}">
+		         <input type="hidden" name="num" value="${dto.eventNum}">
+		         <input type="hidden" name="saveFilename" value="${dto.saveFilename}">
+		         <input type="hidden" name="originalFilename" value="${dto.originalFilename}">
 			</c:if>
 			        
 	    </div>

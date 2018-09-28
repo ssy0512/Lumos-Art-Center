@@ -31,7 +31,7 @@ function deleteBoard() {
 		location.href=url;
 	</c:if>
 
-	<c:if test="${sessionScope.member.userId=='admin'}">
+	<c:if test="${sessionScope.member.userId!='admin'}">
 		alert("게시물을 수정할 수  없습니다.");
 	</c:if>
 	}

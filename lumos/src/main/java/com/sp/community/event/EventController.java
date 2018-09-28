@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,7 @@ public class EventController {
 			@RequestParam(value="eventNum") int eventNum,
 			Model model) throws Exception  {
 		
-		Event dto = service.readBoard(eventNum);
+		Event dto = service.readEvent(eventNum);
 		if(dto==null)
 			return "redirect:/community/event/eventTab";
 		
@@ -89,24 +88,47 @@ public class EventController {
 			@RequestParam(value="eventNum") int eventNum,
 			Model model) throws Exception  {
 		
-		Event dto = service.readUpdateBoard(eventNum);
+		Event dto = service.readEvent(eventNum);
 		if(dto==null)
 			return "redirect:/community/event/eventTab";
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("mode","update");
 		
-		return ".community.event.article";
+		return ".community.event.created";
 	}
 	
 	@RequestMapping(value = "/admin/community/event/update", method = RequestMethod.POST)
-	public String updateSubmit(Event dto,HttpSession session) throws Exception  {
+	public String updateSubmit(
+			@RequestParam(value="selected") String selectOption,
+			Event dto,
+			HttpSession session) throws Exception  {
 		
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root + "uploads" + File.separator + "image";		
-
-		service.updateBoard(dto, pathname);
 		
+		dto.setSelectOption(selectOption);
+		service.updateEvent(dto, pathname);
+		
+		return "redirect:/community/event/eventTab";
+	}
+	
+	@RequestMapping(value = "/admin/community/event/delete", method = RequestMethod.GET)
+	public String delete(
+			@RequestParam(value="eventNum") int eventNum,
+			HttpSession session) throws Exception  {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "uploads" + File.separator + "image";	
+		
+		Event dto = service.readEvent(eventNum);
+		if(dto==null)
+			return "redirect:/community/event/eventTab";
+		
+		pathname+=File.separator+dto.getSaveFilename();
+		
+		service.deleteEvent(eventNum,pathname);
+
 		return "redirect:/community/event/eventTab";
 	}
 	
