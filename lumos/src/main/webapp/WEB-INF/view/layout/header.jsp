@@ -66,11 +66,11 @@
 		    </li>
 		    <li><a href="<%=cp%>/">이용안내</a>
 		    </li>
-		    <li><a href="<%=cp%>/">대관안내</a>
+		    <li><a href="<%=cp%>/rentfront/notice">대관안내</a>
 		    	<ul>
-		        	<li><a href="<%=cp%>/">대관일정</a></li>
-	        		<li><a href="<%=cp%>/">대여료 안내</a></li>
-	        		<li><a href="<%=cp%>/">대여 신청</a></li>
+		        	<li><a href="<%=cp%>/rentfront/notice">대관일정</a></li>
+	        		<li><a href="<%=cp%>/">대관료 안내</a></li>
+	        		<li><a href="<%=cp%>/">대관신청</a></li>
 		        </ul>
 		    </li>
 	 	</ul> 

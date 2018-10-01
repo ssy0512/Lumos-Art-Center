@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+
+/* body */
+.body-content-container {
+	margin: 0px;
+    clear:both;
+    box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
+    min-height: 500px;
+}
+
+.body-academy-title {
+    color: #434343;
+    width: 1438px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.main_photo {
+	width: 100%;
+}
+
+.half_photo {
+ 	background: url('/lumos_admin/resource/images/lumos/zine_half_main_5.jpg') no-repeat center;
+}
+
+.halfptop80 {
+	padding-top: 80px!important;
+}
+
+.half_photo_title {
+	text-align: center;
+    color: #fff;
+    font-weight: 200;
+    font-size: 48px;
+    padding-top: 60px;
+    min-width: 500px;
+}
+
+.rent-tabs {
+	list-style: none;
+    float: left;
+    border-bottom: 1px solid #dddddd;
+    width: 1438px;
+}
+
+.rent-tabs li {
+	font-size: 18px;
+    float: left;
+    line-height: 60px;
+    border: none;
+    width: 33%;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0px;
+    text-align: center;
+    display: inline-block;
+}
+
+.rent-tabs li a {
+	font-weight: 600;
+	color: #aa1717;
+}
+
+

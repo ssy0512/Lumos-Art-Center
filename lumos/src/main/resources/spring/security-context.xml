@@ -35,6 +35,7 @@
 		<intercept-url pattern="/resource/**" access="permitAll"/>
 		<intercept-url pattern="/uploads/**" access="permitAll"/>
 		<intercept-url pattern="/academy/**" access="permitAll"/>
+		<intercept-url pattern="/rentfront/**" access="permitAll"/>
 		<intercept-url pattern="/goods" access="permitAll"/>
 		<intercept-url pattern="/customerCenter/**" access="permitAll"/>
 		
