@@ -32,7 +32,7 @@
 	<select id="endList" parameterType="map" resultType="com.sp.community.event.Event">
 		SELECT * FROM(
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT eventNum, title, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin, selectOption
+				SELECT eventNum, title, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin, selectOption,endContent
 				FROM event
 				WHERE TO_CHAR(eventEnd,'YYYYMMDD') &lt; #{today} 
 				ORDER BY eventEnd DESC
@@ -45,7 +45,7 @@
 	<select id="endUserList" parameterType="map" resultType="com.sp.community.event.Event">
 		SELECT * FROM(
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT eventNum, title, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin, selectOption
+				SELECT eventNum, title, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin, selectOption,endContent
 				FROM event
 				WHERE TO_CHAR(eventEnd,'YYYYMMDD') &lt; #{today} AND (endContent IS NOT NULL)
 				ORDER BY eventEnd DESC

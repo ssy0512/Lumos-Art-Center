@@ -53,7 +53,7 @@
 				<c:if test="${not empty endList}">
 				<tfoot id='listReplyFooter'>
 					<tr height='40' align="center" >
-			            <td colspan='3' style="padding-bottom: 20px;" >
+			            <td colspan='4' style="padding-bottom: 20px;" >
 			              ${paging}
 			            </td>
 			           </tr>
