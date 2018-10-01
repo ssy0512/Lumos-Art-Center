@@ -37,6 +37,13 @@
 					</div>
 				</td>
 			</c:forEach>
+			<c:if test="${empty list }">
+				<tr>
+					<td > 
+						 <div style="text-align:right;height:200px;line-height: 180px;">진행중인 이벤트가 없습니다.</div>
+				 	</td>
+				</tr>
+			</c:if>
 			</table>
 		</div>
 	</div>

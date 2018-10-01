@@ -7,9 +7,10 @@ public class Event {
 	private String eventStart, eventEnd, eventWin;
 	private int eventNum;
 	private String userId;
-	private String content;
+	private String content,endContent;
 	private String originalFilename, saveFilename;
 	private String selectOption;
+	private String year;
 	// 스프링에서 파일 받기
 	private MultipartFile upload; 
 	
@@ -55,6 +56,12 @@ public class Event {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getEndContent() {
+		return endContent;
+	}
+	public void setEndContent(String endContent) {
+		this.endContent = endContent;
+	}
 	public String getOriginalFilename() {
 		return originalFilename;
 	}
@@ -78,6 +85,12 @@ public class Event {
 	}
 	public void setSelectOption(String selectOption) {
 		this.selectOption = selectOption;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
 	}
 	
 }

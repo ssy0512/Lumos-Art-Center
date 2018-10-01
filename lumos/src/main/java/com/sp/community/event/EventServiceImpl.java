@@ -96,4 +96,105 @@ public class EventServiceImpl implements EventService{
 		return result;
 	}
 
+	@Override
+	public List<Reply> listReply(Map<String, Object> map) {
+		List<Reply> list=null;
+		try {
+			list=dao.selectList("event.listReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+	
+	@Override
+	public int replyCount(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.selectOne("event.replyCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int insertReply(Reply dto) {
+		int result=0;
+		try {
+			result=dao.insertData("event.insertReply", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteReply(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.deleteData("event.deleteReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int endListCount(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.selectOne("event.endListCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Event> endList(Map<String, Object> map) {
+		List<Event> list=null;
+		try {
+			list=dao.selectList("event.endList",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public int endUpdateEvent(Event dto) {
+		int result=0;
+		
+		try {
+			dao.updateData("event.endUpdateEvent",dto);
+			result=1;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int endUserListCount(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.selectOne("event.endUserListCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Event> endUserList(Map<String, Object> map) {
+		List<Event> list=null;
+		try {
+			list=dao.selectList("event.endUserList",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
 }

@@ -16,13 +16,49 @@
 		SELECT eventNum, title, saveFilename, TO_CHAR(eventStart,'YYYY-MM-DD') eventStart, 
 			TO_CHAR(eventEnd,'YYYY-MM-DD') eventEnd, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin
 		FROM event
-		WHERE TO_CHAR(eventEnd,'YYYY-MM-DD') &lt;= #{today} 
+		WHERE TO_CHAR(eventEnd,'YYYYMMDD') &gt;= #{today} 
+	</select>
+	
+	<select id="endListCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM event
+		WHERE TO_CHAR(eventEnd,'YYYYMMDD') &lt; #{today} 
+	</select>
+	
+	<select id="endUserListCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM event
+		WHERE TO_CHAR(eventEnd,'YYYYMMDD') &lt; #{today} AND (endContent IS NOT NULL)
+	</select>
+	
+	<select id="endList" parameterType="map" resultType="com.sp.community.event.Event">
+		SELECT * FROM(
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT eventNum, title, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin, selectOption
+				FROM event
+				WHERE TO_CHAR(eventEnd,'YYYYMMDD') &lt; #{today} 
+				ORDER BY eventEnd DESC
+<![CDATA[				
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+]]>	
+	</select>
+	
+	<select id="endUserList" parameterType="map" resultType="com.sp.community.event.Event">
+		SELECT * FROM(
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT eventNum, title, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin, selectOption
+				FROM event
+				WHERE TO_CHAR(eventEnd,'YYYYMMDD') &lt; #{today} AND (endContent IS NOT NULL)
+				ORDER BY eventEnd DESC
+<![CDATA[				
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+]]>	
 	</select>
 	
 	<select id="readEvent" parameterType="Integer" resultType="com.sp.community.event.Event">
 		SELECT eventNum, title,originalFilename, saveFilename, TO_CHAR(eventStart,'YYYY-MM-DD') eventStart, 
 			TO_CHAR(eventEnd,'YYYY-MM-DD') eventEnd, TO_CHAR(eventWin,'YYYY-MM-DD') eventWin,
-			content, selectOption
+			content, selectOption,endContent
 		FROM event
 		WHERE eventNum=#{eventNum}
 	</select>
@@ -34,7 +70,44 @@
 		WHERE eventNum=#{eventNum}
 	</update>
 	
+	<update id="endUpdateEvent">
+		UPDATE event SET endContent=#{content} WHERE eventNum=#{eventNum}
+	</update>
+	
 	<delete id="deleteEvent">
 		DELETE FROM event WHERE eventNum=#{eventNum}
 	</delete>
+	
+	<!-- reply -->
+	<insert id="insertReply" parameterType="com.sp.community.event.Reply">
+		INSERT INTO comments(commentNum, userId, content, eventNum) VALUES
+		(comments_seq.NEXTVAL, #{userId},#{content},#{eventNum})
+	</insert>
+	
+	<select id="listReply" parameterType="map" resultType="com.sp.community.event.Reply">
+		SELECT * FROM(
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT c.commentNum, c.content, c.eventNum, 
+					TO_CHAR(c.created,'YYYY-MM-DD') created, c.userId,
+					substr(m.userName,1,1) || lpad('*',length(m.userName)-2,'*') || substr(m.userName, length(m.userName), 1) userName
+				FROM comments c
+				JOIN member1 m ON c.userId=m.userId
+				JOIN event e ON e.eventNum=c.eventNum
+				WHERE c.eventNum=#{eventNum}
+				ORDER BY c.commentNum DESC
+<![CDATA[				
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+]]>	
+	</select>
+	
+	<delete id="deleteReply" parameterType="map">
+		DELETE comments WHERE commentNum = #{commentNum}
+	</delete>
+	
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM comments
+		WHERE eventNum=#{eventNum}
+	</select>
+	
 </mapper>

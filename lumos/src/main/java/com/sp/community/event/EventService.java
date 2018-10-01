@@ -9,4 +9,15 @@ public interface EventService {
 	public Event readEvent(int num);
 	public int updateEvent(Event dto, String pathname);
 	public int deleteEvent(int num, String pathname);
+	
+	public List<Reply> listReply(Map<String, Object> map);
+	public int replyCount(Map<String, Object> map);
+	public int insertReply(Reply dto);
+	public int deleteReply(Map<String, Object> map);
+	
+	public int endListCount(Map<String, Object> map);
+	public int endUserListCount(Map<String, Object> map);
+	public List<Event> endList(Map<String, Object> map);
+	public List<Event> endUserList(Map<String, Object> map);
+	public int endUpdateEvent(Event dto);
 }

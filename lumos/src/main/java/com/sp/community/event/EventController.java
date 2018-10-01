@@ -14,13 +14,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sp.common.MyUtil;
 import com.sp.member.SessionInfo;
 
 @Controller("commnity.eventController")
 public class EventController {
 	@Autowired
 	private EventService service;
+	@Autowired
+	private MyUtil myUtil;
 	
 	@RequestMapping(value = "/community/event/eventTab", method = RequestMethod.GET)
 	public String method() {
@@ -132,9 +136,182 @@ public class EventController {
 		return "redirect:/community/event/eventTab";
 	}
 	
-	@RequestMapping(value="/community/event/past")
-	public String past() {
+	// 댓글 리스트 : AJAX-TEXT
+	@RequestMapping(value="/community/event/listReply")
+	public String listReply(
+			@RequestParam int eventNum
+			,@RequestParam(value="pageNo", defaultValue="1") int current_page
+			,Model model
+			) throws Exception {
 		
-		return "/community/event/past";
+		int rows=10;
+		int total_page=0;
+		int dataCount=0;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("eventNum", eventNum);
+		
+		dataCount=service.replyCount(map);
+		total_page = myUtil.pageCount(rows, dataCount);
+		if(current_page>total_page)
+			current_page=total_page;
+		
+		int start=(current_page-1)*rows+1;
+		int end=current_page*rows;
+		map.put("start", start);
+		map.put("end", end);
+		List<Reply> listReply=service.listReply(map);
+		
+		for(Reply dto : listReply) {
+			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			if(dto.getUserName().length()==2)
+				dto.setUserName(dto.getUserName().substring(0,1)+'*');
+		}
+		
+		// AJAX 용 페이징
+		String paging=myUtil.pagingMethod(current_page, total_page, "listPage");
+		
+		// 포워딩할 jsp로 넘길 데이터
+		model.addAttribute("listReply", listReply);
+		model.addAttribute("paging", paging);
+		
+		return "community/event/listReply";
+	}
+	
+	// 댓글 및 댓글의 답글 등록 : AJAX-JSON
+	@RequestMapping(value="/community/event/insertReply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertReply(
+			Reply dto,
+			HttpSession session
+			) {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String state="true";
+		
+		dto.setUserId(info.getUserId());
+		int result=service.insertReply(dto);
+		if(result==0)
+			state="false";
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
+	}
+	
+	// 댓글 및 댓글의 답글 삭제 : AJAX-JSON
+	@RequestMapping(value="/community/event/deleteReply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteReply(
+			@RequestParam Map<String, Object> paramMap
+			) {
+		String state="true";
+		service.deleteReply(paramMap);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("state", state);
+		return map;
+	}
+	
+	@RequestMapping(value="/community/event/past")
+	public String past(
+			@RequestParam(value="pageNo", defaultValue="1") int current_page
+			,Model model
+			,HttpSession session) throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		Calendar cal = Calendar.getInstance();
+
+		String today = String.format("%04d%02d%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1,
+				cal.get(Calendar.DATE));
+		
+		int rows=10;
+		int total_page=0;
+		int dataCount=0;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("today",today);
+		
+		if(info.getUserId().equals("admin")) {
+			dataCount=service.endListCount(map);
+			total_page = myUtil.pageCount(rows, dataCount);
+			if(current_page>total_page)
+				current_page=total_page;
+			
+			int start=(current_page-1)*rows+1;
+			int end=current_page*rows;
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<Event> endList=service.endList(map);
+			
+			String paging=myUtil.pagingMethod(current_page, total_page, "listPage");
+			List<Event> endUserList=service.endUserList(map);
+			
+			model.addAttribute("endUserList",endUserList);
+			model.addAttribute("endList",endList);
+			model.addAttribute("paging", paging);
+		}else {
+			dataCount=service.endUserListCount(map);
+			total_page = myUtil.pageCount(rows, dataCount);
+			if(current_page>total_page)
+				current_page=total_page;
+			
+			int start=(current_page-1)*rows+1;
+			int end=current_page*rows;
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<Event> endUserList=service.endUserList(map);
+			
+			String paging=myUtil.pagingMethod(current_page, total_page, "listPage");
+			List<Event> endList=service.endList(map);
+			
+			model.addAttribute("endList",endList);
+			model.addAttribute("endUserList",endUserList);
+			model.addAttribute("paging", paging);
+		}
+			
+			return "/community/event/past";
+	}
+	
+	@RequestMapping(value = "/community/event/endArticle", method = RequestMethod.GET)
+	public String endArticle(
+			@RequestParam(value="eventNum") int eventNum,
+			Model model) throws Exception  {
+		
+		Event dto = service.readEvent(eventNum);
+		if(dto==null)
+			return "redirect:/community/event/eventTab";
+		
+		model.addAttribute("dto", dto);
+
+		return ".community.event.endArticle";
+	}
+	
+	@RequestMapping(value = "/admin/community/event/endUpdate", method = RequestMethod.GET)
+	public String endUpdateForm(
+			@RequestParam(value="eventNum") int eventNum,
+			Model model) throws Exception  {
+		
+		Event dto = service.readEvent(eventNum);
+		if(dto==null)
+			return "redirect:/community/event/eventTab";
+		
+		model.addAttribute("dto", dto);
+		
+		return ".community.event.endCreated";
+	}
+	
+	@RequestMapping(value = "/admin/community/event/endUpdate", method = RequestMethod.POST)
+	public String endUpdateSubmit(
+			Event dto,
+			HttpSession session) throws Exception  {
+		
+		service.endUpdateEvent(dto);
+		
+		return "redirect:/community/event/eventTab";
 	}
 }
+		

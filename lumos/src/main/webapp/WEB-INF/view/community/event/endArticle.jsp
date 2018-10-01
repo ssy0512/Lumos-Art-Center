@@ -26,7 +26,7 @@ function deleteBoard() {
 	<c:if test="${sessionScope.member.userId=='admin'}">
 		var eventNum = "${dto.eventNum}";
 		var query = "eventNum="+eventNum;
-		var url = "<%=cp%>/admin/community/event/update?" + query;
+		var url = "<%=cp%>/admin/community/event/endUpdate?" + query;
 
 		location.href=url;
 	</c:if>
@@ -150,7 +150,7 @@ $(function(){
 <div class="event_info">
 <div class="wrap" >
 	<div class="pageTitleAndButton">
-			<span style="line-height: 40px;">진행 중인 이벤트</span>
+			<span style="line-height: 40px;">당첨자 발표 · 지난 이벤트</span>
 			<c:if test="${sessionScope.member.userId=='admin'}">
 				<button type="button" class="adBtn" onclick="deleteBoard();">
 					삭제
@@ -182,7 +182,12 @@ $(function(){
 		<div class="work_intro" style="padding-bottom:80px;">
 			<div class="wrap">
 				<h1 style="margin-top: 60px;"></h1>
-				${dto.content}
+				<c:if test="${empty dto.endContent }">
+					${dto.content}
+				</c:if>
+				<c:if test="${not empty dto.endContent }">
+					${dto.endContent}
+				</c:if>
 			</div>
 		<button type="button" class="adBtn" style="margin-top: 60px;" onclick="javascript:location.href='<%=cp%>/community/event/eventTab'">
 			목록으로
@@ -191,29 +196,3 @@ $(function(){
 	</div>
 </div>
 </div>
-
-<c:if test="${dto.selectOption == 'reply' }">
-	<div style="background-color: #fbfbfb;  border-top: 1px solid #e8e8e8;">
-		<div class="wrap">
-		<table style='width: 100%; margin: 15px auto 0px; border-spacing: 0px;'>
-			<tr height='30'> 
-				 <td align='left' >
-				 	<span style='font-weight: bold;' >댓글쓰기</span><span> - 타인을 비방하거나 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
-				 </td>
-			</tr>
-			<tr>
-			   	<td style='padding-bottom: 5px;'>
-					<textarea class='boxTA' style='width:100%; height: 70px;'></textarea>
-			    </td>
-			</tr>
-			<tr>
-			   <td align='right'>
-			        <button type='button' class='adBtn btnSendReply' data-num='10' style="width:100px;height:40px;">댓글 등록</button>
-			    </td>
-			 </tr> 
-		</table>
-		     
-		<div id="listReply"></div>
-		</div>
-	</div>
-</c:if>
