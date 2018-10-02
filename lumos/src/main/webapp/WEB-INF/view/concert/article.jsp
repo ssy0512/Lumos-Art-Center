@@ -104,7 +104,7 @@ $(function(){
 				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png">
 			</c:if>
 			<div class="reserveButtonDiv">
-				<a href="<%=cp %>/admin/concert/bookConcert?num=${dto.concertNum}">예매하기</a>
+				<a href="<%=cp %>/ticketing/bookConcert?concertNum=${dto.concertNum}">예매하기</a>
 			</div>
 		</div>
 		<div class="content right">
