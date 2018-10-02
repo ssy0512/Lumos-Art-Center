@@ -1,11 +1,13 @@
 package com.sp.community.event;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -215,9 +217,12 @@ public class EventController {
 	
 	@RequestMapping(value="/community/event/past")
 	public String past(
-			@RequestParam(value="pageNo", defaultValue="1") int current_page
-			,Model model
-			,HttpSession session) throws Exception{
+			@RequestParam(value="pageNo", defaultValue="1") int current_page,
+			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
+			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			HttpServletRequest req,
+			Model model,
+			HttpSession session) throws Exception{
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
@@ -230,12 +235,20 @@ public class EventController {
 		int total_page=0;
 		int dataCount=0;
 		
+		if(req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
+			searchValue = URLDecoder.decode(searchValue, "utf-8");
+		}
+		
 		Map<String, Object> map=new HashMap<>();
 		map.put("today",today);
+		map.put("searchKey", searchKey);
+        map.put("searchValue", searchValue);
 		
 		if(info.getUserId().equals("admin")) {
 			dataCount=service.endListCount(map);
-			total_page = myUtil.pageCount(rows, dataCount);
+			if(dataCount != 0)
+				total_page = myUtil.pageCount(rows, dataCount);
+			
 			if(current_page>total_page)
 				current_page=total_page;
 			
@@ -252,9 +265,13 @@ public class EventController {
 			model.addAttribute("endUserList",endUserList);
 			model.addAttribute("endList",endList);
 			model.addAttribute("paging", paging);
+			model.addAttribute("pageNo", current_page);
+			model.addAttribute("dataCount", dataCount);
+			model.addAttribute("total_page", total_page);
 		}else {
 			dataCount=service.endUserListCount(map);
-			total_page = myUtil.pageCount(rows, dataCount);
+			if(dataCount != 0)
+				total_page = myUtil.pageCount(rows, dataCount);
 			if(current_page>total_page)
 				current_page=total_page;
 			
@@ -271,6 +288,9 @@ public class EventController {
 			model.addAttribute("endList",endList);
 			model.addAttribute("endUserList",endUserList);
 			model.addAttribute("paging", paging);
+			model.addAttribute("pageNo", current_page);
+			model.addAttribute("dataCount", dataCount);
+			model.addAttribute("total_page", total_page);
 		}
 			
 			return "/community/event/past";
@@ -279,13 +299,33 @@ public class EventController {
 	@RequestMapping(value = "/community/event/endArticle", method = RequestMethod.GET)
 	public String endArticle(
 			@RequestParam(value="eventNum") int eventNum,
+			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
+			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			@RequestParam(value="pageNo") String page,
+			HttpServletRequest req,
 			Model model) throws Exception  {
+		
+		if(req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
+			searchValue = URLDecoder.decode(searchValue, "utf-8");
+		}
 		
 		Event dto = service.readEvent(eventNum);
 		if(dto==null)
 			return "redirect:/community/event/eventTab";
 		
+		// 이전 글, 다음 글
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		map.put("eventNum", eventNum);
+	
+		Event preReadDto = service.preReadEvent(map);
+		Event nextReadDto = service.nextReadEvent(map);
+		
 		model.addAttribute("dto", dto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
+		model.addAttribute("pageNo", page);
 
 		return ".community.event.endArticle";
 	}

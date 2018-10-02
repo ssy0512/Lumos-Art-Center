@@ -55,6 +55,52 @@ $(function () {
 		listTab($$tab);
 	});
 });
+
+function searchList(page) {
+	var url="<%=cp%>/community/event/past";
+	
+	var query="pageNo="+page;
+	var search=$('form[name=searchForm]').serialize();
+	query=query+"&"+search;
+	ajaxHTML(url, "get", query);
+}
+
+function ajaxHTML(url, type, query) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data) {
+			if($.trim(data)=="error") {
+				listPage(1);
+				return;
+			}
+			$("#event_info").html(data);
+		}
+		,beforeSend : function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		location.href="<%=cp%>/member/login";
+	    		return;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+//게시글 보기
+function articleBoard(num, page) {
+	var url="<%=cp%>/community/event/endArticle";
+	
+	var query="eventNum="+num;
+	
+	var search=$('form[name=searchForm]').serialize();
+	query=query+"&pageNo="+page+"&"+search;
+	
+	location.href=url+"?"+query;
+}
 </script>
 
 <div class="body-container" style="width:100%">

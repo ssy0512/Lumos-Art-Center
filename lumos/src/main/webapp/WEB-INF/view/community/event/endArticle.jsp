@@ -145,6 +145,18 @@ $(function(){
 		
 	});
 });
+
+//게시글 보기
+function articleBoard(num, page) {
+	var url="<%=cp%>/community/event/endArticle";
+	
+	var query="eventNum="+num;
+	
+	var search=$('form[name=searchForm]').serialize();
+	query=query+"&pageNo="+page+"&"+search;
+	
+	location.href=url+"?"+query;
+}
 </script>
 
 <div class="event_info">
@@ -179,7 +191,7 @@ $(function(){
 		</div>
 	
 		<%-- content --%>
-		<div class="work_intro" style="padding-bottom:80px;">
+		<div class="work_intro" style="padding-bottom:80px;border-bottom:1px solid #ccc;">
 			<div class="wrap">
 				<h1 style="margin-top: 60px;"></h1>
 				<c:if test="${empty dto.endContent }">
@@ -189,10 +201,25 @@ $(function(){
 					${dto.endContent}
 				</c:if>
 			</div>
-		<button type="button" class="adBtn" style="margin-top: 60px;" onclick="javascript:location.href='<%=cp%>/community/event/eventTab'">
+			
+		</div>
+        <c:if test="${not empty preReadDto}">
+			<p style="border-bottom: 1px solid #cccccc;padding:20px 0px;">
+    			<span style="border-right: 1px solid #ccc;padding-right:20px;">이전글 </span>
+            	<span style="padding-left:20px;"><a href="javascript:articleBoard('${preReadDto.eventNum}', '${pageNo}');">${preReadDto.title}</a>
+    			</span>
+			</p>
+        </c:if>
+        <c:if test="${not empty nextReadDto}">
+			<p style="border-bottom: 1px solid #cccccc;padding:20px 0px;">
+    			<span style="border-right: 1px solid #ccc;padding-right:20px;"> 다음글 </span>
+			    <span style="padding-left:20px;"><a href="javascript:articleBoard('${nextReadDto.eventNum}', '${pageNo}');">${nextReadDto.title}</a>
+			    </span>
+			</p>
+        </c:if>
+		<button type="button" class="adBtn" style="margin: 20px 0px;" onclick="javascript:location.href='<%=cp%>/community/event/eventTab'">
 			목록으로
 		</button>
-		</div>
 	</div>
 </div>
 </div>

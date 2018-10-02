@@ -6,12 +6,7 @@
 	String cp = request.getContextPath();
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/eventLayout.css" type="text/css">
-<script type="text/javascript">
-function searchList() {
-	var f=document.searchForm;
-	f.submit();
-}
-</script>
+
 <div class="event-container" style="width:100%;">
 	<div class="wrap">
 		<div class="end-list">
@@ -48,12 +43,12 @@ function searchList() {
 									</div>
 								</c:if>
 							</td>
-							<td ><a href="<%=cp %>/community/event/endArticle?eventNum=${dto.eventNum}">${dto.title}</a></td>
+							<td ><a href="javascript:articleBoard('${dto.eventNum}', '${pageNo}');">${dto.title}</a></td>
 							<td style="width:150px;">${dto.eventWin}</td>
 						</tr>
 					</c:forEach>
 					<c:if test="${empty endList}">
-					<tr align="center"><td colspan='3' height="100px">완료된 이벤트가 없습니다.</td></tr>
+					<tr align="center"><td colspan='4' height="100px">완료된 이벤트가 없습니다.</td></tr>
 				</c:if>
 				</tbody>
 				<c:if test="${not empty endList}">
@@ -86,7 +81,7 @@ function searchList() {
 										리뷰 이벤트</p>
 								</c:if>
 							</div></td>
-							<td ><a href="<%=cp %>/community/event/endArticle?eventNum=${vo.eventNum}">${vo.title}</a></td>
+							<td ><a href="javascript:articleBoard('${vo.eventNum}', '${pageNo}');">${vo.title}</a></td>
 							<td style="width:150px;">${vo.eventWin}</td>
 						</tr>
 					</c:if>
@@ -110,13 +105,15 @@ function searchList() {
 			<table style="width: 100%; margin: 10px auto; border-spacing: 0px;">
 			   <tr height="40">
 			      <td align="center" colspan="3">
-			          <form name="searchForm" action="<%=cp%>/community/event/past" method="post">
+			          <form name="searchForm" action="" method="post">
 			              <select name="searchKey" class="selectField" style="height:33px;width: 140px;">
 			                  <option value="title">제목</option>
 			                  <option value="content">내용</option>
 			            </select>
 			            <input type="text" name="searchValue" class="boxTF" style="width:480px;height:33px;">
-			            <button type="button" class="adBtn" onclick="searchList();" style="float:none;">검색</button>
+			            <!-- 엔터키 막기 -->
+			            <input type="text" style="display:none;">
+			            <button type="button" class="adBtn" onclick="searchList(1);" style="float:none;">검색</button>
 			        </form>
 			      </td>
 		   		</tr>

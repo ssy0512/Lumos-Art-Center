@@ -20,4 +20,7 @@ public interface EventService {
 	public List<Event> endList(Map<String, Object> map);
 	public List<Event> endUserList(Map<String, Object> map);
 	public int endUpdateEvent(Event dto);
+	
+	public Event preReadEvent(Map<String, Object> map);
+	public Event nextReadEvent(Map<String, Object> map);
 }

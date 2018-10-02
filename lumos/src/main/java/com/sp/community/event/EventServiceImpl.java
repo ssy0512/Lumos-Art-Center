@@ -197,4 +197,28 @@ public class EventServiceImpl implements EventService{
 		return list;
 	}
 
+	@Override
+	public Event preReadEvent(Map<String, Object> map) {
+		Event dto=null;
+
+		try {
+			dto=dao.selectOne("event.preReadEvent", map);
+		} catch (Exception e) {
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public Event nextReadEvent(Map<String, Object> map) {
+		Event dto=null;
+
+		try {
+			dto=dao.selectOne("event.nextReadEvent", map);
+		} catch (Exception e) {
+		}
+		
+		return dto;
+	}
+
 }
