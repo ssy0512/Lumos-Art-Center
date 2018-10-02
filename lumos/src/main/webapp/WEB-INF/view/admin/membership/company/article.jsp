@@ -6,9 +6,84 @@
 	String cp = request.getContextPath();
 %>
 <style type="text/css">
-.company-table tr th {
-	height: 35px;
-	background-color: #e0e0e0;
+* {
+	font-size: 11pt;
+}
+.company-article {
+	margin: 50px auto;
+	width: 850px; height: 730px;
+	clear: both;
+	border: 1px solid #333333; border-radius: 50px;
+}
+.company-article-image {
+	margin: 20px 320px;
+}
+.company-table {
+	margin: auto;
+	clear: both;
+	text-align: left;
+}
+
+.company-table tr th, td{
+	height: 33px;
+}
+
+
+/* 버튼 css */
+.myButt {
+	margin: 25px auto;
+	width: 100px; height: 40px;
+	outline: none;
+	border: none;
+	display: block;
+	cursor: pointer;
+	background-color: transparent;
+	position: relative;
+	border: 1px solid #072659;
+  border-radius: 7px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+}
+
+.one {
+  border-color: #072659;
+  overflow: hidden;
+  color: #ffffff;
+  background-color: #072659;
+}
+.one .insider {
+  background-color: #ffffff;
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  left: -135px;
+  transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  -o-transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+}
+.one:hover {
+	background-color: #ffffff;
+	border-color: #072659;
+	color: #072659;
+	font-weight: 600;
+	cursor: pointer;
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	transform: scale(1.1);
+	text-decoration: none;
+}
+.one:hover .insider {
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  left: 135px;
 }
 </style>
 <script type="text/javascript">
@@ -21,58 +96,66 @@
 	}
 </script>
 <div class="body-right" style="width: 1380px; height: 800px;">
-	<div style="clear: both;">
-		<div style="height: 70px; background-color: #e8e8e8; text-align: center; margin-top: 30px;">
-			기업회원 정보
+	<div class="company-article">
+		<div style="float: right; margin: 25px 40px 20px 600px;">
+			회원번호  No.${dto.companyIndex}
 		</div>
-	</div>
-
-	<div style="clear: both;">
-	<form name="companyForm" method="post" onsubmit="return check();" enctype="multipart/form-data">
-		<table class="company-table" style="width: 1380px; clear: both; margin-top: 15px; text-align: center;">
+		<div class="company-article-image">
+			<img src="https://cdn.pixabay.com/photo/2015/02/02/15/28/bar-621033_960_720.jpg" style="width: 220px; height: 220px; border-radius: 110px;">
+		</div>
+		<table class="company-table" style="width: 700px;">
 			<tr>
-				<th colspan="6" style="width: 5px; padding: 0 20px;">회사정보</th>
+				<td style="text-align: center; font-size: 20pt; margin: auto;">${dto.companyName}</td>
+			</tr>
+		</table>
+		<br>
+		<table class="company-table" style="width: 700px;">
+			<tr>
+				<td colspan="5" style="text-align: left; font-size: 15pt; border-bottom: 1px solid #072659">기업정보</td>
 			</tr>
 			<tr>
-				<th>회원번호</th>
-				<th>회사명</th>
-				<th>사업자번호</th>
-				<th>대표</th>
-				<th>연락처</th>
-				<th>팩스</th>
-			</tr>
-			<tr>
-				<td>${dto.companyIndex}</td>
-				<td>${dto.companyName}</td>
+				<th style="width: 100px;">대표</th>
+				<td style="width: 200px;">${dto.repname}</td>
+				<th style="width: 150px;">사업자번호</th>
 				<td>${dto.businessNumber}</td>
-				<td>${dto.repname}</td>
-				<td>${dto.repnumber}</td>
+			</tr>
+		</table>
+		<table class="company-table" style="width: 700px;">
+			<tr>
+				<th style="width: 100px;">연락처</th>
+				<td style="width: 200px;">${dto.repnumber}</td>
+				<th style="width: 150px;">팩스</th>
 				<td>${dto.fax}</td>
 			</tr>
 		</table>
-		<table class="company-table" style="width: 1380px; clear: both; text-align: center;">
+		<table class="company-table" style="width: 700px;">
 			<tr>
-				<th colspan="4" style="width: 5px; padding: 0 20px;">담당자정보</th>
+				<th style="width: 100px;">주소</th>
+				<td>${dto.address1}&nbsp;${dto.address2}&nbsp;(${dto.businessPost})</td>
+			</tr>
+		</table>
+		<br><br>
+		<table class="company-table" style="width: 700px;">
+			<tr>
+				<td colspan="4" style="text-align: left; font-size: 15pt; border-bottom: 1px solid #072659">담당자정보</td>
 			</tr>
 			<tr>
 				<th>아이디</th>
-				<th>이름</th>
-				<th>연락처</th>
-				<th>이메일</th>
-			</tr>
-			<tr class="regular-article-table-tr" style="height: 30px;">
 				<td>${dto.chargeId}</td>
+				<th>이름</th>
 				<td>${dto.chargeName}</td>
+			</tr>
+			<tr>
+				<th>연락처</th>
 				<td>${dto.chargeTel}</td>
+				<th>이메일</th>
 				<td>${dto.chargeEmail}</td>
 			</tr>
 		</table>
-	</form>
+	
+		<button type="button" class="myButt one" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
+			<div class='insider'></div>
+			목록으로
+		</button>
 	</div>
-	<button type="button" class="btn btn-default btn-sm wbtn" style="float: left;"
-			onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';"> 뒤로가기
-	</button>
-	<button type="button" class="btn btn-default btn-sm wbtn" style="float: right;"
-			onclick="updateCompany();">수정
-	</button>
 </div>

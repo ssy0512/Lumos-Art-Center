@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.common.MyUtil;
+import com.sp.member.SessionInfo;
 
 @Controller("regular.regularController")
 public class RegularController {
@@ -30,7 +32,13 @@ public class RegularController {
 			@RequestParam(value="searchKey", defaultValue="memberIndex") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
 			HttpServletRequest req,
+			HttpSession session,
 			Model model) throws Exception {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(! info.getUserId().equals("admin")) {
+			return "redirect:/member/login";
+		}
 		
 		String cp = req.getContextPath();
 		
@@ -71,19 +79,19 @@ public class RegularController {
         
         String query="";
         String listUrl = cp+"/admin/membership/regular/regularList";
-        //String articleUrl = cp+"/admin/membership/regular/article?page="+current_page;
+        String articleUrl = cp+"/admin/membership/regular/article?page="+current_page;//page가 넘어가면 같이 따라가야함
         if(searchValue.length()!=0) {
         	query = "searchKey=" +searchKey + 
         	         "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");	
         }
         if(query.length()!=0) {
         	listUrl = cp+"/admin/membership/regular/regularList?"+query;
-        	//articleUrl = cp+"/admin/membership/regular/article?page=" + current_page + "&"+ query;
+        	articleUrl = cp+"/admin/membership/regular/article?page=" + current_page + "&"+ query;
         }
         String paging = myUtil.paging(current_page, total_page, listUrl);
 		model.addAttribute("subMenu", "1");
 		model.addAttribute("list", list);
-        //model.addAttribute("articleUrl", articleUrl);
+        model.addAttribute("articleUrl", articleUrl);
         model.addAttribute("page", current_page);
         model.addAttribute("dataCount", dataCount);
         model.addAttribute("total_page", total_page);
@@ -98,7 +106,13 @@ public class RegularController {
 			@RequestParam(value="page") String page,
 			@RequestParam(value="searchKey", defaultValue = "memberIndex") String searchKey,
 			@RequestParam(value="searchValue", defaultValue = "") String searchValue,
+			HttpSession session,
 			Model model) throws Exception {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(! info.getUserId().equals("admin")) {
+			return "redirect:.member.login";
+		}
 		
 		searchValue = URLDecoder.decode(searchValue, "utf-8");
 		
@@ -111,9 +125,7 @@ public class RegularController {
 		if(dto==null)
 			return "redirect:/admin/membership/regular/regularList?"+query;
 		
-		
-		
-		model.addAttribute("subMenu", "1");
+		//model.addAttribute("subMenu", "1");
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);

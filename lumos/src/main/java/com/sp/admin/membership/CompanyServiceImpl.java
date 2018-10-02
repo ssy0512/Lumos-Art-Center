@@ -59,15 +59,4 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return dto;
 	}
-
-	@Override
-	public int readUpdateCompany(Company dto) {
-		int result=0;
-		try {
-			dto=dao.selectOne("company.readCompany", dto);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return result;
-	}
 }

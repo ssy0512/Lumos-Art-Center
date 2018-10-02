@@ -14,7 +14,7 @@ public class RegularServiceImpl implements RegularService{
 	private CommonDAO dao;
 	
 	@Override
-	public int insertRegular(Regular dto, String pathname) {
+	public int insertRegular(Regular dto) {
 		int result = 0;
 		try {
 			result = dao.insertData("regular.insertRegular", dto);
@@ -55,16 +55,5 @@ public class RegularServiceImpl implements RegularService{
 			System.out.println(e.toString());
 		}
 		return dto;
-	}
-
-	@Override
-	public int updateRegular(Regular dto) {
-		int result = 0;
-		try {
-			result = dao.selectOne("regular.readRegular", dto);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return result;
 	}
 }

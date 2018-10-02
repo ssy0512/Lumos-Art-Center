@@ -74,10 +74,4 @@
 		LEFT OUTER JOIN member2 m2 ON m1.userId = m2.userId
 		WHERE m1.memberIndex=#{memberIndex}
 	</select>
-	
-<!-- 	<update id="updateRegular" parameterType="com.sp.membership.Regular">
-		UPDATE member1 SET userId=#{userId}
-		WHERE memberIndex=#{memberIndex}
-	</update> -->
-
 </mapper>

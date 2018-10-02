@@ -9,7 +9,7 @@
 			companyIndex, companyName, repname, repnumber, fax, businessNumber, address1, businessPost, address2
 		)
 		VALUES (
-			company_seq.NEXTVAL, #{companyName}, #{repname}, #{repnumber}, #{fax}, #{businessNumber}, #{address1}, #{businessPost}, #{address2}}
+			company_seq.NEXTVAL, #{companyName}, #{repname}, #{repnumber}, #{fax}, #{businessNumber}, #{address1}, #{businessPost}, #{address2}
 		)
  		INTO companyCharge(
 			companyIndex, chargeId, chargeName, chargeTel, chargeEmail
@@ -47,7 +47,7 @@
 	<select id="listCompany" parameterType="map" resultType="com.sp.admin.membership.Company">
 		SELECT * FROM (
 		        SELECT ROWNUM rnum, tb.* FROM (
-		                SELECT cp1.companyIndex, companyName, cc.chargeId, cc.chargeName, fax, businessNumber, address1
+		                SELECT cp1.companyIndex, companyName, cc.chargeId, cc.chargeName, cc.chargeTel, cc.chargeEmail, cp1.fax, cp1.businessNumber, cp1.businessPost, cp1.address1, cp1.address2
 							FROM company1 cp1
 							JOIN companyCharge cc ON cp1.companyIndex=cc.companyIndex
 							LEFT OUTER JOIN (
@@ -67,7 +67,7 @@
 	</select>
 	
   	<select id="readCompany" resultType="com.sp.admin.membership.Company" parameterType="Integer">
-		SELECT cp1.companyIndex, companyName, repname, repnumber, fax, businessNumber, address1, cc.chargeId, cc.chargeName
+		SELECT cp1.companyIndex, companyName, cp1.repname, cp1.repnumber, cp1.fax, cp1.businessNumber, cp1.businessPost, cp1.address1, cp1.address2, cc.chargeId, cc.chargeName, cc.chargeEmail, cc.chargeTel
 		FROM company1 cp1
 		JOIN companyCharge cc ON cp1.companyIndex=cc.companyIndex
 		LEFT OUTER JOIN companyCharge cc ON cp1.companyIndex = cc.companyIndex

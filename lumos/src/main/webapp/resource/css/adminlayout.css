@@ -28,26 +28,25 @@
 /* menu */
 .menu {
 	height: 60px;
-	min-width:1600px;
+	min-width: 1600px;
 	align-items: center;
-	font-size: 15px;
 	background: #072659;
 }
 
 ul.nav {
-	height: 50px;
+	height: 60px;
     margin: 10px;
     padding: 0px;
-    padding-left: 250px;
+    padding-left: 100px;
 }
 
 .basicBox {
   width: 130px;
   height: 50px;
-  margin: 10px 40px;
+  margin: 10px 50px;
   color: #072659;
   font-family: 'Open Sans', sans-serif;
-  font-size: 1.15rem;
+/*   font-size: 1.15rem; */
   line-height: 50px;
   text-transform: uppercase;
   text-align: center;
@@ -73,7 +72,7 @@ stroke: #ffffff;
 color: #ffffff;
   stroke-width: 2;
   stroke-dasharray: 35, 245;
-  stroke-dashoffset: 63;
+  stroke-dashoffset: 60;
   -webkit-transition: all 0.8s ease-in-out;
   -moz-transition: all 0.8s ease-in-out;
   -ms-transition: all 0.8s ease-in-out;
@@ -81,16 +80,15 @@ color: #ffffff;
 }
 svg {
   position: absolute;
-  top: 10;
+  top: 1;
   left: 0;
 }
 
 ul.nav li { 
   display: inline;	/* 헤더 메뉴 가로 정렬 */
   line-height: 60px;
-  padding: 0 37px;
+  padding: 5px 28px;
   color: #ffffff;
-  font-size: 15px;
 }
 
 ul.nav .current a, ul.nav li:hover > a {
@@ -110,7 +108,7 @@ ul.nav .current a, ul.nav li:hover > a {
 	float:left;
     width: 250px;
     height: 800px;
-    font-size: 18px;
+    font-size: 15pt;
     font-weight : 500;
     border-right: 1px solid #072659;
 }
@@ -120,8 +118,8 @@ ul.nav .current a, ul.nav li:hover > a {
     border-bottom: 2px solid #072659;
     color: #072659;
     display: block;
-    padding-top: 15px;
-    font-size: 25px;
+    padding-top: 30px;
+    font-size: 23px;
     margin-bottom: 20px;
 }
 
@@ -150,20 +148,21 @@ ul.nav .current a, ul.nav li:hover > a {
 
 .list-group button {
 	width: 200px;
-  height: 50px;
-  left: 300px;
-  top: 50;
-  font-family: 'Varela Round', sans-serif;
-  letter-spacing: 0.1em;
-  color: #4274D3;
-  border: 1px solid #4274D3;
-  border-radius: 10px;
-  outline: none;
+	height: 50px;
+	left: 300px;
+	top: 50;
+	font-family: 'Varela Round', sans-serif;
+	font-size: 13pt;
+	letter-spacing: 0.1em;
+	color: #4274D3;
+	border: 1px solid #4274D3;
+	border-radius: 10px;
+	outline: none;
 /*   background: linear-gradient(45deg,#4274D3,teal,#4274D3); */
 	background: #ffffff;
-  box-shadow: 0.9vw 0.7vw 0 #072659;
-  cursor: pointer;
-  transition: all 0.3s ease;
+	box-shadow: 0.9vw 0.7vw 0 #072659;
+	cursor: pointer;
+	transition: all 0.3s ease;
 }
 
 .list-group button:hover {
@@ -171,7 +170,7 @@ ul.nav .current a, ul.nav li:hover > a {
     box-shadow: 0.2vw 0.2vw 0 #072659;
   }
 
-@keyframes gradient {s
+@keyframes gradient {
   50% {
     background-position: 100% 0;
   }
