@@ -2,35 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="concert"> <!-- 일정등록용 -->
-	<!-- location용 -->
-	<insert id="insertlocation" parameterType="com.sp.admin.scheduler.ConcertSch">
-		INSERT INTO location (locationNum, locationName)
-			VALUES (locationNum_seq.NEXTVAL, #{locationName})
-	</insert>
-	
-	<update id="updatelocation" parameterType="com.sp.admin.scheduler.ConcertSch">
-		UPDATE location SET locationName=#{locationName}
-		WHERE locationNum=#{locationNum}
-	</update>
-	
-	<delete id="deletelocation" parameterType="Integer">
-		DELETE FROM location WHERE locationNum=#{locationNum}
-	</delete>
-	
-	<select id="readlocation" parameterType="Integer" resultType="com.sp.admin.scheduler.ConcertSch">
-	SELECT locationNum, locationName FROM location WHERE locationNum=#{locationNum}
-	</select>
-	
-	<select id="listlocation" resultType="com.sp.admin.scheduler.ConcertSch">
-		SELECT locationNum, locaationName FROM location
-	</select>
-	
-	<!--  <insert id="inserthall" parameterType="com.sp.admin.ConcertSch">
-		INSERT INTO concertHall (hallNum,hallName,totalSeat,)
-	</insert>  -->
-	
-	
-	
+
 	
 	<!-- 사용자 ui -->
 	<!-- 공연 검색 -->

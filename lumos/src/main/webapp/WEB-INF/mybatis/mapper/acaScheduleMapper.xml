@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academies">
+
+<!-- select box 용 리스트  -->
+<select id="listRoom" resultType="com.sp.admin.acaSchedule.Academies">
+	SELECT roomNum,roomName FROM roomInfo
+</select>
+
+<select id="listInst" resultType="com.sp.admin.acaSchedule.Academies">
+	SELECT instNum, instName FROM instructor
+</select>
+
+<!--   편하게 검색할 수 있는  searchList -->
+
+<sql id="where-list">
+   <if test="searchKey=='academyNum' ">
+        academyNum=#{searchValue}
+   </if>
+   <if test="searchKey=='academyName' ">
+        INSTR(academyName, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='roomName' ">
+        INSTR(roomName, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='instName' ">
+        INSTR(instName, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='academyStart' ">
+        (TO_CHAR(academyStart, 'YYYY-MM-DD') = #{searchValue}
+         OR TO_CHAR(e.academyStart, 'YYYYMMDD') = #{searchValue})
+   </if>
+</sql>
+
+<select id="dataCount" resultType="Integer" parameterType="map">
+	SELECT NVL(COUNT (*),0) FROM academy 
+	<where>
+  	<if test="searchValue!=null and searchValue != '' ">
+  	      <include refid="where-list"/>
+  	</if>
+  </where>
+</select>
+
+<insert id="insertAcademies" parameterType="com.sp.admin.acaSchedule.Academies"> 
+	INSERT INTO academy (academyNum,academyName,totalCount, startDate,endDate,startTime,endTime
+						 ,lectureDay, price, roomNum, instNum, acProfileImage)
+		   VALUES (academy_seq.NEXTVAL, #{academyName},#{totalCount},#{startDate},#{endDate},
+		   		   #{startTime},#{endTime},#{lectureDay},#{price},#{roomNum},#{instNum},#{acProfileImage})
+</insert>
+
+<delete id="deleteAcademies" parameterType="Integer">
+	DELETE FROM academy WHERE academyNum=#{academyNum} 
+</delete>
+
+<update id="updateAcademies" parameterType="com.sp.admin.acaSchedule.Academies">
+	UPDATE academy SET academyName=#{academyName}, startDate=#{startDate}, endDate=#{endDate}, lectureDay=#{lectureDay},
+				startTime=#{startTime}, endTime=#{endTime}, price=#{price}, instNum=#{instNum}, roomNum=#{roomNum},
+						acProfileImage=${acProfileImage}
+						WHERE academyNum=#{academyNum}
+</update>
+
+<select id="readAcademies" parameterType="Integer" resultType="com.sp.admin.acaSchedule.Academies">
+	SELECT academyNum, academyName,startDate,endDate,totalCount,a.roomNum,roomName,a.instNum,instName,startTime,endTime,
+				price,lectureDay, acProfileImage 
+				FROM academy a
+				JOIN roomInfo r ON a.roomNum=r.roomNum
+				JOIN instructor i ON a.instNum=i.instNum
+				WHERE academyNum=#{academyNum}
+</select>
+
+<select id="listAcademies" parameterType="map" resultType="com.sp.admin.acaSchedule.Academies"> <!-- 포토갤러리 형식으로 고칠것. -->
+	SELECT * FROM (
+    SELECT ROWNUM rnum, tb.* FROM (
+        SELECT academyNum,academyName, totalCount, TO_CHAR(startDate, 'YYYY-MM-DD') startDate,TO_CHAR(endDate, 'YYYY-MM-DD') endDate,
+        		startTime,endTime,lectureDay, price, a.roomNum, roomName, a.instNum, instName
+        		FROM academy a 
+        		JOIN roominfo ri ON a.roomNum=ri.roomNum
+        		JOIN instructor i ON a.instNum=i.instNum
+        		ORDER BY academyNum DESC
+<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+</select>
+	
+</mapper>

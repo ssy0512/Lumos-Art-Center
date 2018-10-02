@@ -17,9 +17,9 @@ $(function(){
 
 <div class="list-group">
     <div class="list-group-item-lefthead">
-    	<span>일정관리</span>
+    	<span>일정등록</span>
     </div>
-     <a href="<%=cp%>/admin/menu2/concertSchedule/main" class="list-group-item">LUMOS 공연 관리</a>
-     <a href="<%=cp%>/admin/menu2/exhibitSchedule/main" class="list-group-item">LUMOS 전시 관리</a>
-     <a href="#" class="list-group-item">강의 일정 관리</a>
+     <a href="<%=cp%>/admin/menu2/concertSchedule/insertedlist" class="list-group-item">LUMOS 공연 등록</a>
+     <a href="<%=cp%>/admin/menu2/exhibitSchedule/exhibitlist" class="list-group-item">LUMOS 전시 등록</a>
+     <a href="<%=cp%>/admin/menu2/academySchedule/academylist" class="list-group-item">강의 일정 등록</a>
 </div> 

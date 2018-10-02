@@ -35,7 +35,7 @@
 		  	</a>
 	  	</li>
         <li class="basicBox">
-        	<a href="<%=cp%>/admin/menu2/concertSchedule/main">일정관리
+        	<a href="<%=cp%>/admin/menu2/concertSchedule/insertedlist">일정관리
 	        	<svg width="130" height="50" viewBox="0 0 130 40" xmlns="http://www.w3.org/2000/svg">
 		    		<rect x='0' y='0' fill='none' width='130' height='40'/>
 			  	</svg>

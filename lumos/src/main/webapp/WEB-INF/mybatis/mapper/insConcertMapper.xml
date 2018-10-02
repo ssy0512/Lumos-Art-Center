@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="concerts">
+
+
+<!-- select box 용 리스트  -->
+<select id="listHall" resultType="com.sp.admin.insertCon.Concerts">
+	SELECT hallNum,hallName FROM concertHall
+</select>
+
+<select id="listRate" resultType="com.sp.admin.insertCon.Concerts">
+	SELECT ratingNum,ratingName FROM rating
+</select>
+
+<!--   편하게 검색할 수 있는  searchList -->
+
+<sql id="where-list">
+   <if test="searchKey=='concertNum' ">
+        concertNum=#{searchValue}
+   </if>
+   <if test="searchKey=='concertName' ">
+        INSTR(concertName, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='content' ">
+        DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0
+   </if>
+   <if test="searchKey=='concertStart' ">
+        (TO_CHAR(concertStart, 'YYYY-MM-DD') = #{searchValue}
+         OR TO_CHAR(c.concertStart, 'YYYYMMDD') = #{searchValue})
+   </if>
+</sql>
+
+<select id="dataCount" resultType="Integer" parameterType="map">
+	SELECT NVL(COUNT (*),0) FROM concert 
+	<where>
+  	<if test="searchValue!=null and searchValue != '' ">
+  	      <include refid="where-list"/>
+  	</if>
+  </where>
+</select>
+
+<insert id="insertConcerts" parameterType="com.sp.admin.insertCon.Concerts"> 
+	INSERT INTO concert (concertNum,concertName, concertStart,concertEnd, totalTime,host,supervise,
+						 genre, ratingNum,hallNum, conProfileImage,eventCount,seatPriceList)
+				VALUES (concert_seq.NEXTVAL, #{concertName},#{concertStart},#{concertEnd},#{totalTime},
+						#{host},#{supervise},#{genre},#{ratingNum},#{hallNum},#{conProfileImage},#{eventCount},#{seatPriceList})
+</insert>
+
+<delete id="deleteConcerts" parameterType="Integer">
+	DELETE FROM concert WHERE concertNum=#{concertNum} 
+</delete>
+
+<select id="listConcerts" parameterType="map" resultType="com.sp.admin.insertCon.Concerts"> <!-- 포토갤러리 형식으로 고칠것. -->
+	SELECT * FROM (
+    SELECT ROWNUM rnum, tb.* FROM (
+        SELECT concertNum, concertName,TO_CHAR(concertStart, 'YYYY-MM-DD') concertStart, 
+                TO_CHAR(concertEnd, 'YYYY-MM-DD') concertEnd, 
+                totalTime, genre, hallName,c.ratingNum, ratingName, host, supervise
+                FROM concert c 
+                JOIN concertHall ch ON c.hallNum = ch.hallNum
+                JOIN rating r ON c.ratingNum = r.ratingNum 
+                ORDER BY concertNum ASC 
+<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+</select>
+
+</mapper>
