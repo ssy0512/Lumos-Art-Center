@@ -1,0 +1,271 @@
+@CHARSET "UTF-8";
+
+.myActHead {
+	margin-bottom: 20px;
+	margin-top: 30px;
+}
+
+.wrap {
+	width: 1020px;
+	margin: 0 auto;
+}
+
+.tabTitle {
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 1.4;
+}
+
+.myActTab {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.myActTab ul {
+	list-style: none;
+	height: 34px;
+    text-align: center;
+    line-height: 34px;
+    cursor: pointer;
+    background-color: #fff;
+    float: left;
+}
+
+.myActTab ul li{
+	width: 252px;
+	font-size: 14px;
+	border: 1px solid #999;
+    border-right: 0;
+    float: left;
+    height: 36px;
+    line-height: 34px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.myActTab .first{
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.myActTab .last{
+	border-right: 1px solid #999;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+.clearfix {
+	clear: both;
+	display: block;
+	content: "";
+}
+
+.click_on {
+	color: #fff;
+    background-color: #6f6d6d;
+}
+
+
+
+/* 전체-start (/mypage/myActivity/all/list) */
+.allitems {
+	padding: 20px 0 30px;
+	list-style: none;
+}
+
+.list_bg {
+	background-color: #fbfbfb;
+    border-top: 1px solid #e8e8e8;
+}
+
+.allitems h3 {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 1.4;
+}
+
+.titl {
+	box-sizing: initial;
+	width: 300px;
+    padding-right: 40px;
+    border-right: 1px solid #ccc;
+}
+
+.titl p {
+	color: #777;
+	font-weight: 300;
+	line-height: 1.6;	
+}
+
+.titl a {
+	text-decoration: none;
+	color: #777;
+	margin-top: 10px;
+	display: block;
+	cursor: pointer;
+	font-family: '고딕','맑은고딕', 'MalgunGothic', 'Noto Sans KR', sans-serif;
+    letter-spacing: 0px;
+    word-break: keep-all;
+    font-size: 16px;
+}
+
+.titl a:hover {
+	text-decoration: underline;
+}
+
+.titl a img {
+	padding-bottom: 3px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.cont {
+	width: 599px;
+    padding-left: 80px;
+}
+
+.cont .emp {
+	font-size: 18px;
+	margin-top: 30px;
+	text-align: center;
+	line-height: 1.6;
+}
+
+.cont ul {
+	list-style: none;
+	height: 90px;
+}
+
+.cont .posterLi img {
+	width: 60px;
+    height: 85px;
+    object-fit: cover;	
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.cont ul li a {
+	display: block;
+    width: 498px;
+    text-decoration: none;
+    font-size: 18px;
+	font-weight: 300;
+}
+
+.cont ul li p {
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.6;
+	font-family: '고딕';
+}
+
+.qnaTable tr td {
+	padding : 0 5px;
+	display:inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 1;
+    word-break: break-all;
+    white-space: nowrap;
+}
+
+/* 전체-end (/mypage/myActivity/all/list) */
+
+
+/* 공연리뷰-start (/mypage/myActivity/cReview/list) */
+
+.crTitle {
+	border-bottom: 1px solid #ccc;
+	font-size: 20px;
+	font-weight: 300;
+	padding-bottom: 10px;
+	margin-top: 20px;    
+}
+
+.crv_item {
+	margin-top: 10px;
+    list-style: none;
+    color: #333;
+    font-family: 'Noto Sans KR', '맑은고딕', 'MalgunGothic', sans-serif;
+    letter-spacing: 0px;
+    word-break: keep-all;
+}
+
+.crv_content {
+	position: relative;
+    width: 1020px;
+    height: 80px;
+    padding: 30px 0;
+}
+
+.crv_content a img {
+	width: 60px;
+	height: 80px;
+	float: left;
+}
+
+.conDiv {
+	width: 900px;
+    margin-left: 20px;
+    float: right;
+}
+
+.conDiv .topD {
+	width: 900px;
+	position: relative;
+}
+
+.conDiv .topD h3 {
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 1.4;
+}
+
+.conDiv .topD p span {
+	color: #777;
+	font-size: 14px;
+	margin-top: 3px;
+	float: right;
+}
+
+.conDiv .botD {
+	width: 900px;
+	position: relative;
+	padding-bottom: 10px;
+	
+}
+
+.conDiv .botD p {
+	border-bottom: 1px solid #ccc;
+	color: #777;
+	padding-bottom: 10px;
+	margin-top: 10px;
+    word-break: break-all;
+}
+
+.botD button {
+	width: 80px;
+	height: 25px;
+    line-height: 23px;
+    display: block;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 300;
+    background-color: #fff;
+    vertical-align: middle;
+    margin-right: 5px;
+    float: left;
+    border-radius: 4px;
+}
+
+.btnEdit {
+    color: #e5002c;
+    border: 1px solid #e5002c;
+}
+
+.btnDel {
+	color: gray;
+    border: 1px solid gray;
+}
+
+/* 공연리뷰-end (/mypage/myActivity/cReview/list) */

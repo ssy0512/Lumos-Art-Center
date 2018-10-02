@@ -64,7 +64,7 @@
 				<a>관심작품</a>
 			</li>
 			<li>
-				<a>활동내역</a>
+				<a href="<%=cp%>/mypage/myActivity">활동내역</a>
 			</li>
 			<li>
 				<a>마일리지</a>

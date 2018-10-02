@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lumosMypage">
+	<select id="alleReviewList" parameterType="String" resultType="com.sp.mypage.myactivity.All">
+		SELECT td.* FROM (
+			SELECT exReviewNum, userId,score,exhibitName, er.exhibitNum,
+			    TO_CHAR(exhibitStart, 'YYYY.MM.DD') exhibitStart, 
+			    TO_CHAR(exhibitEnd, 'YYYY.MM.DD') exhibitEnd,
+			    hallName,exProfileImage
+		    FROM exReview er
+		    JOIN exhibit e ON er.exhibitNum=e.exhibitNum
+		    JOIN exhibithall eh ON e.hallNum=eh.hallNum
+		    WHERE userId=#{userId}
+		    ORDER BY created DESC
+		) td 
+		WHERE ROWNUM&lt;=2
+	</select>
+	
+	<select id="allcReviewList" parameterType="String" resultType="com.sp.mypage.myactivity.All">
+		SELECT td.* FROM (
+		    SELECT creviewNum, cr.concertNum, userId,score,concertName,
+		    TO_CHAR(concertStart, 'YYYY.MM.DD') concertStart, TO_CHAR(concertEnd, 'YYYY.MM.DD') concertEnd,
+		    hallName,conProfileImage
+		    FROM concertreview cr
+		    JOIN concert c ON cr.concertNum=c.concertNum
+		    JOIN concerthall ch ON c.hallNum=ch.hallNum
+		    WHERE userId=#{userId}
+		    ORDER BY created DESC
+		) td 
+		WHERE ROWNUM&lt;=2
+	</select>
+	
+	<select id="allmyQnaList" parameterType="String" resultType="com.sp.mypage.myactivity.All">
+		SELECT td.* FROM (
+		    SELECT postNum, title,qcategoryname,
+		    TO_CHAR(created, 'YYYY-MM-DD') created
+		    FROM question q
+		    JOIN qcategory qc ON q.qcategoryCode=qc.qcategoryCode
+		    WHERE userId=#{userId}
+		    ORDER BY created DESC
+		) td 
+		WHERE ROWNUM&lt;=4
+	</select>
+
+
+
+
+	<select id="cDataCount" resultType="Integer">
+	   SELECT NVL(COUNT(*), 0) FROM concertreview WHERE userId=#{userId}
+	</select>
+
+	<select id="cReviewList" parameterType="map"  resultType="com.sp.mypage.myactivity.All">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT creviewNum, cr.concertNum, userId,score,concertName,cr.content,TO_CHAR(created, 'YYYY.MM.DD') created, 
+					TO_CHAR(concertStart, 'YYYY.MM.DD') concertStart,
+				 	TO_CHAR(concertEnd,'YYYY.MM.DD') concertEnd,
+					hallName,conProfileImage
+				FROM concertreview cr
+				JOIN concert c ON cr.concertNum=c.concertNum
+				JOIN concerthall ch ON c.hallNum=ch.hallNum
+				WHERE userId=#{userId}
+				ORDER BY creviewNum DESC
+<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+]]>
+	</select>
+</mapper>
