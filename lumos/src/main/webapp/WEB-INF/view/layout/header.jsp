@@ -38,7 +38,7 @@
 		<a href="<%=cp%>/" style="text-decoration: none;">
 			<img src="<%=cp%>/resource/images/logo.png" style="float: left; padding-left: 20px; text-align:left;">
         </a>
-	 	<ul class="menu">
+	 	<ul class="menu" >
  			<li><a href="<%=cp%>/concert/main">공연예매</a>
 		        <ul>
 		        	<li><a href="<%=cp%>/concert/main">공연일정</a></li>
@@ -73,5 +73,5 @@
 	        		<li><a href="<%=cp%>/">대관신청</a></li>
 		        </ul>
 		    </li>
-	 	</ul> 
+	 	</ul>
 	 </div>

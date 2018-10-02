@@ -6,6 +6,12 @@
 	String cp = request.getContextPath();
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/eventLayout.css" type="text/css">
+<script type="text/javascript">
+function searchList() {
+	var f=document.searchForm;
+	f.submit();
+}
+</script>
 <div class="event-container" style="width:100%;">
 	<div class="wrap">
 		<div class="end-list">
@@ -99,6 +105,21 @@
 				</tfoot>
 				</c:if>
 			</c:if>
+			</table>
+			<!-- 검색 -->
+			<table style="width: 100%; margin: 10px auto; border-spacing: 0px;">
+			   <tr height="40">
+			      <td align="center" colspan="3">
+			          <form name="searchForm" action="<%=cp%>/community/event/past" method="post">
+			              <select name="searchKey" class="selectField" style="height:33px;width: 140px;">
+			                  <option value="title">제목</option>
+			                  <option value="content">내용</option>
+			            </select>
+			            <input type="text" name="searchValue" class="boxTF" style="width:480px;height:33px;">
+			            <button type="button" class="adBtn" onclick="searchList();" style="float:none;">검색</button>
+			        </form>
+			      </td>
+		   		</tr>
 			</table>
 		</div>
 	</div>

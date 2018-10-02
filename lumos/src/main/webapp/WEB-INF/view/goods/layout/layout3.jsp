@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>spring</title>
+<title>Lumos Art Center</title>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/goodsLayout.css" type="text/css">
