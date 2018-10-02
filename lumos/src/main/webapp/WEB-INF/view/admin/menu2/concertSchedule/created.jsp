@@ -172,7 +172,7 @@
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">장&nbsp;&nbsp;르</td>
 			      <td style="padding-left:10px;"> 
-			        <input type="text" name="genre" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.genre}">원
+			        <input type="text" name="genre" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.genre}">
 			      </td>
 			  </tr>
 			  	  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 

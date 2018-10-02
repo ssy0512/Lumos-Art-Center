@@ -125,7 +125,7 @@
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="" id="listRoom">
 		      	<c:forEach var="vo" items="${listRoom}">
-		      		<option value="">::선택::</option>
+		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.roomNum}">${vo.roomName}</option>
 		      	</c:forEach>
 		      </select>
@@ -137,7 +137,7 @@
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="" id="listInst">
 		      	<c:forEach var="vo" items="${listInst}">
-		      		<option value="">::선택::</option>
+		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.instNum}">${vo.instName}</option>
 		      	</c:forEach>
 		      </select>
@@ -153,7 +153,7 @@
 			  </tr>
 			  
 		<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;"></td>
+		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의일자</td>
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="lectureDay">
 		      	<option value="">::선택::</option>
@@ -187,7 +187,7 @@
 			  	  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">총횟수</td>
 			      <td style="padding-left:10px;"> 
-			        <input type="text" name="totalCount" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.totalCount}">원
+			        <input type="text" name="totalCount" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.totalCount}">회
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
