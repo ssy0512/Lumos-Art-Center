@@ -1,9 +1,6 @@
 package com.sp.notice;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.common.MyUtil;
 import com.sp.member.SessionInfo;
@@ -46,7 +44,6 @@ public class NoticeController {
 			searchValue = URLDecoder.decode(searchValue,"utf-8");
 		}
 		
-		
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
@@ -63,62 +60,36 @@ public class NoticeController {
 			noticeList=service.listNoticeTop();
 		}
 		
-		int start = (current_page -1) * rows + 1;
+		int start = (current_page - 1) * rows + 1;
 		int end = current_page * rows;
 		map.put("start", start);
 		map.put("end", end);
 				
 		List<Notice> list = service.listNotice(map);
 		
-		
-		Date endDate = new Date();
-		long gap;
-		int noticeNum, n =0;
+		int lisNum, n =0;
 		Iterator<Notice> it = list.iterator();
+
 		while(it.hasNext()) {
-			Notice data =(Notice)it.next();
-			noticeNum = dataCount -(start + n -1);
-			data.setNoticeNum(noticeNum);
-		
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			
-			
-			Date beginDate = formatter.parse(data.getCreated());
+			Notice data =it.next();
+			lisNum = dataCount -(start + n -1);
+			data.setListNum(lisNum);
 		
 			data.setCreated(data.getCreated().substring(0, 10));
 			
 			n++;
-			
 		}
 		
-		String cp=req.getContextPath();
-		String query ="";
-		String listUrl =cp+"/customerCenter/notice/list";
-		String articleUrl = cp+"/customerCenter/notice/article?page="+ current_page;
+		String paging = myUtil.paging(current_page, total_page);
 		
-		if(searchValue.length()!=0){
-			query ="searchKey="+searchKey+"&serchValue=" +URLEncoder.encode(searchValue , "utf-8");
-			
-		}
-		if(query.length()!=0) {
-			listUrl = cp+"/customerCenter/notice/list?" + query;
-			articleUrl = cp+"/customerCenter/notice/article?page=" + current_page + "&"+ query;
-		}
-		
-		String paging = myUtil.paging(current_page, total_page,listUrl);
-		model.addAttribute("noticeListCount",noticeList.size());
 		model.addAttribute("noticeList",noticeList);
 		model.addAttribute("list" , list);
 		model.addAttribute("page" , current_page);
 		model.addAttribute("dataCount" , dataCount);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging" , paging);
-		model.addAttribute("articleUrl" , articleUrl);
 
 		return "customerCenter/notice/list";
-		
-		
-		
 	}
 	
 	@RequestMapping(value="/customerCenter/notice/created" ,method=RequestMethod.GET)
@@ -127,117 +98,129 @@ public class NoticeController {
 			HttpSession session
 			) throws Exception{
 		
-			SessionInfo info =(SessionInfo)session.getAttribute("member");
-			if(info==null) {
-				return "redirect:/member/login";
-			}
-			
-			if(! info.getUserId().equals("admin")) {
-				return "redirect:/customerCenter/notice/list";
-			}
-
-			model.addAttribute("mode" , "created");
-			
-			return "customerCenter/notice/created";
-		
+		model.addAttribute("page", "1");
+		model.addAttribute("mode", "created");
+		return "customerCenter/notice/created";
 	}
 	
 	@RequestMapping(value="/customerCenter/notice/created" , method=RequestMethod.POST)
-	public String createdSubmit(
+	@ResponseBody
+	public Map<String, Object> createdSubmit(
 			Notice dto,
-			HttpSession session
-			) throws Exception{
+			HttpSession session) throws Exception {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String state="false";
 		
-		if(! info.getUserId().equals("admin")) {
-			return "redirect:/customerCenter/notice/list";
+		if(info.getUserId().equals("admin")) {
+			dto.setUserId(info.getUserId());
+			service.insertNotice(dto);
+			state="true";
 		}
 		
-		dto.setUserId(info.getUserId());
-		service.insertNotice(dto);
-		
-		return "redirect:/customerCenter/notice/list";
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		return model;
 	}
-
-	
-	
 	
 	
 	@RequestMapping(value="/customerCenter/notice/article")
 	public String article(
-			@RequestParam(value="num" ) int noticeNum,
-			@RequestParam(value="searchKey", defaultValue="title") String searchKey,
-			@RequestParam(value="searchValue",defaultValue="")String searchValue,
+			@RequestParam(value="noticeNum" ) int noticeNum, 
 			@RequestParam(value="page") String page,
 			HttpServletRequest req,
 			Model model) throws Exception {
 		
 		
-		String query = "page=" + page;
-		
 		service.updateHitCount(noticeNum);
 		
 		Notice dto = service.readNotice(noticeNum);
 		if(dto==null) {
-			return "redirect:/customerCenter/notice/list?"+query;
+			return "customerCenter/error";
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
-	
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchKey", searchKey);
-		map.put("searchValue", searchValue);
+		
 		map.put("noticeNum", noticeNum);
 		
-		Notice preReaDto = service.preReadNotice(map);
+		Notice preReadDto = service.preReadNotice(map);
 		Notice nextReadDto = service.nextReadNotice(map);
 		
-		//문제있음 
-		//model.addAttribute("dto",dto);
-		model.addAttribute("noticeNum" , noticeNum); 
-		model.addAttribute("preReaDto" , preReaDto);
+		model.addAttribute("dto",dto);
+		model.addAttribute("preReadDto" , preReadDto);
 		model.addAttribute("nextReadDto", nextReadDto);
 		model.addAttribute("page" , page);
-		model.addAttribute("query" , query);
 		
-		return "customerCenter/customerCenter/notice/article";
+		return "customerCenter/notice/article";
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value="/notice/update" , method =RequestMethod.GET)
+	@RequestMapping(value="/customerCenter/notice/update" , method =RequestMethod.GET)
 	public String updateForm(
-			
+			@RequestParam(value="noticeNum") int noticeNum ,
+			@RequestParam(value="page") String page,
+			HttpSession session , 
+			Model model
 			) throws Exception{
+
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
+		if(! info.getUserId().equals("admin")) {
+			return "customerCenter/error";
+		}
+		
+		Notice dto = service.readNotice(noticeNum);
+		
+		if(dto==null) {
+			return "customerCenter/error";
+		}
+		
+		model.addAttribute("mode" , "update");
+		model.addAttribute("page" , page);
+		model.addAttribute("dto" , dto);
+			
 		return "customerCenter/notice/created";
+
 	}
 	
-	@RequestMapping(value="/notice/update", method=RequestMethod.POST)
-		public String updateSubmit() throws Exception{
-			
+	@RequestMapping(value="/customerCenter/notice/update" , method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateSubmit(
+			Notice dto,
+			HttpSession session) throws Exception {
+
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String state="false";
 		
-		return "customerCenter/notice/created";
+		if(info.getUserId().equals("admin")) {
+			dto.setUserId(info.getUserId());
+			service.updateNotice(dto);
+			state="true";
+		}
+		
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		return model;
 	}
-	// delete return 바꿔야댐 
-	@RequestMapping(value="/notice/delete")
-	public String delete () throws Exception {
+	
+	@RequestMapping(value="/customerCenter/notice/delete")
+	@ResponseBody
+	public Map<String, Object> delete(
+			@RequestParam int noticeNum,
+			HttpSession session) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String state="false";
 		
+		if(info.getUserId().equals("admin")) {
+			service.deleteNotice(noticeNum);
+			state="true";
+		}
 		
-		return null;
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		return model;
 	}
 }
 

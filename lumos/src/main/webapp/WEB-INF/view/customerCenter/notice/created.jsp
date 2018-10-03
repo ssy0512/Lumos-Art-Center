@@ -6,37 +6,13 @@
    String cp = request.getContextPath();
 %>
 
-<script type="text/javascript">
-    function sendOk() {
-        var f = document.noticeForm;
-
-    	var str = f.title.value;
-        if(!str) {
-            alert("제목을 입력하세요. ");
-            f.title.focus();
-            return;
-        }
-
-    	str = f.content.value;
-        if(!str) {
-            alert("내용을 입력하세요. ");
-            f.content.focus();
-            return;
-        }
-
-    	f.action="<%=cp%>/customerCenter/notice/${mode}";
-
-        f.submit();
-    }
-</script>
-
 <div class="body-container" style="width: 700px;">
     <div class="body-title">
         <h3><span style="font-family: Webdings">2</span> 공지사항 </h3>
     </div>
     
     <div>
-			<form name="noticeForm" method="post" enctype="multipart/form-data">
+			<form name="boardForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tbody id="tb">
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
@@ -66,20 +42,17 @@
 			        <textarea name="content" rows="12" class="boxTA" style="width: 95%;">${dto.content}</textarea>
 			      </td>
 			  </tr>
-			  
-              </tbody>
-          
+          </tbody>
 		</table>
 			
 			  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 			     <tr height="45"> 
 			      <td align="center" >
-			        <button type="button" class="btn" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}</button>
+			        <button type="button" class="btn" onclick="sendOk('${mode}', '${page}');">${mode=='update'?'수정완료':'등록하기'}</button>
 			        <button type="reset" class="btn">다시입력</button>
-			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/customerCenter/notice/list';">
-			        ${mode=='update'?'수정취소':'등록취소'}</button>
+			        <button type="button" class="btn" onclick="sendCancel('${page}');">${mode=='update'?'수정취소':'등록취소'}</button>
 			         <c:if test="${mode=='update'}">
-			         
+			         	 <input type="hidden" name="noticeNum"  value="${dto.noticeNum}">
 			        	 <input type="hidden" name="page" value="${page}">
 			        </c:if>
 			      </td>
@@ -87,5 +60,4 @@
 			  </table>
 			</form>
     </div>
-    
 </div>

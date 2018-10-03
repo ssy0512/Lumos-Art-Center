@@ -69,6 +69,7 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		try {
 			result =dao.updateData("notice.updateHitCount", noticeNum);
+			
 		} catch (Exception e) {
 		}
 		return result;

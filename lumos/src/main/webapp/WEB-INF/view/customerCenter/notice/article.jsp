@@ -8,15 +8,14 @@
 
 <div class="body-container" style="width: 700px;">
     <div class="body-title">
-        <h3><span style="font-family: Webdings">2</span> 공지사항 </h3>  
 		[공지 글보기 화면 입니다 ]
     <div>
     
 			<table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			<tr height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 			    <td colspan="2" align="center" >
-			    게시글 : ${dto.noticeNum}
-				제목:   ${dto.title}
+			    ${dto.noticeNum} .
+				${dto.title}
 				  
 			    </td>
 			</tr>
@@ -42,7 +41,7 @@
 			    <td colspan="2" align="left" style="padding-left: 5px;">
 			       이전글 :
 			         <c:if test="${not empty preReadDto}">
-			              <a href="<%=cp%>/customerCenter/notice/article?${query}&noticeNum=${preReadDto.noticeNum}">${preReadDto.title}</a>
+			              <a href="javascript:articleBoard('${preReadDto.noticeNum}', '${page}');">${preReadDto.title}</a>
 			        </c:if>
 			    </td>
 			</tr>
@@ -51,7 +50,7 @@
 			    <td colspan="2" align="left" style="padding-left: 5px;">
 			       다음글 :
 			         <c:if test="${not empty nextReadDto}">
-			              <a href="<%=cp%>/customerCenter/notice/article?${query}&noticeNum=${nextReadDto.noticeNum}">${nextReadDto.title}</a>
+			              <a href="javascript:articleBoard('${nextReadDto.noticeNum}', '${page}');">${nextReadDto.title}</a>
 			        </c:if>
 			    </td>
 			</tr>
@@ -61,15 +60,15 @@
 			<tr height="45">
 			    <td width="300" align="left">
 			       <c:if test="${sessionScope.member.userId=='admin'}">				    
-			          <button type="button" class="btn" onclick="updateBoard();">수정</button>
+			          <button type="button" class="btn" onclick="updateForm('${dto.noticeNum}', '${page}');">수정</button>
 			       </c:if>
 			       <c:if test="${sessionScope.member.userId=='admin'}">				    
-			          <button type="button" class="btn" onclick="deleteBoard();">삭제</button>
+			          <button type="button" class="btn" onclick="deleteBoard('${dto.noticeNum}', '${page}');">삭제</button>
 			       </c:if>
 			    </td>
 			
 			    <td align="right">
-			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/customerCenter/notice/list?${query}';">리스트</button>
+			        <button type="button" class="btn" onclick="listPage('${page}')">리스트</button>
 			    </td>
 			</tr>
 			</table>

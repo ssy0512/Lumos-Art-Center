@@ -26,7 +26,7 @@
 </sql>
 
 <select id="listNoticeTop" resultType="com.sp.notice.Notice">
-SELECT noticeNum , important , n.userId ,title,content,hitcount,
+SELECT noticeNum , important , n.userId, userName, title,content,hitcount,
 TO_CHAR(created, 'YYYY-MM-DD') created
 FROM notice n 
 JOIN member1 m ON n.userId=m.userId
@@ -37,7 +37,7 @@ ORDER BY noticeNum DESC
 
 
 <select id="dataCount" parameterType="map" resultType="Integer">
-SELECT NVL(COUNT(*), 0) FROM notice n 
+SELECT NVL(COUNT(*), 1) FROM notice n 
 	JOIN member1 m ON n.userId=m.userId
 <where>
 <if test="searchValue != null and searchValue!='' ">
@@ -51,16 +51,15 @@ SELECT NVL(COUNT(*), 0) FROM notice n
 SELECT * FROM (
 	SELECT ROWNUM rnum, tb.* FROM(
 	
-SELECT noticeNum,important,n.userId,title,content,hitcount,created
+SELECT noticeNum,important,n.userId,userName, title,content,hitcount,created
 	FROM notice n 
 		JOIN member1 m ON n.userId=m.userId 
-			WHERE important = 0 ORDER BY noticeNum DESC
 	<where>
 		<if test="searchValue != null and searchValue != ''">
 			<include refid="where-list"/>
 		</if>
-		
 	</where>
+	   ORDER BY noticeNum DESC
 	
 <![CDATA[
 	        ) tb WHERE ROWNUM <= #{end}
@@ -70,7 +69,7 @@ SELECT noticeNum,important,n.userId,title,content,hitcount,created
 
 
 <select id="readNotice" resultType="com.sp.notice.Notice" parameterType="Integer">
-SELECT noticeNum , n.userId , important, title , content , hitcount,created 
+SELECT noticeNum , n.userId , userName, important, title , content , hitcount,created 
 FROM notice n JOIN member1 m ON n.userId=m.userId
 WHERE noticeNum = #{noticeNum}
 </select>
@@ -96,5 +95,44 @@ WHERE noticeNum = #{noticeNum}
   		 ORDER BY noticeNum ASC
        ) tb WHERE ROWNUM=1
    </select>
+   
+   <select id="nextReadNotice" resultType="com.sp.notice.Notice"
+         parameterType="map">
+         
+        SELECT tb.* FROM(
+        SELECT noticeNum , title  FROM notice n 
+        	JOIN member1 m ON n.userId=m.userId
+        
+        <where>
+        	<if test="searchValue != null and searchValue != ''">
+        		<include refid="where-list"/>
+        	</if>
+        	 <![CDATA[
+            AND (noticeNum < #{noticeNum})
+           ]]>
+        </where>
+        
+        ORDER BY noticeNum DESC
+        ) tb WHERE ROWNUM=1
+   
+   </select>
+    
+   
+   <update id="updateNotice" parameterType="com.sp.notice.Notice">
+  	
+  	UPDATE notice SET  title=#{title} , content=#{content} , important=#{important}
+  
+  	WHERE noticeNum=#{noticeNum}   
+  	
+   </update>
+   
+   
+   <delete id="deleteNotice">
+   
+    DELETE FROM notice WHERE noticeNum=#{noticeNum}
+    
+   </delete>
+   
+   
     
 </mapper>

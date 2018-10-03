@@ -2,8 +2,9 @@ package com.sp.notice;
 
 public class Notice {
 	
-	private int noticeNum;  // 게시판 번호
+	private int listNum, noticeNum;  // 게시판 번호
 	private String userId;  // 회원 아이디  
+	private String userName;
 	private String title;   // 제목
 	private int important;  // 공지 
 	private int hitcount;   // 조회수  
@@ -11,6 +12,12 @@ public class Notice {
 	private String created; // 날짜  
 	
 	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public int getNoticeNum() {
 		return noticeNum;
 	}
@@ -22,6 +29,12 @@ public class Notice {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public int getImportant() {
 		return important;
