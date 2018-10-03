@@ -19,7 +19,7 @@
         exhibitNum=#{searchValue}
    </if>
    <if test="searchKey=='exhibitName' ">
-        INSTR(concertName, #{searchValue}) &gt; 0
+        INSTR(exhibitName, #{searchValue}) &gt; 0
    </if>
    <if test="searchKey=='hallName' ">
         INSTR(hallName, #{searchValue}) &gt; 0

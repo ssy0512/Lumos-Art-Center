@@ -26,19 +26,19 @@
 		 return;
 	 }
 	 
-	 str=f.startDate.value;
+	 str=f.concertStart.value;
 	 if(!str){
 		 alert("시작일을 입력하십시오.");
-		 f.startDate.focus();
+		 f.concertStart.focus();
 		 return;
 	 }
-	 str=f.endDate.value;
+	 str=f.concertEnd.value;
 	 if(!str){
 		 alert("시작일을 입력하십시오.");
-		 f.endDate.focus();
+		 f.concertEnd.focus();
 		 return;
 	 }
-	 str=f.startTime.value;
+	 /* str=f.startTime.value;
 	 if(!str){
 		 alert("시작일을 입력하십시오.");
 		 f.startTime.focus();
@@ -62,7 +62,7 @@
 		 alert("시작 시간을 입력하십시오.");
 		 f.startTime.focus();
 		 return;
-	 }
+	 } */
 	 
 	 var mode="${mode}";
 	 if(mode=="created"|| mode=="update" && f.upload.value!=""){
@@ -119,18 +119,18 @@
 			<form name="createdForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시명</td>
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">공연명</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="subject" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.exhibitName}">
 			      </td>
 			  </tr>
 			
 			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시홀 선택</td>
+		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">홀 선택</td>
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="" id="listRoom">
 		      	<c:forEach var="vo" items="${listHall}">
-		      		<option value="">::선택::</option>
+		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.hallNum}">${vo.hallName}</option>
 		      	</c:forEach>
 		      </select>
@@ -142,18 +142,19 @@
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="" id="listInst">
 		      	<c:forEach var="vo" items="${listRate}">
-		      		<option value="">::선택::</option>
+		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.ratingNum}">${vo.ratingName}</option>
 		      	</c:forEach>
 		      </select>
 		      </td>
 		  </tr>
+		  
   		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시일자</td>
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">공연일자</td>
 			      <td style="padding-left:10px;"> 
-			            <input type="text" id="regDate" name="exhibitStart" readonly="readonly" value="${dto.exhibitStart}"><button></button>
+			            <input type="text" id="regDate" name="exhibitStart" readonly="readonly" value="${dto.concertStart}"><button></button>
 			            ~
-			            <input type="text" id="regDate2" name="exhibitEnd" readonly="readonly" value="${dto.exhibitEnd}"><button></button>
+			            <input type="text" id="regDate2" name="exhibitEnd" readonly="readonly" value="${dto.concertEnd}"><button></button>
 			      </td>
 			  </tr>
 			
@@ -188,7 +189,7 @@
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시이미지</td>
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">공연이미지</td>
 			      <td style="padding-left:10px;"> 
 			          <input type="file" name="upload" class="boxTF" size="53"
 			                     accept="image/*" 
@@ -204,10 +205,10 @@
 			      <td align="center" >
 			        <button type="button" class="btn" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}</button>
 			        <button type="reset" class="btn">다시입력</button>
-			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/exhibitSchedule/exhibitlist';">${mode=='update'?'수정취소':'등록취소'}</button>
+			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/concertSchedule/insertedlist';">${mode=='update'?'수정취소':'등록취소'}</button>
 			         <c:if test="${mode=='update'}">
-			         	 <input type="hidden" name="exhibitNum" value="${dto.exhibitNum}">
-			         	 <input type="hidden" name="exProfileImage" value="${dto.exProfileImage}">
+			         	 <input type="hidden" name="concertNum" value="${dto.concertNum}">
+			         	 <input type="hidden" name="conProfileImage" value="${dto.conProfileImage}">
 			        	 <input type="hidden" name="page" value="${page}">
 			        </c:if>
 			      </td>

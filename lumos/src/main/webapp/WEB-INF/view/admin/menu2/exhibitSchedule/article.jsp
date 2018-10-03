@@ -41,9 +41,9 @@
 </style>
 <script type="text/javascript">
 function deleteExhibits(){
-	var num="${dto.exhibitNum}";
+	var exhibitNum="${dto.exhibitNum}";
 	var page="${page}";
-	var query="num="+num+"&page="+page;
+	var query="exhibitNum="+exhibitNum+"&page="+page;
 	var url="<%=cp%>/admin/exhibitSchedule/delete?"+query;
 	
 	if(confirm("이 전시를 삭제 하시겠습니까?"))
@@ -53,9 +53,9 @@ function deleteExhibits(){
 }
 
 function updateExhibits(){
-	var num="${dto.exhibitNum}";
+	var exhibitNum="${dto.exhibitNum}";
 	var page="${page}";
-	var query = "num="+num+"&page="+page;
+	var query = "exhibitNum="+exhibitNum+"&page="+page;
 	var url="<%=cp%>/admin/exhibitSchedule/update?"+query; 
 	
 	location.href=url;
@@ -74,9 +74,10 @@ function updateExhibits(){
 	</div>
 	<div class="post-right">
 		<div class="post-right_body">
-			<h3>강의실 : ${dto.roomName}</h3>
-			<h3>진행시간: ${dto.startTime} ~ ${dto.endTime} 매주 ${dto.lectureDay}</h3>	
-			<h3>가격 : ${dto.price} 원</h3>
+			<h3>전시번호 : ${dto.exhibitNum}</h3>
+			<h3>진행시간: ${dto.admitStart} ~ ${dto.admitEnd} </h3>	
+			<h3>주최 : ${dto.host}</h3>
+			<h3>주관 : ${dto.supervise}</h3>
 			<table style="width:60%; margin:0px auto 20px; border-spacing:0px;">
 				<tr height="35">
 					<td width="300" align="right">
@@ -91,7 +92,7 @@ function updateExhibits(){
 		</div>
 		<div class="post-right_footer">
 			<div class="post-right_footer_date">
-				<p>${dto.startDate} ~ ${dto.endDate} <span>총 ${dto.totalCount} 회</span></p>
+				<p>${dto.exhibitStart} ~ ${dto.exhibitEnd} <span>장르 : ${dto.genre}</span></p>
 			</div>
 		</div>
 	</div>

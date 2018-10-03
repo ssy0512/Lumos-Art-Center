@@ -96,7 +96,7 @@ public class AcademiesController {
 	}
 	
 	@RequestMapping(value="/admin/menu2/academySchedule/article")
-	public String article(@RequestParam(value="academyNum") int academyNum,
+	public String article(@RequestParam(value="academyNum",defaultValue="1") int academyNum,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="searchKey", defaultValue="1") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,

@@ -45,6 +45,8 @@ public class ExhibitsServiceImpl implements ExhibitsService {
 	public int insertExhibits(Exhibits dto, String pathname) {
 		int result=0;
 		try {
+			
+			
 			String saveFilename=filemanager.doFileUpload(dto.getUpload(), pathname);
 			if(saveFilename!=null) {
 				dto.setExProfileImage(saveFilename);

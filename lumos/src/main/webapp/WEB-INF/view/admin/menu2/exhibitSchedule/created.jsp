@@ -20,48 +20,48 @@
  <script type="text/javascript">
  function sendOk(){
 	 var f=document.createdForm;
-	 var str=f.academyName.value;
+	 var str=f.exhibitName.value;
 	 if(!str){
-		 alert("공연명을 입력하십시오.");
-		 f.academyName.focus();
+		 alert("전시명을 입력하십시오.");
+		 f.exhibitName.focus();
 		 return;
 	 }
 	 
-	 str=f.startDate.value;
+	 str=f.exhibitStart.value;
 	 if(!str){
 		 alert("시작일을 입력하십시오.");
-		 f.startDate.focus();
+		 f.exhibitStart.focus();
 		 return;
 	 }
-	 str=f.endDate.value;
+	 str=f.exhibitEnd.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
-		 f.endDate.focus();
+		 alert("마감일을 입력하십시오.");
+		 f.exhibitEnd.focus();
 		 return;
 	 }
-	 str=f.startTime.value;
+	 str=f.admitStart.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
-		 f.startTime.focus();
+		 alert("입장시작 시간을 입력하십시오.");
+		 f.admitStart.focus();
 		 return;
 	 }
-	 str=f.endTime.value;
+	 str=f.admitEnd.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
-		 f.endTime.focus();
+		 alert("입장종료 시간을 입력하십시오.");
+		 f.admitEnd.focus();
 		 return;
 	 }
-	 str=f.price.value;
+	 str=f.host.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
-		 f.price.focus();
+		 alert("주최처를 입력하십시오.");
+		 f.host.focus();
 		 return;
 	 }
 	 
-	 str=f.startTime.value;
+	 str=f.supervise.value;
 	 if(!str){
-		 alert("시작 시간을 입력하십시오.");
-		 f.startTime.focus();
+		 alert("주관처를 입력하십시오.");
+		 f.supervise.focus();
 		 return;
 	 }
 	 
@@ -73,7 +73,7 @@
 			 return;
 		 }
 	 }
-	 f.action="<%=cp%>/admin/menu2/academySchedule/${mode}";
+	 f.action="<%=cp%>/admin/menu2/exhibitSchedule/${mode}";
 	 f.submit();
  }
  
@@ -122,16 +122,16 @@
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시명</td>
 			      <td style="padding-left:10px;"> 
-			        <input type="text" name="subject" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.exhibitName}">
+			        <input type="text" name="exhibitName" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.exhibitName}">
 			      </td>
 			  </tr>
 			
 			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시홀 선택</td>
 		      <td style="padding-left:10px;"> 
-		      <select class="selectField" name="" id="listRoom">
+		      <select class="selectField" name="hallNum" id="listhall">
 		      	<c:forEach var="vo" items="${listHall}">
-		      		<option value="">::선택::</option>
+		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.hallNum}">${vo.hallName}</option>
 		      	</c:forEach>
 		      </select>
@@ -141,9 +141,9 @@
 		  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">관람등급선택</td>
 		      <td style="padding-left:10px;"> 
-		      <select class="selectField" name="" id="listInst">
+		      <select class="selectField" name="ratingNum" id="listRate">
 		      	<c:forEach var="vo" items="${listRate}">
-		      		<option value="">::선택::</option>
+		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.ratingNum}">${vo.ratingName}</option>
 		      	</c:forEach>
 		      </select>
@@ -152,9 +152,9 @@
   		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시일자</td>
 			      <td style="padding-left:10px;"> 
-			            <input type="text" id="regDate" name="exhibitStart" readonly="readonly" value="${dto.exhibitStart}"><button></button>
+			            <input type="date" id="regDate" name="exhibitStart" readonly="readonly" value="${dto.exhibitStart}"><button></button>
 			            ~
-			            <input type="text" id="regDate2" name="exhibitEnd" readonly="readonly" value="${dto.exhibitEnd}"><button></button>
+			            <input type="date" id="regDate2" name="exhibitEnd" readonly="readonly" value="${dto.exhibitEnd}"><button></button>
 			      </td>
 			  </tr>
 			

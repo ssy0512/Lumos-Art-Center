@@ -100,7 +100,7 @@ public class ConcScheduleController {
 	}
 	
 	@RequestMapping(value="/admin/menu2/concertSchedule/article")
-	public String article(@RequestParam(value="concertNum") int concertNum,
+	public String article(@RequestParam(value="concertNum",defaultValue="1") int concertNum,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="searchKey", defaultValue="concertNum") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
@@ -149,7 +149,7 @@ public class ConcScheduleController {
 	public String insertConOk (Concerts dto,HttpSession session) throws Exception {
 		
 		String root=session.getServletContext().getRealPath("/");
-		String path=root+"uploads"+File.separator+"photo";
+		String path=root+"uploads"+File.separator+"concertSchedule";
 		service.insertConcert(dto,path);
 		
 		return "redirect:/admin4/menu2/concertSchedule/insertedlist";
@@ -176,7 +176,7 @@ public class ConcScheduleController {
 	public String updateConcertSubmit (Concerts dto, @RequestParam String page,HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
-		String path=root+"upload"+File.separator+"photo"; //수정해야할수도있음
+		String path=root+"upload"+File.separator+"concertSchedule"; //수정해야할수도있음
 		service.updateConcerts(dto,path);
 		
 		return "redirect:/menu2/concertSchedule/article?listNum="+dto.getListNum()+"&page="+page;
@@ -187,7 +187,7 @@ public class ConcScheduleController {
 							@RequestParam String page, HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
-		String path=root+"upload"+File.separator+"photo";
+		String path=root+"upload"+File.separator+"concertSchedule";
 		service.deleteConcerts(concertNum,path);
 	
 		return "redirect:/menu2/concertSchedule/insertedlist?page="+page;

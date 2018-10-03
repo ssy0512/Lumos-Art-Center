@@ -35,7 +35,7 @@ public class ExhibitsController {
 	
 	//basic LIST 
 	@RequestMapping(value="/admin/menu2/exhibitSchedule/exhibitlist")
-	public String listConcerts(@RequestParam(value="page", defaultValue="1") int current_page,
+	public String listExhibits(@RequestParam(value="page",defaultValue="1") int current_page,
 			@RequestParam(value="searchKey", defaultValue="exhibitNum") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
 			HttpServletRequest req,
@@ -100,9 +100,10 @@ public class ExhibitsController {
 	}
 	
 	@RequestMapping(value="/admin/menu2/exhibitSchedule/article")
-	public String article(@RequestParam(value="exhibitNum") int exhibitNum,
+	public String article(
+			@RequestParam(value="exhibitNum") int exhibitNum,
 			@RequestParam(value="page") String page,
-			@RequestParam(value="searchKey", defaultValue="exhibitNum") String searchKey,
+			@RequestParam(value="searchKey", defaultValue="exhibitName") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
 			Model model) throws Exception{
 		
@@ -145,10 +146,10 @@ public class ExhibitsController {
 	public String createdOk (Exhibits dto,HttpSession session) throws Exception {
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"photo";
+		String pathname=root+"uploads"+File.separator+"image";
 		service.insertExhibits(dto, pathname);
 		
-		return "redirect:/admin4/menu2/exhibitSchedule/exhibitlist";
+		return "redirect:/admin/menu2/exhibitSchedule/exhibitlist";
 	}
 	
 	@RequestMapping(value="/admin/menu2/exhibitSchedule/update", method=RequestMethod.GET)
@@ -172,7 +173,7 @@ public class ExhibitsController {
 	public String updateSubmit (Exhibits dto, @RequestParam String page,HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"upload"+File.separator+"photo"; //수정해야할수도있음
+		String pathname=root+"upload"+File.separator+"image"; //수정해야할수도있음
 		service.updateExhibits(dto,pathname);
 		
 		return "redirect:/menu2/exhibitSchedule/article?listNum="+dto.getListNum()+"&page="+page;
@@ -183,7 +184,7 @@ public class ExhibitsController {
 							@RequestParam String page, HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"upload"+File.separator+"photo";
+		String pathname=root+"upload"+File.separator+"image";
 		service.deleteExhibits(exhibitNum, pathname);
 	
 		return "redirect:/menu2/exhibitSchedule/exhibitlist?page="+page;

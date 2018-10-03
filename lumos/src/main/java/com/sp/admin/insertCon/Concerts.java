@@ -36,6 +36,28 @@ public class Concerts {
 	private int sessionNum;
 	private String sessionDate;
 	private String genre;
+	private String seatlevel;
+	private int seatprice;
+	private int seatlevelnum;
+	
+	public String getSeatlevel() {
+		return seatlevel;
+	}
+	public void setSeatlevel(String seatlevel) {
+		this.seatlevel = seatlevel;
+	}
+	public int getSeatprice() {
+		return seatprice;
+	}
+	public void setSeatprice(int seatprice) {
+		this.seatprice = seatprice;
+	}
+	public int getSeatlevelnum() {
+		return seatlevelnum;
+	}
+	public void setSeatlevelnum(int seatlevelnum) {
+		this.seatlevelnum = seatlevelnum;
+	}
 	public String getGenre() {
 		return genre;
 	}

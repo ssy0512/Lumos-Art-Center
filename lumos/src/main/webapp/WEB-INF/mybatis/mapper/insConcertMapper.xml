@@ -13,6 +13,10 @@
 	SELECT ratingNum,ratingName FROM rating
 </select>
 
+<select id="listLevel" resultType="com.sp.admin.insertCon.Concerts">
+	SELECT seatlevelnum, seatLevel FROM seatlevel
+</select>
+
 <!--   편하게 검색할 수 있는  searchList -->
 
 <sql id="where-list">
@@ -40,12 +44,31 @@
   </where>
 </select>
 
-<insert id="insertConcerts" parameterType="com.sp.admin.insertCon.Concerts"> 
-	INSERT INTO concert (concertNum,concertName, concertStart,concertEnd, totalTime,host,supervise,
+<update id="insertConcerts" parameterType="com.sp.admin.insertCon.Concerts"> 
+	<!-- INSERT INTO concert (concertNum,concertName, concertStart,concertEnd, totalTime,host,supervise,
 						 genre, ratingNum,hallNum, conProfileImage,eventCount,seatPriceList)
 				VALUES (concert_seq.NEXTVAL, #{concertName},#{concertStart},#{concertEnd},#{totalTime},
 						#{host},#{supervise},#{genre},#{ratingNum},#{hallNum},#{conProfileImage},#{eventCount},#{seatPriceList})
-</insert>
+	INSERT INTO concertSession (concertNum, sessionNum, sessionTime) VALUES concert_seq.NEXTVAL, session_seq.NEXTVAL, #{sessionTime}) 
+	INSERT INTO seatPrice (concertNum, seatlevelnum, seatlevel, seatPrice) 
+				VALUES (concert_seq.NEXTVAL, seatlevel_seq.NEXTVAL, #{seatLevel}, #{seatPrice})  -->
+	INSERT 
+		INTO concert (concertNum, concertName, concertStart, concertEnd,totalTime, host, supervise, genre,
+						ratingNum, hallNum, conProfileImage, eventCount, seatPriceList)
+				VALUES (concert_seq.NEXTVAL,#{concertName},#{concertStart},#{concertEnd},#{totalTime},
+						#{host},#{supervise},#{genre},#{ratingNum},#{hallNum},#{conProfileImage},#{eventCount},#{seatPriceList})
+		INTO concertSession (concertNum, sessionNum, sessionTime)
+					VALUES   (concert_seq.NEXTVAL, #{sessionNum}, #{sessionTime})
+		INTO seatPrice		(concertNum, SeatLevelNum, seatLevel, seatPrice)
+					VALUES (concert_seq.NEXTVAL, #{seatLevelNum}, #{seatLevel}, #{seatPrice}) 
+</update> <!-- 다중insert는 업데이트를 이용해야함. -->
+
+<update id="updateConcerts" parameterType="com.sp.admin.insertCon.Concerts">
+	UPDATE concert SET concertName=#{concertName}, concertStart=#{concertStart}, totalTime=#{totalTime}, host=#{host}, supervise=#{supervise},
+						genre=#{genre}, ratingNum=#{ratingNum}, hallNum=#{hallNum}, conProfileImage=#{conProfileImage}, eventCount=#{eventCount}
+	UPDATE concertSession SET sessionTime=#{sessionTime} 
+	UPDATE seatLevel SET seatPrice=#{seatPrice} 
+</update>
 
 <delete id="deleteConcerts" parameterType="Integer">
 	DELETE FROM concert WHERE concertNum=#{concertNum} 

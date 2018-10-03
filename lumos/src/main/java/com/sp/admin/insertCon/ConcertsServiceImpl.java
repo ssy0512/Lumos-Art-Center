@@ -11,10 +11,33 @@ import com.sp.common.dao.CommonDAO;
 
 @Service("concerts.concertService")
 public class ConcertsServiceImpl implements ConcertsService {
+
+
 	@Autowired
 	private CommonDAO dao;
 	@Autowired
 	private FileManager filemanager;
+	@Override
+	public int updateSeatPrice(Concerts dto) { //수정을 수정중... ㅠ ㅇ ㅠ 
+		int result=0;
+		
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return result;
+	}
+	
+	@Override
+	public int updateSession(Concerts dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 	@Override
 	
 	public List<Concerts> listHall() {
