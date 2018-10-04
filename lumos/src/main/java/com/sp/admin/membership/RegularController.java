@@ -16,15 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sp.common.MyUtil;
-import com.sp.member.SessionInfo;
+import com.sp.common.AdminUtil;
 
 @Controller("regular.regularController")
 public class RegularController {
 	@Autowired
 	private RegularService service;
 	@Autowired
-	private MyUtil myUtil;
+	private AdminUtil adminUtil;
 	
 	@RequestMapping(value="/admin/membership/regular/regularList")
 	public String list(
@@ -35,10 +34,10 @@ public class RegularController {
 			HttpSession session,
 			Model model) throws Exception {
 		
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
+/*		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(! info.getUserId().equals("admin")) {
-			return "redirect:/member/login";
-		}
+			return "redirect:.member.login";
+		}*/
 		
 		String cp = req.getContextPath();
 		
@@ -56,7 +55,7 @@ public class RegularController {
 		
         dataCount = service.dataCount(map);
         if(dataCount != 0)
-            total_page = myUtil.pageCount(rows, dataCount);
+            total_page = adminUtil.pageCount(rows, dataCount);
         
         if(total_page < current_page) 
             current_page = total_page;
@@ -88,7 +87,7 @@ public class RegularController {
         	listUrl = cp+"/admin/membership/regular/regularList?"+query;
         	articleUrl = cp+"/admin/membership/regular/article?page=" + current_page + "&"+ query;
         }
-        String paging = myUtil.paging(current_page, total_page, listUrl);
+        String paging = adminUtil.paging(current_page, total_page, listUrl);
 		model.addAttribute("subMenu", "1");
 		model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);
@@ -106,13 +105,12 @@ public class RegularController {
 			@RequestParam(value="page") String page,
 			@RequestParam(value="searchKey", defaultValue = "memberIndex") String searchKey,
 			@RequestParam(value="searchValue", defaultValue = "") String searchValue,
-			HttpSession session,
 			Model model) throws Exception {
 		
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
+/*		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(! info.getUserId().equals("admin")) {
 			return "redirect:.member.login";
-		}
+		}*/
 		
 		searchValue = URLDecoder.decode(searchValue, "utf-8");
 		
@@ -125,7 +123,6 @@ public class RegularController {
 		if(dto==null)
 			return "redirect:/admin/membership/regular/regularList?"+query;
 		
-		//model.addAttribute("subMenu", "1");
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);

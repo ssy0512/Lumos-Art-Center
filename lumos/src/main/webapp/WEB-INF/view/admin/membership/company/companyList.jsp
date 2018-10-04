@@ -7,7 +7,7 @@
 %>
 <style type="text/css">
 .company-top {
-	width: 1380px; height: 50px; margin-top: 20px;
+	width: 1380px; height: 50px; margin-top: 40px;
 }
 .company-top-page {
 	float: left; margin: 10px 0 0 7px;
@@ -22,15 +22,18 @@
 	border-collapse: collapse;
 	overflow: hidden;
 }
-.companyList-tr {
+.companyList-table thead tr {
+	height: 41px;
+	border-top: 1px solid #072659;
+	border-bottom: 1px solid #072659;
+}
+.companyList-table tbody tr {
+	height: 41px;
 	border-bottom: 1px solid #cccccc;
 	text-align: center;
 }
-.companyList-tr:hover {
+.companyList-table tr:hover {
 	cursor: pointer;
-}
-.companyList-tr td {
-	height: 40px;
 }
 .company-top-layout {
 	float: right;
@@ -44,6 +47,28 @@
 }
 .boxTF {
 	width: 300px;
+}
+.list-btn {
+	width: 96px; height: 30px;
+	margin: 0 5px;
+	align-content: center; align-items: center;
+	background-color: #072659;
+	border: 1px solid #072659;
+	border-radius: 5px;
+	color: #ffffff;
+	cursor: pointer;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+}
+.list-btn:hover {
+	cursor: pointer;
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	transform: scale(1.1);
+	text-decoration: none;
 }
 </style>
 
@@ -72,23 +97,23 @@
 					<button type="button" class="btn" onclick="searchList()" style="margin: 5px">&nbsp;검색&nbsp;</button>
 					
 					<div class="company-top-layout">
-						<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
-							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 3px 2px 3px;">
-								&nbsp;목록형&nbsp;&nbsp;
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
+							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
+								&nbsp;&nbsp;목록형&nbsp;&nbsp;
 						</button>
-						<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyListCards';">
-							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 3px 2px 3px;">
-								&nbsp;앨범형&nbsp;&nbsp;
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyListCards';">
+							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
+								&nbsp;&nbsp;앨범형&nbsp;&nbsp;
 						</button>
 					</div>
 				</form>
 			</div>
 		</div>
 		
-		<div style="clear: both; margin-top: 5px; font-size: 12pt;">
+		<div style="clear: both; margin-top: 20px; font-size: 12pt;">
 			<table class="companyList-table">
-				<thead style="background-color: #e8e8e8;">
-					<tr style="height: 40px;">
+				<thead>
+					<tr>
 						<th style="width: 90px;">회원번호</th>
 						<th style="width: 150px;">회사명</th>
 						<th style="width: 150px;">사업자번호</th>
@@ -101,7 +126,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="dto" items="${list}">
-						<tr class="companyList-tr"
+						<tr
 							onclick="location.href='<%=cp%>/admin/membership/company/article?&page=${page}&companyIndex=${dto.companyIndex}';">
 							<td>${dto.companyIndex}</td>
 							<td>${dto.companyName}</td>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exhibitSales">
+
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM exhibit e
+	</select>
+<!-- 	
+	<select id="listMain" parameterType="map" resultType="com.sp.admin.sales.ExhibitSales">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT e.exhibitNum, e.exhibitName, TO_CHAR(exhibitStart, 'YYYY-MM-DD') exhibitStart,
+					TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, host, supervise, h.hallName
+				FROM exhibit e
+				JOIN exhibitHall h ON e.hallNum=h.hallNum
+				LEFT OUTER JOIN (
+					SELECT hallName
+					FROM exhibitHall
+					WHERE hallNum = 1
+				) c ON e.hallNum = h.hallNum
+	<![CDATA[
+			) tb WHERE ROWNUM <= ${end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select> -->
+	
+	<select id="listExhibitSales" parameterType="map" resultType="com.sp.admin.sales.ExhibitSales">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT e.exhibitNum, e.exhibitName, TO_CHAR(exhibitStart, 'YYYY-MM-DD') exhibitStart,
+					TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, host, supervise, h.hallName
+				FROM exhibit e
+				JOIN exhibitHall h ON e.hallNum=h.hallNum
+				LEFT OUTER JOIN (
+					SELECT hallName
+					FROM exhibitHall
+					WHERE hallNum = 1
+				) c ON e.hallNum = h.hallNum
+	<![CDATA[
+			) tb WHERE ROWNUM <= ${end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
+	<select id="readExhibitSales" resultType="com.sp.admin.sales.ExhibitSales" parameterType="Integer">
+		SELECT e.exhibitNum, e.exhibitName, TO_CHAR(exhibitStart, 'YYYY-MM-DD') exhibitStart,
+		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, host, supervise, h.hallName
+		FROM exhibit e
+		JOIN exhibitHall h ON e.hallNum=h.hallNum
+		LEFT OUTER JOIN exhibitHall h ON e.hallNum=h.hallNum
+        WHERE e.exhibitNum=#{exhibitNum}
+	</select>
+	
+<!-- 	<select id="exhibitPrice" parameterType="Integer" resultType="String">
+		SELECT  audience||' '||exprice priceString FROM EXHIBITprice ep
+		JOIN AUDIENCELEVEL al ON ep.AUDIENCELEVELNUM = al.AUDIENCELEVELNUM
+		WHERE ep.exhibitNum=#{exhibitNum}
+		ORDER BY ep.AUDIENCELEVELNUM ASC
+	</select> -->
+</mapper>

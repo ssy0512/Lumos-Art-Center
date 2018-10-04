@@ -27,7 +27,6 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public List<Company> listCompany(Map<String, Object> map) {
 		List<Company> list = null;
-		
 		try {
 			list = dao.selectList("company.listCompany", map);
 		} catch (Exception e) {
@@ -51,7 +50,6 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public Company readCompany(int companyIndex) {
 		Company dto = null;
-		
 		try {
 			dto=dao.selectOne("company.readCompany", companyIndex);
 		} catch (Exception e) {

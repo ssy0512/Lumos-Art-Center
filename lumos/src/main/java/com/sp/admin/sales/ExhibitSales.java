@@ -1,6 +1,7 @@
 package com.sp.admin.sales;
 
 public class ExhibitSales {
+	private int listNum;
 	private int exhibitNum;
 	private String exhibitName;
 	private String exhibitStart;
@@ -19,7 +20,12 @@ public class ExhibitSales {
 	private String exHallImage;
 	private String exPriceString;
 	
-	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public String getExPriceString() {
 		return exPriceString;
 	}

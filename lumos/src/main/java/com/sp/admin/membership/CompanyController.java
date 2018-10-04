@@ -16,7 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sp.common.MyUtil;
+import com.sp.common.AdminUtil;
 import com.sp.member.SessionInfo;
 
 @Controller("company.companyController")
@@ -24,7 +24,7 @@ public class CompanyController {
 	@Autowired
 	private CompanyService service;
 	@Autowired
-	private MyUtil myUtil;
+	private AdminUtil adminUtil;
 
 //list 역할
 	@RequestMapping(value="/admin/membership/company/companyList")
@@ -36,10 +36,10 @@ public class CompanyController {
 			HttpSession session,
 			Model model) throws Exception {
 		
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
+/*		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		if(! info.getUserId().equals("admin")) {
 			return "redirect:.member.login";
-		}
+		}*/
 		
 		String cp = req.getContextPath();
 		
@@ -57,7 +57,7 @@ public class CompanyController {
 		
         dataCount = service.dataCount(map);
         if(dataCount != 0)
-            total_page = myUtil.pageCount(rows, dataCount);
+            total_page = adminUtil.pageCount(rows, dataCount);
         
         if(total_page < current_page) 
             current_page = total_page;
@@ -90,8 +90,7 @@ public class CompanyController {
         	articleUrl = cp+"/admin/membership/company/article?page=" + current_page + "&"+ query;
         }
         
-        String paging = myUtil.paging(current_page, total_page, listUrl);
-        model.addAttribute("subMenu", "2");
+        String paging = adminUtil.paging(current_page, total_page, listUrl);
         
         model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);
@@ -133,7 +132,7 @@ public class CompanyController {
 		
         dataCount = service.dataCount(map);
         if(dataCount != 0)
-            total_page = myUtil.pageCount(rows, dataCount);
+            total_page = adminUtil.pageCount(rows, dataCount);
         
         if(total_page < current_page) 
             current_page = total_page;
@@ -166,7 +165,7 @@ public class CompanyController {
         	articleUrl = cp+"/admin/membership/company/article?page=" + current_page + "&"+ query;
         }
         
-        String paging = myUtil.paging(current_page, total_page, listUrl);
+        String paging = adminUtil.paging(current_page, total_page, listUrl);
         model.addAttribute("subMenu", "2");
         
         model.addAttribute("list", list);
@@ -204,7 +203,6 @@ public class CompanyController {
 		if(dto==null)
 			return "redirect:admin/membership/company/companyList?"+query;
 		
-		model.addAttribute("subMenu", "2");
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);

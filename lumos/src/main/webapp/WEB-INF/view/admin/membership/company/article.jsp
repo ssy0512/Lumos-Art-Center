@@ -1,17 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp = request.getContextPath();
 %>
 <style type="text/css">
-* {
-	font-size: 11pt;
-}
 .company-article {
 	margin: 50px auto;
-	width: 850px; height: 730px;
+	width: 850px; height: 740px;
 	clear: both;
 	border: 1px solid #333333; border-radius: 50px;
 }
@@ -31,7 +28,7 @@
 
 /* 버튼 css */
 .myButt {
-	margin: 25px auto;
+	margin: 20px auto;
 	width: 100px; height: 40px;
 	outline: none;
 	border: none;
@@ -40,14 +37,13 @@
 	background-color: transparent;
 	position: relative;
 	border: 1px solid #072659;
-  border-radius: 7px;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
+	border-radius: 7px;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
 }
-
 .one {
   border-color: #072659;
   overflow: hidden;
@@ -86,15 +82,6 @@
   left: 135px;
 }
 </style>
-<script type="text/javascript">
-	function updateCompany(companyIndex) {
-		var page = "${page}";
-		var query = "companyIndex="+companyIndex+"&page="+page;
-		var url = "<%=cp%>/admin/membership/company/created?" + query;
-		
-		location.href=url;
-	}
-</script>
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<div class="company-article">
 		<div style="float: right; margin: 25px 40px 20px 600px;">
