@@ -264,7 +264,8 @@ public class MonthlyController {
 							}
 						} else if (sd2 == cn&edf/100==cnf/100) {
 							for (int j = cn ; j <= ed2; j++) {
-								days[row][j-sd2+i] += "<span class='scheduleSubject' data-date='" + sd2 + "' data-num='"
+								if ((j-sd2+i-1)>6) break;
+								days[row][j-sd2+i-1] += "<span class='scheduleSubject' data-date='" + sd2 + "' data-num='"
 										+ dto.getExhibitNum() + "' onclick='goArticle(" + dto.getExhibitNum() + ")'>"
 										+ dto.getHallName() + "&nbsp;&nbsp;" + dto.getExhibitName() + "</span>";
 							}							
