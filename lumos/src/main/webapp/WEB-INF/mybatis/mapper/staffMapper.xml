@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="staff">
+
+<sql id="where-list">
+	<if test="searchKey=='staffNum'">
+		staffNum=#{searchValue}
+	</if>
+	<if test="searchKey=='staffName'">
+		INSTR(staffName, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='department'">
+		INSTR(department, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='birth'">
+		TO_CHAR(birth, 'YYYY-MM-DD') = #{searchValue}
+	</if>
+</sql>
+
+<select id="dataCount" resultType="Integer" parameterType="map">
+	SELECT NVL(COUNT (*),0) FROM staff
+	<!-- <where>
+  	<if test="searchValue!=null and searchValue != '' ">
+  	      <include refid="where-list"/>
+  	</if>
+  </where> -->
+</select>
+
+<insert id="insertStaff" parameterType="com.sp.admin.staff.Staff">
+	INSERT INTO staff(staffNum, staffName, birth, department,tel,staffImage)
+		VALUES (staff_seq.NEXTVAL, #{staffName},#{birth},#{department},#{tel}, #{staffImage})
+</insert>
+
+<update id="updateStaff" parameterType="com.sp.admin.staff.Staff">
+	UPDATE staff SET staffName=#{staffName}, birth=#{birth}, department=#{department}, tel=#{tel}, staffImage=#{staffImage}
+</update>
+
+<delete id="deleteStaff" parameterType="Integer">
+	DELETE FROM staff WHERE staffNum=#{staffNum}
+</delete>
+
+<select id="readStaff" parameterType="Integer" resultType="com.sp.admin.staff.Staff">
+		SELECT staffNum, staffName, to_char(birth, 'YYYY-MM-DD') birth, 
+				department, tel, staffImage 
+				FROM staff
+				WHERE staffNum=#{staffNum};
+</select>
+
+<select id="listStaff" parameterType="map" resultType="com.sp.admin.staff.Staff">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb. * FROM (
+		SELECT staffNum, staffName, to_char(birth, 'YYYY-MM-DD') birth, 
+				department, tel, staffImage 
+				FROM staff
+				ORDER BY staffNum DESC
+		<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+</select>
+</mapper>

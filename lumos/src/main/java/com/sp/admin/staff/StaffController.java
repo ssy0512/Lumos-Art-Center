@@ -1,20 +1,26 @@
 package com.sp.admin.staff;
 
+import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 
+import com.sp.common.MyExcelView;
 import com.sp.common.MyUtil;
 
 @Controller("staff.staffController")
@@ -23,8 +29,10 @@ public class StaffController {
 	private StaffService service;
 	@Autowired
 	private MyUtil util;
+	@Autowired
+	private MyExcelView excelView;
 	
-	@RequestMapping(value="/admin/staff/stafflist")
+	@RequestMapping(value="/admin/staff/staffs/stafflist")
 	public String listStaff(
 			@RequestParam(value="page",defaultValue="1") int current_page,
 			@RequestParam(value="searchKey", defaultValue="staffNum") String searchKey,
@@ -67,12 +75,12 @@ public class StaffController {
 		}
 		
 		String query = "";
-		String listUrl = cp+"/admin/staff/stafflist";
-		String articleUrl = cp="/admin/staff/article?page="+current_page;
+		String listUrl = cp+"/admin/staff/staffs/stafflist";
+		String articleUrl = cp="/admin/staff/staffs/article?page="+current_page;
 		
 		if(searchValue.length()!=0) {
-			listUrl = cp+"/admin/staff/stafflist?"+query;
-			articleUrl=cp+"/admin/staff/article?page="+current_page;
+			listUrl = cp+"/admin/staff/staffs/stafflist?"+query;
+			articleUrl=cp+"/admin/staff/staffs/article?page="+current_page;
 		}
 		String paging=util.paging(current_page, total_page,listUrl);
 		
@@ -83,10 +91,10 @@ public class StaffController {
 		model.addAttribute("total_page",total_page);
 		model.addAttribute("paging",paging);
 		
-		return ".admin4.staff.stafflist";
+		return ".admin4.staff.staffs.stafflist";
 	}
 	
-	@RequestMapping(value="/admin/staff/artice")
+	@RequestMapping(value="/admin/staff/staffs/artice")
 	public String article (@RequestParam(value="staffNum") int staffNum,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="searchKey", defaultValue="staffName") String searchKey,
@@ -105,9 +113,87 @@ public class StaffController {
 		model.addAttribute("dto",dto);
 		model.addAttribute("page",page);
 		model.addAttribute("query",query);
-		return ".admin4.staff.article";
+		return ".admin4.staff.staffs.article";
 		
 	}
 	
+	@RequestMapping(value="/admin/staff/staffs/created",method=RequestMethod.GET) 
+	public String created (Model model) throws Exception{
+		
+		model.addAttribute("page","1");
+		model.addAttribute("mode","created");
+		
+		return ".admin4.staff.staffs.created";
+	}
 	
+	@RequestMapping(value="/admin/staff/staffs/created",method=RequestMethod.POST)
+	public String createdOk (Staff dto, HttpSession session) throws Exception{
+		String root = session.getServletContext().getRealPath("/");
+		String pathname=root+"uploads"+File.separator+"image";
+		service.insertStaff(dto, pathname);
+		
+		return "redirect:/admin/staff/staffs/stafflist";
+	}
+	
+	@RequestMapping(value="/admin/staff/staffs/update",method=RequestMethod.GET)
+	public String updateStaff (
+			@RequestParam(value="staffNum") int staffNum,
+			@RequestParam(value="page",defaultValue="1") String page,
+			Model model
+			) throws Exception {
+		
+		Staff dto = service.readStaff(staffNum);
+		if(dto==null) {
+			return "redirect:/staff/staffs/stafflist?page="+page;
+		}
+		
+		model.addAttribute("mode","update");
+		model.addAttribute("page",page);
+		model.addAttribute("dto",dto);
+		
+		return ".admin4.staff.staffs.created";
+	}
+	
+	@RequestMapping(value="/admin/staff/staffs/update",method=RequestMethod.POST)
+	public String updateSubmit(Staff dto, @RequestParam String page,HttpSession session) throws Exception{
+		String root = session.getServletContext().getRealPath("/");
+		String pathname= root+"upload"+File.separator+"image";
+		service.updateStaff(dto, pathname);
+		return "redirect:/staff/staffs/article?listNum="+dto.getListNum()+"&page="+page;
+	}
+	
+	@RequestMapping(value="/admin/staff/staffs/delete",method=RequestMethod.POST)
+	public String deleteStaff (@RequestParam(value="staffNum") int staffNum,
+							@RequestParam String page, HttpSession session) {
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+"upload"+File.separator+"image";
+		
+		service.deleteStaff(staffNum, pathname);
+		return "redirect:/staff/staffs/stafflist?page="+page;
+	}
+	
+	@RequestMapping(value="/admin/staff/staffs/excel")
+	public View excel (Staff dto,Map<String, Object> model) throws Exception{
+		
+		String sheetName = "직원목록";
+		String filename="staff.xls";
+		List<String> columnLabels=new ArrayList<>();
+		List<Object[]> columnValues=new ArrayList<>();
+		
+		columnLabels.add("목록");
+		columnLabels.add("사번");
+		columnLabels.add("직원명");
+		columnLabels.add("생년월일");
+		columnLabels.add("소속부서");
+		columnLabels.add("전화번호");
+		
+		columnValues.add(new Object[] {dto.getListNum(),dto.getStaffNum(),dto.getStaffName(),dto.getBirth(),dto.getDepartment(),dto.getTel()});
+		
+		model.put("sheetName",sheetName);
+		model.put("filename", filename);
+		model.put("columnLabels", columnLabels);
+		model.put("columnValues", columnValues);
+		
+		return excelView;
+	}
 }
