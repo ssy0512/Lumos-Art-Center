@@ -1,23 +1,76 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	String cp=request.getContextPath();
+	String cp = request.getContextPath();
 %>
-
-<style>
-
-.academylist-tr td{
-	height: 35px;
+<style type="text/css">
+.academy-top {
+	width: 1580px; height: 50px; margin-top: 40px;
 }
-
-.academylist-tr:hover{
+.academy-top-page {
+	float: left; margin: 10px 0 0 7px;
+	font-size: 12pt;
+}
+.academy-top-search {
+	align-content: center; text-align: center;
+}
+.academylist-table {
+	width: 1580px; margin: 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	overflow: hidden;
+}
+.academylist-table thead tr {
+	height: 41px;
+	border-top: 1px solid #072659;
+	border-bottom: 1px solid #072659;
+}
+.academylist-table tbody tr {
+	height: 41px;
+	border-bottom: 1px solid #cccccc;
+	text-align: center;
+}
+.academylist-table tr:hover {
 	cursor: pointer;
 }
+.academy-top-layout {
+	float: right;
+}
+.academy-top-layout button, .btn {
+	cursor: pointer;
+	font-size: 12pt;
+	font-family: 'Varela Round', sans-serif;
+	display: inline-flex;
+	align-items: center;
+}
+.boxTF {
+	width: 300px;
+}
+.list-btn {
+	width: 96px; height: 30px;
+	margin: 0 5px;
+	align-content: center; align-items: center;
+	background-color: #072659;
+	border: 1px solid #072659;
+	border-radius: 5px;
+	color: #ffffff;
+	cursor: pointer;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+}
+.list-btn:hover {
+	cursor: pointer;
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	transform: scale(1.1);
+	text-decoration: none;
+}
 </style>
-
-<%-- <link rel="stylesheet" href="<%=cp%>/resource/css/adminAcademy.css" type="text/css"> --%>
 
 <script type="text/javascript">
 	function searchList() {
@@ -28,46 +81,56 @@
 
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<c:if test="${dataCount!=0}">
-		<div style="width: 1380px; height: 35px; margin-top: 15px;">
-			<div style="width: 200px; float: left; margin-left: 10px">
-				${dataCount}개(${page}/${total_page} 페이지)
+		<div class="academy-top">
+			<div class="academy-top-page">
+				전체 ${dataCount} (${page}/${total_page} 페이지)
 			</div>
-	<%-- 	<div class="wrapper" >
-		<div class="btn btn--border btn--primary btn--animated">등록하기</div>
-		 onclick="locaion.href='<%=cp%>/admin/menu2/academySchedule/created';" 
-		</div> --%>
-			<div style="float: right; text-align: center;">
+
+			<div class="academy-top-search">
 				<form action="searchForm" action="<%=cp%>/admin/menu2/academySchedule/academylist" method="post">
 					<select name="searchKey" class="selectField">
+						<option value="academyNum">강의번호</option>
 						<option value="academyName">강의명</option>
-						<option value="roomName">강의실명</option>
-						<option value="startDate">강의시작일</option>
 						<option value="instName">강사명</option>
-					</select> <input type="text" name="searchValue" class="boxTF">
-					<button type="button" class="btn" onclick="searchList()" style="width: 60px;">검색</button>
+					</select>
+					<input type="text" name="searchValue" class="boxTF">
+					<button type="button" class="btn" onclick="searchList()" style="margin: 5px">&nbsp;검색&nbsp;</button>
+					
+					<div class="academy-top-layout">
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academylist';">
+							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
+								&nbsp;&nbsp;목록형&nbsp;&nbsp;
+						</button>
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academyCards';">
+							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
+								&nbsp;&nbsp;앨범형&nbsp;&nbsp;
+						</button>
+					</div>
 				</form>
 			</div>
 		</div>
-		<div style="clear: both; margin-top: 5px;">
-			<table style="width: 1380px; margin: 0px; border-spacing: 0px; border-collapse: collapse;">
-				<thead style="background-color: #efefef;">
-					<tr style="height: 30px;">
-						<th style="width: 100px;">번호</th>
-						<th style="width: 200px;">강의명</th>
+		
+		<div style="clear: both; margin-top: 20px; font-size: 12pt;">
+			<table class="academylist-table">
+				<thead>
+					<tr>
+						<th style="width: 90px;">번호</th>
+						<th style="width: 300px;">강의명</th>
 						<th style="width: 150px;">강의실</th>
-						<th style="width: 130px;">강의시작일</th>
-						<th style="width: 130px;">강의마감일</th>
-						<th style="width: 100px;">강의시작시간</th>
-						<th style="width: 100px;">강의종료시간</th>
-						<th style="width: 100px;">강의요일</th>
-						<th style="width: 130px;">수강료</th>
-						<th style="width: 100px;">강사명</th>
+						<th style="width: 150px;">강의시작</th>
+						<th style="width: 150px;">강의마감</th>
+						<th style="width: 150px;">시작시간</th>
+						<th style="width: 150px;">종료시간</th>
+						<th style="width: 150px;">강의일</th>
+						<th style="width: 150px;">가격</th>
+						<th style="width: 150px;">강사명</th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="dto" items="${list}">
-						<tr class="academylist" align="center" style="border-bottom: 1px solid #cccccc; height:40px;"
-							onclick="location.href='<%=cp%>/admin/menu2/academySchedule/article?&page=${page}&listNum=${dto.listNum}'">
+						<tr
+							onclick="location.href='<%=cp%>/admin/menu2/academySchedule/article?&page=${page}&listNum=${dto.listNum}';">
 							<td>${dto.listNum}</td>
 							<td>${dto.academyName}</td>
 							<td>${dto.roomName}</td>
@@ -81,23 +144,11 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-				
 			</table>
-	<table style="width:100%; margin:10px auto; border-spacing:0px">
-		<tr height="40">
-				<td align="left" width="100">
-					<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academylist';">새로고침</button>
-				</td>
-				<td align="right" width="100">
-					<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/created';">등록하기</button>
-				</td>
-		</tr>
-	</table>
 		</div>
 	</c:if>
-	
-	<div class="paging"
-		style="text-align: center; min-height: 50px; line-height: 50px;">
+
+	<div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
 		<c:if test="${dataCount==0}">등록된 강의가 없습니다.</c:if>
 		<c:if test="${dataCount!=0}">${paging}</c:if>
 	</div>
