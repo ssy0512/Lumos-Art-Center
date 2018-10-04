@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+.selectDate{
+	font-weight:bold;
+	font-size:13pt;
+	border-bottom:2px solid #434343;
+	margin-bottom:15px;
+	line-height: 30px;
+}

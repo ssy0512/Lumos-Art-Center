@@ -17,14 +17,6 @@
 	</select>
 
 	<select id="listYear" parameterType="map" resultType="com.sp.sch.Schedule">
-<!-- 		SELECT concertNum, concertName,genre,ch.hallName
-			,TO_CHAR(concertStart,'RR-MM') concertStart,TO_CHAR(concertEnd,'RR-MM') concertEnd
-		FROM concert c
-		JOIN concertHall ch ON c.hallNum=ch.hallNum
-        WHERE TO_CHAR(concertStart,'YYYYMM')&gt;= TO_CHAR(#{startDay},'YYYYMM')
-        	AND TO_CHAR(concertEnd,'YYYYMM') &lt;= TO_CHAR(#{endDay},'YYYYMM')
-   		ORDER BY ch.hallName ASC, concertStart ASC -->
-   		
    		SELECT concertNum, concertName,genre,ch.hallName
 			,TO_CHAR(concertStart,'MM-DD') concertStart,TO_CHAR(concertEnd,'MM-DD') concertEnd,
 			TO_CHAR(concertEnd,'MM') endmonth, TO_CHAR(concertStart,'MM') startmonth
