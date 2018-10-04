@@ -9,6 +9,21 @@
                     WHERE userId=#{userId}
     </update>
     
+    <select id="isMemberUserId" parameterType="com.sp.member.Member" resultType="Integer">
+        SELECT count(*) totalCount from member1 
+                    WHERE userId=#{userId}
+    </select>
+    
+    <select id="isCompayChargeId" parameterType="com.sp.member.MemberCompanyCharge" resultType="Integer">
+        SELECT count(*) totalCount from CompanyCharge 
+                    WHERE chargeId=#{chargeId}
+    </select>
+    
+    
+    <update id="updateCompanyLastLoginDate" parameterType="String">
+        UPDATE companyCharge SET lastLoginDate=SYSDATE 
+                    WHERE chargeId=#{userId}
+    </update>
     
    
    <select id="readMember" resultType="com.sp.member.Member" parameterType="String">
@@ -19,7 +34,7 @@
             WHERE userId = #{userId} 
    </select>
 
-   
+  
    
    <select id="readMypageMember" resultType="com.sp.member.Member" parameterType="String">
    SELECT email, phone, zip, address1, address2 
@@ -27,14 +42,9 @@
    WHERE userId = #{userId} 
    </select>
    
-   <select id="findMemberId" resultType="com.sp.member.Member" parameterType="com.sp.member.Member">
-   SELECT member2.userId 
-	  FROM member1, member2
-      WHERE member1.userId = member2.userId
-      AND member1.userName = #{userName}
-      AND member2.email = #{email}
-   </select>
-  
+
+   
+   
    
    <select id="readCompanyMember" resultType="com.sp.member.MemberCompanyCharge" parameterType="String">
 	   SELECT chargeId, chargeName, chargePwd, 
@@ -48,38 +58,9 @@
    		SELECT COUNT(*) IS_MEMBER FROM MEMBER1 WHERE USERID = #{userId} 
    </select>
 
-      
-   <select id="readMemberSeq" resultType="int">
-   		SELECT MEMBER_SEQ.NEXTVAL MEMBER_SEQ FROM DUAL
-   </select>
-   
-   <select id="insertMember" parameterType="com.sp.member.Member" resultType="int">
-	    INSERT ALL
-	    INTO member (memberIndex, memberShip) VALUES (#{memberIndex}, 1)
-	    INTO member1 
-	    (memberIndex, userId, userName, userPwd, ENABLED, CREATEDDATE) 
-	    VALUES 
-	    (#{memberIndex},#{userId},#{userName},#{userPwd}, 1, SYSDATE)
-	    INTO member2 (userId, birth, email, phone, zip, address1, address2)
-	    VALUES
-	    (#{userId},#{birth},#{email},#{phone},#{zip},#{address1},#{address2}) 
-	    SELECT 1 FROM DUAL  
-    	
-	</select>
-	
 
-	<update id="updateMember" parameterType="com.sp.member.Member">
-	     UPDATE member2 
-	     SET 
-	     email=#{email}
-	     ,phone=#{phone}
-	     ,zip=#{zip}
-	     ,address1=#{address1}
-	     ,address2=#{address2}
-	     WHERE userId=#{userId}
-	</update>
-	
-	
+ 
+
    
     <!-- 어쏘러티(권한) 테이블 -->    
 	<!--

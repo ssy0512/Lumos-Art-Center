@@ -1,16 +1,25 @@
 package com.sp.member;
 
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sp.notice.NoticeService;
+import com.sun.media.jai.util.Service;
 
 
 @Controller("member.memberController")
@@ -94,22 +103,62 @@ public class MemberController {
 
 	@RequestMapping(value="/member/find_password" , method=RequestMethod.GET)
 	public String memberFindPasswordForm(Model model) {
-		
-		return null;
+		model.addAttribute("mode","created");
+
+		return".member.find_password";
 	}
 
-	
+	// 임시 패스워드 메일 발송 
 	@RequestMapping(value="/member/find_password" , method=RequestMethod.POST)
-	public String memberFindPassword() throws Exception{
+	public String memberFindPassword(
+			@RequestParam(value="member_type" , defaultValue="1") int member_type,
+			@RequestParam(value="userId" , defaultValue="") String userId,
+			@RequestParam(value="email", defaultValue="") String email,
+			HttpServletRequest req,
+			Model model) throws Exception{
 
-		
-		return null; 
+		model.addAttribute("mode","created");
+
+		StringBuffer sb = new StringBuffer();
+
+		// password generate
+		Random r=new Random();
+		String randomNum=""+r.nextInt(10000);
+
+		if (randomNum.length()!=5){
+			int addNum=5-randomNum.length();
+			if (addNum>0){
+				for (int i=0;i<addNum;i++){
+					randomNum="0"+randomNum;
+				}
+			}
+		}
+
+		String randomPassword = "pwd" + randomNum;
+		String password = bcryptEncoder.encode(randomPassword);
+
+
+		int exist = service.updateMemberPassword(userId, email, password, member_type);
+		if(exist == 1)
+		{
+			MemberEmail emailUtil = new MemberEmail();
+			emailUtil.mailSend(email, randomPassword);
+
+			sb.append("신규 생성 패스워스가 메일로 전달되었습니다 : " + email);
+		}
+		else
+			sb.append("회원 정보를 찾을 수 없습니다.");
+
+		model.addAttribute("message", sb.toString());
+
+		return".member.member_find_ok"; 
 	}
 
 	@RequestMapping(value="/member/member_company" , method=RequestMethod.GET)
-	public String memberComapnyForm() {
+	public String memberComapnyForm(Model model) {
+		model.addAttribute("mode","created");
 
-		return null;
+		return".member.member_company";
 
 	}
 
@@ -117,7 +166,7 @@ public class MemberController {
 	public String memberJoinForm(Model model) {
 		model.addAttribute("mode","created");
 
-		return ".member.join";
+		return".member.join";
 
 	}
 
@@ -154,10 +203,36 @@ public class MemberController {
 
 
 	@RequestMapping(value="/member/member_company" , method=RequestMethod.POST)
-	public String memberCompanySubmit()
+	public String memberCompanySubmit(
+			MemberCompany dto
+			,Model model
+			)
 	{
 
-		return null; 
+		StringBuffer sb = new StringBuffer();
+
+		try
+		{			
+			
+
+			String encPwd = bcryptEncoder.encode(dto.mainChargeDTO.getChargePwd());
+			dto.setChargePwd(encPwd);
+
+			service.insertMemberCompany(dto);
+			
+			sb.append(dto.mainChargeDTO.getChargeName()+"님의 회원 가입이 정삭적으로 처리되었습니다.<br>");
+			sb.append("메인화면으로 이동하여 로그인 하시기 바랍니다.<br>");
+
+		}
+		catch(Exception e)
+		{
+			sb.append("회원가입이 실패했습니다. 관리자에게 문의하세요.<br/>");
+		}
+
+		model.addAttribute("message", sb.toString());
+		model.addAttribute("title", "회원 가입");
+
+		return ".member.member_ok"; 
 	}
 
 
@@ -168,6 +243,30 @@ public class MemberController {
 		}
 		return ".member.login";
 	}
+	
+
+	@RequestMapping(value="/member/userIdCheck", produces="text/html; charset=utf-8")
+	@ResponseBody
+	public String checkUserId(
+			String login_error
+			, Model model
+			,@RequestParam(value="type" , defaultValue="0") String type
+			,@RequestParam(value="id" , defaultValue="0") String id
+			) 
+			throws Exception {
+
+	
+		int isExist = 0;
+		
+		if(type.equals("member") == true)
+			isExist = service.isMemberUserId(id);
+		else
+			isExist = service.isCompayChargeId(id);
+	
+		return isExist + "";
+		
+	}
+
 
 	@RequestMapping(value="/mypage/member/member" , method=RequestMethod.GET)
 	public String mypageMemberForm(
@@ -187,8 +286,13 @@ public class MemberController {
 		}
 		else
 		{
-		
-
+			MemberCompany dto = service.readMypageCompanyByUserId(userId);
+			MemberCompanyCharge chargeDto = service.readMypageCompanyChargeByUserId(userId);
+			
+			model.addAttribute("companyDTO", dto);
+			model.addAttribute("companyChargeDTO", chargeDto);
+			
+			movePage = ".mypage.member.member_company";
 		}
 		
 		return movePage;
@@ -232,13 +336,41 @@ public class MemberController {
 
 
 	
-	@RequestMapping(value="" , method=RequestMethod.POST)
-	public String mypageMemberCompany() {
-		
-		return null;
+	@RequestMapping(value="/mypage/member/member_company" , method=RequestMethod.POST)
+	public String mypageMemberCompany(
+			@RequestParam(value="changepwd" , defaultValue="0") int changepwd
+			,MemberCompanyCharge dto
+			,Model model
+			,HttpSession session) {
+		model.addAttribute("mode","created");
+
+		String password = "";
+
+		try
+		{
+			
+
+			SessionInfo info=(SessionInfo)session.getAttribute("member");
+			String userId = info.getUserId();
+			dto.setChargeId(userId);
+
+			service.updateMemberCompany(dto);
+			
+			if(changepwd == 1)
+			{
+				password = bcryptEncoder.encode(dto.getChargePwd());
+				dto.setChargePwd(password);
+				
+				service.updateMypageMemberCompanyPassword(dto);
+			}
+			
+		}
+		catch(Exception e)
+		{
+
+		}
+		return".mainMainLayout";
 	}
 
-		
-	
 	
 }

@@ -156,6 +156,7 @@ function changeEmail() {
     }
 }
 
+
 function userIdCheck() {
 	var str = $("#userId").val();
 	str = str.trim();
@@ -164,21 +165,22 @@ function userIdCheck() {
 		return;
 	}
 	
-	var url="<%=cp%>/member/userIdCheck";
-	var q="userId="+str;
+	var url="<%=cp%>/member/userIdCheck?type=member&id=" + str;
+	//var q="userId="+str;
 	
 	$.ajax({
 		type:"post"
 		,url:url
-		,data:q
+		//,data:q
 		,dataType:"json"
 		,success:function(data) {
-			var p=data.passed;
-			if(p=="true") {
+			var value = $.trim(data);
+
+			if(value=="0") {
 				var s="<span style='color:blue;font-weight:bold;'>"+str+"</span> 아이디는 사용 가능합니다.";
 				$("#userId").parent().next(".help-block").html(s);
 			} else {
-				var s="<span style='color:red;font-weight:bold;'>"+str+"</span> 아이디는 사용할 수 없습니다.";
+				var s="<span style='color:red;font-weight:bold;'>"+str+"</span> 는 이미 존재하는 아이디입니다.";
 				$("#userId").parent().next(".help-block").html(s);
 				$("#userId").val("");
 				$("#userId").focus();
@@ -191,6 +193,27 @@ function userIdCheck() {
 	
 }
 
+
+function checkPhoneNumber() {
+  	var x = document.getElementById("phone");
+  	x.value = x.value.replace(/[^0-9]/g, '');
+  	var tmp = "";
+
+  	if (x.value.length > 3 && x.value.length <= 7) {
+  		tmp += x.value.substr(0, 3);
+  		tmp += '-';
+  		tmp += x.value.substr(3);
+  		x.value = tmp;
+  	} else if (x.value.length > 7) {
+  		tmp += x.value.substr(0, 3);
+  		tmp += '-';
+  		tmp += x.value.substr(3, 4);
+  		tmp += '-';
+  		tmp += x.value.substr(7);
+  		x.value = tmp;
+  	}
+  }
+  
 </script>
 
 <br/>
@@ -209,7 +232,7 @@ function userIdCheck() {
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            <input type="text" name="userId" id="userId" value="${dto.userId}"
-                         onchange="userIdCheck();" style="width: 95%;"
+                         onblur="userIdCheck();" style="width: 95%;"
                          ${mode=="update" ? "readonly='readonly' ":""}
                          maxlength="15" class="boxTF" placeholder="아이디">
 			        </p>
@@ -301,7 +324,7 @@ function userIdCheck() {
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            
-			            <input type="text" name="phone" value="${dto.phone}" class="boxTF" maxlength="13">
+			            <input type="text" name="phone" id="phone" onkeyup="checkPhoneNumber()" value="${dto.phone}" class="boxTF" maxlength="13">
 
 			        </p>
 			      </td>

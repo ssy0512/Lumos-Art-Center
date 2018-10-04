@@ -112,5 +112,4 @@ public class Member {
 		this.authority = authority;
 	}
 	
-	
 }

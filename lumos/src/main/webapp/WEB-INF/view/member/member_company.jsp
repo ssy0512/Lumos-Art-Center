@@ -81,14 +81,14 @@ function memberOk() {
 	if(strlen < 5 || strlen > 20)
 	{
 		alert("아이디는 5~10자 이내입니다.");
-		f.userId.focus();
+		f.chargeId.focus();
 		return;
 	}
 	
 	var chk = str.substring(0,1);
 	if(!chk.match(/[a-z]/)) { 
 		alert("아이디는 첫글자는 영문자이어야 합니다.");
-		f.userId.focus();
+		f.chargeId.focus();
 		return;
 	}
 	
@@ -155,6 +155,66 @@ function changeEmail() {
 }
 
 
+
+function userIdCheck() {
+	var str = $("#chargeId").val();
+	str = str.trim();
+	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+		$("#chargeId").focus();
+		return;
+	}
+	
+	var url="<%=cp%>/member/userIdCheck?type=company&id=" + str;
+	//var q="userId="+str;
+	
+	$.ajax({
+		type:"post"
+		,url:url
+		//,data:q
+		,dataType:"json"
+		,success:function(data) {
+			var value = $.trim(data);
+
+			if(value=="0") {
+				var s="<span style='color:blue;font-weight:bold;'>"+str+"</span> 아이디는 사용 가능합니다.";
+				$("#chargeId").parent().next(".help-block").html(s);
+			} else {
+				var s="<span style='color:red;font-weight:bold;'>"+str+"</span> 는 이미 존재하는 아이디입니다.";
+				$("#chargeId").parent().next(".help-block").html(s);
+				$("#chargeId").val("");
+				$("#chargeId").focus();
+			}
+		}
+	    ,error:function(e) {
+	    	console.log(e.responseText);
+	    }
+	});
+	
+}
+
+
+
+function checkPhoneNumber() {
+  	var x = document.getElementById("chargeTel");
+  	x.value = x.value.replace(/[^0-9]/g, '');
+  	var tmp = "";
+
+  	if (x.value.length > 3 && x.value.length <= 7) {
+  		tmp += x.value.substr(0, 3);
+  		tmp += '-';
+  		tmp += x.value.substr(3);
+  		x.value = tmp;
+  	} else if (x.value.length > 7) {
+  		tmp += x.value.substr(0, 3);
+  		tmp += '-';
+  		tmp += x.value.substr(3, 4);
+  		tmp += '-';
+  		tmp += x.value.substr(7);
+  		x.value = tmp;
+  	}
+  }
+  
+
 </script>
 
 <br/>
@@ -173,7 +233,7 @@ function changeEmail() {
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            <input type="text" name="companyName" id="companyName" value="${dto.companyName}"
-                         onchange="" style="width: 95%;"
+                         onblur="" style="width: 95%;"
                          ${mode=="update" ? "readonly='readonly' ":""}
                          maxlength="15" class="boxTF" placeholder="기업명">
 			        </p>
@@ -299,7 +359,7 @@ function changeEmail() {
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            <input type="text" name="chargeId" id="chargeId" value="${dto.chargeId}"
-                         onchange="" style="width: 95%;"
+                         onblur="userIdCheck();" style="width: 95%;"
                          ${mode=="update" ? "readonly='readonly' ":""}
                          maxlength="15" class="boxTF" placeholder="아이디">
 			        </p>
@@ -343,7 +403,7 @@ function changeEmail() {
 			      <td style="padding: 0 0 15px 15px;">
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            
-			            <input type="text" name="chargeTel" value="${dto.chargeTel}" class="boxTF" maxlength="11">
+			            <input type="text" name="chargeTel" id="chargeTel" onkeyup="checkPhoneNumber()" value="${dto.chargeTel}" class="boxTF" maxlength="13">
 			      
 			        </p>
 			      </td>

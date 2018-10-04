@@ -1,11 +1,13 @@
 package com.sp.member;
 
 import java.util.List;
-import java.util.Map;
 
 public interface MemberService {
 	
 	public int isMember(String userId);
+	
+	public int isMemberUserId(String id) throws Exception ;
+	public int isCompayChargeId(String id) throws Exception ;
 	
 	public Member readMember(String userId);
 	public Member readMypageMember(String userId);
@@ -37,7 +39,6 @@ public interface MemberService {
 	public int insertAuthority(Member dto);
 	public int updateAuthority(Member dto);
 	public List<Member> listAuthority(String userId);
-
 	
-
+	
 }

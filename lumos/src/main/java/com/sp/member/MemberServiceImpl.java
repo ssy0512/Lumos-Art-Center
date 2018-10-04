@@ -288,9 +288,13 @@ try {
 
 	@Override
 	public int updateCompnayLastLoginDate(String userId) {
-	
-		return 0;
-	
+		
+		int result=0;
+		try {
+			result=dao.updateData("member.updateCompanyLastLoginDate", userId);
+		} catch (Exception e) {
+		}
+		return result;
 	}
 	
 	@Override
@@ -345,5 +349,53 @@ try {
 
 		return isMember;
 	}
+
+	@Override
+	public int isMemberUserId(String id) throws Exception {
+		// TODO Auto-generated method stub
+		int isExist = 0;
+		
+		Member dto = new Member();
+		dto.setUserId(id);
+		
+		try {
+			isExist = dao.selectOne("member.isMemberUserId", dto);
+		} catch (Exception e) {
+		}
+
+		return isExist;
+	}
+
+	@Override
+	public int isCompayChargeId(String id) throws Exception {
+		// TODO Auto-generated method stub
+		int isExist = 0;
+		
+		MemberCompanyCharge dto = new MemberCompanyCharge();
+		dto.setChargeId(id);
+		
+		try {
+			isExist = dao.selectOne("member.isCompayChargeId", dto);
+		} catch (Exception e) {
+		}
+
+		return isExist;
+	}
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+	
 
 }

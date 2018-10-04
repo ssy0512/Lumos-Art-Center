@@ -17,6 +17,6 @@
 	<a href="<%=cp%>/member/member"><img src="<%=cp%>/resource/images/lumos/join-private.png" width="300"/></a>
 	    		&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 	    		&nbsp;&nbsp;&nbsp;
-	    <a href="<%=cp%>/"><img src="<%=cp%>/resource/images/lumos/join-company.png" width="300"/></a><br>
+	    <a href="<%=cp%>/member/member_company"><img src="<%=cp%>/resource/images/lumos/join-company.png" width="300"/></a><br>
     </div>
 </div>
