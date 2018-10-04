@@ -30,6 +30,7 @@
 		<intercept-url pattern="/main/**" access="permitAll"/>
 		<intercept-url pattern="/member/login" access="permitAll"/>
 		<intercept-url pattern="/member/member" access="permitAll"/>
+		<intercept-url pattern="/member/**" access="permitAll"/>
 		<intercept-url pattern="/member/userIdCheck" access="permitAll"/>
 		<intercept-url pattern="/member/logout" access="permitAll"/>
 		<intercept-url pattern="/resource/**" access="permitAll"/>
@@ -69,10 +70,30 @@
     <!-- 객체가 생성되었다 -->
     
     <jdbc-user-service data-source-ref="dataSource" id="userService"
-    				   users-by-username-query="SELECT userId username, userPwd password,
-    				   enabled FROM member1 WHERE userId=?"
-    				   authorities-by-username-query="SELECT userId username, authority FROM memberAuthority
-    				   where userId=?"/> <!-- 서비스객체 생성완료 -->
+                   users-by-username-query="
+                     SELECT username, password, enabled FROM
+                  (
+                  SELECT M1.USERID username, M1.USERPWD password, M1.enabled
+                  FROM MEMBER1 M1
+                  UNION ALL
+                  SELECT C1.CHARGEID USERID, C1.CHARGEPWD password, C1.enabled
+                  FROM COMPANYCHARGE C1
+                  ) TEMP_TABLE
+                  WHERE username=?
+                   "
+                   authorities-by-username-query=
+                   "
+                    SELECT username, authority FROM
+                  (
+                  SELECT M1.userId username, M1.authority
+                  FROM memberAuthority M1
+                  UNION ALL
+                  SELECT C1.userId username, C1.authority
+                  FROM companyAuthority C1
+                  ) TEMP_TABLE
+                  WHERE username=?
+                   "/>
+                   <!-- 서비스객체 생성완료 -->
     
     <!-- BCrypt:패스워드 암호화에 특화된 password hashing function -->
     <beans:bean id="bCryptPassword" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>

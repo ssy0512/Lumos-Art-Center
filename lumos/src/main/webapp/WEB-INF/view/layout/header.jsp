@@ -21,7 +21,7 @@
 			<ul class="header-right">
 				<c:if test="${empty sessionScope.member}">
 					<li><a href="<%=cp%>/member/login">로그인</a></li>
-					<li><a href="<%=cp%>/">회원가입</a></li>
+					<li><a href="<%=cp%>/member/join">회원가입</a></li>
 				</c:if>
 				<c:if test="${not empty sessionScope.member}">
 					<span style="color:#434343; font-weight: bold;">${sessionScope.member.userName}</span>님

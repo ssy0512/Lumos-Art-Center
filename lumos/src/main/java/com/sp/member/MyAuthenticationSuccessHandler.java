@@ -19,17 +19,32 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
 		
-		String userId=authentication.getName();
-		service.updateLastLoginDate(userId);
+		Member memberDTO = null;
+		MemberCompanyCharge memberCompnayChargeDTO = null;
 		
 		HttpSession session=request.getSession();
-		Member dto=service.readMember(userId);
 		SessionInfo info=new SessionInfo();
+		
+		String userId=authentication.getName();
 		info.setUserId(userId);
-		info.setUserName(dto.getUserName());
+		
+		int isMember = service.isMember(userId);
+		
+		if(isMember == 1) // 개인
+		{
+			service.updateLastLoginDate(userId);
+			memberDTO=service.readMember(userId);
+			info.setUserName(memberDTO.getUserName());
+			
+		}
+		else // 기업
+		{
+			service.updateCompnayLastLoginDate(userId);
+			memberCompnayChargeDTO=service.readCompanyMember(userId);
+			info.setUserName(memberCompnayChargeDTO.getChargeName());
+		}
 		
 		session.setAttribute("member", info); //세션의 정보 저장
-		
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 	

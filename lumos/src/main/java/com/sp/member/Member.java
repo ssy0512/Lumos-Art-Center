@@ -14,6 +14,7 @@ public class Member {
 	private String address2;
 	private String authority;
 	
+	
 	public long getMemberIndex() {
 		return memberIndex;
 	}

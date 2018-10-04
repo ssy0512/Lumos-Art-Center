@@ -9,6 +9,7 @@
                     WHERE userId=#{userId}
     </update>
     
+    
    
    <select id="readMember" resultType="com.sp.member.Member" parameterType="String">
    SELECT userId, userName, userPwd, 
@@ -17,12 +18,84 @@
             FROM member1
             WHERE userId = #{userId} 
    </select>
+
    
+   
+   <select id="readMypageMember" resultType="com.sp.member.Member" parameterType="String">
+   SELECT email, phone, zip, address1, address2 
+   FROM member2
+   WHERE userId = #{userId} 
+   </select>
+   
+   <select id="findMemberId" resultType="com.sp.member.Member" parameterType="com.sp.member.Member">
+   SELECT member2.userId 
+	  FROM member1, member2
+      WHERE member1.userId = member2.userId
+      AND member1.userName = #{userName}
+      AND member2.email = #{email}
+   </select>
+  
+   
+   <select id="readCompanyMember" resultType="com.sp.member.MemberCompanyCharge" parameterType="String">
+	   SELECT chargeId, chargeName, chargePwd, 
+		NVL(enabled, 0) enabled, 
+		createdDate, modifyDate, lastLoginDate
+		FROM companyCharge
+            WHERE chargeId = #{userId} 
+   </select>
+   
+   <select id="isMember" resultType="int" parameterType="String">
+   		SELECT COUNT(*) IS_MEMBER FROM MEMBER1 WHERE USERID = #{userId} 
+   </select>
+
+      
+   <select id="readMemberSeq" resultType="int">
+   		SELECT MEMBER_SEQ.NEXTVAL MEMBER_SEQ FROM DUAL
+   </select>
+   
+   <select id="insertMember" parameterType="com.sp.member.Member" resultType="int">
+	    INSERT ALL
+	    INTO member (memberIndex, memberShip) VALUES (#{memberIndex}, 1)
+	    INTO member1 
+	    (memberIndex, userId, userName, userPwd, ENABLED, CREATEDDATE) 
+	    VALUES 
+	    (#{memberIndex},#{userId},#{userName},#{userPwd}, 1, SYSDATE)
+	    INTO member2 (userId, birth, email, phone, zip, address1, address2)
+	    VALUES
+	    (#{userId},#{birth},#{email},#{phone},#{zip},#{address1},#{address2}) 
+	    SELECT 1 FROM DUAL  
+    	
+	</select>
+	
+
+	<update id="updateMember" parameterType="com.sp.member.Member">
+	     UPDATE member2 
+	     SET 
+	     email=#{email}
+	     ,phone=#{phone}
+	     ,zip=#{zip}
+	     ,address1=#{address1}
+	     ,address2=#{address2}
+	     WHERE userId=#{userId}
+	</update>
+	
+	
    
     <!-- 어쏘러티(권한) 테이블 -->    
+	<!--
 	<insert id="insertAuthority" parameterType="com.sp.member.Member">
 	    INSERT INTO memberAuthority(userId, authority)
 	        VALUES (#{userId}, #{authority})
+	</insert>
+    -->
+    <insert id="insertAuthority" parameterType="com.sp.member.Member">
+	    INSERT INTO memberAuthority(userId, authority)
+	        VALUES (#{userId}, 'ROLE_USER')
+	</insert>
+     
+    <insert id="insertCompanyAuthority" parameterType="com.sp.member.MemberCompanyCharge">
+	    INSERT INTO companyAuthority(userId, authority)
+	        VALUES (#{chargeId}, 'ROLE_USER')
 	</insert>
      
 	<select id="listAuthority" parameterType="String" resultType="com.sp.member.Member">
