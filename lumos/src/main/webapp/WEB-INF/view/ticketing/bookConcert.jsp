@@ -8,6 +8,29 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/ticketingLayout.css" type="text/css">
 <script type="text/javascript">
 $( function() {
+	var availableDates = new Array();
+	<c:forEach items="${list}" var="dto">
+		availableDates.push("${dto.sessionDate}");
+	</c:forEach>
+		console.log(availableDates);
+	
+	// 회차있는 날 외에는 선택막기
+	function available(date) {
+	    var m = date.getMonth()+1, d = date.getDate(), y = date.getFullYear();
+	    if(m<10){
+	    	m="0"+m;
+	    }
+	    if(d<10){
+	    	d="0"+d;
+	    }
+	    var ymd=y+"-"+m+"-"+d;
+	    if($.inArray(ymd,availableDates)>=0){
+	    	return[true,"",""];
+	    }else{
+	    	return [false,"",""];
+	    }
+	}	
+
 	$.datepicker.regional['ko'] = {
 			closeText: '닫기',
 			prevText: '이전달',
@@ -25,8 +48,8 @@ $( function() {
 			firstDay: 0,
 			isRTL: false,
 			showMonthAfterYear: true,
-			yearSuffix: '년',
-			beforShowDay:disableAllTheseDays
+			yearSuffix: '년'
+			
 	};
 	
 	$.datepicker.setDefaults($.datepicker.regional['ko']);
@@ -36,29 +59,12 @@ $( function() {
     		var date=dateAsString.replace(/-/g,"");
 			var url="<%=cp%>/ticketing/sessionList?sessionDate="+date;
     		ajaxText(url);
-    	}		 
+    	},
+    	beforeShowDay:available
     }); 
 });
 
-var disabledDays = "${list.sessionDate}";
 
-//이전 날짜들은 선택막기
-function noBefore(date){
-    if (date < new Date())
-        return [false];
-    return [true];
-}
-
-// 회차있는 날 외에는 선택막기
-function disableAllTheseDays(date) {
-    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
-    for (i = 0; i < disabledDays.length; i++) {
-        if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
-            return [false];
-        }
-    }
-    return [true];
-}
 
 function ajaxText(url) {
 	$.ajax({
@@ -82,6 +88,9 @@ function ajaxText(url) {
 			<p class="selectDate" style="">관람일 선택</p>
 			<div id="datepicker"></div>  
 		</div> 
-		<div id="session-list" style="float:left;margin-left:15px;"></div>
+		<div id="session-list" style="float:left;margin-left:15px;">
+		<p class="selectDate" style="">회차(관람시간)</p>
+			
+		</div>
 	</form>
 </div>

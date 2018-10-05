@@ -1,6 +1,9 @@
 package com.sp.ticketing;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,15 @@ public class TicketingController {
 			@RequestParam(value="concertNum") int concertNum,
 			Model model) {
 		
-		List<Ticketing> list=service.sessionList(concertNum);
+		Calendar cal = Calendar.getInstance();
+		
+		String today = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1,
+				cal.get(Calendar.DATE));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("today", today);
+		map.put("concertNum",concertNum);
+		List<Ticketing> list=service.sessionList(map);
 		
 		model.addAttribute("list",list);
 		

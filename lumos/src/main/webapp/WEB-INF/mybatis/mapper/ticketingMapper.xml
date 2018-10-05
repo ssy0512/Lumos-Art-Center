@@ -2,14 +2,14 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ticketing">
-	<select id="sessionList" parameterType="Integer" resultType="com.sp.ticketing.Ticketing">
+	<select id="sessionList" parameterType="map" resultType="com.sp.ticketing.Ticketing">
 		SELECT * FROM(
-			SELECT sessionNum,sessionDate,cs.concertNum		            
+			SELECT sessionNum,TO_CHAR(sessionDate,'YYYY-MM-DD') sessionDate,cs.concertNum		            
 				,ROW_NUMBER() OVER(partition by sessionDate order by sessionDate) cnt
 			FROM concertSession cs
 			JOIN concert c on cs.concertNum=c.concertNum
 			)
-		WHERE cnt=1 AND concertNum=#{concertNum}
+		WHERE cnt=1 AND concertNum=#{concertNum} AND sessionDate > #{today}
 		ORDER BY sessionDate ASC, concertNum DESC 
 	</select>
 </mapper>

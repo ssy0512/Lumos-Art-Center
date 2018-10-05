@@ -1,6 +1,7 @@
 package com.sp.ticketing;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,10 @@ public class TicketingServiceImpl implements TicketingService{
 	private CommonDAO dao;
 	
 	@Override
-	public List<Ticketing> sessionList(int concertNum) {
+	public List<Ticketing> sessionList(Map<String, Object> map) {
 		List<Ticketing> list=null;
 		try {
-			list=dao.selectList("ticketing.sessionList",concertNum);
+			list=dao.selectList("ticketing.sessionList",map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
