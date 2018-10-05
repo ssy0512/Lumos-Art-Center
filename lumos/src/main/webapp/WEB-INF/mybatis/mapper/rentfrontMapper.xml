@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rentnotice">
+	<select id="listHall" parameterType="map" resultType="com.sp.rentfront.notice.Notice">
+		 SELECT hallNum, hallName
+		              FROM concertHall 
+		              ORDER BY hallNum ASC
+	</select>
+	
+	<select id="listExHall" parameterType="map" resultType="com.sp.rentfront.notice.Notice">
+         SELECT hallNum, hallName
+              FROM exhibitHall 
+              ORDER BY hallNum ASC	
+	</select>
+	
+	<select id="dataCount" resultType="Integer" parameterType="map">
+		SELECT NVL(Count(*),0) FROM concertHall
+	</select>
+
+</mapper>
