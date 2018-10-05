@@ -68,7 +68,7 @@
 		    </li>
 		    <li><a href="<%=cp%>/rentfront/main">대관안내</a>
 		    	<ul>
-		        	<li><a href="<%=cp%>/rentfront/notice/list">대관일정</a></li>
+		        	<li><a href="<%=cp%>/rentfront/main">대관일정</a></li>
 	        		<li><a href="<%=cp%>/">대관료 안내</a></li>
 	        		<li><a href="<%=cp%>/">대관신청</a></li>
 		        </ul>
