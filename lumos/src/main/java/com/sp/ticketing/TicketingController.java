@@ -41,6 +41,25 @@ public class TicketingController {
 	public String sessionList(
 			@RequestParam(value="sessionDate") String sessionDate,
 			Model model) throws Exception {
+		
+		List<Ticketing> timeList=service.timeList(sessionDate);
+		
+		model.addAttribute("timeList",timeList);
+		return "/ticketing/sessionList";
+	}
+	
+	@RequestMapping(value="/ticketing/seatList")
+	public String seatList(
+			@RequestParam(value="sessionTime") String sessionTime,
+			@RequestParam(value="sessionNum") int sessionNum,
+			Model model) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("sessionTime", sessionTime);
+		map.put("sessionNum", sessionNum);
+		List<Ticketing> seatList=service.seatList(map);
+		
+		model.addAttribute("seatList",seatList);
 		return "/ticketing/sessionList";
 	}
 }

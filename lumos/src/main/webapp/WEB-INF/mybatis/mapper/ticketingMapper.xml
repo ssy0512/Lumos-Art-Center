@@ -12,4 +12,20 @@
 		WHERE cnt=1 AND concertNum=#{concertNum} AND sessionDate > #{today}
 		ORDER BY sessionDate ASC, concertNum DESC 
 	</select>
+	
+	<select id="timeList" parameterType="String" resultType="com.sp.ticketing.Ticketing">
+		SELECT sessionTime,sessionNum
+		FROM concertSession 
+		WHERE sessionDate=#{sessionDate}
+	</select>
+	
+	<select id="seatList" parameterType="String" resultType="com.sp.ticketing.Ticketing">
+		SELECT sl.seatLevel,sc.seatCount,sl.color 
+		FROM seatLevel sl
+		JOIN seatCount sc ON sl.seatLevelNum=sc.seatLevelNum
+		JOIN concertHall ch ON sc.hallNum=ch.hallNum
+		JOIN concert c ON c.hallNum=ch.hallNum
+		
+		WHERE sessionNum=#{sessionNum}
+	</select>
 </mapper>

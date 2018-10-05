@@ -23,5 +23,27 @@ public class TicketingServiceImpl implements TicketingService{
 		}
 		return list;
 	}
+
+	@Override
+	public List<Ticketing> timeList(String sessionDate) {
+		List<Ticketing> list=null;
+		try {
+			list=dao.selectList("ticketing.timeList",sessionDate);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public List<Ticketing> seatList(Map<String, Object> map) {
+		List<Ticketing> list=null;
+		try {
+			list=dao.selectList("ticketing.seatList",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
 	
 }
