@@ -13,8 +13,7 @@
 
 </script>
 
-<div id="tab-contents" style="clear: both; margin: 100px; width: 900px;">
-
+<div id="tab-content" style="clear: both; margin: 100px; width: 900px;">
 
   <p style="font-size: 18px; font-weight: 600; margin: -40px 0px 40px 0px;">공연장</p>
 
@@ -61,3 +60,4 @@
 	</table>
 	
 </div>
+

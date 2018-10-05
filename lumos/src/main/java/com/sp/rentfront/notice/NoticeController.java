@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.common.MyUtil;
 
-@Controller("notice.NoticeController")
+@Controller("rentnotice.NoticeController")
 public class NoticeController {
 	@Autowired
 	private NoticeService service;
@@ -60,5 +61,12 @@ public class NoticeController {
 		model.addAttribute("total_page", total_page);
 		
 		return "rentfront/notice/list";
+	}
+	
+	@RequestMapping(value="/rentfront/notice/created", method=RequestMethod.GET)
+	public String createdForm(Model model) throws Exception {
+		
+		
+		return "rentfront/notice/created";
 	}
 }
