@@ -19,13 +19,26 @@
 		WHERE sessionDate=#{sessionDate}
 	</select>
 	
-	<select id="seatList" parameterType="String" resultType="com.sp.ticketing.Ticketing">
-		SELECT sl.seatLevel,sc.seatCount,sl.color 
+	<select id="seatList" parameterType="map" resultType="com.sp.ticketing.Ticketing">
+		SELECT sl.seatLevel,sc.seatCount,sl.color,sessionNum,c.hallNum
 		FROM seatLevel sl
 		JOIN seatCount sc ON sl.seatLevelNum=sc.seatLevelNum
-		JOIN concertHall ch ON sc.hallNum=ch.hallNum
-		JOIN concert c ON c.hallNum=ch.hallNum
-		
+		JOIN concert c ON sc.hallNum=c.hallNum
+		JOIN concertSession cs ON cs.concertNum=c.concertNum
+		WHERE sessionNum=#{sessionNum}
+		ORDER BY seatCount desc
+	</select>
+	
+	<select id="seatCount" parameterType="Integer" resultType="Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM bookConcert
+		WHERE sessionNum=#{sessionNum}
+	</select>
+	
+	<select id="selectHallNum" parameterType="Integer" resultType="Integer">
+		SELECT hallNum
+		FROM concertSession cs
+		JOIN concert c ON cs.concertNum=c.concertNum
 		WHERE sessionNum=#{sessionNum}
 	</select>
 </mapper>

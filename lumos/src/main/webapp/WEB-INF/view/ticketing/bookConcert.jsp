@@ -12,6 +12,7 @@
 } 
 </style>
 <script type="text/javascript">
+var hallNum;
 $( function() {
 	var availableDates = new Array();
 	<c:forEach items="${list}" var="dto">
@@ -62,6 +63,7 @@ $( function() {
     		var dateAsString = dateText;
     		var date=dateAsString.replace(/-/g,"");
 			var url="<%=cp%>/ticketing/sessionList?sessionDate="+date;
+
     		ajaxText(url);
     	},
     	beforeShowDay:available
@@ -88,7 +90,7 @@ function ajaxText(url) {
 $(function() {
 	$("body").on("click",".timeList",function(){
 		var $tab=$(this).attr("data-time");
-		alert($tab);
+		var dateValue=$( "#datepicker" ).val();
 		$(".timeList").each(function(){
 			$(this).removeClass("active");
 		});
@@ -96,17 +98,20 @@ $(function() {
 		$("#time-"+$tab).addClass("active");
 		
 		var time=$(this).text();
-		var url="<%=cp%>/ticketing/seatList?sessionNum="+$tab+"&sessionTime="+time;
-		ajaxData(url);
+		var url="<%=cp%>/ticketing/seatList?sessionNum="+$tab+"&sessionDate="+dateValue;
+		ajaxData(url, $tab);
 	});
 });
 
-function ajaxData(url) {
+function ajaxData(url, tab) {
 	$.ajax({
 		type:"get"
 		,url:url
 		,success:function(data) {
-			$("#session-list").html(data);	
+			$("#session-list").html(data);
+			$("#time-"+tab).addClass("active");
+			
+			hallNum=$("#hallNum").val();
 		}
 		,beforeSend : function(jqXHR) {
 	        jqXHR.setRequestHeader("AJAX", true);
@@ -115,6 +120,9 @@ function ajaxData(url) {
 	    	console.log(jqXHR.responseText);
 	    }
 	});
+}
+function goBook(){
+	location.href="<%=cp%>/ticketing/selectSeat?hallNum="+hallNum;
 }
 </script>
 <div class="body-container" style="margin-top:15px;width:620px;margin-bottom:15px;">
@@ -141,5 +149,13 @@ function ajaxData(url) {
 	<%-- 유의사항 --%>
 	<div style="width:100%;border: 1px solid #d3d3d3;border-radius: 4px;float:left;margin-bottom:15px;">
 		<jsp:include page="/WEB-INF/view/layout/notice.jsp"></jsp:include>
+	</div>
+	<div style="text-align:center;">
+		<button type="button" class="adBtn" onclick="history.back();">
+			이전단계
+		</button>
+		<button type="button" class="adBtn" onclick="goBook();">
+			다음단계
+		</button>
 	</div>
 </div>

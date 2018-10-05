@@ -28,8 +28,20 @@
 	cursor: pointer;
 }
 
-.seatList{
-	
+.adBtn {
+	width: 150px;
+	height : 33px;
+    color: #ffffff;
+    font-weight: 700;
+    border: 1px solid #aa1717; 
+    background-color: #aa1717;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.adBtn:hover {
+	color: #aa1717;
+	background-color: #ffffff;
 }
 
 .h3{

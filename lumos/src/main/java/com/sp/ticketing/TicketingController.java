@@ -50,15 +50,28 @@ public class TicketingController {
 	
 	@RequestMapping(value="/ticketing/seatList")
 	public String seatList(
-			@RequestParam(value="sessionTime") String sessionTime,
+			@RequestParam(value="sessionDate") String sessionDate,
 			@RequestParam(value="sessionNum") int sessionNum,
+			Ticketing ticket,
 			Model model) throws Exception {
 		
+		List<Ticketing> timeList=service.timeList(sessionDate);
+		
 		Map<String, Object> map = new HashMap<>();
-		map.put("sessionTime", sessionTime);
+		map.put("sessionDate", sessionDate);
 		map.put("sessionNum", sessionNum);
+		
+		int hallNum=service.selectHallNum(sessionNum);
+		ticket.setHallNum(hallNum);
+		
 		List<Ticketing> seatList=service.seatList(map);
 		
+
+		// 결제 후 남은 좌석 count
+		/*int count=service.seatCount(sessionNum);*/
+		
+		model.addAttribute("ticket",ticket);
+		model.addAttribute("timeList",timeList);
 		model.addAttribute("seatList",seatList);
 		return "/ticketing/sessionList";
 	}

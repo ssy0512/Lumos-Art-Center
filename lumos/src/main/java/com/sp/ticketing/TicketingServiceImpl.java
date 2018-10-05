@@ -45,5 +45,27 @@ public class TicketingServiceImpl implements TicketingService{
 		}
 		return list;
 	}
+
+	@Override
+	public int seatCount(int sessionNum) {
+		int result=0;
+		try {
+			result=dao.selectOne("ticketing.seatCount",sessionNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int selectHallNum(int sessionNum) {
+		int result=0;
+		try {
+			result=dao.selectOne("ticketing.selectHallNum",sessionNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 	
 }

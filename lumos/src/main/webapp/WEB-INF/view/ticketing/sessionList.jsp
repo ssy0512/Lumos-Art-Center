@@ -5,6 +5,17 @@
 <%
    String cp=request.getContextPath();
 %>
+<script type="text/javascript">
+$(".timeList").click(function(){
+				var $tab=$(this).attr("data-time");
+				var dateValue=$( "#datepicker" ).val();
+				$(".timeList").each(function(){
+					$(this).removeClass("active");
+				});
+				
+				$("#time-"+$tab).addClass("active");
+			});
+ </script>
 <div style="width:150px;height:300px;float:left;">
 	<p class="selectDate" style="width:150px;">회차(관람시간)</p>
 	<c:if test="${empty timeList }">
@@ -24,7 +35,10 @@
 		</div>
 	</c:if>
 	<c:forEach var="vo" items="${seatList }">
-		<p style="width:10px; height:10px; background-color:${vo.color};"/>
-		<p class="seatList">${vo.seatLevel} | ${vo.seatCount }석</p>
+	<div style="float:left;">
+		<p style="width:10px; height:10px; background-color:${vo.color};float:left;margin: 5px;"/>
+		<p class="seatList" style="float:left;">${vo.seatLevel} | ${vo.seatCount }석</p>
+	</div>
 	</c:forEach>
+	<input type="hidden" id="hallNum" value=${ticket.hallNum }>
 </div>

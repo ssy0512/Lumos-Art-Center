@@ -7,4 +7,6 @@ public interface TicketingService {
 	public List<Ticketing> sessionList(Map<String, Object> map);
 	public List<Ticketing> timeList(String sessionDate);
 	public List<Ticketing> seatList(Map<String, Object> map);
+	public int seatCount(int sessionNum);
+	public int selectHallNum(int sessionNum);
 }
