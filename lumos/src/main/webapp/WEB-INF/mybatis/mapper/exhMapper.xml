@@ -82,4 +82,8 @@
 	]]>
 </select>
 	
+	<!-- <select id="exhibitPrice" parameterType="Integer" resultType="String">
+		SELECT  audience||' '||exprice priceString FROM EXHIBITprice ep
+    JOIN AUDIENCELEVEL al ON ep.AUDIENCELEVELNUM = al.AUDIENCELEVELNUM WHERE ep.exhibitNum=#{exhibitNum} ORDER BY ep.AUDIENCELEVELNUM ASC
+	</select> -->
 </mapper>

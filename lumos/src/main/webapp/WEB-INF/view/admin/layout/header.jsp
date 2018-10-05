@@ -68,7 +68,7 @@
         	</a>
         </li>
         <li class="basicBox">
-        	<a href="<%=cp%>/admin/customer/question/questionAdmin">
+        	<a href="<%=cp%>/admin/customer/question/questionlist">
         		<span style="font-size: 13pt">고객관리</span>
         		<svg width="130" height="50" viewBox="0 0 130 35" xmlns="http://www.w3.org/2000/svg">
 			    	<rect x='0' y='0' fill='none' width='130' height='40'/>

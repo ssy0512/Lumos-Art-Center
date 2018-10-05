@@ -25,7 +25,7 @@ public class AdminQuestionController {
 	
 	@Autowired
 	private MyUtil util;
-	@RequestMapping(value="/admin/customer/question/questionAdmin")
+	@RequestMapping(value="/admin/customer/question/questionlist")
 	public String list(
 			@RequestParam(value="page",defaultValue="1") int current_page,
 			@RequestParam(value="searchKey",defaultValue="title") String searchKey,
@@ -73,7 +73,7 @@ public class AdminQuestionController {
 		model.addAttribute("page",current_page);
 		model.addAttribute("paging",paging);
 		model.addAttribute("total_page",total_page);
-		return ".admin4.customer.question.questionAdmin";
+		return ".admin4.customer.question.questionlist";
 	}
 	
 	

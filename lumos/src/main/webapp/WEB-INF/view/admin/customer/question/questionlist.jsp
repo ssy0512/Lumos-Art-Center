@@ -6,39 +6,39 @@
 	String cp = request.getContextPath();
 %>
 <style type="text/css">
-.academy-top {
-	width: 1580px; height: 50px; margin-top: 40px;
+.question-top {
+	width: 1380px; height: 50px; margin-top: 40px;
 }
-.academy-top-page {
+.question-top-page {
 	float: left; margin: 10px 0 0 7px;
 	font-size: 12pt;
 }
-.academy-top-search {
-	align-content: center; text-align: center;
+.question-top-search {
+	align-content: center; text-align: right;
 }
-.academylist-table {
-	width: 1580px; margin: 0px;
+.questionlist-table {
+	width: 1380px; margin: 0px;
 	border-spacing: 0px;
 	border-collapse: collapse;
 	overflow: hidden;
 }
-.academylist-table thead tr {
+.questionlist-table thead tr {
 	height: 41px;
 	border-top: 1px solid #072659;
 	border-bottom: 1px solid #072659;
 }
-.academylist-table tbody tr {
+.questionlist-table tbody tr {
 	height: 41px;
 	border-bottom: 1px solid #cccccc;
 	text-align: center;
 }
-.academylist-table tr:hover {
+.questionlist-table tr:hover {
 	cursor: pointer;
 }
-.academy-top-layout {
+.question-top-layout {
 	float: right;
 }
-.academy-top-layout button, .btn {
+.question-top-layout button, .btn {
 	cursor: pointer;
 	font-size: 12pt;
 	font-family: 'Varela Round', sans-serif;
@@ -81,86 +81,72 @@
 
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<c:if test="${dataCount!=0}">
-		<div class="academy-top">
-			<div class="academy-top-page">
+		<div class="question-top">
+			<div class="question-top-page">
 				전체 ${dataCount} (${page}/${total_page} 페이지)
 			</div>
 
-			<div class="academy-top-search">
-				<form action="searchForm" action="<%=cp%>/admin/menu2/academySchedule/academylist" method="post">
+			<div class="question-top-search">
+				<form action="searchForm" action="<%=cp%>/admin/customer/question/questionlist" method="post" style="align:right;">
 					<select name="searchKey" class="selectField">
-						<option value="academyNum">강의번호</option>
-						<option value="academyName">강의명</option>
-						<option value="instName">강사명</option>
+						<option value="title">제목</option>
+						<option value="userName">작성자</option>
+						<option value="created">등록일</option>
 					</select>
 					<input type="text" name="searchValue" class="boxTF">
 					<button type="button" class="btn" onclick="searchList()" style="margin: 5px">&nbsp;검색&nbsp;</button>
 					
-					<div class="academy-top-layout">
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academylist';">
+				<%-- 	<div class="company-top-layout">
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
 							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
 								&nbsp;&nbsp;목록형&nbsp;&nbsp;
 						</button>
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academyCards';">
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyListCards';">
 							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
 								&nbsp;&nbsp;앨범형&nbsp;&nbsp;
 						</button>
-					</div>
+					</div> --%>
 				</form>
 			</div>
 		</div>
 		
 		<div style="clear: both; margin-top: 20px; font-size: 12pt;">
-			<table class="academylist-table">
+			<table class="questionlist-table">
 				<thead>
 					<tr>
-						<th style="width: 90px;">번호</th>
-						<th style="width: 300px;">강의명</th>
-						<th style="width: 150px;">강의실</th>
-						<th style="width: 150px;">강의시작</th>
-						<th style="width: 150px;">강의마감</th>
-						<th style="width: 150px;">시작시간</th>
-						<th style="width: 150px;">종료시간</th>
-						<th style="width: 150px;">강의일</th>
-						<th style="width: 150px;">가격</th>
-						<th style="width: 150px;">강사명</th>
-						
+						<th style="width: 90px;">글번호</th>
+						<th style="width: 150px;">카테고리</th>
+						<th style="width: 300px;">글제목</th>
+						<th style="width: 150px;">작성자</th>
+						<th style="width: 150px;">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="dto" items="${list}">
 						<tr
-							onclick="location.href='<%=cp%>/admin/menu2/academySchedule/article?&page=${page}&academyNum=${dto.academyNum}';">
+							onclick="location.href='<%=cp%>/customerCenter/questions/article?&page=${page}&postNum=${dto.postNum}';">
 							<td>${dto.listNum}</td>
-							<td>${dto.academyName}</td>
-							<td>${dto.roomName}</td>
-							<td>${dto.startDate}</td>
-							<td>${dto.endDate}</td>
-							<td>${dto.startTime}</td>
-							<td>${dto.endTime}</td>
-							<td>${dto.lectureDay}</td>
-							<td>${dto.price}</td>
-							<td>${dto.instName}</td>
+							<td>${dto.qCategoryName}</td>
+							 <td align="left" style="padding-left: 10px;width:150px;">
+					           <c:forEach var="n" begin="1" end="${dto.depth}">
+					               &nbsp;
+					           </c:forEach>
+					           <c:if test="${dto.depth!=0}">
+					            <img src='<%=cp%>/resource/images/re.gif'>
+					           </c:if>
+           						<a style="margin-left:150px;" href="javascript:location.href='<%=cp%>/customerCenter/questions/article('${dto.postNum}', '${page}')';">${dto.title}</a>
+     						 </td>
+							<td>${dto.userName}</td>
+							<td>${dto.created}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
-				<table style="width:1580px; margin:10px auto; border-spacing:0px">
-		<tr height="40">
-				<td align="left" width="100">
-					<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academylist';">새로고침</button>
-				</td>
-				<td align="right" width="100">
-					<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/created';">등록하기</button>
-				</td>
-		</tr>
-	</table>
 		</div>
 	</c:if>
 
 	<div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-		<c:if test="${dataCount==0}">등록된 강의가 없습니다.</c:if>
+		<c:if test="${dataCount==0}">등록된 게시물이 없습니다.</c:if>
 		<c:if test="${dataCount!=0}">${paging}</c:if>
 	</div>
 </div>

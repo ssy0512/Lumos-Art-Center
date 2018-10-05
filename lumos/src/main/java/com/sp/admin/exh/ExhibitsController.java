@@ -146,7 +146,7 @@ public class ExhibitsController {
 	public String createdOk (Exhibits dto,HttpSession session) throws Exception {
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"image";
+		String pathname=root+"uploads"+File.separator+"images";
 		service.insertExhibits(dto, pathname);
 		
 		return "redirect:/admin/menu2/exhibitSchedule/exhibitlist";

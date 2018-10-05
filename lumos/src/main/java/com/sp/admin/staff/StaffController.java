@@ -94,7 +94,7 @@ public class StaffController {
 		return ".admin4.staff.staffs.stafflist";
 	}
 	
-	@RequestMapping(value="/admin/staff/staffs/artice")
+	@RequestMapping(value="/admin/staff/staffs/article")
 	public String article (@RequestParam(value="staffNum") int staffNum,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="searchKey", defaultValue="staffName") String searchKey,
@@ -108,6 +108,7 @@ public class StaffController {
 		}
 		
 		Staff dto = service.readStaff(staffNum);
+		
 		if(dto==null)
 			return "redirect:admin/staff/stafflist?"+query;
 		model.addAttribute("dto",dto);
@@ -173,7 +174,7 @@ public class StaffController {
 	}
 	
 	@RequestMapping(value="/admin/staff/staffs/excel")
-	public View excel (Staff dto,Map<String, Object> model) throws Exception{
+	public View excel (Map<String, Object> model) throws Exception{
 		
 		String sheetName = "직원목록";
 		String filename="staff.xls";
@@ -186,8 +187,12 @@ public class StaffController {
 		columnLabels.add("생년월일");
 		columnLabels.add("소속부서");
 		columnLabels.add("전화번호");
+		columnLabels.add("이메일");
 		
-		columnValues.add(new Object[] {dto.getListNum(),dto.getStaffNum(),dto.getStaffName(),dto.getBirth(),dto.getDepartment(),dto.getTel()});
+		List<Staff> list=service.listAllStaff();
+		for(Staff dto:list) {
+			columnValues.add(new Object[] {dto.getListNum(),dto.getStaffNum(),dto.getStaffName(),dto.getBirth(),dto.getDepartment(),dto.getTel(),dto.getEmail()});
+		}
 		
 		model.put("sheetName",sheetName);
 		model.put("filename", filename);

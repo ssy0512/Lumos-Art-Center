@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sp.academy.Academy;
-import com.sp.admin.membership.Company;
 import com.sp.common.MyUtil;
 import com.sp.member.SessionInfo;
 
@@ -221,7 +219,7 @@ public class AcademiesController {
 	public String createdOk (Academies dto,HttpSession session) throws Exception {
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"photo";
+		String pathname=root+"uploads"+File.separator+"images";
 		service.insertAcademies(dto, pathname);
 		
 		return "redirect:/admin4/menu2/academySchedule/academylist";

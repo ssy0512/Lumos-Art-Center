@@ -44,6 +44,17 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
+	public List<Staff> listAllStaff() {
+		 List<Staff>  list = null;
+		 try {
+			list=dao.selectList("staff.listAllStaff");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+	
+	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result = 0;
 		try {

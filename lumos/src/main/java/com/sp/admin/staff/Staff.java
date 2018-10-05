@@ -11,8 +11,15 @@ public class Staff {
 	private String department;
 	private String tel;
 	private String staffImage;
+	private String email;
 	private MultipartFile upload;
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public MultipartFile getUpload() {
 		return upload;
 	}

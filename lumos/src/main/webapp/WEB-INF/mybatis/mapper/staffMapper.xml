@@ -28,12 +28,12 @@
 </select>
 
 <insert id="insertStaff" parameterType="com.sp.admin.staff.Staff">
-	INSERT INTO staff(staffNum, staffName, birth, department,tel,staffImage)
-		VALUES (staff_seq.NEXTVAL, #{staffName},#{birth},#{department},#{tel}, #{staffImage})
+	INSERT INTO staff(staffNum, staffName, birth, department,tel,email,staffImage)
+		VALUES (staff_seq.NEXTVAL, #{staffName},#{birth},#{department},#{tel}, #{email}, #{staffImage})
 </insert>
 
 <update id="updateStaff" parameterType="com.sp.admin.staff.Staff">
-	UPDATE staff SET staffName=#{staffName}, birth=#{birth}, department=#{department}, tel=#{tel}, staffImage=#{staffImage}
+	UPDATE staff SET staffName=#{staffName}, birth=#{birth}, department=#{department}, tel=#{tel}, email=#{email}, staffImage=#{staffImage}
 </update>
 
 <delete id="deleteStaff" parameterType="Integer">
@@ -41,17 +41,17 @@
 </delete>
 
 <select id="readStaff" parameterType="Integer" resultType="com.sp.admin.staff.Staff">
-		SELECT staffNum, staffName, to_char(birth, 'YYYY-MM-DD') birth, 
-				department, tel, staffImage 
+		SELECT staffNum, staffName, TO_CHAR(birth, 'YYYY-MM-DD') birth, 
+				department, tel, email,staffImage 
 				FROM staff
-				WHERE staffNum=#{staffNum};
+				WHERE staffNum=#{staffNum}
 </select>
 
 <select id="listStaff" parameterType="map" resultType="com.sp.admin.staff.Staff">
 SELECT * FROM (
 	SELECT ROWNUM rnum, tb. * FROM (
 		SELECT staffNum, staffName, to_char(birth, 'YYYY-MM-DD') birth, 
-				department, tel, staffImage 
+				department, tel, email,staffImage 
 				FROM staff
 				ORDER BY staffNum DESC
 		<![CDATA[
@@ -59,4 +59,15 @@ SELECT * FROM (
 		) WHERE rnum >= #{start}
 	]]>
 </select>
+
+<select id="listAllStaff" resultType="com.sp.admin.staff.Staff">
+    SELECT ROWNUM listNum, tb.* FROM (
+		SELECT staffNum, staffName, to_char(birth, 'YYYY-MM-DD') birth, 
+				department, tel,email, staffImage 
+				FROM staff
+				ORDER BY staffNum DESC
+	) tb
+</select>
+
+
 </mapper>

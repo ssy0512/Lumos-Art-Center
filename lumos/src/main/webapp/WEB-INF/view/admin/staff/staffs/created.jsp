@@ -45,6 +45,12 @@
 		 f.tel.focus();
 		 return;
 	 }
+	 str=f.email.value;
+	 if(!str){
+		 alert("이메일을 입력하십시오.");
+		 f.email.focus();
+		 return;
+	 }
 	 
 	 var mode="${mode}";
 	 if(mode=="created"|| mode=="update" && f.upload.value!=""){
@@ -61,7 +67,7 @@
  $(function(){
 	$("#regDate").datepicker({
 		dateFormat:"yy-mm-dd",
-		minDate:"-20Y",
+		minDate:"-60Y",
 		maxDate:"+1Y",
 		closeText:"닫기",
 		dayNames:['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],
@@ -112,6 +118,14 @@
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="tel" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.tel}">
 			      </td>
+			  </tr>
+			   
+			   <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">이메일</td>
+			      <td style="padding-left:10px;"> 
+			        <input type="text" name="email" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.email}">
+			      </td>
+			 
 			  </tr>
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">사원이미지</td>

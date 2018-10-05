@@ -7,6 +7,7 @@ public interface StaffService {
 	
 	public int insertStaff(Staff dto, String pathname);
 	public List<Staff> listStaff(Map<String, Object> map);
+	public List<Staff> listAllStaff();
 	
 	public int dataCount(Map<String, Object> map);
 	public Staff readStaff(int staffNum);
