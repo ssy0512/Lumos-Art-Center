@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sp.exhibit.schedule.DateUtil;
 import com.sp.member.SessionInfo;
 
 
@@ -28,6 +29,9 @@ public class ExhibitController {
 	public String main() {
 		return ".exhibit.main";
 	}
+	
+	@Autowired
+	private DateUtil dUtil;
 	
 	@RequestMapping(value="/admin/exhibit/update", method=RequestMethod.GET)
 	public String updateForm(
@@ -180,6 +184,17 @@ public class ExhibitController {
 			return "redirect:/exhibit/main";
 		}
 		
+		List<String> listPrice = exhibitService.exhibitPrice(num);
+		
+		if(listPrice!=null && listPrice.size() > 0) {
+			String exPriceString="";
+			for( String s : listPrice) {
+				exPriceString+=s+" / ";
+			}
+			exPriceString=exPriceString.substring(0, exPriceString.length()-3);
+			dto.setExPriceString(exPriceString);
+		}
+		
 		model.addAttribute("dto", dto);
 		return ".exhibit.article";
 	}
@@ -191,6 +206,13 @@ public class ExhibitController {
 			Model model) throws Exception {
 		Exhibit dto = exhibitService.readBoard(num);
 		if(dto==null) {
+			return "redirect:/exhibit/main";
+		}
+		
+		int sysDate = Integer.parseInt(dUtil.syadateToString().replaceAll("-", ""));
+		int srtDate = Integer.parseInt(dto.getExhibitStart().replaceAll("-", ""));
+		
+		if(sysDate<srtDate) {
 			return "redirect:/exhibit/main";
 		}
 		
@@ -225,7 +247,7 @@ public class ExhibitController {
 		exhibitService.insertExReview(dto);
 		
 		model.addAttribute("dto", dto);
-		return "redirect:/exhibit/main";
+		return "redirect:/mypage/myActivity";
 	}
 	
 	@RequestMapping(value = "/exhibitReview/update", method = RequestMethod.POST)
@@ -237,6 +259,6 @@ public class ExhibitController {
 		dto.setExreviewNum(num);
 		exhibitService.updateExReview(dto);
 		
-		return "redirect:/exhibit/main";
+		return "redirect:/mypage/myActivity";
 	}
 }
