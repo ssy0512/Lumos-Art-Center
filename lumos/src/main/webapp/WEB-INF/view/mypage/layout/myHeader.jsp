@@ -17,16 +17,18 @@
 					<li style="margin-left: 20px;">
 						<p>
 							<span style="padding-right: 15px;">로그인 사용자</span>
-							<span style="padding-left: 15px;"> : 김자바(kimjava123)</span>
+							<span style="padding-left: 15px;"> : ${sessionScope.member.userName}(${sessionScope.member.userId})</span>
 						</p>
 						<p style="margin-top: 10px;">
 							<span style="">사용가능 포인트</span>
 							<span style="padding-left: 15px;"> : 0</span>
 						</p>
 					</li>
+					<!--
 					<li style="margin-left: 15px;">
 						<a href="" class="titlebtn">개인정보수정</a>
 					</li>
+					-->
 				</ul>
 				<ul class="right">
 					<li style="padding-left: 50px;">
@@ -35,12 +37,12 @@
 					<li style="margin-left: 20px;">
 						<p>회원구분
 							<span style="padding-left: 15px;">
-								: 개인회원
+								: ${sessionScope.member.membertype}
 							</span>
 						</p>
 						<p style="margin-top: 15px;">가입일자
 							<span style="padding-left: 15px;">
-								: 2018.09.28
+								: ${sessionScope.member.createdDate}
 							</span>
 						</p>
 					</li>

@@ -4,6 +4,10 @@ public class SessionInfo {
 	private String userId;
 	private String userName;
 	private int memberLevel;
+	private String createdDate;
+	private String membertype; 
+	private String mileage;
+	
 	
 	public String getUserId() {
 		return userId;
@@ -22,5 +26,23 @@ public class SessionInfo {
 	}
 	public void setMemberLevel(int memberLevel) {
 		this.memberLevel = memberLevel;
+	}
+	public String getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+	public String getMembertype() {
+		return membertype;
+	}
+	public void setMembertype(String membertype) {
+		this.membertype = membertype;
+	}
+	public String getMileage() {
+		return mileage;
+	}
+	public void setMileage(String mileage) {
+		this.mileage = mileage;
 	}
 }

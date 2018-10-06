@@ -35,13 +35,17 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 			service.updateLastLoginDate(userId);
 			memberDTO=service.readMember(userId);
 			info.setUserName(memberDTO.getUserName());
-			
+			info.setCreatedDate(memberDTO.getCreatedDate());
+			info.setMembertype("개인 회원");
+						
 		}
 		else // 기업
 		{
 			service.updateCompnayLastLoginDate(userId);
 			memberCompnayChargeDTO=service.readCompanyMember(userId);
 			info.setUserName(memberCompnayChargeDTO.getChargeName());
+			info.setCreatedDate(memberCompnayChargeDTO.getCreatedDate());
+			info.setMembertype("기업 회원");
 		}
 		
 		session.setAttribute("member", info); //세션의 정보 저장
