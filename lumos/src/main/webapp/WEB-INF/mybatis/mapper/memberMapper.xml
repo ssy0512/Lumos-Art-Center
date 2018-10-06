@@ -34,7 +34,21 @@
             WHERE userId = #{userId} 
    </select>
 
-  
+   <select id="readMypageCompanyByUserId" resultType="com.sp.member.MemberCompany" parameterType="String">
+   select companyName, repName, repNumber, fax, businessNumber, businessPost, address1, address2 
+	from company1, companyCharge
+	where company1.companyIndex = companyCharge.companyIndex
+	and companyCharge.chargeId=#{userId} 
+   </select>   
+   
+   
+   
+   <select id="readMypageCompanyChargeByUserId" resultType="com.sp.member.MemberCompanyCharge" parameterType="String">
+   select chargeName, chargeTel, chargeEmail 
+   from companyCharge
+	where chargeId=#{userId} 
+   </select>   
+   
    
    <select id="readMypageMember" resultType="com.sp.member.Member" parameterType="String">
    SELECT email, phone, zip, address1, address2 
@@ -42,8 +56,46 @@
    WHERE userId = #{userId} 
    </select>
    
-
+   <select id="findMemberId" resultType="com.sp.member.Member" parameterType="com.sp.member.Member">
+   SELECT member2.userId 
+	  FROM member1, member2
+      WHERE member1.userId = member2.userId
+      AND member1.userName = #{userName}
+      AND member2.email = #{email}
+   </select>
    
+   <select id="findMemberCompanyId" resultType="com.sp.member.MemberCompanyCharge" parameterType="com.sp.member.MemberCompanyCharge">
+   SELECT chargeId 
+	  FROM companyCharge
+      WHERE chargeName = #{chargeName}
+      AND chargeEmail = #{chargeEmail}
+   </select>
+   
+
+	
+   <select id="isMemberForPassword" resultType="int" parameterType="com.sp.member.Member">
+    SELECT count(*) total_count 
+	  FROM member2
+      WHERE userId = #{userId}
+      AND email = #{email}
+   </select>   
+   
+   <select id="isMemberCompanyForPassword" resultType="int" parameterType="com.sp.member.MemberCompanyCharge">
+    SELECT count(*) total_count 
+	  FROM companyCharge
+      WHERE chargeId = #{chargeId}
+      AND chargeEmail = #{chargeEmail}
+   </select>   
+   
+   <update id="updateMemeberPassword" parameterType="com.sp.member.Member">
+	     UPDATE member1 SET userPwd=#{userPwd}
+	         WHERE userId=#{userId}
+	</update>
+	
+	<update id="updateMemeberCompanyPassword" parameterType="com.sp.member.MemberCompanyCharge">
+	     UPDATE companyCharge SET chargePwd=#{chargePwd}
+	         WHERE chargeId=#{chargeId}
+	</update>
    
    
    <select id="readCompanyMember" resultType="com.sp.member.MemberCompanyCharge" parameterType="String">
@@ -58,9 +110,84 @@
    		SELECT COUNT(*) IS_MEMBER FROM MEMBER1 WHERE USERID = #{userId} 
    </select>
 
+   <select id="readMemberCompanySeq" resultType="int">
+   		SELECT COMPANY_SEQ.NEXTVAL MEMBER_SEQ FROM DUAL
+   </select>
+      
+   <select id="readMemberSeq" resultType="int">
+   		SELECT MEMBER_SEQ.NEXTVAL MEMBER_SEQ FROM DUAL
+   </select>
+   
+   <select id="insertMember" parameterType="com.sp.member.Member" resultType="int">
+	    INSERT ALL
+	    INTO member (memberIndex, memberShip) VALUES (#{memberIndex}, 1)
+	    INTO member1 
+	    (memberIndex, userId, userName, userPwd, ENABLED, CREATEDDATE) 
+	    VALUES 
+	    (#{memberIndex},#{userId},#{userName},#{userPwd}, 1, SYSDATE)
+	    INTO member2 (userId, birth, email, phone, zip, address1, address2)
+	    VALUES
+	    (#{userId},#{birth},#{email},#{phone},#{zip},#{address1},#{address2}) 
+	    SELECT 1 FROM DUAL  
+    	
+	</select>
+	
 
- 
-
+	<update id="updateMember" parameterType="com.sp.member.Member">
+	     UPDATE member2 
+	     SET 
+	     email=#{email}
+	     ,phone=#{phone}
+	     ,zip=#{zip}
+	     ,address1=#{address1}
+	     ,address2=#{address2}
+	     WHERE userId=#{userId}
+	</update>
+	
+	
+	<update id="updateMypageMemberPassword" parameterType="com.sp.member.Member">
+	     UPDATE member1 
+	     SET 
+	     userPwd=#{userPwd}
+	     WHERE userId=#{userId}
+	</update>
+	
+	
+	<update id="updateMemberCompany" parameterType="com.sp.member.MemberCompanyCharge">
+	     UPDATE companyCharge 
+	     SET 
+	     chargeName=#{chargeName}
+	     ,chargeTel=#{chargeTel}
+	     ,chargeEmail=#{chargeEmail}
+	     WHERE chargeId=#{chargeId}
+	</update>
+	
+	<update id="updateMypageMemberCompanyPassword" parameterType="com.sp.member.MemberCompanyCharge">
+	     UPDATE companyCharge 
+	     SET 
+	     chargePwd=#{chargePwd}
+	     WHERE chargeId=#{chargeId}
+	</update>
+	
+	
+	
+	<select id="insertMemberCompany" parameterType="com.sp.member.MemberCompany" resultType="int">
+	    INSERT ALL
+	    INTO company (companyIndex, cmemberShip) VALUES (#{companyIndex}, 1)
+	    INTO company1 
+	    (companyIndex, companyName, repName, repNumber, fax, businessNumber, businessPost, address1, address2) 
+	    VALUES 
+	    (#{companyIndex},#{companyName},#{repName},#{repNumber},#{fax},#{businessNumber},#{businessPost},#{address1},#{address2})
+	    SELECT 1 FROM DUAL  
+	</select>
+	
+	<insert id="insertMemberCompanyCharge" parameterType="com.sp.member.MemberCompanyCharge">
+	    INSERT INTO companyCharge 
+	    (companyIndex, chargeId, chargeName, chargePwd, chargeTel, chargeEmail, ENABLED, CREATEDDATE) 
+	    VALUES 
+	    (#{companyIndex},#{chargeId},#{chargeName},#{chargePwd},#{chargeTel},#{chargeEmail},1,SYSDATE)
+	</insert>
+	
    
     <!-- 어쏘러티(권한) 테이블 -->    
 	<!--
