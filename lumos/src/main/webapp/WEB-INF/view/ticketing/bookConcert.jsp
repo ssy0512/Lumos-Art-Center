@@ -13,6 +13,7 @@
 </style>
 <script type="text/javascript">
 var hallNum;
+var $tab;
 $( function() {
 	var availableDates = new Array();
 	<c:forEach items="${list}" var="dto">
@@ -89,7 +90,7 @@ function ajaxText(url) {
 // 회차에 대한 잔여좌석 정보
 $(function() {
 	$("body").on("click",".timeList",function(){
-		var $tab=$(this).attr("data-time");
+		$tab=$(this).attr("data-time");
 		var dateValue=$( "#datepicker" ).val();
 		$(".timeList").each(function(){
 			$(this).removeClass("active");
@@ -122,7 +123,7 @@ function ajaxData(url, tab) {
 	});
 }
 function goBook(){
-	location.href="<%=cp%>/ticketing/selectSeat?hallNum="+hallNum;
+	location.href="<%=cp%>/ticketing/selectSeat?hallNum="+hallNum+"&sessionNum="+$tab;
 }
 </script>
 <div class="body-container" style="margin-top:15px;width:620px;margin-bottom:15px;">

@@ -65,7 +65,6 @@ public class TicketingController {
 		ticket.setHallNum(hallNum);
 		
 		List<Ticketing> seatList=service.seatList(map);
-		
 
 		// 결제 후 남은 좌석 count
 		/*int count=service.seatCount(sessionNum);*/
@@ -74,5 +73,28 @@ public class TicketingController {
 		model.addAttribute("timeList",timeList);
 		model.addAttribute("seatList",seatList);
 		return "/ticketing/sessionList";
+	}
+	
+	@RequestMapping(value="/ticketing/selectSeat")
+	public String seatSelect(
+			@RequestParam(value="sessionNum") int sessionNum,
+			@RequestParam(value="hallNum") int hallNum,
+			Model model) {
+		
+		model.addAttribute("sessionNum",sessionNum);
+		model.addAttribute("hallNum",hallNum);
+		
+		return ".ticketing.selectSeat";
+	}
+	
+	@RequestMapping(value="/ticketing/book")
+	public String booking(
+			@RequestParam(value="sessionNum") int sessionNum,
+			@RequestParam(value="hallNum") int hallNum,
+			@RequestParam(value="R") String Rlist[],
+			Model model) {
+		System.out.println(Rlist);
+		
+		return ".ticketing.book";
 	}
 }
