@@ -47,9 +47,13 @@ function check() {
          f.eventWin.focus();
          return;
     }
+    
+    if(f.startDate.value > f.eventWin.value || f.endDate.value > f.eventWin.value){
+    	alert("이벤트 발표 날짜는 시작,종료 기간보다 늦을 수 없습니다.");
+    	return;
+    }
 	
     // 스마트에디터 입력 내용
-  
 	str = f.content.value;
     if(!str || str=="<p>&nbsp;</p>") {
         alert("내용을 입력하세요. ");

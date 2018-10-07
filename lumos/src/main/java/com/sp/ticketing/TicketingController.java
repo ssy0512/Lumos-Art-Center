@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller("ticketing.ticketingController")
 public class TicketingController {
@@ -79,7 +80,7 @@ public class TicketingController {
 	public String seatSelect(
 			@RequestParam(value="sessionNum") int sessionNum,
 			@RequestParam(value="hallNum") int hallNum,
-			Model model) {
+			Model model) throws Exception {
 		
 		model.addAttribute("sessionNum",sessionNum);
 		model.addAttribute("hallNum",hallNum);
@@ -91,9 +92,30 @@ public class TicketingController {
 	public String booking(
 			@RequestParam(value="sessionNum") int sessionNum,
 			@RequestParam(value="hallNum") int hallNum,
-			@RequestParam(value="R") String Rlist[],
-			Model model) {
-		System.out.println(Rlist);
+			@RequestParam(value="R", defaultValue="") String[] RList,
+			@RequestParam(value="S", defaultValue="") String[] SList,
+			@RequestParam(value="A", defaultValue="") String[] AList,
+			Model model) throws Exception {
+		String r=null,s=null,a=null;
+		int rcnt=0,scnt=0,acnt=0;
+		for(int i=0;i<RList.length;i++) {
+			r+=RList;
+			rcnt++;
+		}
+		for(int i=0;i<SList.length;i++) {
+			s+=SList;
+			scnt++;
+		}
+		for(int i=0;i<AList.length;i++) {
+			a+=AList;
+			acnt++;
+		}
+		String total=r+s+a;
+		
+		model.addAttribute("total",total);
+		model.addAttribute("rcnt",rcnt);
+		model.addAttribute("scnt",scnt);
+		model.addAttribute("acnt",acnt);
 		
 		return ".ticketing.book";
 	}

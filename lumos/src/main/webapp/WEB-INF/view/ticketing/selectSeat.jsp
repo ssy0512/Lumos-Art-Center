@@ -46,17 +46,6 @@ input[name="A"] + label {
 	margin-bottom:5px; 
 }
  
-input[name="dis"] + label {
-	display: inline-block; 
-	width:44px;  
-	height: 18px; 
-	background: #592ae8;
-	cursor: pointer; 
-	border-radius: 3px;
-}
-input[name="dis"]:checked + label {
-	background:#434343; 
-}
 </style>
 
 <script type="text/javascript">
@@ -72,22 +61,44 @@ function goTicketing(){
 	if(count>5){
 		alert('좌석은 최대 5개까지만 선택하실 수 있습니다.');
 		return;
-	}else if(count=0){
+	}else if(count==0){
 		alert('좌석을 선택해 주세요.');
 		return;
 	}
 	var url="<%=cp%>/ticketing/book";
+	var num=$("input[name=sessionNum]").val();
+	var hnum=$("input[name=hallNum]").val();
 	var query=$('form[name=seatForm]').serialize();
 	
-	location.href=url+"?"+query;
+	url=url+"?sessionNum="+num+"&hallNum="+hnum;
+	
+	$.ajax({
+		type:"get"
+		,url:url
+		,data:query
+		,success:function(data) {
+			location.href=url;
+		}
+		,beforeSend : function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		location.href="<%=cp%>/member/login";
+	    		return;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
 }
 
 </script>
 
-<div class="body-container" style="margin-top:15px;"> 
+<div class="body-container" style="margin-top:15px;width:1400px;">  
 <form name="seatForm" action="" method="post">
-	<div style="font-size:20pt;background-color:#cccccc;border-radius: 4px;height:115px;text-align:center;line-height:105px;margin-bottom:15px;">stage</div>
+	<c:if test="${hallNum==5 || hallNum==6 }">
 	<div class="eventHall-56" style="text-align:center;">
+	<div style="font-size:20pt;background-color:#cccccc;border-radius: 4px;height:115px;text-align:center;line-height:105px;margin-bottom:15px;">stage</div>
 		
 		<p style="padding:20px 0px; text-align:left;">
 			<span style="font-weight:bold;margin:40px;">3F</span>  
@@ -97,19 +108,17 @@ function goTicketing(){
 		<div class="third" style="border:1px solid #d3d3d3; border-top:none;width:1020px;margin-bottom:15px;">
 			<div class="second" style="border:1px solid #d3d3d3; border-top:none; width:800px;margin:0px 100px 0px 100px;">
 				<div class="first" style="border:1px solid #d3d3d3; border-top:none; width:600px;margin:0px 100px 0px 100px;padding-bottom:30px;">
-					<input type="checkbox" id="dis1" name="dis" value="dis1"/><label for="dis1">장</label>&nbsp;&nbsp;
-					<input type="checkbox" id="dis2" name="dis" value="dis2"/><label for="dis2">장</label>&nbsp;
-					<c:forEach var="i" begin="6" end="10" step="1">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="4" end="10" step="1">
 						<input type="checkbox" id="1check${i}" value="1check-${i}" name="R"/>
 						<label for="1check${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<c:forEach var="i" begin="1" end="5" step="1">
+					<c:forEach var="i" begin="1" end="7" step="1">
 						<input type="checkbox" id="1check${i}" value="1check-${i}" name="R"/>
 						<label for="1check${i}">${i}</label>
 					</c:forEach>
-					<input type="checkbox" id="dis3" name="dis" value="dis3"/><label for="dis3">장</label>
-					<input type="checkbox" id="dis4" name="dis" value="dis4"/><label for="dis4">장</label><br>
+					<br>
 					<c:forEach var="j" begin="2" end="5" step="1">
 						<c:forEach var="i" begin="1" end="10" step="1">
 							<input type="checkbox" id="acheck${j}${i}" value="acheck-${j}-${i}" name="R"/>
@@ -171,15 +180,203 @@ function goTicketing(){
 				</c:forEach>
 			</div>
 		</div>
+	</div>
+	</c:if>
+	
+	<c:if test="${hallNum==3 || hallNum==4 }">
+	<div class="eventHall-34" style="text-align:center;">
+	<div style="font-size:20pt;background-color:#cccccc;border-radius: 4px;height:115px;text-align:center;line-height:105px;margin-bottom:15px;">stage</div>
 		
-		<div style="text-align:center;">
-			<button type="button" class="adBtn" onclick="history.back();">
-				이전단계
-			</button>
-			<button type="button" class="adBtn" onclick="goTicketing();">
-				다음단계
-			</button>
+		<p style="padding:20px 0px; text-align:left;">
+			<span style="font-weight:bold;margin:40px;">2F</span>
+			<span style="font-weight:bold;margin:395px;">1F</span><br>
+		</p>
+			<div class="second" style="border:1px solid #d3d3d3; border-top:none; width:1020px;">
+				<div class="first" style="border:1px solid #d3d3d3; border-top:none; width:800px;margin:0px 100px 0px 100px;padding-bottom:30px;">
+					<c:forEach var="j" begin="1" end="7" step="1">
+						<c:forEach var="i" begin="1" end="6" step="1">
+							<input type="checkbox" id="acheck${j}${i}" value="acheck-${j}-${i}" name="R"/>
+							<label for="acheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="16" step="1">
+							<input type="checkbox" id="bcheck${j}${i}" value="bcheck-${j}-${i}" name="R"/>
+							<label for="bcheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="6" step="1">
+							<input type="checkbox" id="ccheck${j}${i}" value="ccheck-${j}-${i}" name="R"/>
+							<label for="ccheck${j}${i}">${i}</label>
+						</c:forEach>
+						<br>
+					</c:forEach>
+					<c:forEach var="j" begin="8" end="13" step="1">
+						<c:forEach var="i" begin="1" end="6" step="1">
+							<input type="checkbox" id="acheck${j}${i}" value="acheck-${j}-${i}" name="S"/>
+							<label for="acheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="16" step="1">
+							<input type="checkbox" id="bcheck${j}${i}" value="bcheck-${j}-${i}" name="S"/>
+							<label for="bcheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="6" step="1">
+							<input type="checkbox" id="ccheck${j}${i}" value="ccheck-${j}-${i}" name="S"/>
+							<label for="ccheck${j}${i}">${i}</label>
+						</c:forEach>
+						<br>
+					</c:forEach>
+					<c:forEach var="i" begin="4" end="6" step="1">
+						<input type="checkbox" id="acheck14${i}" value="acheck-14-${i}" name="S"/>
+						<label for="acheck14${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="16" step="1">
+						<input type="checkbox" id="bcheck14${i}" value="acheck-14-${i}" name="S"/>
+						<label for="bcheck14${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="3" step="1">
+						<input type="checkbox" id="ccheck14${i}" value="ccheck-14-${i}" name="S"/>
+						<label for="ccheck14${i}">${i}</label>
+					</c:forEach>
+				</div>
+				<div style="margin-top:10px;padding-left:10px;">
+					<c:forEach var="i" begin="1" end="10" step="1">
+						<input type="checkbox" id="2acheck${i}" value="2acheck-${i}" name="A"/>
+						<label for="2acheck${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="10" step="1">
+						<input type="checkbox" id="2bcheck${i}" value="2bcheck-${i}" name="A"/>
+						<label for="2bcheck${i}">${i}</label>
+					</c:forEach>
+					<br>
+					<c:forEach var="j" begin="1" end="3" step="1">
+						<c:forEach var="i" begin="1" end="13" step="1">
+							<input type="checkbox" id="2acheck${j}${i}" value="2acheck-${j}-${i}" name="A"/>
+							<label for="2acheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="13" step="1">
+							<input type="checkbox" id="2bcheck${j}${i}" value="2bcheck-${j}-${i}" name="A"/>
+							<label for="2bcheck${j}${i}">${i}</label>
+						</c:forEach>
+						<br>
+					</c:forEach> 
+				</div>
+			</div>  
 		</div>
+	</c:if>
+	
+	<c:if test="${hallNum==1 || hallNum==2 }">
+	<div class="eventHall-12" style="text-align:center; width:1400px;">
+	<div style="font-size:20pt;background-color:#cccccc;border-radius: 4px;height:115px;text-align:center;line-height:105px;margin-bottom:15px;">stage</div>
+		
+		<p style="padding:20px 0px; text-align:left;">
+			<span style="font-weight:bold;margin:40px;">2F</span>
+			<span style="font-weight:bold;margin:600px;">1F</span><br> 
+		</p>
+			<div class="second" style="border:1px solid #d3d3d3; border-top:none; width:1400px;">
+				<div class="first" style="border:1px solid #d3d3d3; border-top:none; width:1300px;margin:0px 50px 0px 50px;padding-bottom:30px;">
+					<c:forEach var="j" begin="1" end="6" step="1">
+						<c:forEach var="i" begin="1" end="18" step="1">
+							<input type="checkbox" id="acheck${j}${i}" value="acheck-${j}-${i}" name="R"/>
+							<label for="acheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="18" step="1">
+							<input type="checkbox" id="bcheck${j}${i}" value="bcheck-${j}-${i}" name="R"/>
+							<label for="bcheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="18" step="1">
+							<input type="checkbox" id="ccheck${j}${i}" value="ccheck-${j}-${i}" name="R"/>
+							<label for="ccheck${j}${i}">${i}</label>
+						</c:forEach>
+						<br>
+					</c:forEach>
+					<c:forEach var="j" begin="7" end="12" step="1">
+						<c:forEach var="i" begin="1" end="18" step="1">
+							<input type="checkbox" id="acheck${j}${i}" value="acheck-${j}-${i}" name="S"/>
+							<label for="acheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="18" step="1">
+							<input type="checkbox" id="bcheck${j}${i}" value="bcheck-${j}-${i}" name="S"/>
+							<label for="bcheck${j}${i}">${i}</label>
+						</c:forEach>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:forEach var="i" begin="1" end="18" step="1">
+							<input type="checkbox" id="ccheck${j}${i}" value="ccheck-${j}-${i}" name="S"/>
+							<label for="ccheck${j}${i}">${i}</label>
+						</c:forEach>
+					</c:forEach>
+						<br><br><br>
+					<c:forEach var="i" begin="1" end="23" step="1">
+						<input type="checkbox" id="acheck13${i}" value="acheck-13-${i}" name="S"/>
+						<label for="acheck13${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="23" step="1">
+						<input type="checkbox" id="bcheck13${i}" value="acheck-13-${i}" name="S"/>
+						<label for="bcheck13${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+				<div style="margin-top:10px;padding-left:10px;">
+					<c:forEach var="i" begin="1" end="17" step="1">
+						<input type="checkbox" id="2acheck${i}" value="2acheck-${i}" name="A"/>
+						<label for="2acheck${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="17" step="1">
+						<input type="checkbox" id="2bcheck${i}" value="2bcheck-${i}" name="A"/>
+						<label for="2bcheck${i}">${i}</label>
+					</c:forEach>
+					<br>
+					<c:forEach var="i" begin="1" end="20" step="1">
+						<input type="checkbox" id="2acheck1${i}" value="2acheck-1-${i}" name="A"/>
+						<label for="2acheck1${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="20" step="1">
+						<input type="checkbox" id="2bcheck1${i}" value="2bcheck-1-${i}" name="A"/>
+						<label for="2bcheck1${i}">${i}</label>
+					</c:forEach> 
+					<br>
+					<c:forEach var="i" begin="1" end="16" step="1">
+						<input type="checkbox" id="2acheck2${i}" value="2acheck-2-${i}" name="A"/>
+						<label for="2acheck2${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="16" step="1">
+						<input type="checkbox" id="2bcheck2${i}" value="2bcheck-2-${i}" name="A"/>
+						<label for="2bcheck2${i}">${i}</label>
+					</c:forEach> 
+					<br>
+					<c:forEach var="i" begin="1" end="22" step="1">
+						<input type="checkbox" id="2acheck3${i}" value="2acheck-3-${i}" name="A"/>
+						<label for="2acheck3${i}">${i}</label>
+					</c:forEach>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:forEach var="i" begin="1" end="22" step="1">
+						<input type="checkbox" id="2bcheck3${i}" value="2bcheck-3-${i}" name="A"/>
+						<label for="2bcheck3${i}">${i}</label>
+					</c:forEach> 
+				</div>
+			</div>  
+		</div>
+	</c:if>
+	
+	<div style="text-align:center;margin-top:15px;">
+		<button type="button" class="adBtn" onclick="history.back();">
+			이전단계
+		</button>
+		<button type="button" class="adBtn" onclick="goTicketing();">
+			다음단계
+		</button>
 	</div>
 	<input type="hidden" name="sessionNum" value="${sessionNum }">
 	<input type="hidden" name="hallNum" value="${hallNum }">
