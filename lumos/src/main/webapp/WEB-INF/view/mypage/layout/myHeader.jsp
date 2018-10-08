@@ -21,14 +21,12 @@
 						</p>
 						<p style="margin-top: 10px;">
 							<span style="">사용가능 포인트</span>
-							<span style="padding-left: 15px;"> : 0</span>
+							<span id="usableMile" style="padding-left: 15px;"> : </span>
 						</p>
 					</li>
-					<!--
 					<li style="margin-left: 15px;">
 						<a href="" class="titlebtn">개인정보수정</a>
 					</li>
-					-->
 				</ul>
 				<ul class="right">
 					<li style="padding-left: 50px;">
@@ -37,12 +35,12 @@
 					<li style="margin-left: 20px;">
 						<p>회원구분
 							<span style="padding-left: 15px;">
-								: ${sessionScope.member.membertype}
+								: 개인회원
 							</span>
 						</p>
 						<p style="margin-top: 15px;">가입일자
-							<span style="padding-left: 15px;">
-								: ${sessionScope.member.createdDate}
+							<span id="created" style="padding-left: 15px;">
+								: 
 							</span>
 						</p>
 					</li>
@@ -72,7 +70,7 @@
 				<a>마일리지</a>
 			</li>
 			<li>
-				<a href="<%=cp%>/mypage/member/member">개인정보관리</a>
+				<a>개인정보관리</a>
 			</li>
 			<li>
 				<a>회원탈퇴</a>

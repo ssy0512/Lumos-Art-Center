@@ -60,7 +60,7 @@
 		    <li><a href="<%=cp%>/community/event/eventTab">커뮤니티</a>
 		    	<ul>
 	        		<li><a href="<%=cp%>/">공연후기</a></li>
-	        		<li><a href="<%=cp%>/">전시후기</a></li>
+	        		<li><a href="<%=cp%>/community/exhibitReview">전시후기</a></li>
 	        		<li><a href="<%=cp%>/community/event/eventTab">이벤트</a></li>
 		        </ul>
 		    </li>

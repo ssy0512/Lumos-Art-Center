@@ -67,4 +67,39 @@ public class MyActivityServiceImpl implements MyActivityService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<All> eReviewList(Map<String, Object> map) {
+		List<All> list = null;
+		try {
+			list=dao.selectList("lumosMypage.eReviewList", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public int eDataCount(String userId) {
+		int result = 0;
+		try {
+			result=dao.selectOne("lumosMypage.eDataCount", userId);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteEReview(int num) {
+		int result=0;
+
+		try{
+			dao.deleteData("lumosMypage.deleteEReview", num);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }

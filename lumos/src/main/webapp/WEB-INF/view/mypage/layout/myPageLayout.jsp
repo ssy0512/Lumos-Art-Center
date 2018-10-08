@@ -24,6 +24,37 @@
 
 <script type="text/javascript" src="<%=cp%>/resource/js/util-jquery.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
+<script type="text/javascript">
+$(function () {
+	getMyInfo();
+});
+
+function getMyInfo(page) {
+	var url="<%=cp%>/mypage/myInformation";
+	
+	$.ajax({
+		type:"get"
+		,url:url
+		,dataType:"json"
+		,success:function(data) {
+			$("#created").append(data.created);
+			$("#usableMile").append(data.mile);
+		}
+	    ,beforeSend:function(jqXHR) {
+	    	jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+	
+}
+</script>
+
 </head>
 
 <body>

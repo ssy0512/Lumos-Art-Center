@@ -39,6 +39,7 @@
 		<intercept-url pattern="/rentfront/**" access="permitAll"/>
 		<intercept-url pattern="/goods" access="permitAll"/>
 		<intercept-url pattern="/customerCenter/**" access="permitAll"/>
+		<intercept-url pattern="/community/exhibitReview/**" access="permitAll"/>
 		
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> 
 		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER')"/>

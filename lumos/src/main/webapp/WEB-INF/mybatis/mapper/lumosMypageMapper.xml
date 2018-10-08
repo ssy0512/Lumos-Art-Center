@@ -67,4 +67,38 @@
 	    ) WHERE rnum >= #{start}
 ]]>
 	</select>
+	
+	<select id="getCreatedDate" parameterType="String"  resultType="String">
+		SELECT TO_CHAR(createdDate,'yyyy.mm.dd') FROM member1 WHERE userId=#{userId}
+	</select>
+	
+	<select id="getUsableMileage" parameterType="String"  resultType="Integer">
+		SELECT NVL(SUM(points),0) FROM MILEAGE WHERE userId=#{userId} AND (accumdate+365>SYSDATE)
+	</select>
+	
+	<select id="eDataCount" resultType="Integer">
+	   SELECT NVL(COUNT(*), 0) FROM exreview WHERE userId=#{userId}
+	</select>
+
+	<select id="eReviewList" parameterType="map"  resultType="com.sp.mypage.myactivity.All">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT exreviewNum, er.exhibitNum, userId,score,exhibitName,er.content,TO_CHAR(created, 'YYYY.MM.DD') created, 
+					TO_CHAR(exhibitStart, 'YYYY.MM.DD') exhibitStart,
+				 	TO_CHAR(exhibitEnd,'YYYY.MM.DD') exhibitEnd,
+					hallName,exProfileImage
+				FROM exreview er
+				JOIN exhibit e ON er.exhibitNum=e.exhibitNum
+				JOIN exhibithall eh ON e.hallNum=eh.hallNum
+				WHERE userId=#{userId}
+				ORDER BY exreviewNum DESC
+<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+]]>
+	</select>
+	
+	<delete id="deleteEReview" parameterType="Integer">
+		DELETE FROM exreview WHERE exreviewNum=#{num}
+	</delete>
 </mapper>

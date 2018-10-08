@@ -3,6 +3,7 @@ package com.sp.mypage.myactivity;
 public class All {
 	private int exReviewNum;
 	private String userId;
+	private String userName;
 	private int score;
 	private int exhibitNum;
 	private String exhibitName;
@@ -19,8 +20,6 @@ public class All {
 	private String concertEnd;
 	private String conProfileImage;
 	
-	
-	
 	private int postNum;
 	private String title;
 	private String qcategoryname;
@@ -28,9 +27,28 @@ public class All {
 	
 	
 	private String content;
+	private int bestPage;
+	private int likeCount;
 	
 	
-	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getBestPage() {
+		return bestPage;
+	}
+	public void setBestPage(int bestPage) {
+		this.bestPage = bestPage;
+	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	public String getContent() {
 		return content;
 	}

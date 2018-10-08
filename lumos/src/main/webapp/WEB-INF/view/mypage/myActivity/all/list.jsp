@@ -41,7 +41,7 @@ $(function () {
 			<li class="titl" style="float: left;">
 				<p style="margin-top: 10px;">관람한 공연의 리뷰</p>
 				<p>공연 관람평을 남기고, 감상을 공유 할 수 있습니다.</p>
-				<a><img src="<%=cp %>/resource/images/lumos/add_open.png">
+				<a onclick="moveTab('cReview');"><img src="<%=cp %>/resource/images/lumos/add_open.png">
 					공연 후기 보기</a>
 			</li>
 			<li class="cont" style="float: left;">
@@ -81,7 +81,7 @@ $(function () {
 			<li class="titl" style="float: left;">
 				<p style="margin-top: 10px;">관람한 전시의 리뷰</p>
 				<p>전시 관람평을 남기고, 감상을 공유 할 수 있습니다.</p>
-				<a><img src="<%=cp %>/resource/images/lumos/add_open.png">
+				<a onclick="moveTab('eReview');"><img src="<%=cp %>/resource/images/lumos/add_open.png">
 					전시 후기 보기</a>
 			</li>
 			<li class="cont" style="float: left;">

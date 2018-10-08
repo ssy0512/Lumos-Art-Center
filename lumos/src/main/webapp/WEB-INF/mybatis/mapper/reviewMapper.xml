@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<sql id="order-list">
+	  <if test="order=='latest'">
+	      ORDER BY exreviewNum DESC
+	  </if>
+	  <if test="order=='highscore'">
+	      ORDER BY score DESC
+	  </if>
+	</sql>
+	
+	<select id="eDataCount" resultType="Integer">
+	   SELECT NVL(COUNT(*), 0) FROM exreview
+	</select>
+
+	<select id="eReviewList" parameterType="map"  resultType="com.sp.mypage.myactivity.All">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT exreviewNum, er.exhibitNum, er.userId,score,exhibitName,er.content,TO_CHAR(created, 'YYYY.MM.DD') created, 
+					TO_CHAR(exhibitStart, 'YYYY.MM.DD') exhibitStart,
+				 	TO_CHAR(exhibitEnd,'YYYY.MM.DD') exhibitEnd,
+					hallName,exProfileImage,userName
+				FROM exreview er
+				JOIN member1 m ON er.userId=m.userId
+				JOIN exhibit e ON er.exhibitNum=e.exhibitNum
+				JOIN exhibithall eh ON e.hallNum=eh.hallNum
+				 <include refid="order-list"/>
+<![CDATA[
+	        ) tb WHERE ROWNUM <= #{end}
+	    ) WHERE rnum >= #{start}
+]]>
+	</select>
+	
+	<select id="eReviewBestList" resultType="com.sp.mypage.myactivity.All">
+		SELECT ROWNUM rnum, tb.* FROM (
+			SELECT er.exreviewNum, er.exhibitNum,
+				er.userId,score,exhibitName,er.content,TO_CHAR(created, 'YYYY.MM.DD')
+				created,userName,
+				TO_CHAR(exhibitStart, 'YYYY.MM.DD') exhibitStart,
+				TO_CHAR(exhibitEnd,'YYYY.MM.DD') exhibitEnd,
+				hallName,exProfileImage, NVL(likeCount,0) likeCount
+			FROM exreview er
+			JOIN member1 m ON er.userId=m.userId
+			JOIN exhibit e ON er.exhibitNum=e.exhibitNum
+			JOIN exhibithall eh ON e.hallNum=eh.hallNum
+			LEFT OUTER JOIN (SELECT exreviewNum, NVL(COUNT(exreviewNum),0) likeCount
+				FROM exreviewLike GROUP BY exreviewNum) lc ON
+				er.exreviewNum=lc.exreviewNum
+<![CDATA[
+			WHERE er.created >= SYSDATE-90
+			ORDER BY likeCount DESC
+		) tb WHERE ROWNUM <= 3
+]]>
+	</select>
+	
+	<select id="eReviewLocationCount" parameterType="map" resultType="Integer">
+	   SELECT  * FROM (
+		    SELECT ROWNUM rnum, exreviewNum FROM (
+		        SELECT exreviewNum FROM exreview
+				<include refid="order-list"/>
+		    )
+		) WHERE exreviewNum=#{num}
+	</select>
+	
+	<insert parameterType="map" id="insertReviewLike">
+		INSERT INTO exreviewLike(exreviewNum, userId) VALUES (#{num}, #{userId}) 
+	</insert>
+
+	<select parameterType="Integer" id="reviewLikeCount" resultType="Integer">
+		SELECT COUNT(*) FROM exreviewLike WHERE exreviewNum=#{num} 
+	</select>
+</mapper>
