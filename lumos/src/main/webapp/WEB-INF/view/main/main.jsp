@@ -49,13 +49,13 @@
 	        		<c:forEach items="${ntcList}" var="ntc">
 		        		<li>
 		        			<span class="update">${ntc.created}</span>
-		        			<a href="<%=cp%>/lumos/customerCenter/mainToArticle?noticeNum=${ntc.noticeNum}">
+		        			<a href="<%=cp%>/customerCenter/main_notice?noticeNum=${ntc.noticeNum}">
 		        				<span class="subj ${ntc.important==1?'bold':''}">${ntc.title}</span>
 		        			</a>
 		        		</li>
 	        		</c:forEach>
 	        	</ul>
-	        	<a class="more" style="bottom: 302px;" href="<%=cp%>/lumos/customerCenter/main">더보기+</a>
+	        	<a class="more" style="bottom: 302px;" href="<%=cp%>/customerCenter/main">더보기+</a>
 	        </div>
 		</div>
 		
