@@ -37,6 +37,7 @@
     background-color: #aa1717;
     border-radius: 4px;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 .adBtn:hover {
@@ -69,13 +70,23 @@
 
 /* book.jsp */
 h3.title{
-	font-wight:bold;
-	margin:2px 0;
+	font-weight:bold;
+	margin:12px 0px 5px;
+	
+}
+
+.price-table{
+	width: 100%;
+	table-layout: fixed;
+	word-break: break-all;
+	border-top:1px solid #434343;
+	border-bottom:1px solid #434343;
+	border-collapse: collapse; 
 }
 
 .count{
-	height: 20px;
-    margin-top: 2px;
+	height: 28px;
+    margin-top: 5px;
     padding: 5px 0 0 11px;
     background: #e5e5e5;
 }

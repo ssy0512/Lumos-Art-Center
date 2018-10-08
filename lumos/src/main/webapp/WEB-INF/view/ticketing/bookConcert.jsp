@@ -122,7 +122,12 @@ function ajaxData(url, tab) {
 	    }
 	});
 }
-function goBook(){
+function check(){
+	if(!$tab){
+		alert("회차를 선택해주세요.");
+		return;
+	}
+	
 	location.href="<%=cp%>/ticketing/selectSeat?hallNum="+hallNum+"&sessionNum="+$tab;
 }
 </script>
@@ -155,7 +160,7 @@ function goBook(){
 		<button type="button" class="adBtn" onclick="history.back();">
 			이전단계
 		</button>
-		<button type="button" class="adBtn" onclick="goBook();">
+		<button type="button" class="adBtn" onclick="check();">
 			다음단계
 		</button>
 	</div>

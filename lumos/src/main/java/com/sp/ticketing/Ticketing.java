@@ -8,6 +8,9 @@ public class Ticketing {
 	private int seatCount;
 	private String color;
 	private int hallNum;
+	private int totalMileage;
+	private int seatLevelNum;
+	private int seatPrice;
 	
 	public String getSessionDate() {
 		return sessionDate;
@@ -71,5 +74,29 @@ public class Ticketing {
 
 	public void setHallNum(int hallNum) {
 		this.hallNum = hallNum;
+	}
+
+	public int getTotalMileage() {
+		return totalMileage;
+	}
+
+	public void setTotalMileage(int totalMileage) {
+		this.totalMileage = totalMileage;
+	}
+
+	public int getSeatLevelNum() {
+		return seatLevelNum;
+	}
+
+	public void setSeatLevelNum(int seatLevelNum) {
+		this.seatLevelNum = seatLevelNum;
+	}
+
+	public int getSeatPrice() {
+		return seatPrice;
+	}
+
+	public void setSeatPrice(int seatPrice) {
+		this.seatPrice = seatPrice;
 	}
 }

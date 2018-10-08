@@ -67,5 +67,27 @@ public class TicketingServiceImpl implements TicketingService{
 		}
 		return result;
 	}
+
+	@Override
+	public int myMileage(String userId) {
+		int result=0;
+		try {
+			result=dao.selectOne("ticketing.myMileage",userId);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Ticketing> seatPrice(int hallNum) {
+		List<Ticketing> list=null;
+		try {
+			list=dao.selectList("ticketing.seatPrice",hallNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
 	
 }

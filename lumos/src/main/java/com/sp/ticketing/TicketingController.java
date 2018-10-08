@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sp.member.SessionInfo;
 
 @Controller("ticketing.ticketingController")
 public class TicketingController {
@@ -95,9 +99,12 @@ public class TicketingController {
 			@RequestParam(value="R", defaultValue="") String[] RList,
 			@RequestParam(value="S", defaultValue="") String[] SList,
 			@RequestParam(value="A", defaultValue="") String[] AList,
+			HttpSession session,
+			Ticketing dto,
 			Model model) throws Exception {
-		String r=null,s=null,a=null;
-		int rcnt=0,scnt=0,acnt=0;
+		
+		String r=null;String s=null;String a=null;
+		int rcnt=0;int scnt=0;int acnt=0;
 		for(int i=0;i<RList.length;i++) {
 			r+=RList;
 			rcnt++;
@@ -110,12 +117,36 @@ public class TicketingController {
 			a+=AList;
 			acnt++;
 		}
-		String total=r+s+a;
+		int total=rcnt+scnt+acnt;
 		
+		// 좌석 가격 정보(+할인된 금액)
+		List<Ticketing> priceList=service.seatPrice(hallNum);
+		
+		int[] array=new int[3];
+		int size=0;
+		for(Ticketing ddto : priceList) {
+			array[size++]=ddto.getSeatPrice();
+		}
+		
+		int rprice=(int)array[0]/2;
+		int sprice=(int)array[1]/2;
+		int aprice=(int)array[2]/2;
+		
+		// 가지고 있는 마일리지
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		int totalMileage = service.myMileage(info.getUserId());
+		
+		model.addAttribute("rprice",rprice);
+		model.addAttribute("sprice",sprice);
+		model.addAttribute("aprice",aprice);
+		model.addAttribute("array",array);
+		model.addAttribute("totalMileage",totalMileage);
 		model.addAttribute("total",total);
 		model.addAttribute("rcnt",rcnt);
 		model.addAttribute("scnt",scnt);
 		model.addAttribute("acnt",acnt);
+		model.addAttribute("sessionNum",sessionNum);
+		model.addAttribute("hallNum",hallNum);
 		
 		return ".ticketing.book";
 	}

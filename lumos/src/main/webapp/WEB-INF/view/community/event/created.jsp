@@ -17,7 +17,7 @@ function check() {
     if(!str) {
         alert("제목을 입력하세요. ");
         f.title.focus();
-        return;
+        return false;
     }
 
     f.selected.value=sel;
@@ -27,30 +27,30 @@ function check() {
     if(!str || !isValidDateFormat(str)) {
         alert("이벤트 시작 기간을 제대로 입력해주세요[YYYY-MM-DD]. ");
         f.eventStart.focus();
-        return;
+        return false;
     }
     str =f.eventEnd.value;
 	str = str.trim();
     if(!str || !isValidDateFormat(str)) {
         alert("이벤트 종료 기간을 제대로 입력해주세요[YYYY-MM-DD]. ");
         f.eventEnd.focus();
-        return;
+        return false;
     }
     if(f.startDate.value > f.endDate.value){
     	alert("시작 기간은 종료 기간보다 늦을 수 없습니다.");
-    	return;
+    	return false;
     }
     str = f.eventWin.value;
     str = str.trim();
     if(!str || !isValidDateFormat(str)){
     	 alert("날짜를 제대로 입력해주세요[YYYY-MM-DD]. ");
          f.eventWin.focus();
-         return;
+         return false;
     }
     
     if(f.startDate.value > f.eventWin.value || f.endDate.value > f.eventWin.value){
     	alert("이벤트 발표 날짜는 시작,종료 기간보다 늦을 수 없습니다.");
-    	return;
+    	return false;
     }
 	
     // 스마트에디터 입력 내용

@@ -50,52 +50,31 @@ input[name="A"] + label {
 
 <script type="text/javascript">
 function goTicketing(){
+	var f = document.seatForm;
 	var count = 0;
-	var array=new Array();
 	$("input[type=checkbox]:checked").each(function() {
-		  var test = $(this).val();
-		  array.push(test);
  		  count++;
 	});
 	
 	if(count>5){
 		alert('좌석은 최대 5개까지만 선택하실 수 있습니다.');
-		return;
+		return false;
 	}else if(count==0){
 		alert('좌석을 선택해 주세요.');
-		return;
+		return false;
 	}
-	var url="<%=cp%>/ticketing/book";
+	
 	var num=$("input[name=sessionNum]").val();
 	var hnum=$("input[name=hallNum]").val();
-	var query=$('form[name=seatForm]').serialize();
+	f.action="<%=cp%>/ticketing/book?sessionNum="+num+"&hallNum="+hnum;
 	
-	url=url+"?sessionNum="+num+"&hallNum="+hnum;
-	
-	$.ajax({
-		type:"get"
-		,url:url
-		,data:query
-		,success:function(data) {
-			location.href=url;
-		}
-		,beforeSend : function(jqXHR) {
-	        jqXHR.setRequestHeader("AJAX", true);
-	    }
-	    ,error:function(jqXHR) {
-	    	if(jqXHR.status==403) {
-	    		location.href="<%=cp%>/member/login";
-	    		return;
-	    	}
-	    	console.log(jqXHR.responseText);
-	    }
-	});
+	return true;
 }
 
 </script>
 
 <div class="body-container" style="margin-top:15px;width:1400px;">  
-<form name="seatForm" action="" method="post">
+<form name="seatForm" method="post" onsubmit="return goTicketing();">
 	<c:if test="${hallNum==3 || hallNum==4 }">
 	<div class="eventHall-56" style="text-align:center;width:1020px;margin: auto;">
 	<div style="font-size:20pt;background-color:#cccccc;border-radius: 4px;height:115px;text-align:center;line-height:105px;margin-bottom:15px;">stage</div>
@@ -374,7 +353,7 @@ function goTicketing(){
 		<button type="button" class="adBtn" onclick="history.back();">
 			이전단계
 		</button>
-		<button type="button" class="adBtn" onclick="goTicketing();">
+		<button type="submit" class="adBtn">
 			다음단계
 		</button>
 	</div>

@@ -41,4 +41,19 @@
 		JOIN concert c ON cs.concertNum=c.concertNum
 		WHERE sessionNum=#{sessionNum}
 	</select>
+	
+	<select id="myMileage" parameterType="String" resultType="Integer">
+		SELECT totalMileage
+		FROM mileage
+		WHERE userId=#{userId}
+	</select>
+	
+	<select id="seatPrice" parameterType="Integer" resultType="com.sp.ticketing.Ticketing">
+		SELECT ch.hallNum, sp.seatLevelNum, sp.seatPrice
+		FROM seatPrice sp
+		JOIN concert c ON c.concertNum=sp.concertNum
+		JOIN concertHall ch ON ch.hallNum=c.hallNum
+		WHERE ch.hallNum=#{hallNum}
+		ORDER BY seatLevelNum ASC
+	</select>
 </mapper>
