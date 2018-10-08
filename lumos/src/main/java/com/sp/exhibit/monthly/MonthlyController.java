@@ -42,14 +42,12 @@ public class MonthlyController {
 			year = cal.get(Calendar.YEAR);
 			month = cal.get(Calendar.MONTH) + 1;
 			int week = cal.get(Calendar.DAY_OF_WEEK); // 1~7
-
 			// 첫주의 year년도 month월 1일 이전 날짜
 			Calendar scal = (Calendar) cal.clone();
 			scal.add(Calendar.DATE, -(week - 1));
 			int syear = scal.get(Calendar.YEAR);
 			int smonth = scal.get(Calendar.MONTH) + 1;
 			int sdate = scal.get(Calendar.DATE);
-
 			// 마지막주의 year년도 month월 말일주의 토요일 날짜
 			Calendar ecal = (Calendar) cal.clone();
 			// year년도 month월 말일
@@ -59,7 +57,6 @@ public class MonthlyController {
 			int eyear = ecal.get(Calendar.YEAR);
 			int emonth = ecal.get(Calendar.MONTH) + 1;
 			int edate = ecal.get(Calendar.DATE);
-
 			// 스케쥴 가져오기
 			String startDay = String.format("%04d%02d%02d", syear, smonth, sdate);
 			String endDay = String.format("%04d%02d%02d", eyear, emonth, edate);
@@ -67,10 +64,10 @@ public class MonthlyController {
 			map.put("startDay", startDay);
 			map.put("endDay", endDay);
 			List<Schedule> list = service.listMonthlySchedule(map);
-			
 			String s;
 			String[][] days = new String[cal.getActualMaximum(Calendar.WEEK_OF_MONTH)][7];
-
+			if(days[0][5]==null) {
+			}
 			for (int i = 1; i < week; i++) {
 				s = String.format("%04d%02d%02d", syear, smonth, sdate);
 				days[0][i - 1] = "<span class='textDate preMonthDate' data-date='" + s + "' >" + sdate + "</span>";
@@ -290,6 +287,8 @@ public class MonthlyController {
 			model.addAttribute("month", month);
 			model.addAttribute("days", days);
 		} catch (Exception e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 
 		

@@ -7,8 +7,20 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitArticle.css" type="text/css">
 <script type="text/javascript">
+
 function login() {
 	location.href="<%=cp%>/member/login";
+}
+
+function createReview() {
+	var currentDay = new Date();  
+	currentDay = currentDay.getFullYear()+"-"+(currentDay.getMonth()+1)+"-"+currentDay.getDate();
+	if (currentDay<"${dto.exhibitStart}"){
+		alert("아직 시작되지 않은 전시입니다.");
+		return;
+	}
+	
+	window.location.href = "<%=cp%>/exhibitReview/created?num=${dto.exhibitNum}";
 }
 
 $(function(){
@@ -96,7 +108,7 @@ $(function(){
 					<img src="<%=cp %>/resource/images/lumos/pick_icon.png" style="margin-bottom: 3px;">
 					<span style="display:inline-block; margin-top: 2px;"></span>
 				</button>
-				<button type="button" class="pickBtn" style="width: 110px; margin-right: 10px;" onclick="javascript:location.href='<%=cp%>/exhibitReview/created?num=${dto.exhibitNum}'">
+				<button type="button" class="pickBtn" style="width: 110px; margin-right: 10px;" onclick="createReview();">
 					<span style="display:inline-block; margin-top: 2px;">관람평 쓰기</span>
 				</button>
 			</c:if>

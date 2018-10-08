@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="usermain">
+	<select id="conSlideBanner" resultType="com.sp.main.Slide">
+		SELECT concertNum,concertName,TO_CHAR(concertStart,'yyyy.mm.dd') concertStart,
+		    TO_CHAR(concertEnd,'yyyy.mm.dd') concertEnd,slideBanner,hallName
+		FROM concert c
+		LEFT OUTER JOIN concerthall ch ON c.hallNum=ch.hallNum
+		WHERE (c.content IS NOT NULL) AND (slideBanner IS NOT NULL) AND (concertEnd+1>SYSDATE)
+	</select>
+	
+	<select id="exSlideBanner" resultType="com.sp.main.Slide">
+		SELECT exhibitNum,exhibitName,TO_CHAR(exhibitStart,'yyyy.mm.dd') exhibitStart,
+		    TO_CHAR(exhibitEnd,'yyyy.mm.dd') exhibitEnd,slideBanner,hallName
+		FROM exhibit e
+		LEFT OUTER JOIN exhibithall eh ON e.hallNum=eh.hallNum
+		WHERE (e.content IS NOT NULL) AND (slideBanner IS NOT NULL)
+			AND ((TO_DATE(TO_CHAR(exhibitEnd,'YYYYMMDD')||' '||admitEnd,'yyyy-mm-dd	hh24:mi:ss'))>SYSDATE)
+	</select>
+	
+	<select id="mainEvtList" resultType="com.sp.main.MainBbs">
+		SELECT * FROM (
+		    SELECT ROWNUM rnum,eventNum,title,selectOption,eventStart,eventEnd FROM (
+		        SELECT title,eventNum,selectOption, TO_CHAR(eventStart,'yyyy-mm-dd') eventStart, TO_CHAR(eventEnd,'yyyy-mm-dd') eventEnd FROM event
+<![CDATA[
+		        WHERE (eventStart<=SYSDATE) AND (eventEnd+1>SYSDATE)
+		        ORDER BY eventNum DESC
+		    )
+
+		) WHERE rnum<=8
+]]>
+	</select>
+	
+	<select id="mainNtcList" resultType="com.sp.main.MainBbs">
+		SELECT * FROM (
+		    SELECT ROWNUM rnum,important,title,noticeNum, created FROM (
+		        SELECT important,title, noticeNum, TO_CHAR(created,'yyyy-mm-dd') created FROM notice
+		        ORDER BY important DESC, noticeNum DESC
+		    )
+<![CDATA[		    
+		) WHERE rnum<=8
+]]>		
+	</select>
+</mapper>

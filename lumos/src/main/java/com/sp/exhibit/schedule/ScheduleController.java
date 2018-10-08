@@ -134,12 +134,15 @@ public class ScheduleController {
 		}
 		
 		List<String> listPrice = exhibitService.exhibitPrice(num);
-		String exPriceString="";
-		for( String s : listPrice) {
-			exPriceString+=s+" / ";
+		
+		if(listPrice!=null && listPrice.size() > 0) {
+			String exPriceString="";
+			for( String s : listPrice) {
+				exPriceString+=s+" / ";
+			}
+			exPriceString=exPriceString.substring(0, exPriceString.length()-3);
+			dto.setExPriceString(exPriceString);
 		}
-		exPriceString=exPriceString.substring(0, exPriceString.length()-3);
-		dto.setExPriceString(exPriceString);
 		
 		model.addAttribute("query", query);
 		model.addAttribute("dto", dto);
