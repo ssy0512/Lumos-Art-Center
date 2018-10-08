@@ -181,7 +181,6 @@ public class StaffController {
 		List<String> columnLabels=new ArrayList<>();
 		List<Object[]> columnValues=new ArrayList<>();
 		
-		columnLabels.add("목록");
 		columnLabels.add("사번");
 		columnLabels.add("직원명");
 		columnLabels.add("생년월일");
@@ -191,7 +190,7 @@ public class StaffController {
 		
 		List<Staff> list=service.listAllStaff();
 		for(Staff dto:list) {
-			columnValues.add(new Object[] {dto.getListNum(),dto.getStaffNum(),dto.getStaffName(),dto.getBirth(),dto.getDepartment(),dto.getTel(),dto.getEmail()});
+			columnValues.add(new Object[] {dto.getStaffNum(),dto.getStaffName(),dto.getBirth(),dto.getDepartment(),dto.getTel(),dto.getEmail()});
 		}
 		
 		model.put("sheetName",sheetName);

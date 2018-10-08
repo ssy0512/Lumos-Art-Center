@@ -150,6 +150,8 @@
 		<tr height="40">
 				<td align="left" width="100">
 					<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/concertSchedule/insertedlist';">새로고침</button>
+				<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/concert/main';">CLIENT</button>
+			
 				</td>
 				<td align="right" width="100">
 					<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/concertSchedule/created';">등록하기</button>
