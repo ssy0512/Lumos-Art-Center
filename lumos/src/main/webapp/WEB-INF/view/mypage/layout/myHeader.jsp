@@ -70,7 +70,7 @@
 				<a>마일리지</a>
 			</li>
 			<li>
-				<a>개인정보관리</a>
+				<a href="<%=cp%>/mypage/member/member">개인정보관리</a>
 			</li>
 			<li>
 				<a>회원탈퇴</a>
