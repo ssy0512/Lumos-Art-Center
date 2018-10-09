@@ -63,6 +63,18 @@ function updateConcerts(){
 	if(success)
 		alert("성공적으로 수정되었습니다.");
 }
+
+
+function updateSession(){
+	var num="${dto.concertNum}";
+	var page="${page}";
+	var query = "num="+num+"&page="+page;
+	var url="<%=cp%>/admin/concertSchedule/update?"+query; 
+	
+	location.href=url;
+	if(success)
+		alert("성공적으로 수정되었습니다.");
+}
 </script>
 
 <div class="post" style="background:radial-gradient(circle,#d6a664, #f9cd8f); display:flex; justify-content:center; align-items:center;">
@@ -81,8 +93,10 @@ function updateConcerts(){
 			<table style="width:60%; margin:0px auto 20px; border-spacing:0px;">
 				<tr height="35">
 					<td width="300" align="right">
-						<button type="button" class="btn" onclick="updateExhibits();">수정</button>
-						<button type="button" class="btn" onclick="deleteExhibits();">삭제</button>
+						<button type="button" class="btn" onclick="updateConcerts();">수정</button>
+						<button type="button" class="btn" onclick="deleteConcerts();">삭제</button>
+						<button type="button" class="btn" onclick="updateSession();">삭제</button>
+					
 					</td>
 					<td align="left">
 						<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/exhibitSchedule/exhibitlist?${query}';">리스트</button>

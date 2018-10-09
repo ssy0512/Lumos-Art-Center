@@ -16,6 +16,9 @@
 <select id="listLevel" resultType="com.sp.admin.insertCon.Concerts">
 	SELECT seatlevelnum, seatLevel FROM seatlevel
 </select>
+<select id="listnames" resultType="com.sp.admin.insertCon.Concerts">
+	SELECT concertNum, concertName FROM concert
+</select>
 
 <!--   편하게 검색할 수 있는  searchList -->
 
@@ -44,7 +47,7 @@
   </where>
 </select>
 
-<update id="insertConcerts" parameterType="com.sp.admin.insertCon.Concerts"> 
+<insert id="insertConcerts" parameterType="com.sp.admin.insertCon.Concerts"> 
 	<!-- INSERT INTO concert (concertNum,concertName, concertStart,concertEnd, totalTime,host,supervise,
 						 genre, ratingNum,hallNum, conProfileImage,eventCount,seatPriceList)
 				VALUES (concert_seq.NEXTVAL, #{concertName},#{concertStart},#{concertEnd},#{totalTime},
@@ -57,21 +60,51 @@
 						ratingNum, hallNum, conProfileImage, eventCount, seatPriceList)
 				VALUES (concert_seq.NEXTVAL,#{concertName},#{concertStart},#{concertEnd},#{totalTime},
 						#{host},#{supervise},#{genre},#{ratingNum},#{hallNum},#{conProfileImage},#{eventCount},#{seatPriceList})
-		INTO concertSession (concertNum, sessionNum, sessionTime)
+		<!-- INTO concertSession (concertNum, sessionNum, sessionTime)
 					VALUES   (concert_seq.NEXTVAL, #{sessionNum}, #{sessionTime})
 		INTO seatPrice		(concertNum, SeatLevelNum, seatLevel, seatPrice)
-					VALUES (concert_seq.NEXTVAL, #{seatLevelNum}, #{seatLevel}, #{seatPrice}) 
-</update> <!-- 다중insert는 업데이트를 이용해야함. -->
+					VALUES (concert_seq.NEXTVAL, #{seatLevelNum}, #{seatLevel}, #{seatPrice})  -->
+</insert> <!-- 다중insert는 업데이트를 이용해야함. -->
+
+<insert id="insertSession" parameterType="com.sp.admin.insertCon.Concerts">
+	INSERT INTO concertSession(concertNum, sessionNum, sessionDate,sessionTime)
+		VALUES (#{concertNum}, concertsession_seq.NEXTVAL, #{sessionDate},#{sessionTime})
+</insert>
+
+<!-- 결제를 위한 가격정보등록 -->
+<insert id="insertPrice" parameterType="com.sp.admin.insertCon.Concerts">
+  insert  INTO seatPrice (concertNum, SeatLevelNum, seatPrice)
+					VALUES (#{concertNum}, #{seatLevelNum},  #{seatPrice})
+</insert>
+<select id="listPrice" parameterType="map" resultType="com.sp.admin.insertCon.Concerts"> 
+	SELECT seatLevel, concertNum,seatPrice
+		FROM seatPrice sp
+		JOIN seatLevel  sl ON sp.seatLevelNum=sl.seatLevelNum
+		where concertNum=
+		ORDER BY sp.seatLevelNum
+</select>
 
 <update id="updateConcerts" parameterType="com.sp.admin.insertCon.Concerts">
 	UPDATE concert SET concertName=#{concertName}, concertStart=#{concertStart}, totalTime=#{totalTime}, host=#{host}, supervise=#{supervise},
-						genre=#{genre}, ratingNum=#{ratingNum}, hallNum=#{hallNum}, conProfileImage=#{conProfileImage}, eventCount=#{eventCount}
-	UPDATE concertSession SET sessionTime=#{sessionTime} 
-	UPDATE seatLevel SET seatPrice=#{seatPrice} 
+						genre=#{genre}, ratingNum=#{ratingNum}, hallNum=#{hallNum}, 
+						conProfileImage=#{conProfileImage}, eventCount=#{eventCount}, seatPriceList=#{seatPriceList}
+						WHERE concertNum=#{concertNum}
+</update>
+
+<update id="updateSession" parameterType="com.sp.admin.insertCon.Concerts">
+	UPDATE concertSession SET sessionDate=#{sessionDate}, sessionTime=#{sessionTime} WHERE concertNum=#{concertNum}
+</update>
+
+<update id="updatePrice" parameterType="com.sp.admin.insertCon.Concerts">
+	UPDATE seatPrice SET seatPrice=#{seatPrice} WHERE cocnertNum=#{concertNum}
 </update>
 
 <delete id="deleteConcerts" parameterType="Integer">
 	DELETE FROM concert WHERE concertNum=#{concertNum} 
+</delete>
+
+<delete id="deleteSession" parameterType="Integer">
+	DELETE FROM concertsession WHERE cocnertNum=#{concertNum}
 </delete>
 
 <select id="listConcerts" parameterType="map" resultType="com.sp.admin.insertCon.Concerts"> <!-- 포토갤러리 형식으로 고칠것. -->

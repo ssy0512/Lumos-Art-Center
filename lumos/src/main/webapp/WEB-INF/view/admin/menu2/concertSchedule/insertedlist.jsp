@@ -160,9 +160,9 @@
 	</table>
 		</div>
 	</c:if>
-
+<!--  이곳에 가격을 넣을 수 있는 곳을 찾아야함. 중요쓰 중요쓰야  -->
 	<div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-		<c:if test="${dataCount==0}">등록된 전시가 없습니다.</c:if>
+		<c:if test="${dataCount==0}">등록된 공연이 없습니다.</c:if>
 		<c:if test="${dataCount!=0}">${paging}</c:if>
 	</div>
 </div>

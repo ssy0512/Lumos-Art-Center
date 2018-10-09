@@ -9,32 +9,70 @@ import org.springframework.stereotype.Service;
 import com.sp.common.FileManager;
 import com.sp.common.dao.CommonDAO;
 
-@Service("concerts.concertService")
+@Service("concerts.concertsService")
 public class ConcertsServiceImpl implements ConcertsService {
+
 
 
 	@Autowired
 	private CommonDAO dao;
 	@Autowired
 	private FileManager filemanager;
+	
+	
 	@Override
-	public int updateSeatPrice(Concerts dto) { //수정을 수정중... ㅠ ㅇ ㅠ 
+	public int insertSession(Concerts dto) {
 		int result=0;
-		
 		try {
-			
+			result=dao.insertData("concerts.insertSession",dto);
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.toString());
 		}
-		
-		
+		return result;
+	}
+	
+	@Override
+	public  List<Concerts> listnames() {
+		 List<Concerts> list =null;
+		 try {
+			list=dao.selectList("concerts.listnames",list);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		 return list;
+	}
+	
+	@Override
+	public int insertPrice(Concerts dto) {
+		int result=0;
+		try {
+			result=dao.insertData("concerts.insertPrice",dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
+	@Override
+	public int updatePrice(Concerts dto) {
+		int result=0;
+		try {
+			result=dao.updateData("concerts.updatePrice",dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 		return result;
 	}
 	
 	@Override
 	public int updateSession(Concerts dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.updateData("concerts.updateSession",dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 	
 	

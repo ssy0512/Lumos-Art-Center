@@ -158,16 +158,10 @@
 			      </td>
 			  </tr>
 			
-			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">시작시간</td>
+		<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">총 공연시간</td>
 			      <td style="padding-left:10px;"> 
-			        <input type="text" name="admitStart" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.admitStart}">
-			      </td>
-			  </tr>
-			  	<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">종료시간</td>
-			      <td style="padding-left:10px;"> 
-			        <input type="text" name="admitEnd" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.admitEnd}">
+			       <input type="text" name="supervise" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.totalTime}">
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
@@ -186,6 +180,12 @@
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">주&nbsp;&nbsp;관</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="supervise" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.supervise}">
+			      </td>
+			  </tr>
+			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">가&nbsp;&nbsp;격</td>
+			      <td style="padding-left:10px;"> 
+			        <input type="text" name="seatPriceList" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.seatPriceList}">
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
@@ -207,8 +207,14 @@
 			        <button type="reset" class="btn">다시입력</button>
 			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/concertSchedule/insertedlist';">${mode=='update'?'수정취소':'등록취소'}</button>
 			         <c:if test="${mode=='update'}">
-			         	 <input type="hidden" name="concertNum" value="${dto.concertNum}">
-			         	 <input type="hidden" name="conProfileImage" value="${dto.conProfileImage}">
+			         	 <input type="hidden" name="concertName" value="${dto.concertName}">
+			         	 <input type="hidden" name="host" value="${dto.host}">
+			         	 <input type="hidden" name="concertStart" value="${dto.concertStart}">
+			         	 <input type="hidden" name="concertEnd" value="${dto.concertEnd}">
+			         	 <input type="hidden" name="supervise" value="${dto.supervise}">
+			         	 <input type="hidden" name="genre" value="${dto.genre}">
+			         	 <input type="hidden" name="totalTime" value="${dto.totalTime}">
+			         	 <input type="hidden" name="ratingNum" value="${dto.ratingNum}">
 			        	 <input type="hidden" name="page" value="${page}">
 			        </c:if>
 			      </td>
