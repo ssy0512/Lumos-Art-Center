@@ -209,7 +209,14 @@
 			        <button type="reset" class="btn">다시입력</button>
 			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academylist';">${mode=='update'?'수정취소':'등록취소'}</button>
 			         <c:if test="${mode=='update'}">
-			         	 <input type="hidden" name="academyNum" value="${dto.academyNum}">
+			         	 <input type="hidden" name="academyName" value="${dto.academyName}">
+			         	 <input type="hidden" name="startDay" value="${dto.startDay}">
+			         	 <input type="hidden" name="endDay" value="${dto.endDay}">
+			         	 <input type="hidden" name="lectureDay" value="${dto.lectureDay}">
+			         	 <input type="hidden" name="startTime" value="${dto.startTime}">
+			         	 <input type="hidden" name="endTime" value="${dto.endTime}">
+			         	 <input type="hidden" name="totalCount" value="${dto.totalCount}">
+			         	 <input type="hidden" name="price" value="${dto.price}">
 			         	 <input type="hidden" name="acProfileImage" value="${dto.acProfileImage}">
 			        	 <input type="hidden" name="page" value="${page}">
 			        </c:if>
