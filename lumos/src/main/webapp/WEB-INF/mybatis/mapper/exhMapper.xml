@@ -11,8 +11,11 @@
 <select id="listRate" resultType="com.sp.admin.exh.Exhibits">
 	SELECT ratingNum,ratingName FROM rating
 </select>
-
-<!--   편하게 검색할 수 있는  searchList -->
+<select id="listaudience" resultType="com.sp.admin.exh.Exhibits">
+	SELECT audiencelevelNum, audience FROM audienceLevel
+</select><!--   편하게 검색할 수 있는  searchList -->
+<!-- 
+<select id="getexhibit"></select> -->
 
 <sql id="where-list">
    <if test="searchKey=='exhibitNum' ">
@@ -81,9 +84,12 @@
 		) WHERE rnum >= #{start}
 	]]>
 </select>
-	
-	<!-- <select id="exhibitPrice" parameterType="Integer" resultType="String">
+<select id="exhibitPrice" parameterType="Integer" resultType="String">
 		SELECT  audience||' '||exprice priceString FROM EXHIBITprice ep
     JOIN AUDIENCELEVEL al ON ep.AUDIENCELEVELNUM = al.AUDIENCELEVELNUM WHERE ep.exhibitNum=#{exhibitNum} ORDER BY ep.AUDIENCELEVELNUM ASC
-	</select> -->
+	</select>
+<insert id="insertPrice" parameterType="com.sp.admin.exh.Exhibits">
+	INSERT INTO exhibitPrice (audiencelevelnum, exhibitnum, exprice) values (#{audiencelevelnum},#{exhibitNum}.#{exprice})
+</insert>
+	
 </mapper>

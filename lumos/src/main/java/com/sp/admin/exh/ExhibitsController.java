@@ -117,7 +117,16 @@ public class ExhibitsController {
 		Exhibits dto= service.readExhibits(exhibitNum);
 		if(dto==null)
 			return "redirect:admin/menu2/exhibitSchedule/exhibitlist?"+query;
+		List<String> listPrice = service.exhibitPrice(exhibitNum);
 		
+		if(listPrice!=null && listPrice.size() > 0) {
+			String exPriceString="";
+			for( String s : listPrice) {
+				exPriceString+=s+" / ";
+			}
+			exPriceString=exPriceString.substring(0, exPriceString.length()-3);
+			dto.setExPriceString(exPriceString);
+		}
 		model.addAttribute("dto",dto);
 		model.addAttribute("page",page);
 		model.addAttribute("query",query);
@@ -151,7 +160,26 @@ public class ExhibitsController {
 		
 		return "redirect:/admin/menu2/exhibitSchedule/exhibitlist";
 	}
+	@RequestMapping(value="/admin/menu2/exhibitSchedule/created2",method=RequestMethod.GET)
+	public String created2(Model model) throws Exception{
+		
+		
+		List<Exhibits> listaudience=new ArrayList<>();
+		listaudience=service.listaudience();
+		
+		model.addAttribute("listaudience",listaudience);
+		model.addAttribute("page","1");
+		model.addAttribute("mode","created");
+		
+		return ".admin4.menu2.exhibitSchedule.created2";
+	}
 	
+	@RequestMapping(value="/admin/menu2/exhibitSchedule/created2",method=RequestMethod.POST)
+	public String createdOk (Exhibits dto) throws Exception {
+		service.insertprice(dto);
+		
+		return "redirect:/admin/menu2/exhibitSchedule/article";
+	}
 	@RequestMapping(value="/admin/menu2/exhibitSchedule/update", method=RequestMethod.GET)
 	public String updateExhibit(@RequestParam(value="exhibitNum") int exhibitNum,
 			@RequestParam(value="page",defaultValue="1")String page,

@@ -6,6 +6,35 @@
 	String cp=request.getContextPath();
 %>
 
+
+<!--  
+
+아티클 수정필수 
+버튼은 총 네개가 있어야 함. 
+1. 공연에 대한 수정 2. 회차에 대한 수정 3. 가격에 대한 정보입력 (수정은 드랍) 4. 공연에 대한 삭제. 
+
+
+
+
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <link href="https://fonts/googleapis/com/css?family=Noto+Serif+KR" rel="stylesheet">
 
 <style>
@@ -111,4 +140,6 @@ function updateSession(){
 		</div>
 	</div>
 </div>
+
+
 

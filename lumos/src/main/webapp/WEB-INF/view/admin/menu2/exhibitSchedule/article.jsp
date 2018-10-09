@@ -5,6 +5,18 @@
 <%
 	String cp=request.getContextPath();
 %>
+
+<!--  디자인 변경하면서
+	  버튼 생성할것. (가격정보입력)
+
+ -->
+
+
+
+
+
+
+
 <link href="https://fonts/googleapis/com/css?family=Noto+Serif+KR" rel="stylesheet">
 
 <style>
@@ -78,6 +90,7 @@ function updateExhibits(){
 			<h3>진행시간: ${dto.admitStart} ~ ${dto.admitEnd} </h3>	
 			<h3>주최 : ${dto.host}</h3>
 			<h3>주관 : ${dto.supervise}</h3>
+			<h3>가격 : ${dto.expriceString}</h3>
 			<table style="width:60%; margin:0px auto 20px; border-spacing:0px;">
 				<tr height="35">
 					<td width="300" align="right">

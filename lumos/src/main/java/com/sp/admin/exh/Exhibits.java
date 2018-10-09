@@ -20,6 +20,36 @@ public class Exhibits {
 	private  String hallName;
 	private String exProfileImage;
 	private MultipartFile upload;
+	private String exPriceString;
+	private int audiencelevelNum;
+	private String audience;
+	private int exprice;
+	
+	
+	public int getAudiencelevelNum() {
+		return audiencelevelNum;
+	}
+	public void setAudiencelevelNum(int audiencelevelNum) {
+		this.audiencelevelNum = audiencelevelNum;
+	}
+	public String getAudience() {
+		return audience;
+	}
+	public void setAudience(String audience) {
+		this.audience = audience;
+	}
+	public int getExprice() {
+		return exprice;
+	}
+	public void setExprice(int exprice) {
+		this.exprice = exprice;
+	}
+	public String getExPriceString() {
+		return exPriceString;
+	}
+	public void setExPriceString(String exPriceString) {
+		this.exPriceString = exPriceString;
+	}
 	public int getListNum() {
 		return listNum;
 	}

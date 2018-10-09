@@ -27,12 +27,36 @@ public class ExhibitsServiceImpl implements ExhibitsService {
 		
 		return list;
 	}
+	
+
+	@Override
+	public List<String> exhibitPrice(int exhibitNum) {
+		List<String> list=null;
+		try {
+			list=dao.selectList("exhibits.exhibitPrice",exhibitNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
 
 	@Override
 	public List<Exhibits> listRate() {
 		List<Exhibits> list=null;
 		try {
 			list=dao.selectList("exhibits.listRate");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+	@Override
+	public List<Exhibits> listaudience() {
+		List<Exhibits> list=null;
+		try {
+			list=dao.selectList("exhibits.listaudience");
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -57,6 +81,18 @@ public class ExhibitsServiceImpl implements ExhibitsService {
 		}
 		return result;
 	}
+	@Override
+	public int insertprice(Exhibits dto) {
+		int result=0;
+		try {
+				result = dao.insertData("exhibits.insertprice", dto);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
