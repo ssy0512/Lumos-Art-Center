@@ -77,7 +77,7 @@ public class AdminQuestionController {
 	}
 	
 	
-	@RequestMapping(value="/customerCenter/questions/article",method=RequestMethod.POST)
+	@RequestMapping(value="/customerCenter/main",method=RequestMethod.POST)
 	public String article(
 			@RequestParam(value="postNum") int postNum,
 			@RequestParam(value="page")String page,
@@ -108,7 +108,7 @@ public class AdminQuestionController {
 		model.addAttribute("page",page);
 		model.addAttribute("query",query);
 	
-		return "customerCenter/questions/article";
-		//이부분 고치기.
+		return "redirect:/customerCenter/main";
+	
 	}
 }

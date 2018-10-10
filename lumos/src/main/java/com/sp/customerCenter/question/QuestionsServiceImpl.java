@@ -30,7 +30,7 @@ public class QuestionsServiceImpl implements QuestionsService{
 	public int insertQuestion(Questions dto, String mode) {
 		int result=0;
 		try {
-			int seq=dao.selectOne("question_seq");
+			int seq=dao.selectOne("question.seq");
 			dto.setPostNum(seq);
 			
 			if(mode.equals("created")) {

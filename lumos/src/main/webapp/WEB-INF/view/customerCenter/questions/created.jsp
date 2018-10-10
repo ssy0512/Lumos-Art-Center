@@ -55,16 +55,12 @@
 	<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
       <td width="100" bgcolor="#eeeeee" style="text-align: center;">카테고리</td>
       <td style="padding-left:10px;"> 
-      <select class="selectField" name="" id="listCategory">
+      <select class="selectField" name="qCategoryCode" id="listCategory">
       	<c:forEach var="vo" items="${listCategory}">
       		<option value="${vo.qCategoryCode}">${vo.qCategoryName}</option>
       	</c:forEach>
       </select>
-          <%-- 	<select name="selectBox" id="listCategory" class="selectField">
-          <c:forEach var="listCategory" items="${listCategory}">
-          	<option value="${dto.qCategoryCode}">${dto.qCategoryName}</option>
-          </c:forEach>
-          	</select> --%>
+        
       </td>
   </tr>
   <tr align="left" style="border-bottom: 1px solid #cccccc;"> 
@@ -97,46 +93,3 @@
     </tr>
   </table>
 </form>
-<%-- 
-
-<script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-	oAppRef: oEditors,
-	elPlaceHolder: "content",
-	sSkinURI: "<%=cp%>/resource/se/SmartEditor2Skin.html",	
-	htParams : {bUseToolbar : true,
-		fOnBeforeUnload : function(){
-			
-		}
-	}, 
-	fOnAppLoad : function(){
-	},
-	fCreator: "createSEditor2"
-});
-
-function pasteHTML() {
-	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
-	oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
-}
-
-function showHTML() {
-	var sHTML = oEditors.getById["content"].getIR();
-	alert(sHTML);
-}
-	
-function submitContents(elClickedObj) {
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);	
-	
-	
-	try {
-		return check();
-	} catch(e) {}
-}
-
-function setDefaultFont() {
-	var sDefaultFont = '돋움';
-	var nFontSize = 24;
-	oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
-}
-</script>  --%>
