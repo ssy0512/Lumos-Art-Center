@@ -5,40 +5,8 @@
 <%
 	String cp=request.getContextPath();
 %>
-<link href="https://fonts/googleapis/com/css?family=Noto+Serif+KR" rel="stylesheet">
+<link rel="stylesheet" href="<%=cp%>/resource/css/adminexhibit.css" type="text/css">
 
-<style>
-.post{
-	display:flex;
-	width:1000px;
-}
-.post-left{
-	width:40%;
-	/* background-color:#484855;
-	color:white; */
-	padding:30px;
-	position:relative;
-}
-
-.post-left_title{
-	font-size:20px;
-	text-transform:uppercase;
-	font-weight:300;
-	margin-top:0.25;
-}
-.post-left_border{
-	border:2px solid #ef5350;
-	width:15%;
-	margin-top:1;
-}
-.post-left_author{
-	position:absolute;
-	bottom:2px;
-	display:flex;
-	align-items: center;
-}
-
-</style>
 <script type="text/javascript">
 function deleteAcademies(){
 	var academyNum="${dto.academyNum}";
@@ -63,38 +31,73 @@ function updateAcademies(){
 		alert("성공적으로 수정되었습니다.");
 }
 </script>
-
-<div class="post" style="background:radial-gradient(circle,#d6a664, #f9cd8f); display:flex; justify-content:center; align-items:center;">
-	<div class="post-left">
-		<img src="<%=cp%>/uploads/admin/academySchedule/${dto.acProfileImage}" style="max-width:40%; height:auto;resize:both;">
-		<div class="post-left_title">${dto.academyName}</div>
-		<div class="post0left_title_sub">${dto.instName}</div>
-		<div class="post-left_border"></div>
-		<!-- <div class="post-left_author"><img><p></p></div> 쓸만한 데가 있을까...-->
-	</div>
-	<div class="post-right">
-		<div class="post-right_body">
-			<h3>강의번호 : ${dto.academyNum}</h3>
-			<h3>강의실 : ${dto.roomName}</h3>
-			<h3>강의시간: ${dto.startTime} ~ ${dto.endTime} 매주 ${dto.lectureDay}</h3>	
-			<h3>가격 : ${dto.price} 원</h3>
-			<table style="width:60%; margin:0px auto 20px; border-spacing:0px;">
-				<tr height="35">
-					<td width="300" align="right">
-						<button type="button" class="btn" onclick="updateAcademies();">수정</button>
-						<button type="button" class="btn" onclick="deleteAcademies();">삭제</button>
-					</td>
-					<td align="left">
-						<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academylist?${query}';">리스트</button>
-					</td>
-				</tr>
-			</table>
+<div class="exhibit_detail">
+	<div class="wrap">
+		<div class="pageTitleAndButton">
+			<span>공연 상세 정보</span>
+			<c:if test="${sessionScope.member.userId=='admin'}">
+				<button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/admin/menu2/concertSchedule/created2';">
+					공연 회차 관리
+				</button>
+			</c:if>
+			<%-- <c:if test="${sessionScope.member.userId!='admin'}">
+				<button type="button" class="btnSendInterest">
+					<img src="<%=cp %>/resource/images/lumos/pick_icon.png" style="margin-bottom: 3px;">
+					<span style="display:inline-block; margin-top: 2px;"></span>
+				</button>
+			</c:if> --%>
 		</div>
-		<div class="post-right_footer">
-			<div class="post-right_footer_date">
-				<p>${dto.startDate} ~ ${dto.endDate} <span>총 ${dto.totalCount} 회</span></p>
+		<div class="poster left">
+			<c:if test="${not empty dto.acProfileImage }">
+				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.acProfileImage}">
+			</c:if>
+			<c:if test="${empty dto.acProfileImage }">
+				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png">
+			</c:if>
+			<div class="updateButtonDiv" onclick="updateAcademy();">
+				<a>수정하기</a>
 			</div>
+		</div>
+		<div class="content right">
+			<h2>${dto.academyName}</h2>
+			<table class="detail_inform">
+				<tbody>
+					<tr>
+						<th>기간</th>
+						<td>${dto.startDate}~${dto.endDate} | 매주 ${dto.lectureDay}</td>						
+					</tr>
+					<tr>
+						<th>시간</th>
+						<td>${dto.startTime}~${dto.endTime}</td>						
+					</tr>
+					<tr>
+						<th>장소</th>
+						<td>${dto.roomName}</td>						
+					</tr>
+					<tr>
+						<th>모집정원</th>
+						<td>${dto.totalCount}</td>						
+					</tr>
+					<tr>
+						<th>강사</th>
+						<td>${dto.instName}</td>						
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td>${dto.price}원</td>						
+					</tr>
+					<%-- <tr>
+						<th>주최</th>
+						<td>${dto.host}</td>						
+					</tr>
+					<c:if test="${dto.host!='lac' && not empty dto.supervise}">
+						<tr>
+							<th>주관</th>
+							<td>${dto.supervise}</td>						
+						</tr>
+					</c:if> --%>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
-

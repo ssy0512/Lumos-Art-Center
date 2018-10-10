@@ -222,7 +222,7 @@ public class AcademiesController {
 		String pathname=root+"uploads"+File.separator+"images";
 		service.insertAcademies(dto, pathname);
 		
-		return "redirect:/admin4/menu2/academySchedule/academylist";
+		return "redirect:/admin/menu2/academySchedule/academylist";
 	}
 	
 	@RequestMapping(value="/admin/menu2/academySchedule/update", method=RequestMethod.GET)

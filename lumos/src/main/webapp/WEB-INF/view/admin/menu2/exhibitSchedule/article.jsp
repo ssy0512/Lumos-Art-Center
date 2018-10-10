@@ -6,57 +6,13 @@
 	String cp=request.getContextPath();
 %>
 
-<!--  디자인 변경하면서
-	  버튼 생성할것. (가격정보입력)
-
- -->
-
-
-
-
-
-
-
-<link href="https://fonts/googleapis/com/css?family=Noto+Serif+KR" rel="stylesheet">
-
-<style>
-.post{
-	display:flex;
-	width:1000px;
-}
-.post-left{
-	width:40%;
-	/* background-color:#484855;
-	color:white; */
-	padding:30px;
-	position:relative;
-}
-
-.post-left_title{
-	font-size:20px;
-	text-transform:uppercase;
-	font-weight:300;
-	margin-top:0.25;
-}
-.post-left_border{
-	border:2px solid #ef5350;
-	width:15%;
-	margin-top:1;
-}
-.post-left_author{
-	position:absolute;
-	bottom:2px;
-	display:flex;
-	align-items: center;
-}
-
-</style>
+<link rel="stylesheet" href="<%=cp%>/resource/css/adminexhibit.css" type="text/css">
 <script type="text/javascript">
 function deleteExhibits(){
 	var exhibitNum="${dto.exhibitNum}";
 	var page="${page}";
 	var query="exhibitNum="+exhibitNum+"&page="+page;
-	var url="<%=cp%>/admin/exhibitSchedule/delete?"+query;
+	var url="<%=cp%>/admin/menu2/exhibitSchedule/delete?"+query;
 	
 	if(confirm("이 전시를 삭제 하시겠습니까?"))
 		location.href=url;
@@ -68,14 +24,14 @@ function updateExhibits(){
 	var exhibitNum="${dto.exhibitNum}";
 	var page="${page}";
 	var query = "exhibitNum="+exhibitNum+"&page="+page;
-	var url="<%=cp%>/admin/exhibitSchedule/update?"+query; 
+	var url="<%=cp%>/admin/menu2/exhibitSchedule/update?"+query; 
 	
 	location.href=url;
 	if(success)
 		alert("성공적으로 수정되었습니다.");
 }
 </script>
-
+<%-- 
 <div class="post" style="background:radial-gradient(circle,#d6a664, #f9cd8f); display:flex; justify-content:center; align-items:center;">
 	<div class="post-left">
 		<img src="<%=cp%>/uploads/admin/exhibitSchedule/${dto.exProfileImage}" style="max-width:40%; height:auto;resize:both;">
@@ -110,4 +66,78 @@ function updateExhibits(){
 		</div>
 	</div>
 </div>
-
+ --%>
+<div class="exhibit_detail">
+	<div class="wrap">
+		<div class="pageTitleAndButton">
+			<span>전시 상세 정보</span>
+			<c:if test="${sessionScope.member.userId=='admin'}">
+				<button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/admin/menu2/exhibitSchedule/created2';">
+					전시 가격 관리
+				</button>
+			</c:if>
+			<%-- <c:if test="${sessionScope.member.userId!='admin'}">
+				<button type="button" class="btnSendInterest">
+					<img src="<%=cp %>/resource/images/lumos/pick_icon.png" style="margin-bottom: 3px;">
+					<span style="display:inline-block; margin-top: 2px;"></span>
+				</button>
+				<button type="button" class="pickBtn" style="width: 110px; margin-right: 10px;" onclick="">
+					<span style="display:inline-block; margin-top: 2px;">수정하기</span>
+				</button>
+			</c:if> --%>
+		</div>
+		<div class="poster left">
+			<c:if test="${not empty dto.exProfileImage}">
+				<img class="list_image_crop" src="<%=cp %>/uploads/image/${dto.exProfileImage}">
+			</c:if>
+			<c:if test="${empty dto.exProfileImage}">
+				<img class="list_image_crop noposter" src="<%=cp%>/resource/images/lumos/noposter.png">
+			</c:if>
+			<div class="updateButtonDiv" onclick="updateExhibits();">
+				<a>수정하기</a>
+			</div>
+		</div>
+		<div class="content right">
+			<h2>${dto.exhibitName}</h2>
+			<table class="detail_inform">
+				<tbody>
+					<tr>
+						<th>기간</th>
+						<td>${dto.exhibitStart}~${dto.exhibitEnd}</td>						
+					</tr>
+					<tr>
+						<th>시간</th>
+						<td>${dto.admitStart}~${dto.admitEnd}</td>						
+					</tr>
+					<tr>
+						<th>장소</th>
+						<td>${dto.hallName}&nbsp;${dto.exHallLocate}</td>						
+					</tr>
+					<tr>
+						<th>관람등급</th>
+						<td>${dto.ratingName}</td>						
+					</tr>
+					<tr>
+						<th>장르</th>
+						<td>${dto.genre}</td>						
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td>${dto.expriceString}</td>						
+					</tr>
+					<tr>
+						<th>주최</th>
+						<td>${dto.host}</td>						
+					</tr>
+					<c:if test="${dto.host!='lac' && not empty dto.supervise}">
+						<tr>
+							<th>주관</th>
+							<td>${dto.supervise}</td>						
+						</tr>
+					</c:if>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+ 

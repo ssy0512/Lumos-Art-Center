@@ -6,11 +6,11 @@
 	String cp=request.getContextPath();
 %>
 
-
+<!-- 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
+ -->
  <script type="text/javascript">
  function sendOk(){
 	 var f=document.createdForm;
@@ -21,41 +21,41 @@
 		 return;
 	 }
 	 
-	 str=f.startDay.value;
+	 str=f.startDate.value;
 	 if(!str){
 		 alert("시작일을 입력하십시오.");
-		 f.startDay.focus();
+		 f.startDate.focus();
 		 return;
 	 }
-	 str=f.endDay.value;
+	 str=f.endDate.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
-		 f.endDay.focus();
+		 alert("종료일을 입력하십시오.");
+		 f.endDate.focus();
 		 return;
 	 }
 	 str=f.startTime.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
+		 alert("시작시간을 입력하십시오.");
 		 f.startTime.focus();
 		 return;
 	 }
 	 str=f.endTime.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
+		 alert("종료시간을 입력하십시오.");
 		 f.endTime.focus();
 		 return;
 	 }
 	 str=f.price.value;
 	 if(!str){
-		 alert("시작일을 입력하십시오.");
+		 alert("가격을 입력하십시오.");
 		 f.price.focus();
 		 return;
 	 }
 	 
-	 str=f.startTime.value;
+	 str=f.lectureDay.value;
 	 if(!str){
-		 alert("시작 시간을 입력하십시오.");
-		 f.startTime.focus();
+		 alert("요일을 입력하십시오.");
+		 f.lectureDay.focus();
 		 return;
 	 }
 	 
@@ -123,7 +123,7 @@
 			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의실 선택</td>
 		      <td style="padding-left:10px;"> 
-		      <select class="selectField" name="" id="listRoom">
+		      <select class="selectField" name="roomNum" id="listRoom">
 		      	<c:forEach var="vo" items="${listRoom}">
 		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.roomNum}">${vo.roomName}</option>
@@ -135,7 +135,7 @@
 		  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강사 선택</td>
 		      <td style="padding-left:10px;"> 
-		      <select class="selectField" name="" id="listInst">
+		      <select class="selectField" name="instNum" id="listInst">
 		      	<c:forEach var="vo" items="${listInst}">
 		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.instNum}">${vo.instName}</option>
@@ -146,9 +146,9 @@
   		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의시작일</td>
 			      <td style="padding-left:10px;"> 
-			            <input type="text" id="regDate" name="startDay" readonly="readonly" value="${dto.startDay}"><button></button>
+			            <input type="text" id="regDate" name="startDate" readonly="readonly" value="${dto.startDate}"><button></button>
 			            ~
-			            <input type="text" id="regDate2" name="endDay" readonly="readonly" value="${dto.endDay}"><button></button>
+			            <input type="text" id="regDate2" name="endDate" readonly="readonly" value="${dto.endDate}"><button></button>
 			      </td>
 			  </tr>
 			  
@@ -185,9 +185,9 @@
 			      </td>
 			  </tr>
 			  	  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">총횟수</td>
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">모집인원</td>
 			      <td style="padding-left:10px;"> 
-			        <input type="text" name="totalCount" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.totalCount}">회
+			        <input type="text" name="totalCount" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.totalCount}">명
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">

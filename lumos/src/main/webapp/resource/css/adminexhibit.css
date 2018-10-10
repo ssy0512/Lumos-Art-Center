@@ -1,0 +1,227 @@
+@charset "UTF-8";
+
+
+
+.pageTitleAndButton {
+	height : 55px;
+	font-size: 25px;
+    font-weight: bold;
+    font-family: "Malgun Gothic", "Nanum Gothic", "Dotum";
+}
+
+.pageTitleAndButton .adBtn {
+	width: 150px;
+	height : 33px;
+    color: #ffffff;
+    font-weight: 700;
+    float: right;
+    border: 1px solid #aa1717;
+    background-color: #aa1717;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.pageTitleAndButton .adBtn:hover {
+	color: #aa1717;
+	background-color: #ffffff;
+}
+
+.pickBtn {
+	width: 150px;
+	height : 33px;
+    color: #696969;
+    font-weight: 700;
+    float: right;
+    border: 1px solid gray;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.pageTitleAndButton .pickBtn:hover {
+	color: #ffffff;
+	background-color: #c0c0c0;
+}
+
+.pickedBtn {
+	width: 150px;
+	height : 33px;
+    color: #ffffff;
+    font-weight: 700;
+    float: right;
+    border: 1px solid gray;
+    background-color: #c0c0c0;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.pageTitleAndButton .pickedBtn:hover {
+	color: #c0c0c0;
+	background-color: #ffffff;
+}
+
+
+/* 최상단 div (포스터 + 상세정보) */
+.exhibit_detail{
+	max-width: 1920px;
+    min-height: 500px;
+    margin: 0 auto;
+    margin-top: 25px;
+    position: relative;
+}
+
+.wrap {
+	width: 1020px;
+    margin: 0 auto;
+}
+
+/* 최상단 div 좌측(포스터) */
+.exhibit_detail .poster {
+	width: 270px;
+}
+
+.left {
+	float: left;
+}
+
+.list_image_crop {
+	width: 270px;
+    height: 344px;
+    object-fit: cover;
+}
+
+.noposter {
+	border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+/* 수정하기 버튼 */
+.updateButtonDiv {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.updateButtonDiv a{
+	display: block;
+    width: 270px;
+    height: 48px;
+    border: 1px solid /*#999*/;
+    line-height: 48px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    border-color: #072659;
+    color: #fff;
+    background-color: #072659;
+}
+
+.updateButtonDiv a:hover{
+	color: #072659;
+    background-color:#fff;
+}
+
+/* 최상단 div 우측(상세정보) */
+.content {
+    position: relative;
+    width: 660px;
+    min-height: 450px;
+}
+
+.right {
+	float: right;
+}
+
+.content h2{
+	font-weight: 300;
+	font-size: 30px;
+    margin: 0  0 10px 0;
+    /* word-break: keep-all; */
+    
+}
+
+/* 상세정보 table */
+.detail_inform {
+	width: 660px;
+    margin-bottom: 35px;
+    
+	/* .t1 */
+	margin-top: 60px;
+}
+
+.content .detail_inform tr{
+    height: 27px;
+}
+
+.content .detail_inform th{
+    width: 100px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.content .detail_inform td{
+	width: 550px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+.discount {
+	background-color: #fbfbfb;
+    border-top: 1px solid #e8e8e8;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.discount h3{
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.dcText {
+	font-size: 14px;
+	margin-top: 30px;
+	column-count: 2;
+	column-gap: 50px;
+	column-rule: none;
+	
+}
+
+.dcText pre {
+	display : block;
+	font-family: '맑은고딕', 'MalgunGothic', 'Noto Sans KR', sans-serif;	
+	box-sizing: border-box;
+    white-space: pre-wrap;
+    letter-spacing: 0px;
+    word-break: keep-all;
+    list-style: none;
+}
+
+.work_intro {
+	
+}
+
+
+/* created */
+.eBtn {
+	width: 80px;
+	height : 30px;
+    color: #aa1717;
+    font-weight: 700;
+    border: 1px solid #aa1717;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.eBtn:hover {
+	color: #ffffff;
+	background-color: #aa1717;
+}
+
+.eBtnDiv {
+	width: 260px;
+	margin: 10px auto;
+}

@@ -67,14 +67,14 @@
   		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">회차 날짜 입력</td>
 			      <td style="padding-left:10px;"> 
-			            <input type="text" id="regDate" name="exhibitStart" readonly="readonly" value="${dto.concertStart}"><button></button>
+			            <input type="text" id="regDate" name="sessionDate" readonly="readonly" value="${dto.sessionDate}"><button></button>
 			      </td>
 			  </tr>
 			
 			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">회차 시간</td>
 			      <td style="padding-left:10px;"> 
-			        <input type="text" name="admitStart" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.admitStart}">
+			        <input type="text" name="sessionTime" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.sessionTime}">
 			      </td>
 			  </tr>
 			  
@@ -89,6 +89,7 @@
 			         <c:if test="${mode=='update'}">
 			         	 <input type="hidden" name="sessionDate" value="${dto.sessionDate}">
 			         	 <input type="hidden" name="sessionTime" value="${dto.sessionTime}">
+			         	 <input type="hidden" name="page" value="${dto.page}">
 			        </c:if>
 			      </td>
 			    </tr>

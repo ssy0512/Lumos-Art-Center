@@ -8,6 +8,13 @@ public class Exhibits {
 	private String exhibitName;
 	private String exhibitStart;
 	private String exhibitEnd;
+	private String exHallLocate;
+	public String getExHallLocate() {
+		return exHallLocate;
+	}
+	public void setExHallLocate(String exHallLocate) {
+		this.exHallLocate = exHallLocate;
+	}
 	private String host;
 	private String supervise;
 	private String content;

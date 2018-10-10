@@ -48,13 +48,7 @@
 </select>
 
 <insert id="insertConcerts" parameterType="com.sp.admin.insertCon.Concerts"> 
-	<!-- INSERT INTO concert (concertNum,concertName, concertStart,concertEnd, totalTime,host,supervise,
-						 genre, ratingNum,hallNum, conProfileImage,eventCount,seatPriceList)
-				VALUES (concert_seq.NEXTVAL, #{concertName},#{concertStart},#{concertEnd},#{totalTime},
-						#{host},#{supervise},#{genre},#{ratingNum},#{hallNum},#{conProfileImage},#{eventCount},#{seatPriceList})
-	INSERT INTO concertSession (concertNum, sessionNum, sessionTime) VALUES concert_seq.NEXTVAL, session_seq.NEXTVAL, #{sessionTime}) 
-	INSERT INTO seatPrice (concertNum, seatlevelnum, seatlevel, seatPrice) 
-				VALUES (concert_seq.NEXTVAL, seatlevel_seq.NEXTVAL, #{seatLevel}, #{seatPrice})  -->
+
 	INSERT 
 		INTO concert (concertNum, concertName, concertStart, concertEnd,totalTime, host, supervise, genre,
 						ratingNum, hallNum, conProfileImage, eventCount, seatPriceList)
@@ -121,6 +115,16 @@
 			) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}
 	]]>
+</select>
+
+<select id="readConcertList" parameterType="Integer" resultType="com.sp.admin.insertCon.Concerts">
+	SELECT c.concertNum,c.concertName,c.content,c.host,c.supervise,r.ratingName,c.totalTime,c.conProfileImage,
+		TO_CHAR(concertStart, 'YYYY-MM-DD') concertStart, TO_CHAR(concertEnd, 'YYYY-MM-DD') concertEnd,
+		 h.hallName, c.genre, seatPriceList
+		FROM concert c
+		JOIN concertHall h ON c.hallNum=h.hallNum
+        JOIN rating r ON c.ratingNum=r.ratingNum
+        WHERE concertNum=#{concertNum}
 </select>
 
 </mapper>

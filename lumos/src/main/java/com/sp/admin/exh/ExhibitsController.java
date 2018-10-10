@@ -204,7 +204,7 @@ public class ExhibitsController {
 		String pathname=root+"upload"+File.separator+"image"; //수정해야할수도있음
 		service.updateExhibits(dto,pathname);
 		
-		return "redirect:/menu2/exhibitSchedule/article?listNum="+dto.getListNum()+"&page="+page;
+		return "redirect:/menu2/exhibitSchedule/article?exhibitNum="+dto.getExhibitNum()+"&page="+page;
 	}
 	
 	@RequestMapping(value="/admin/menu2/exhibitSchedule/delete", method=RequestMethod.POST)

@@ -37,7 +37,7 @@ public class Concerts {
 	private String sessionDate;
 	private String genre;
 	private String seatlevel;
-	private int seatprice;
+	private String seatPriceList;
 	private int seatlevelnum;
 	
 	public String getSeatlevel() {
@@ -46,11 +46,11 @@ public class Concerts {
 	public void setSeatlevel(String seatlevel) {
 		this.seatlevel = seatlevel;
 	}
-	public int getSeatprice() {
-		return seatprice;
+	public String getSeatPriceList() {
+		return seatPriceList;
 	}
-	public void setSeatprice(int seatprice) {
-		this.seatprice = seatprice;
+	public void setSeatPriceList(String seatPriceList) {
+		this.seatPriceList = seatPriceList;
 	}
 	public int getSeatlevelnum() {
 		return seatlevelnum;
