@@ -51,7 +51,7 @@ function searchList(){
            <c:if test="${dto.depth!=0}">
             <img src='<%=cp%>/resource/images/re.gif'>
            </c:if>
-           <a href="javascript:location.href='<%=cp%>/customerCenter/questions/articleForm('${dto.postNum}', '${page}')';">${dto.title}</a>
+           <a href="javascript:location.href='<%=cp%>/customerCenter/main';">${dto.title}</a>
       </td>
       <td>${dto.userName}</td>
       <td>${dto.created}</td>

@@ -120,12 +120,12 @@ public class ExhibitsController {
 		List<String> listPrice = service.exhibitPrice(exhibitNum);
 		
 		if(listPrice!=null && listPrice.size() > 0) {
-			String exPriceString="";
+			String expriceString="";
 			for( String s : listPrice) {
-				exPriceString+=s+" / ";
+				expriceString+=s+" / ";
 			}
-			exPriceString=exPriceString.substring(0, exPriceString.length()-3);
-			dto.setExPriceString(exPriceString);
+			expriceString=expriceString.substring(0, expriceString.length()-3);
+			dto.setExpriceString(expriceString);
 		}
 		model.addAttribute("dto",dto);
 		model.addAttribute("page",page);

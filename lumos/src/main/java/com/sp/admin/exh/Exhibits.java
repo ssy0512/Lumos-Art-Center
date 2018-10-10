@@ -20,7 +20,7 @@ public class Exhibits {
 	private  String hallName;
 	private String exProfileImage;
 	private MultipartFile upload;
-	private String exPriceString;
+	private String expriceString;
 	private int audiencelevelNum;
 	private String audience;
 	private int exprice;
@@ -44,11 +44,11 @@ public class Exhibits {
 	public void setExprice(int exprice) {
 		this.exprice = exprice;
 	}
-	public String getExPriceString() {
-		return exPriceString;
+	public String getExpriceString() {
+		return expriceString;
 	}
-	public void setExPriceString(String exPriceString) {
-		this.exPriceString = exPriceString;
+	public void setExpriceString(String expriceString) {
+		this.expriceString = expriceString;
 	}
 	public int getListNum() {
 		return listNum;

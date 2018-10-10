@@ -96,16 +96,7 @@
 					<input type="text" name="searchValue" class="boxTF">
 					<button type="button" class="btn" onclick="searchList()" style="margin: 5px">&nbsp;검색&nbsp;</button>
 					
-				<%-- 	<div class="company-top-layout">
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
-							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
-								&nbsp;&nbsp;목록형&nbsp;&nbsp;
-						</button>
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyListCards';">
-							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
-								&nbsp;&nbsp;앨범형&nbsp;&nbsp;
-						</button>
-					</div> --%>
+			
 				</form>
 			</div>
 		</div>
@@ -124,7 +115,7 @@
 				<tbody>
 					<c:forEach var="dto" items="${list}">
 						<tr
-							onclick="location.href='<%=cp%>/customerCenter/questions/article?&page=${page}&postNum=${dto.postNum}';">
+							onclick="location.href='<%=cp%>/customerCenter/main';">
 							<td>${dto.listNum}</td>
 							<td>${dto.qCategoryName}</td>
 							 <td align="left" style="padding-left: 10px;width:150px;">

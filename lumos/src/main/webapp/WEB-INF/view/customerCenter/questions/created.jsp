@@ -84,6 +84,7 @@
 	        </c:if>
 	        <c:if test="${mode=='reply'}">
 	        	<input type="hidden" name="pageNo" value="${page}">
+	        	<input type="hidden" name="qCategoryCode" value="${dto.qCategoryCode}">
 	        	<input type="hidden" name="groupNum" value="${dto.groupNum}">
 	        	<input type="hidden" name="orderNo" value="${dto.orderNo}">
 	        	<input type="hidden" name="depth" value="${dto.depth}">
