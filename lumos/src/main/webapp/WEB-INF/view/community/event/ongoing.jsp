@@ -24,7 +24,7 @@
         		<td width="210">
 					<div style="width: 495px;height: 273px;margin: 0px 10px;">
 						<a href="<%=cp %>/community/event/article?eventNum=${dto.eventNum}">
-							<img src="<%=cp%>/resource/images/lumos/${dto.saveFilename}" style="width:495px;height: 158.2px;">
+							<img src="<%=cp%>/uploads/image/${dto.saveFilename}" style="width:495px;height: 158.2px;">
 						</a>
 					
 					<p class="event_title"style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"> 
