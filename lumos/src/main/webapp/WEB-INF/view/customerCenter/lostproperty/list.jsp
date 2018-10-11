@@ -22,32 +22,9 @@
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
 $(function(){
-	//이화연 181009 main에서 공지글로 이동-------------------------------------
-	<c:if test="${goTo=='notice'}">
-		toArticleBoard("${mNoticeNum}","${goTo}", 1);
-		
-		// 문의글 밑 공지 볼때. 
-		function toArticleBoard(num, goTo, page) {
-			var url="<%=cp%>/customerCenter/"+goTo+"/article";
-			var query;
-			if(goTo=="questions")
-				query="postNum="+num;
-			else
-				query="noticeNum="+num;
-			
-			query=query+"&page="+page;
-			ajaxHTML(url, "get", query);
-		}
-	</c:if>
-	//--------------------------------------------------------------------
-	
 	$("#tab-notice").addClass("active");
-	
-	//이화연 181009 main에서 공지글로 이동하는 경우 listPage(1);실행되지 않도록-----------
-	<c:if test="${empty goTo}">
 	listPage(1);
-	</c:if>
-	
+
 	$("ul.tabs li").click(function() {
 		tab = $(this).attr("data-tab");
 		
@@ -296,6 +273,7 @@ function deleteBoard(num, page) {
 			       <li id="tab-notice" data-tab="notice">공지사항</li>
 			       <li id="tab-questions" data-tab="questions">1:1문의</li>
 			       <li id="tab-lostproperty" data-tab="lostproperty">유실물관리</li>
+			       
 			   </ul>
 		   </div>
 		   <div id="tab-content" style="clear:both; padding: 20px 10px 0px;"> </div>
