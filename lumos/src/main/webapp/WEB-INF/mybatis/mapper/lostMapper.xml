@@ -37,7 +37,7 @@
 
 
 <select id="readLost" resultType="com.sp.admin.customer.lost.Lost">
-		select lostNum, lostPerson, lostName, tel, email, to_char(lostDate, 'YYYY-MM-DD'), lostPlace, content, lostStatus.lostStatus, lostStatusName
+		select lostNum, lostPerson, lostName, tel, email, to_char(lostDate, 'YYYY-MM-DD') lostDate, lostPlace, content, lostStatus.lostStatus, lostStatusName
 		from lost, lostStatus
 		where lost.lostStatus = lostStatus.lostStatus
 		and lost.lostNum = #{lostNum}
