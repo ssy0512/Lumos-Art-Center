@@ -1,10 +1,12 @@
 package com.sp.rentfront.notice;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.common.MyUtil;
+import com.sp.member.SessionInfo;
 
 @Controller("rentnotice.NoticeController")
 public class NoticeController {
@@ -24,49 +27,58 @@ public class NoticeController {
 	private MyUtil myUtil;
 	
 	@RequestMapping(value="/rentfront/notice/list")
-	public String list(
-			@RequestParam(value="pageNo", defaultValue="1") int current_page,
-			HttpServletRequest req,
-			Model model) throws Exception {
+	public String list(Model model) throws Exception {
 		
-		int rows=20;
-		int total_page=0;
-		int dataCount=0;
+		Calendar cal=Calendar.getInstance();
+		
+		String today = String.format("%04d%02d%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1,
+				cal.get(Calendar.DATE));
 		
 		Map<String, Object> map=new HashMap<>();
-		
-		dataCount=service.dataCount(map);
-		
-		if(dataCount!=0)
-			total_page=myUtil.pageCount(rows, dataCount);
-		
-		if(total_page<current_page)
-			current_page=total_page;
-		
-		int start=(current_page-1)*rows+1;
-		int end=current_page*rows;
-		map.put("start", start);
-		map.put("end", end);
+		map.put("today", today);
 		
 		List<Notice> clist=service.listHall(map);
 		List<Notice> elist=service.listExHall(map);
 		
-		String paging=myUtil.paging(current_page, total_page);
-		
 		model.addAttribute("clist", clist);
 		model.addAttribute("elist", elist);
-		model.addAttribute("paging", paging);
-		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("pageNo", current_page);
-		model.addAttribute("total_page", total_page);
 		
 		return "rentfront/notice/list";
 	}
 	
 	@RequestMapping(value="/rentfront/notice/created", method=RequestMethod.GET)
 	public String createdForm(Model model) throws Exception {
+		List<Notice> pList=new ArrayList<>();
+		List<Notice> pList2=new ArrayList<>();
 		
+		Map<String, Object> map=new HashMap<>();
+		pList=service.pList(map);
+		pList2=service.pList2(map);
 		
-		return "rentfront/notice/created";
+		model.addAttribute("mode", "created");
+		model.addAttribute("pList", pList);
+		model.addAttribute("pList2",pList2);
+		
+		return ".rentfront.notice.created";
+	}
+	
+	@RequestMapping(value="/rentfront/notice/created", method=RequestMethod.POST)
+	public String createdSubmit(
+			@RequestParam(value="selected") String selectOption,
+			@RequestParam(value="locationNum") int locationNum,
+			Notice dto,
+			HttpSession session) throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		dto.setUserId(info.getUserId());
+		dto.setSelectOption(selectOption);
+		if(dto.getSelectOption()=="concert") {
+			service.InsertConcert(dto);
+		} else {
+			service.InsertExhibit(dto);
+		}
+		
+		return "redirect:/rentfront/main";
 	}
 }

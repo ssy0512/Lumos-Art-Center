@@ -25,7 +25,6 @@ $(function(){
 		});
 		
 		$("#tab-"+tab).addClass("active");
-		
 		listPage(1);
 	});
 });
@@ -66,11 +65,18 @@ function listPage(page) {
 	ajaxHTML(url, "get", query);
 }
 
-function name() {
+// 신청하기 
+function insertForm() {
+	var $tab=$(".tabs .active");
+	var tab=$tab.attr("data-tab");
+	var url="<%=cp%>/rentfront/"+tab+"/created";
 	
+	var query="tmp="+new Date().getTime();
+	ajaxHTML(url, "get", query);
 }
 
 </script>
+
 
 <div>
 	<div class="main_photo half_photo" style=" height: 250px;">
@@ -89,12 +95,7 @@ function name() {
 	    		<li id="tab-request" data-tab="request">대관신청</li>
 	    	</ul>
 	    </div>
-	    
 	    <div id="tab-list" style="clear: both; padding: 20px"> </div>
 	</div>
 </div>	
 
-<form name="rentfrontSearchForm" action="" method="post">
-
-</form>
-	

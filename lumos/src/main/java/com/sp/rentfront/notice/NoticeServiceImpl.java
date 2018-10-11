@@ -14,14 +14,22 @@ public class NoticeServiceImpl implements NoticeService {
 	private CommonDAO dao;
 	
 	@Override
-	public int insertNotice(Notice dto) {
+	public int InsertConcert(Notice dto) {
 		int result=0;
 		
 		try {
-			int seq=dao.selectOne("rent.seq");
-			dto.setRentNum(seq);
-			
-			result=dao.insertData("rentnotice.InsertNotice", dto);
+			result=dao.insertData("rentnotice.InsertConcert", dto);
+		} catch (Exception e) {
+		}
+		return result;
+	}
+	
+	@Override
+	public int InsertExhibit(Notice dto) {
+		int result=0;
+		
+		try {
+			result=dao.insertData("rentnotice.InsertExhibit", dto);
 		} catch (Exception e) {
 		}
 		return result;
@@ -115,6 +123,46 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		
 		return dto;
+	}
+
+	@Override
+	public List<Notice> rentDate(int num) {
+		List<Notice> list=null;
+		try {
+			list=dao.selectOne("rentnotice.rentDate", num);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	@Override
+	public Notice readRentDate(int concertNum) {
+		Notice dto=null;
+		try {
+			dto=dao.selectOne("rentnotice.readRentDate", concertNum);
+		} catch (Exception e) {
+		}
+		return dto;
+	}
+
+	@Override
+	public List<Notice> pList(Map<String, Object> map) {
+		List<Notice> list=null;
+		try {
+			list=dao.selectList("rentnotice.pList", map);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	@Override
+	public List<Notice> pList2(Map<String, Object> map) {
+		List<Notice> list=null;
+		try {
+			list=dao.selectList("rentnotice.pList2", map);
+		} catch (Exception e) {
+		}
+		return list;
 	}
 
 }

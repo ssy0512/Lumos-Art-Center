@@ -2,29 +2,28 @@ package com.sp.rentfront.notice;
 
 public class Notice {
 	private int exhibitNum;
-	private int hallNum; 
+	private int concertNum;
 	private int listNum, rentNum;
-	private int eventCount;
-	private int ratingNum;
-	private int processNum;
+
+	private int rentConcertNum;
+	private int rentExhibitNum;
+	private int hallNum; 
 	private int locationNum;
 	
 	private String exhibitName;
 	private String hallName;
 	private String rentStart;
 	private String rentEnd;
-	
-	private String startDate;
-	private String endDate;
-	private String planName;
-	private String genre;
-	private String placeName;
-	private String host;
-	private String supervise;
-	private String purpose;
-	private String person;
-	private String chargeId;
-	private String userId, userName;
+	private String userId;
+	private String title;
+	private String content;
+	private String imageFile;
+	private String selectOption;
+	private String year;
+	private String concertStart;
+	private String concertEnd;
+	private String exhibitStart;
+	private String exhibitEnd;
 	
 	public int getExhibitNum() {
 		return exhibitNum;
@@ -32,11 +31,11 @@ public class Notice {
 	public void setExhibitNum(int exhibitNum) {
 		this.exhibitNum = exhibitNum;
 	}
-	public int getHallNum() {
-		return hallNum;
+	public int getConcertNum() {
+		return concertNum;
 	}
-	public void setHallNum(int hallNum) {
-		this.hallNum = hallNum;
+	public void setConcertNum(int concertNum) {
+		this.concertNum = concertNum;
 	}
 	public int getListNum() {
 		return listNum;
@@ -50,23 +49,23 @@ public class Notice {
 	public void setRentNum(int rentNum) {
 		this.rentNum = rentNum;
 	}
-	public int getEventCount() {
-		return eventCount;
+	public int getRentConcertNum() {
+		return rentConcertNum;
 	}
-	public void setEventCount(int eventCount) {
-		this.eventCount = eventCount;
+	public void setRentConcertNum(int rentConcertNum) {
+		this.rentConcertNum = rentConcertNum;
 	}
-	public int getRatingNum() {
-		return ratingNum;
+	public int getRentExhibitNum() {
+		return rentExhibitNum;
 	}
-	public void setRatingNum(int ratingNum) {
-		this.ratingNum = ratingNum;
+	public void setRentExhibitNum(int rentExhibitNum) {
+		this.rentExhibitNum = rentExhibitNum;
 	}
-	public int getProcessNum() {
-		return processNum;
+	public int getHallNum() {
+		return hallNum;
 	}
-	public void setProcessNum(int processNum) {
-		this.processNum = processNum;
+	public void setHallNum(int hallNum) {
+		this.hallNum = hallNum;
 	}
 	public int getLocationNum() {
 		return locationNum;
@@ -98,77 +97,65 @@ public class Notice {
 	public void setRentEnd(String rentEnd) {
 		this.rentEnd = rentEnd;
 	}
-	public String getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-	public String getPlanName() {
-		return planName;
-	}
-	public void setPlanName(String planName) {
-		this.planName = planName;
-	}
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-	public String getPlaceName() {
-		return placeName;
-	}
-	public void setPlaceName(String placeName) {
-		this.placeName = placeName;
-	}
-	public String getHost() {
-		return host;
-	}
-	public void setHost(String host) {
-		this.host = host;
-	}
-	public String getSupervise() {
-		return supervise;
-	}
-	public void setSupervise(String supervise) {
-		this.supervise = supervise;
-	}
-	public String getPurpose() {
-		return purpose;
-	}
-	public void setPurpose(String purpose) {
-		this.purpose = purpose;
-	}
-	public String getPerson() {
-		return person;
-	}
-	public void setPerson(String person) {
-		this.person = person;
-	}
-	public String getChargeId() {
-		return chargeId;
-	}
-	public void setChargeId(String chargeId) {
-		this.chargeId = chargeId;
-	}
 	public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
-		return userName;
+	public String getTitle() {
+		return title;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getImageFile() {
+		return imageFile;
+	}
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
+	}
+	public String getConcertStart() {
+		return concertStart;
+	}
+	public void setConcertStart(String concertStart) {
+		this.concertStart = concertStart;
+	}
+	public String getConcertEnd() {
+		return concertEnd;
+	}
+	public void setConcertEnd(String concertEnd) {
+		this.concertEnd = concertEnd;
+	}
+	public String getExhibitStart() {
+		return exhibitStart;
+	}
+	public void setExhibitStart(String exhibitStart) {
+		this.exhibitStart = exhibitStart;
+	}
+	public String getExhibitEnd() {
+		return exhibitEnd;
+	}
+	public void setExhibitEnd(String exhibitEnd) {
+		this.exhibitEnd = exhibitEnd;
+	}
+	public String getSelectOption() {
+		return selectOption;
+	}
+	public void setSelectOption(String selectOption) {
+		this.selectOption = selectOption;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
 	}
 	
 }
