@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lost">
+
+<sql id="where-list">
+	<if test="searchKey=='lostNum'">
+		lostNum=#{searchValue}
+	</if>
+	<if test="searchKey=='lostNum'">
+		INSTR(lostNum, #{searchValue}) &gt; 0
+	</if>
+<!-- 	<if test="searchKey=='department'">
+		INSTR(department, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='birth'">
+		TO_CHAR(birth, 'YYYY-MM-DD') = #{searchValue}
+	</if> -->
+</sql>
+
+
+
+<select id="dataCount" resultType="Integer" parameterType="map">
+	SELECT NVL(COUNT (*),0) FROM lost
+	
+</select>
+
+
+<insert id="insertLost" parameterType="com.sp.admin.customer.lost.Lost">
+	INSERT INTO lost(lostNum, lostPerson, lostName, tel, email, lostDate, lostPlace, content, lostStatus)
+		VALUES (lost_seq.NEXTVAL, #{lostPerson},#{lostName},#{tel},#{email},#{lostDate}, #{lostPlace},#{content}, 1)
+</insert>
+
+<update id="updateLostStatus" parameterType="com.sp.admin.customer.lost.Lost">
+	UPDATE lost SET lostStatus=#{lostStatus} where lostNum=#{lostNum}	
+</update>
+
+
+<select id="readLost" resultType="com.sp.admin.customer.lost.Lost">
+		select lostNum, lostPerson, lostName, tel, email, lostDate, lostPlace, content, lostStatus.lostStatus, lostStatusName
+		from lost, lostStatus
+		where lost.lostStatus = lostStatus.lostStatus
+		and lost.lostNum = #{lostNum}
+</select>
+
+<select id="listLost" parameterType="map" resultType="com.sp.admin.customer.lost.Lost">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb. * FROM (
+		SELECT lostNum,lostPerson,lostName,tel,email, to_char(lostDate, 'YYYY-MM-DD') lostDate, 
+				lostPlace, content, lostStatusName 
+				FROM lost, lostStatus
+				WHERE lost.lostStatus = lostStatus.lostStatus
+				ORDER BY lostNum DESC
+		<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+</select>
+</mapper>
