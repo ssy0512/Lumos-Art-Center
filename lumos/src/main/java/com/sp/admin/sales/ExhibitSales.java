@@ -20,6 +20,16 @@ public class ExhibitSales {
 	private String exHallImage;
 	private String exPriceString;
 	
+	private String approveNum;
+	private String orderDate;
+	private int total;
+	//private long total;
+	private int price;
+	private int totalPrice;
+	private int ticketCount;
+	private String discountName;
+	private int usableMileage;
+
 	public int getListNum() {
 		return listNum;
 	}
@@ -127,5 +137,53 @@ public class ExhibitSales {
 	}
 	public void setSupervise(String supervise) {
 		this.supervise = supervise;
+	}
+	public String getApproveNum() {
+		return approveNum;
+	}
+	public void setApproveNum(String approveNum) {
+		this.approveNum = approveNum;
+	}
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getTicketCount() {
+		return ticketCount;
+	}
+	public void setTicketCount(int ticketCount) {
+		this.ticketCount = ticketCount;
+	}
+	public String getDiscountName() {
+		return discountName;
+	}
+	public void setDiscountName(String discountName) {
+		this.discountName = discountName;
+	}
+	public int getUsableMileage() {
+		return usableMileage;
+	}
+	public void setUsableMileage(int usableMileage) {
+		this.usableMileage = usableMileage;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
 	}
 }

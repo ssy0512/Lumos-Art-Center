@@ -36,6 +36,14 @@
 	  	<put-attribute name="left" value="/WEB-INF/view/{1}/left.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/{2}.jsp"/>
 	</definition>
+	
+		<!-- 관리자 메인 -->
+	<definition name=".adminMainLayout" template="/WEB-INF/view/admin/layout/adminMainLayout.jsp">
+		<put-attribute name="body" value="/WEB-INF/view/admin/main/main.jsp" />
+	</definition>
+	<definition name=".admin4.main" extends=".adminMainLayout">
+		<put-attribute name="body" value="/WEB-INF/view/admin/main/main.jsp" />
+	</definition>
 
     <!-- 4 단 관리자 -->
 	<definition name=".admin4Layout" template="/WEB-INF/view/admin/layout/layout4.jsp">

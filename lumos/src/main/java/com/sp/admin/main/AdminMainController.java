@@ -19,6 +19,6 @@ public class AdminMainController {
 		}else if(! info.getUserId().equals("admin")) {
 			return ".member.noAuthorized";
 		}
-		return ".admin4Layout";
+		return ".adminMainLayout";
 	}
 }

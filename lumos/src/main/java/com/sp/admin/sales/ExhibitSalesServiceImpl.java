@@ -46,4 +46,58 @@ public class ExhibitSalesServiceImpl implements ExhibitSalesService {
 		return dto;
 	}
 	
+	@Override
+	public List<String> exhibitPrice(int exhibitNum) {
+		List<String> list = null;
+		try {
+			list=dao.selectList("exhibitSales.exhibitPrice",exhibitNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+/*	@Override
+	public long totalSum(int exhibitNum) {
+		long result=0;
+		try {
+			result=dao.selectOne("exhibitSales.totalSum");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}*/
+	
+	@Override
+	public List<ExhibitSales> totalSum(int exhibitNum) {
+		List<ExhibitSales> list = null;
+		try {
+			list=dao.selectList("exhibitSales.totalSum",exhibitNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public int totalCount(int exhibitNum) {
+		int result = 0;
+		try {
+			result=dao.selectOne("exhibitSales.totalCount", exhibitNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<ExhibitSales> listOrders(Map<String, Object> map) {
+		List<ExhibitSales> list = null;
+		try {
+			list = dao.selectList("exhibitSales.listOrders", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
 }

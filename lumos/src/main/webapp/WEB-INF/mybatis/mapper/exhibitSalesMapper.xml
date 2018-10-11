@@ -7,25 +7,6 @@
 		SELECT NVL(COUNT(*), 0)
 		FROM exhibit e
 	</select>
-<!-- 	
-	<select id="listMain" parameterType="map" resultType="com.sp.admin.sales.ExhibitSales">
-		SELECT * FROM (
-			SELECT ROWNUM rnum, tb.* FROM (
-				SELECT e.exhibitNum, e.exhibitName, TO_CHAR(exhibitStart, 'YYYY-MM-DD') exhibitStart,
-					TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, host, supervise, h.hallName
-				FROM exhibit e
-				JOIN exhibitHall h ON e.hallNum=h.hallNum
-				LEFT OUTER JOIN (
-					SELECT hallName
-					FROM exhibitHall
-					WHERE hallNum = 1
-				) c ON e.hallNum = h.hallNum
-	<![CDATA[
-			) tb WHERE ROWNUM <= ${end}
-		) WHERE rnum >= #{start}
-	]]>
-	</select> -->
-	
 	<select id="listExhibitSales" parameterType="map" resultType="com.sp.admin.sales.ExhibitSales">
 		SELECT * FROM (
 			SELECT ROWNUM rnum, tb.* FROM (
@@ -38,8 +19,9 @@
 					FROM exhibitHall
 					WHERE hallNum = 1
 				) c ON e.hallNum = h.hallNum
+				ORDER BY e.exhibitNum DESC
 	<![CDATA[
-			) tb WHERE ROWNUM <= ${end}
+			) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}
 	]]>
 	</select>
@@ -53,10 +35,39 @@
         WHERE e.exhibitNum=#{exhibitNum}
 	</select>
 	
-<!-- 	<select id="exhibitPrice" parameterType="Integer" resultType="String">
-		SELECT  audience||' '||exprice priceString FROM EXHIBITprice ep
+ 	<select id="exhibitPrice" parameterType="Integer" resultType="String">
+		SELECT  audience||' '||exprice priceString FROM ExhibitPrice ep
 		JOIN AUDIENCELEVEL al ON ep.AUDIENCELEVELNUM = al.AUDIENCELEVELNUM
 		WHERE ep.exhibitNum=#{exhibitNum}
 		ORDER BY ep.AUDIENCELEVELNUM ASC
-	</select> -->
+	</select>
+	
+	<select id="totalSum" parameterType="map" resultType="Long">
+		SELECT SUM(total)
+		FROM orders o
+		JOIN bookExhibit b ON o.approveNum=b.approveNum
+		JOIN exhibit e ON b.exhibitNum=e.exhibitNum
+		WHERE e.exhibitNum=#{exhibitNum}
+	</select>
+	
+	<select id="totalCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM exhibit e
+		JOIN bookExhibit b ON e.exhibitNum=b.exhibitNum
+		JOIN orders o ON b.approveNum=o.approveNum
+		WHERE b.exhibitNum=#{exhibitNum}
+	</select>
+	
+ 	<select id="listOrders" parameterType="map" resultType="com.sp.admin.sales.ExhibitSales">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT b.exhibitNum, b.APPROVENUM, b.price, b.ticketCount, b.usableMileage, TO_CHAR(orderDate, 'YYYY-MM-DD hh:mm:ss') orderDate, o.total
+				FROM bookExhibit b
+                JOIN orders o ON b.approveNum=o.approveNum
+				ORDER BY o.orderDate ASC
+        <![CDATA[
+			) tb WHERE exhibitNum=#{exhibitNum} AND ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
 </mapper>

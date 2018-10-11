@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -152,6 +153,7 @@ $(function() {
 							<td>주최</td>
 							<td>주관</td>
 							<td>전시장</td>
+							<td>가격></td>
 						</tr>
 						<tr>
 							<td>${dto.exhibitNum}</td>
@@ -159,6 +161,7 @@ $(function() {
 							<td>${dto.host}</td>
 							<td>${dto.supervise}</td>
 							<td>${dto.hallName}</td>
+							<td>${dto.exPrice}
 						</tr>
 					</table>
 				</c:forEach>

@@ -61,7 +61,7 @@
 						</if>
 					</where>
 	<![CDATA[
-			) tb WHERE ROWNUM <= ${end}
+			) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}
 	]]>
 	</select>

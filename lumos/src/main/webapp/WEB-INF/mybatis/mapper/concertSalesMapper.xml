@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="concertSales">
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM concert c
+	</select>
+	
+	<select id="readConcertSales" resultType="com.sp.admin.sales.ConcertSales" parameterType="Integer">
+		SELECT c.concertNum, c.concertName, c.host, c.supervise,
+		TO_CHAR(concertStart, 'YYYY-MM-DD') concertStart, TO_CHAR(concertEnd, 'YYYY-MM-DD') concertEnd,
+		 h.hallName, c.genre, seatPriceList
+		FROM concert c
+		JOIN concertHall h ON c.hallNum=h.hallNum
+        WHERE concertNum=#{concertNum}
+	</select>
+	
+	<select id="listConcertSales" parameterType="map" resultType="com.sp.admin.sales.ConcertSales">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT c.concertNum, c.concertName, TO_CHAR(concertStart, 'YYYY-MM-DD') concertStart,
+					TO_CHAR(concertEnd, 'YYYY-MM-DD') concertEnd, genre, host, supervise, h.hallName
+				FROM concert c
+				JOIN concertHall h ON c.hallNum=h.hallNum
+				ORDER BY c.concertNum DESC
+		<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
+	<select id="seatList" parameterType="map" resultType="com.sp.admin.sales.ConcertSales">
+		SELECT seatLevel, concertNum,seatPrice
+		FROM seatPrice sp
+		JOIN seatLevel  sl ON sp.seatLevelNum=sl.seatLevelNum
+		where concertNum=#{concertNum}
+		ORDER BY sp.seatLevelNum
+	</select>
+	
+	<select id="totalSum" parameterType="map" resultType="Long">
+		SELECT SUM(total)
+		FROM orders o
+		JOIN bookConcert b ON o.approveNum=b.approveNum
+		JOIN concert c ON b.concertNum=c.concertNum
+		WHERE c.concertNum=#{concertNum}
+	</select>
+	
+ 	<select id="totalCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM concert c
+		JOIN bookConcert b ON c.concertNum=b.concertNum
+		JOIN orders o ON b.approveNum=o.approveNum
+		WHERE b.concertNum=#{concertNum}
+	</select>
+	
+	<select id="listOrders" parameterType="map" resultType="com.sp.admin.sales.ConcertSales">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT b.APPROVENUM, b.price, b.seatCount, b.useMileage, TO_CHAR(orderDate, 'YYYY-MM-DD') orderDate, o.total
+				FROM bookConcert b
+                JOIN orders o ON b.approveNum=o.approveNum
+				ORDER BY b.approveNum ASC
+	<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+</mapper>

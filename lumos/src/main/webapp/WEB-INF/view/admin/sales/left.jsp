@@ -21,7 +21,7 @@ $(function(){
     	<button onclick="javascript:location.href='<%=cp%>/admin/sales/salesSub/salesMain';">전체 매출 조회</button>
     </a>
     <a>
-    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/concert/concertSales';">공연 매출 조회</button>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/concert/salesList';">공연 매출 조회</button>
     </a>
     <a>
     	<button onclick="javascript:location.href='<%=cp%>/admin/sales/exhibit/exhibitSales';">전시 매출 조회</button>
