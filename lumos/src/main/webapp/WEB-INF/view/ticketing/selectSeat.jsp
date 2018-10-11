@@ -89,35 +89,35 @@ function goTicketing(){
 				<div class="first" style="border:1px solid #d3d3d3; border-top:none; width:600px;margin:0px 100px 0px 100px;padding-bottom:30px;">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="4" end="10" step="1">
-						<input type="checkbox" id="acheck-1-${i}" value="acheck-1-${i}" name="R"/>
+						<input type="checkbox" id="acheck-1-${i}" value="a구역-1열-${i}번" name="R"/>
 						<label for="acheck-1-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="7" step="1">
-						<input type="checkbox" id="bcheck-1-${i}" value="bcheck-1-${i}" name="R"/>
+						<input type="checkbox" id="bcheck-1-${i}" value="b구역-1열-${i}번" name="R"/>
 						<label for="bcheck-1-${i}">${i}</label>
 					</c:forEach>
 					<br>
 					<c:forEach var="j" begin="2" end="5" step="1">
 						<c:forEach var="i" begin="1" end="10" step="1">
-							<input type="checkbox" id="acheck-${j}-${i}" value="acheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="acheck-${j}-${i}" value="a구역-${j}열-${i}번" name="R"/>
 							<label for="acheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="9" step="1">
-							<input type="checkbox" id="bcheck-${j}-${i}" value="bcheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="bcheck-${j}-${i}" value="b구역-${j}열-${i}번" name="R"/>
 							<label for="bcheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						<br>
 					</c:forEach>
 					<c:forEach var="j" begin="6" end="9" step="1">
 						<c:forEach var="i" begin="1" end="10" step="1">
-							<input type="checkbox" id="acheck-${j}-${i}" value="acheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="acheck-${j}-${i}" value="a구역-${j}열-${i}번" name="S"/>
 							<label for="acheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="9" step="1">
-							<input type="checkbox" id="bcheck-${j}-${i}" value="bcheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="bcheck-${j}-${i}" value="b구역-${j}열-${i}번" name="S"/>
 							<label for="bcheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						<br>
@@ -125,23 +125,23 @@ function goTicketing(){
 				</div>
 				<div style="margin-top:10px;padding-left:10px;">
 					<c:forEach var="i" begin="1" end="10" step="1">
-						<input type="checkbox" id="2check-${i}" value="2check-${i}" name="S"/>
+						<input type="checkbox" id="2check-${i}" value="2층-${i}번" name="S"/>
 						<label for="2check-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="28" end="37" step="1">
-						<input type="checkbox" id="2check-${i}" value="2check-${i}" name="S"/>
+						<input type="checkbox" id="2check-${i}" value="2층-${i}번" name="S"/>
 						<label for="2check-${i}">${i}</label>
 					</c:forEach>
 					<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="11" end="19" step="1">
-						<input type="checkbox" id="2check-${i}" value="2check-${i}" name="S"/>
+						<input type="checkbox" id="2check-${i}" value="2층-${i}번" name="S"/>
 						<label for="2check-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="20" end="27" step="1">
-						<input type="checkbox" id="2check-${i}" value="2check-${i}" name="S"/>
+						<input type="checkbox" id="2check-${i}" value="2층-${i}번" name="S"/>
 						<label for="2check-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -149,12 +149,12 @@ function goTicketing(){
 			</div>
 			<div style="margin-top:10px;">
 				<c:forEach var="i" begin="1" end="9" step="1">
-					<input type="checkbox" id="3check-${i}" value="3check-${i}" name="A"/>
+					<input type="checkbox" id="3check-${i}" value="3층-${i}번" name="A"/>
 					<label for="3check-${i}">${i}</label>
 				</c:forEach>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<c:forEach var="i" begin="10" end="18" step="1">
-					<input type="checkbox" id="3check-${i}" value="3check-${i}" name="A"/>
+					<input type="checkbox" id="3check-${i}" value="3층-${i}번" name="A"/>
 					<label for="3check-${i}">${i}</label>
 				</c:forEach>
 			</div>
@@ -174,72 +174,72 @@ function goTicketing(){
 				<div class="first" style="border:1px solid #d3d3d3; border-top:none; width:800px;margin:0px 100px 0px 100px;padding-bottom:30px;">
 					<c:forEach var="j" begin="1" end="7" step="1">
 						<c:forEach var="i" begin="1" end="6" step="1">
-							<input type="checkbox" id="acheck-${j}-${i}" value="acheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="acheck-${j}-${i}" value="a구역 ${j}열 ${i}번" name="R"/>
 							<label for="acheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="16" step="1">
-							<input type="checkbox" id="bcheck-${j}-${i}" value="bcheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="bcheck-${j}-${i}" value="b구역 ${j}열 ${i}번" name="R"/>
 							<label for="bcheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="6" step="1">
-							<input type="checkbox" id="ccheck-${j}-${i}" value="ccheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="ccheck-${j}-${i}" value="c구역 ${j}열 ${i}번" name="R"/>
 							<label for="ccheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						<br>
 					</c:forEach>
 					<c:forEach var="j" begin="8" end="13" step="1">
 						<c:forEach var="i" begin="1" end="6" step="1">
-							<input type="checkbox" id="acheck-${j}-${i}" value="acheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="acheck-${j}-${i}" value="a구역 ${j}열 ${i}번" name="S"/>
 							<label for="acheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="16" step="1">
-							<input type="checkbox" id="bcheck-${j}-${i}" value="bcheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="bcheck-${j}-${i}" value="b구역 ${j}열 ${i}번" name="S"/>
 							<label for="bcheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="6" step="1">
-							<input type="checkbox" id="ccheck-${j}-${i}" value="ccheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="ccheck-${j}-${i}" value="c구역 ${j}열 ${i}번" name="S"/>
 							<label for="ccheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						<br>
 					</c:forEach>
 					<c:forEach var="i" begin="4" end="6" step="1">
-						<input type="checkbox" id="acheck-14-${i}" value="acheck-14-${i}" name="S"/>
+						<input type="checkbox" id="acheck-14-${i}" value="a구역 14열 ${i}번" name="S"/>
 						<label for="acheck-14-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="16" step="1">
-						<input type="checkbox" id="bcheck-14-${i}" value="acheck-14-${i}" name="S"/>
+						<input type="checkbox" id="bcheck-14-${i}" value="a구역 14열 ${i}번" name="S"/>
 						<label for="bcheck-14-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="3" step="1">
-						<input type="checkbox" id="ccheck-14-${i}" value="ccheck-14-${i}" name="S"/>
+						<input type="checkbox" id="ccheck-14-${i}" value="c구역 14열 ${i}번" name="S"/>
 						<label for="ccheck-14-${i}">${i}</label>
 					</c:forEach>
 				</div>
 				<div style="margin-top:10px;padding-left:10px;">
 					<c:forEach var="i" begin="1" end="10" step="1">
-						<input type="checkbox" id="2acheck-${i}" value="2acheck-${i}" name="A"/>
+						<input type="checkbox" id="2acheck-${i}" value="2층 a구역 ${i}번" name="A"/>
 						<label for="2acheck-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="10" step="1">
-						<input type="checkbox" id="2bcheck-${i}" value="2bcheck-${i}" name="A"/>
+						<input type="checkbox" id="2bcheck-${i}" value="2층 b구역 ${i}번" name="A"/>
 						<label for="2bcheck-${i}">${i}</label>
 					</c:forEach>
 					<br>
 					<c:forEach var="j" begin="1" end="3" step="1">
 						<c:forEach var="i" begin="1" end="13" step="1">
-							<input type="checkbox" id="2acheck-${j}-${i}" value="2acheck-${j}-${i}" name="A"/>
+							<input type="checkbox" id="2acheck-${j}-${i}" value="2층 a구역 ${j}열 ${i}번" name="A"/>
 							<label for="2acheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="13" step="1">
-							<input type="checkbox" id="2bcheck-${j}-${i}" value="2bcheck-${j}-${i}" name="A"/>
+							<input type="checkbox" id="2bcheck-${j}-${i}" value="2층 b구역 ${j}열 ${i}번" name="A"/>
 							<label for="2bcheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						<br>
@@ -261,87 +261,87 @@ function goTicketing(){
 				<div class="first" style="border:1px solid #d3d3d3; border-top:none; width:1300px;margin:0px 50px 0px 50px;padding-bottom:30px;">
 					<c:forEach var="j" begin="1" end="6" step="1">
 						<c:forEach var="i" begin="1" end="18" step="1">
-							<input type="checkbox" id="acheck-${j}-${i}" value="acheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="acheck-${j}-${i}" value="a구역 ${j}열 ${i}번" name="R"/>
 							<label for="acheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="18" step="1">
-							<input type="checkbox" id="bcheck-${j}-${i}" value="bcheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="bcheck-${j}-${i}" value="b구역 ${j}열 ${i}번" name="R"/>
 							<label for="bcheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="18" step="1">
-							<input type="checkbox" id="ccheck-${j}-${i}" value="ccheck-${j}-${i}" name="R"/>
+							<input type="checkbox" id="ccheck-${j}-${i}" value="c구역 ${j}열 ${i}번" name="R"/>
 							<label for="ccheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						<br>
 					</c:forEach>
 					<c:forEach var="j" begin="7" end="12" step="1">
 						<c:forEach var="i" begin="1" end="18" step="1">
-							<input type="checkbox" id="acheck-${j}-${i}" value="acheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="acheck-${j}-${i}" value="a구역 ${j}열 ${i}번" name="S"/>
 							<label for="acheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="18" step="1">
-							<input type="checkbox" id="bcheck-${j}-${i}" value="bcheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="bcheck-${j}-${i}" value="b구역 ${j}열 ${i}번" name="S"/>
 							<label for="bcheck-${j}-${i}">${i}</label>
 						</c:forEach>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<c:forEach var="i" begin="1" end="18" step="1">
-							<input type="checkbox" id="ccheck-${j}-${i}" value="ccheck-${j}-${i}" name="S"/>
+							<input type="checkbox" id="ccheck-${j}-${i}" value="c구역 ${j}열 ${i}번" name="S"/>
 							<label for="ccheck-${j}-${i}">${i}</label>
 						</c:forEach>
 					</c:forEach>
 						<br><br><br>
 					<c:forEach var="i" begin="1" end="23" step="1">
-						<input type="checkbox" id="acheck-13-${i}" value="acheck-13-${i}" name="S"/>
+						<input type="checkbox" id="acheck-13-${i}" value="a구역 13열 ${i}번" name="S"/>
 						<label for="acheck-13-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="23" step="1">
-						<input type="checkbox" id="bcheck-13-${i}" value="acheck-13-${i}" name="S"/>
+						<input type="checkbox" id="bcheck-13-${i}" value="a구역 13열 ${i}번" name="S"/>
 						<label for="bcheck-13-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 				</div>
 				<div style="margin-top:10px;padding-left:10px;">
 					<c:forEach var="i" begin="1" end="17" step="1">
-						<input type="checkbox" id="2acheck-${i}" value="2acheck-${i}" name="A"/>
+						<input type="checkbox" id="2acheck-${i}" value="2층 a구역 ${i}번" name="A"/>
 						<label for="2acheck-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="17" step="1">
-						<input type="checkbox" id="2bcheck-${i}" value="2bcheck-${i}" name="A"/>
+						<input type="checkbox" id="2bcheck-${i}" value="2층 b구역 ${i}번" name="A"/>
 						<label for="2bcheck-${i}">${i}</label>
 					</c:forEach>
 					<br>
 					<c:forEach var="i" begin="1" end="20" step="1">
-						<input type="checkbox" id="2acheck-1-${i}" value="2acheck-1-${i}" name="A"/>
+						<input type="checkbox" id="2acheck-1-${i}" value="2층 a구역 1열 ${i}번" name="A"/>
 						<label for="2acheck-1-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="20" step="1">
-						<input type="checkbox" id="2bcheck-1-${i}" value="2bcheck-1-${i}" name="A"/>
+						<input type="checkbox" id="2bcheck-1-${i}" value="2층 b구역 1열 ${i}번" name="A"/>
 						<label for="2bcheck-1-${i}">${i}</label>
 					</c:forEach> 
 					<br>
 					<c:forEach var="i" begin="1" end="16" step="1">
-						<input type="checkbox" id="2acheck-2-${i}" value="2acheck-2-${i}" name="A"/>
+						<input type="checkbox" id="2acheck-2-${i}" value="2층 a구역 2열 ${i}번" name="A"/>
 						<label for="2acheck-2-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="16" step="1">
-						<input type="checkbox" id="2bcheck-2-${i}" value="2bcheck-2-${i}" name="A"/>
+						<input type="checkbox" id="2bcheck-2-${i}" value="2층 b구역 2열 ${i}번" name="A"/>
 						<label for="2bcheck-2-${i}">${i}</label>
 					</c:forEach> 
 					<br>
 					<c:forEach var="i" begin="1" end="22" step="1">
-						<input type="checkbox" id="2acheck-3-${i}" value="2acheck-3-${i}" name="A"/>
+						<input type="checkbox" id="2acheck-3-${i}" value="2층 a구역 3열 ${i}번" name="A"/>
 						<label for="2acheck-3-${i}">${i}</label>
 					</c:forEach>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="i" begin="1" end="22" step="1">
-						<input type="checkbox" id="2bcheck-3-${i}" value="2bcheck-3-${i}" name="A"/>
+						<input type="checkbox" id="2bcheck-3-${i}" value="2층 b구역 3열 ${i}번" name="A"/>
 						<label for="2bcheck-3-${i}">${i}</label>
 					</c:forEach> 
 				</div>

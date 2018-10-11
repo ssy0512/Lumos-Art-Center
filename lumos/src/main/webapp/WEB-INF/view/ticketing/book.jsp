@@ -7,13 +7,58 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/ticketingLayout.css" type="text/css">
 <script type="text/javascript">
-function check(){
+function goCheck(){
+	var f=document.bookingForm;
 	
+	var $rcnt="${rcnt}";
+	var $scnt="${scnt}";
+	var $acnt="${acnt}";
+	var totalCount="${total}";
+	
+	var rcount=Number($("#trcnt").val())+Number($("#salercnt").val());
+	var scount=Number($("#tscnt").val())+Number($("#salescnt").val());
+	var acount=Number($("#tacnt").val())+Number($("#saleacnt").val());
+	
+	if(rcount!=$rcnt || scount!=$scnt || acount!=$acnt || (rcount+scount+acount)!=totalCount){
+		alert("매수를 다시 선택해주세요.");
+		return false;
+	}
+	
+	<%-- 마일리지 정규식 --%>
+	var regexp = /^[0-9]*$/;
+	var $mil=$("input[name=mileage]").val();
+	if( !regexp.test($mil) ) {
+		alert("마일리지는 숫자만 입력 가능합니다.");
+		return false;
+	}
+	var $totalMil=Number("${totalMileage}");
+	$mil=Number($mil);
+	if($mil > $totalMil){
+		alert("보유 마일리지 이상 사용은 불가능합니다.");
+		return false;
+	}
+	if($mil < 1000){
+		alert("마일리지는 1000점부터 사용 가능합니다.");
+		return false;
+	}
+	
+	<%-- 라디오버튼 --%>
+	if(!$('input:radio[name=card]').is(':checked')){
+		alert("결제방식을 선택해주세요.");
+		return false;
+	}
+	
+	var num=$("input[name=sessionNum]").val();
+	var hnum=$("input[name=hallNum]").val();
+
+	f.action="<%=cp%>/ticketing/finalBook?sessionNum="+num+"&hallNum="+hnum;
+	
+	return true;
 }
 </script>
 
 <div class="body-container">
-<form id="bookingForm" method="post" onsubmit="return check();">
+<form name="bookingForm" method="post" onsubmit="return goCheck();">
 	<h3 class="title">가격</h3>
 	<c:if test="${rcnt!=0 }">
 		<div>
@@ -27,10 +72,10 @@ function check(){
 					<td style="padding-left:9px;">일반</td>
 					<td style="text-align:right;padding-right:9px;width:100px;">${array[0] }원</td>
 					<td style="text-align:center;width:100px;">
-						<select name="tcnt" class="selectField" style="height:28px;width: 60px;">
-			                  <option value="r-0">0매</option>
+						<select id="trcnt" name="trcnt" class="selectField" style="height:28px;width: 60px;">
+			                  <option value="0">0매</option>
 			                  <c:forEach var="i" begin="1" end="${rcnt}" step="1">
-			                  	<option value="r-${i}">${i}매</option>
+			                  	<option value="${i}">${i}매</option>
 			                  </c:forEach>
 			            </select>
 					</td>
@@ -40,10 +85,10 @@ function check(){
 					<td style="padding-left:9px;">장애인/국가유공자 할인 50%</td>
 					<td style="text-align:right;padding-right:9px;width:100px;">${rprice}원</td>
 					<td style="text-align:center;width:100px;">
-						<select name="salercnt" class="selectField" style="height:28px;width: 60px;">
-			                  <option value="r-0">0매</option>
+						<select id="salercnt" name="salercnt" class="selectField" style="height:28px;width: 60px;">
+			                  <option value="0">0매</option>
 			                  <c:forEach var="i" begin="1" end="${rcnt}" step="1">
-			                  	<option value="r-sale-${i}">${i}매</option>
+			                  	<option value="${i}">${i}매</option>
 			                  </c:forEach>
 			            </select>
 					</td>
@@ -64,10 +109,10 @@ function check(){
 					<td style="padding-left:9px;">일반</td>
 					<td style="text-align:right;padding-right:9px;width:100px;">${array[1] }원</td>
 					<td style="text-align:center;width:100px;">
-						<select name="tscnt" class="selectField" style="height:28px;width: 60px;">
-			                  <option value="s-0">0매</option>
+						<select id="tscnt" name="tscnt" class="selectField" style="height:28px;width: 60px;">
+			                  <option value="0">0매</option>
 			                  <c:forEach var="i" begin="1" end="${scnt}" step="1">
-			                  	<option value="s-${i}">${i}매</option>
+			                  	<option value="${i}">${i}매</option>
 			                  </c:forEach>
 			            </select>
 					</td>
@@ -77,10 +122,10 @@ function check(){
 					<td style="padding-left:9px;">장애인/국가유공자 할인 50%</td>
 					<td style="text-align:right;padding-right:9px;width:100px;">${sprice}원</td>
 					<td style="text-align:center;width:100px;">
-						<select name="slaescnt" class="selectField" style="height:28px;width: 60px;">
-			                  <option value="s-0">0매</option>
+						<select id="salescnt" name="salescnt" class="selectField" style="height:28px;width: 60px;">
+			                  <option value="0">0매</option>
 			                  <c:forEach var="i" begin="1" end="${scnt}" step="1">
-			                  	<option value="s-sale-${i}">${i}매</option>
+			                  	<option value="${i}">${i}매</option>
 			                  </c:forEach>
 			            </select>
 					</td>
@@ -101,10 +146,10 @@ function check(){
 					<td style="padding-left:9px;">일반</td>
 					<td style="text-align:right;padding-right:9px;width:100px;">${array[2] }원</td>
 					<td style="text-align:center;width:100px;">
-						<select name="tacnt" class="selectField" style="height:28px;width: 60px;">
-			                  <option value="a-0">0매</option>
+						<select id="tacnt" name="tacnt" class="selectField" style="height:28px;width: 60px;">
+			                  <option value="0">0매</option>
 			                  <c:forEach var="i" begin="1" end="${acnt}" step="1">
-			                  	<option value="a-${i}">${i}매</option>
+			                  	<option value="${i}">${i}매</option>
 			                  </c:forEach>
 			            </select>
 					</td>
@@ -114,10 +159,10 @@ function check(){
 					<td style="padding-left:9px;">장애인/국가유공자 할인 50%</td>
 					<td style="text-align:right;padding-right:9px;width:100px;">${aprice }원</td>
 					<td style="text-align:center;width:100px;">
-						<select name="tcnt" class="selectField" style="height:28px;width: 60px;">
-			                  <option value="a-0">0매</option>
+						<select id="saleacnt" name="saleacnt" class="selectField" style="height:28px;width: 60px;">
+			                  <option value="0">0매</option>
 			                  <c:forEach var="i" begin="1" end="${acnt}" step="1">
-			                  	<option value="a-sale-${i}">${i}매</option>
+			                  	<option value="${i}">${i}매</option>
 			                  </c:forEach>
 			            </select>
 					</td>
@@ -138,7 +183,7 @@ function check(){
 	<table class="price-table">
 		<tr style="height:31px;">
 			<td style="padding-left:20px;width:130px;background: #f7f7f7;">
-				<input type="radio">신용카드
+				<input type="radio" name="card">신용카드
 			</td>
 		</tr>
 	</table>
@@ -153,5 +198,9 @@ function check(){
 	</div>
 	<input type="hidden" name="sessionNum" value="${sessionNum }">
 	<input type="hidden" name="hallNum" value="${hallNum }">
+	<input type="hidden" name="array[0]" value="${array[0]}">
+	<input type="hidden" name="array[1]" value="${array[1]}">
+	<input type="hidden" name="array[2]" value="${array[2]}">
+	<input type="hidden" name="bookedSeatNum" value="${bookedSeatNum}">
 </form>
 </div>

@@ -89,5 +89,16 @@ public class TicketingServiceImpl implements TicketingService{
 		}
 		return list;
 	}
+
+	@Override
+	public List<Ticketing> sessionDate(int sessionNum) {
+		List<Ticketing> result=null;
+		try {
+			result=dao.selectList("ticketing.sessionDate", sessionNum);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 	
 }

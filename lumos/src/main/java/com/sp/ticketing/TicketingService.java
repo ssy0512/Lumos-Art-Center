@@ -12,4 +12,5 @@ public interface TicketingService {
 	
 	public List<Ticketing> seatPrice(int hallNum);
 	public int myMileage(String userId);
+	public List<Ticketing> sessionDate(int sessionNum);
 }

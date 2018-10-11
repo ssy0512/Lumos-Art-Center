@@ -56,4 +56,10 @@
 		WHERE ch.hallNum=#{hallNum}
 		ORDER BY seatLevelNum ASC
 	</select>
+	
+	<select id="sessionDate" parameterType="Integer" resultType="com.sp.ticketing.Ticketing">
+		SELECT TO_CHAR(sessionDate,'YYYY-MM-DD') sessionDate,sessionTime
+		FROM concertSession
+		WHERE sessionNum=#{sessionNum}
+	</select>
 </mapper>

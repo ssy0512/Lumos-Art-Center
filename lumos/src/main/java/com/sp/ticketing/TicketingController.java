@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sp.member.SessionInfo;
 
@@ -96,29 +95,40 @@ public class TicketingController {
 	public String booking(
 			@RequestParam(value="sessionNum") int sessionNum,
 			@RequestParam(value="hallNum") int hallNum,
-			@RequestParam(value="R", defaultValue="") String[] RList,
-			@RequestParam(value="S", defaultValue="") String[] SList,
-			@RequestParam(value="A", defaultValue="") String[] AList,
+			@RequestParam(value="R", required=false) String[] RList,
+			@RequestParam(value="S", required=false) String[] SList,
+			@RequestParam(value="A", required=false) String[] AList,
 			HttpSession session,
-			Ticketing dto,
 			Model model) throws Exception {
 		
-		String r=null;String s=null;String a=null;
-		int rcnt=0;int scnt=0;int acnt=0;
-		for(int i=0;i<RList.length;i++) {
-			r+=RList;
-			rcnt++;
-		}
-		for(int i=0;i<SList.length;i++) {
-			s+=SList;
-			scnt++;
-		}
-		for(int i=0;i<AList.length;i++) {
-			a+=AList;
-			acnt++;
-		}
-		int total=rcnt+scnt+acnt;
 		
+		String r="";String s="";String a="";
+		int rcnt=0;int scnt=0;int acnt=0;
+		
+		if(RList!=null) {
+			for(int i=0;i<RList.length;i++) {
+				r+=RList[i]+",";
+				rcnt++;
+			}
+		}
+		
+		if(SList!=null) {
+			for(int i=0;i<SList.length;i++) {
+				s+=SList[i]+",";
+				scnt++;
+			}
+		}
+		
+		if(AList!=null) {
+			for(int i=0;i<AList.length;i++) {
+				a+=AList[i]+",";
+				acnt++;
+			}
+		}
+		
+		int total=rcnt+scnt+acnt;
+		String bookedSeatNum=r+s+a;
+		bookedSeatNum=bookedSeatNum.substring(0,bookedSeatNum.length()-1);
 		// 좌석 가격 정보(+할인된 금액)
 		List<Ticketing> priceList=service.seatPrice(hallNum);
 		
@@ -136,10 +146,13 @@ public class TicketingController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		int totalMileage = service.myMileage(info.getUserId());
 		
+		model.addAttribute("bookedSeatNum",bookedSeatNum);
 		model.addAttribute("rprice",rprice);
 		model.addAttribute("sprice",sprice);
 		model.addAttribute("aprice",aprice);
-		model.addAttribute("array",array);
+		model.addAttribute("array[0]",array[0]);
+		model.addAttribute("array[1]",array[1]);
+		model.addAttribute("array[2]",array[2]);
 		model.addAttribute("totalMileage",totalMileage);
 		model.addAttribute("total",total);
 		model.addAttribute("rcnt",rcnt);
@@ -149,5 +162,51 @@ public class TicketingController {
 		model.addAttribute("hallNum",hallNum);
 		
 		return ".ticketing.book";
+	}
+	
+	@RequestMapping(value="/ticketing/finalBook")
+	public String finalBook(
+			@RequestParam(value="hallNum") int hallNum,
+			@RequestParam(value="sessionNum") int sessionNum,
+			@RequestParam(value="array[0]", defaultValue="0") int array0,
+			@RequestParam(value="array[1]", defaultValue="0") int array1,
+			@RequestParam(value="array[2]", defaultValue="0") int array2,
+			@RequestParam(value="bookedSeatNum") String bookedSeatNum,
+			@RequestParam(value="trcnt", defaultValue="0") int trcnt,
+			@RequestParam(value="salercnt", defaultValue="0") int salercnt,
+			@RequestParam(value="tscnt", defaultValue="0") int tscnt,
+			@RequestParam(value="salescnt", defaultValue="0") int salescnt,
+			@RequestParam(value="tacnt", defaultValue="0") int tacnt,
+			@RequestParam(value="saleacnt", defaultValue="0") int saleacnt,
+			@RequestParam(value="mileage", defaultValue="0") int mileage,
+			Ticketing dto,
+			Model model) {
+		System.out.println(array0+"++++++++++++++");
+		
+		List<Ticketing> list=service.sessionDate(sessionNum);
+		for(Ticketing ddto:list) {
+			dto.setSessionDate(ddto.getSessionDate());
+			dto.setSessionTime(ddto.getSessionTime());
+		}
+		
+		String[] sp=bookedSeatNum.split(",");
+		int total=sp.length;
+		
+		int rprice=(int)array0/2;
+		int sprice=(int)array1/2;
+		int aprice=(int)array2/2;
+		
+		int totalPrice=array0*(trcnt+salercnt)+array1*(tscnt+salescnt)+array2*(tacnt+saleacnt);
+		int discount=rprice*salercnt+sprice*salescnt+aprice+saleacnt+mileage;
+		int price=totalPrice-discount;
+		
+		model.addAttribute("dto",dto);
+		model.addAttribute("bookedSeatNum",bookedSeatNum);
+		model.addAttribute("total",total);
+		model.addAttribute("totalPrice",totalPrice);
+		model.addAttribute("discount",discount);
+		model.addAttribute("price",price);
+		
+		return ".ticketing.finalBook";
 	}
 }
