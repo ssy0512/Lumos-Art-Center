@@ -95,7 +95,7 @@
 				<div class="resultList">
 					<a href="<%=cp %>/concert/article?num=${vo.concertNum}&${query}">
 						<c:if test="${not empty vo.conProfileImage }">
-							<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${vo.conProfileImage}">
+							<img class="list_image_crop" src="<%=cp %>/uploads/image/${vo.conProfileImage}">
 						</c:if>
 						<c:if test="${empty vo.conProfileImage }">
 							<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png" >

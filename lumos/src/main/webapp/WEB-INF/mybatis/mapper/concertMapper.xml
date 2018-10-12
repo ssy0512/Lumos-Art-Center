@@ -78,7 +78,7 @@
 	</select>
 	
 	<select id="listConcertHall" resultType="com.sp.concert.Concert">
-		SELECT hallName, hallNum FROM concertHall
+		SELECT hallName, hallNum FROM concertHall ORDER BY hallNum asc
 	</select>
 	
 	<select id="readConcertHall" parameterType="Integer"  resultType="com.sp.concert.Concert">

@@ -32,7 +32,7 @@
 			<span>전시 상세 정보</span>
 		</div>
 		<div class="poster left">
-			<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.conProfileImage}">
+			<img class="list_image_crop" src="<%=cp %>/uploads/image/${dto.conProfileImage}">
 		</div>
 		<div class="content right">
 			<h2>${dto.concertName}</h2>

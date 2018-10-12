@@ -98,7 +98,7 @@ $(function(){
 		</div>
 		<div class="poster left">
 			<c:if test="${not empty dto.conProfileImage }">
-				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.conProfileImage}">
+				<img class="list_image_crop" src="<%=cp %>/uploads/image/${dto.conProfileImage}">
 			</c:if>
 			<c:if test="${empty dto.conProfileImage }">
 				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png">
