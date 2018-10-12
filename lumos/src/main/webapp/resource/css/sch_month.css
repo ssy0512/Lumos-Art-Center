@@ -123,13 +123,16 @@ ul.tab_month li.active >a{
 }
 
 .scheduleSubject {
-   display:block;
-   margin:1.5px 0;
-   font-size:13px;
-   color:#555555;
-   background:#eeeeee;
-   cursor: pointer;
-   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    display: block;
+    margin: 1.5px 0;
+    width: 134.8px;
+    font-size: 13px;
+    color: #555555;
+    background: #eeeeee;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .scheduleMore {
    display:block;
@@ -140,3 +143,4 @@ ul.tab_month li.active >a{
    cursor: pointer;
    text-align:right;
 }
+

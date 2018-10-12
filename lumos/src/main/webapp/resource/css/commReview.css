@@ -174,9 +174,6 @@
 }
 
 .rvCont {
-	height: 110px;
-	-webkit-line-clamp: 7;
-    height: 151px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -186,7 +183,7 @@
     -webkit-box-orient: vertical;
     word-wrap: break-word;
     line-height: 22px;
-    height: 115px;
+    height: 113px;
     color: #777;
     margin-top: 20px;
 	cursor: pointer;

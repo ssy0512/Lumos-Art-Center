@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sp.common.MyUtil;
+import com.sp.common.AdminUtil;
 
 @Controller("exhibits.exhController")
 public class ExhibitsController {
 	@Autowired
 	private ExhibitsService service;
 	@Autowired
-	private MyUtil util;
+	private AdminUtil util;
 /*	
 	@RequestMapping(value="/admin/menu2/concertSchedule/insertedlist", method=RequestMethod.GET) //일정관리의 메인
 	public String main() {
@@ -189,7 +189,13 @@ public class ExhibitsController {
 		if(dto==null) {
 			return "redirect:/menu2/exhibitSchedule/exhibitlist?page="+page; //error 
 		}
+		List<Exhibits> listHall = new ArrayList<>();
+		listHall=service.listHall();
 		
+		List<Exhibits> listRate=new ArrayList<>();
+		listRate=service.listRate();
+		model.addAttribute("listHall",listHall);
+		model.addAttribute("listRate",listRate);
 		model.addAttribute("mode","update");
 		model.addAttribute("page",page);
 		model.addAttribute("dto",dto);

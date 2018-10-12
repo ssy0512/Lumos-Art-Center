@@ -16,8 +16,9 @@ $(function(){
 </script>
 
 <div class="list-group">
-    <div class="list-group-item-lefthead">
-    	<span>직원관리</span>
-    </div>
-     <a href="<%=cp%>/admin/staff/staffs/stafflist" class="list-group-item">LUMOS 직원목록</a>
+    <div class="list-group-item-lefthead"><span>직원관리</span></div>
+     <%-- <a href="<%=cp%>/admin/staff/staffs/stafflist" class="list-group-item">LUMOS 직원목록</a> --%>
+       <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/staff/staffs/stafflist';">LUMOS 직원목록</button>
+    </a>
 </div> 

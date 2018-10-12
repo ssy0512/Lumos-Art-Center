@@ -19,6 +19,13 @@ $(function(){
     <div class="list-group-item-lefthead">
     	<span>고객관리</span>
     </div>
-     <a href="<%=cp%>/admin/customer/question/questionlist" class="list-group-item">1:1문의 관리</a>
-     <a href="<%=cp%>/admin/customer/lost/main" class="list-group-item">유실물 목록 관리</a>
+   <%--   <a href="<%=cp%>/admin/customer/question/questionlist" class="list-group-item">1:1문의 관리</a>
+     <a href="<%=cp%>/admin/customer/lost/main" class="list-group-item">유실물 목록 관리</a> --%>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/customer/question/questionlist';">문의글 목록 조회</button>
+    </a>
+    <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/customer/lost/main';">유실물 목록 관리</button>
+    </a> 
+     
 </div> 

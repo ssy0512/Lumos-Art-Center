@@ -119,15 +119,15 @@
     <div style="clear:both;">
 			<form name="createdForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
-			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시명</td>
+			  <tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+			      <td width="100" bgcolor="#fff" style="text-align: center; color:#072659;">전시명</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="exhibitName" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.exhibitName}">
 			      </td>
 			  </tr>
 			
-			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시홀 선택</td>
+			<tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+		      <td width="100" bgcolor="#fff" style="text-align: center;">전시홀 선택</td>
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="listHall" id="listhall">
 		      	<c:forEach var="vo" items="${listHall}">
@@ -138,8 +138,8 @@
 		      </td>
 		  </tr>
 		  
-		  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">관람등급선택</td>
+		  <tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+		      <td width="100" bgcolor="#fff" style="text-align: center;">관람등급선택</td>
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="listRate" id="listRate">
 		      	<c:forEach var="vo" items="${listRate}">
@@ -149,8 +149,8 @@
 		      </select>
 		      </td>
 		  </tr>
-  		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시일자</td>
+  		<tr align="left" height="45" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+			      <td width="100" bgcolor="#fff" style="text-align: center;">전시일자</td>
 			      <td style="padding-left:10px;"> 
 			            <input type="date" id="regDate" name="exhibitStart" readonly="readonly" value="${dto.exhibitStart}"><button></button>
 			            ~
@@ -158,38 +158,38 @@
 			      </td>
 			  </tr>
 			
-			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">시작시간</td>
+			<tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+			      <td width="100" bgcolor="#fff" style="text-align: center;">시작시간</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="admitStart" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.admitStart}">
 			      </td>
 			  </tr>
-			  	<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">종료시간</td>
+			  	<tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+			      <td width="100" bgcolor="#fff" style="text-align: center;">종료시간</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="admitEnd" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.admitEnd}">
 			      </td>
 			  </tr>
-			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">장&nbsp;&nbsp;르</td>
+			  <tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+			      <td width="100" bgcolor="#fff" style="text-align: center;">장&nbsp;&nbsp;르</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="genre" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.genre}">
 			      </td>
 			  </tr>
-			  	  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">주&nbsp;&nbsp;최</td>
+			  	  <tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+			      <td width="100" bgcolor="#fff" style="text-align: center;">주&nbsp;&nbsp;최</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="host" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.host}">
 			      </td>
 			  </tr>
-			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">주&nbsp;&nbsp;관</td>
+			  <tr align="left" height="40" style="border-top: 1px solid #072659; border-bottom: 1px solid #072659;"> 
+			      <td width="100" bgcolor="#fff" style="text-align: center;">주&nbsp;&nbsp;관</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="supervise" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.supervise}">
 			      </td>
 			  </tr>
-			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시이미지</td>
+			  <tr align="left" height="40" style="border-bottom: 1px solid #072659;">
+			      <td width="100" bgcolor="#fff" style="text-align: center;">전시이미지</td>
 			      <td style="padding-left:10px;"> 
 			          <input type="file" name="upload" class="boxTF" size="53"
 			                     accept="image/*" 
