@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sp.common.MyUtil;
+import com.sp.common.AdminUtil;
 
 @Controller("customerCenter.adminQuestionController")
 public class AdminQuestionController {
@@ -24,7 +24,7 @@ public class AdminQuestionController {
 	private QuestionsService service;
 	
 	@Autowired
-	private MyUtil util;
+	private AdminUtil util;
 	@RequestMapping(value="/admin/customer/question/questionlist")
 	public String list(
 			@RequestParam(value="page",defaultValue="1") int current_page,

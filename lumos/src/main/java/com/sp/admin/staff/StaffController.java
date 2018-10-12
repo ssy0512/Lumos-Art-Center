@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 
+import com.sp.common.AdminUtil;
 import com.sp.common.MyExcelView;
-import com.sp.common.MyUtil;
 
 @Controller("staff.staffController")
 public class StaffController {
 	@Autowired
 	private StaffService service;
 	@Autowired
-	private MyUtil util;
+	private AdminUtil util;
 	@Autowired
 	private MyExcelView excelView;
 	

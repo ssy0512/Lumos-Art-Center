@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sp.common.MyUtil;
+import com.sp.common.AdminUtil;
 import com.sp.member.SessionInfo;
 
 @Controller("academies.academiesController")
@@ -27,7 +27,7 @@ public class AcademiesController {
 	@Autowired
 	private AcademiesService service;
 	@Autowired
-	private MyUtil util;
+	private AdminUtil util;
 
 	
 	//basic LIST 

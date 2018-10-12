@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sp.common.MyUtil;
+import com.sp.common.AdminUtil;
 
 @Controller("exhibits.exhController")
 public class ExhibitsController {
 	@Autowired
 	private ExhibitsService service;
 	@Autowired
-	private MyUtil util;
+	private AdminUtil util;
 /*	
 	@RequestMapping(value="/admin/menu2/concertSchedule/insertedlist", method=RequestMethod.GET) //일정관리의 메인
 	public String main() {
