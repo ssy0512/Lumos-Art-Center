@@ -189,7 +189,13 @@ public class ExhibitsController {
 		if(dto==null) {
 			return "redirect:/menu2/exhibitSchedule/exhibitlist?page="+page; //error 
 		}
+		List<Exhibits> listHall = new ArrayList<>();
+		listHall=service.listHall();
 		
+		List<Exhibits> listRate=new ArrayList<>();
+		listRate=service.listRate();
+		model.addAttribute("listHall",listHall);
+		model.addAttribute("listRate",listRate);
 		model.addAttribute("mode","update");
 		model.addAttribute("page",page);
 		model.addAttribute("dto",dto);
