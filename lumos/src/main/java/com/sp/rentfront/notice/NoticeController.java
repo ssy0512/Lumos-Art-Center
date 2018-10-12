@@ -46,8 +46,9 @@ public class NoticeController {
 		return "rentfront/notice/list";
 	}
 	
-	@RequestMapping(value="/rentfront/notice/created", method=RequestMethod.GET)
-	public String createdForm(Model model) throws Exception {
+	@RequestMapping(value="/rentfront/notice/concert/created", method=RequestMethod.GET)
+	public String conCreatedForm(Model model) throws Exception {
+		
 		List<Notice> pList=new ArrayList<>();
 		List<Notice> pList2=new ArrayList<>();
 		
@@ -62,8 +63,8 @@ public class NoticeController {
 		return ".rentfront.notice.created";
 	}
 	
-	@RequestMapping(value="/rentfront/notice/created", method=RequestMethod.POST)
-	public String createdSubmit(
+	@RequestMapping(value="/rentfront/notice/concert/created", method=RequestMethod.POST)
+	public String conCreatedSubmit(
 			@RequestParam(value="selected") String selectOption,
 			@RequestParam(value="locationNum") int locationNum,
 			Notice dto,

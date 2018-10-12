@@ -15,6 +15,7 @@
  <script type="text/javascript">
  function sendOk(){
 	 var f=document.createdForm;
+	 
 	 var str=f.instName.value;
 	 if(!str){
 		 alert("강사의 이름을 입력하십시오.");
@@ -96,6 +97,14 @@
 			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전화번호</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="tel" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.tel}">
+			      </td>
+			  </tr>
+			  
+			  <!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
+			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
+			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강사정보</td>
+			      <td style="padding-left:10px;"> 
+			        <input type="text" name="profile" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.profile}">
 			      </td>
 			  </tr>
 			   

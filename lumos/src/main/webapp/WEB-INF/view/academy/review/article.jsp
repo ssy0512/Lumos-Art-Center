@@ -141,12 +141,13 @@ $(function(){
 			  <table style="width: 900px; border-top: 2px solid #aa1717; margin: 0px auto; border-spacing: 0px;">
 			     <tr height="70"> 
 			      <td align="left" style="padding: 30px;">
-			        <span>&lt; 이전글</span>
-			      	<c:if test="${not empty preReviewDto}">
-			              <span style="font-weight: 600; padding-left: 40px;">
-			              	<a href="<%=cp%>/academy/review/article?${query}&classReviewNum=${preReviewDto.classReviewNum}">${preReviewDto.subject}</a>
-			              </span>
+			        <span>&lt; 이전글&nbsp;&nbsp;</span>
+			      	<c:if test="${not empty nextReviewDto}">
+			      		<span style="font-weight: 600; padding-right: 40px;">
+			              <a href="<%=cp%>/academy/review/article?${query}&classReviewNum=${nextReviewDto.classReviewNum}">${nextReviewDto.subject}</a>
+			      		</span>
 			      	</c:if>
+			      	
 			      	<c:if test="${empty preReviewDto}">
 			        	<span style="font-weight: 600; padding-left: 40px;">이전글이 없습니다.</span>
 			        </c:if>
@@ -155,12 +156,12 @@ $(function(){
 			        <c:if test="${empty nextReviewDto}">
 			        	<span style="font-weight: 600; padding-right: 40px;">다음글이 없습니다.</span>
 			        </c:if>
-			      	<c:if test="${not empty nextReviewDto}">
-			      		<span style="font-weight: 600; padding-right: 40px;">
-			              <a href="<%=cp%>/academy/review/article?${query}&classReviewNum=${nextReviewDto.classReviewNum}">${nextReviewDto.subject}</a>
-			      		</span>
+			      	<c:if test="${not empty preReviewDto}">
+			              <span style="font-weight: 600; padding-left: 40px;">
+			              	<a href="<%=cp%>/academy/review/article?${query}&classReviewNum=${preReviewDto.classReviewNum}">${preReviewDto.subject}</a>
+			              </span>
 			      	</c:if>
-			      	<span>다음글 &gt;</span>
+			      	<span>&nbsp;&nbsp;다음글 &gt;</span>
 			      </td>
 			    </tr>
 			  </table>

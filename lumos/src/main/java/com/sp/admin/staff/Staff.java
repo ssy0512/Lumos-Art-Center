@@ -12,6 +12,7 @@ public class Staff {
 	private String tel;
 	private String staffImage;
 	private String email;
+	private String profile;
 	private MultipartFile upload;
 	
 	public String getEmail() {
@@ -68,6 +69,11 @@ public class Staff {
 	public void setStaffImage(String staffImage) {
 		this.staffImage = staffImage;
 	}
-	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	
 }

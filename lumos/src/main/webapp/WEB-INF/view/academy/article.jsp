@@ -167,7 +167,12 @@ $(function () {
      <div id="inst-dialog" class="ui-widget-header" style="display: none; height: 420px;">
      <form name="instForm" method="post">
      	<div style="height: 100%; border-top: 2px solid #aa1717; border-bottom: 2px solid #aa1717; padding-top: 15px; padding-bottom: 15px;">
-     		<img src="<%=cp%>/uploads/image/${dto.instPhotoImage}" style="width: 180px; height: 180px; margin: 10px;">
+     		<c:if test="${empty dto.instPhotoImage}">
+     			<img src="<%=cp%>/resource/images/lumos/noposter.png" style="width: 180px; height: 180px; margin: 10px;">
+     		</c:if>
+     		<c:if test="${! empty dto.instPhotoImage}">
+     			<img src="<%=cp%>/uploads/image/${dto.instPhotoImage}" style="width: 180px; height: 180px; margin: 10px;">
+	     	</c:if>
 	     	<div style="width: 450px; float: right; padding: 10px;">	
 	     		<p style="padding-bottom: 110px;  font-size: 20px; font-weight: 600;">${dto.instName}</p>
 	     		<p>${dto.birth}</p>
@@ -179,7 +184,9 @@ $(function () {
 	     		<c:if test="${empty dto.profile}">
 	     			<p>등록된 정보가 없습니다.</p>
 	     		</c:if>
-     		<p>${dto.profile}</p>
+	     		<c:if test="${! empty dto.profile}">
+	     			<p>${dto.profile}</p>
+	     		</c:if>
      	</div>
      </form>
      </div>

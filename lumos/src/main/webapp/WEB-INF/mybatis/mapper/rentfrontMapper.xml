@@ -15,9 +15,11 @@ VALUES(rentExhibitNum_seq.NEXTVAL, #{userId}, #{title, jdbcType=VARCHAR}, #{cont
 
 	<!--공연장 리스트 -->
 	<select id="listHall" parameterType="map" resultType="com.sp.rentfront.notice.Notice">
-		 SELECT hallNum, hallName
-		              FROM concertHall 
-		              ORDER BY hallNum ASC
+		 SELECT ch.hallNum, hallName, TO_CHAR(rc.rentStart, 'YYYY-MM-DD') rentStart, 
+		 	  TO_CHAR(rc.rentEnd, 'YYYY-MM-DD') rentEnd
+	              FROM concertHall ch 
+	                    JOIN rentConcert rc ON ch.hallNum=rc.hallnum
+	              ORDER BY hallNum ASC
 	</select>
 	
 	<!--전시장 리스트 -->

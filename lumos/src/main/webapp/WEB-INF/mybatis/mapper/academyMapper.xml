@@ -42,7 +42,7 @@
 	<select id="listAcademy" parameterType="map" resultType="com.sp.academy.Academy">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-		        SELECT academyNum, academyName, startTime, endTime, lectureDay, acProfileImage, instPhotoImage, I.tel, 
+		        SELECT academyNum, academyName, startTime, endTime, lectureDay, acProfileImage, instPhotoImage, profile, I.tel, 
 		        TO_CHAR(birth, 'YYYY-MM-DD') birth, totalCount, price, 
               		   A.roomNum, R.position, R.roomName, I.instNum, instName, 
 				            TO_CHAR(startDate, 'YYYY-MM-DD') startDate,
@@ -66,7 +66,7 @@
 	</select>
 	
 	<select id="readAcademy" parameterType="Integer" resultType="com.sp.academy.Academy">
-		SELECT academyNum, academyName, startTime, endTime, lectureDay, totalCount, acProfileImage, instPhotoImage, I.tel, 
+		SELECT academyNum, academyName, startTime, endTime, lectureDay, totalCount, acProfileImage, instPhotoImage, profile, I.tel, 
 		TO_CHAR(birth, 'YYYY-MM-DD') birth, classInfo, price, 
                A.roomNum, R.position, R.roomName, I.instNum, instName, 
                 TO_CHAR(startDate, 'YYYY-MM-DD') startDate,

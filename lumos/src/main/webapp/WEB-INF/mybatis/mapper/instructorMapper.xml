@@ -29,13 +29,13 @@
 </select>
 
 <insert id="insertInstructor" parameterType="com.sp.admin.inst.Instructor">
-	INSERT INTO instructor(instNum, instName,birth,tel,instPhotoImage)
+	INSERT INTO instructor(instNum, instName,birth,tel,instPhotoImage,profile)
 		VALUES
-							(instructor_seq.NEXTVAL, #{instName},#{birth},#{tel},#{instPhotoImage})
+							(instructor_seq.NEXTVAL, #{instName},#{birth},#{tel},#{instPhotoImage},#{profile})
 </insert>
 
 <update id="updateInstructor" parameterType="com.sp.admin.inst.Instructor">
-	UPDATE instructor SET instName=#{instName}, birth=#{birth}, tel=#{tel}, instPhotoImage=#{instPhotoImage}
+	UPDATE instructor SET instName=#{instName}, birth=#{birth}, tel=#{tel}, instPhotoImage=#{instPhotoImage}, profile=#{profile}
 		WHERE instNum=#{instNum}
 </update>
 
@@ -44,7 +44,7 @@
 </delete>
 
 <select id="readInstructor" parameterType="Integer" resultType="com.sp.admin.inst.Instructor">
-	SELECT instNum, instName, to_char(birth, 'YYYY-MM-DD')birth, tel, instPhotoImage
+	SELECT instNum, instName, to_char(birth, 'YYYY-MM-DD')birth, tel, instPhotoImage, profile
 	FROM instructor 
 	WHERE instNum=#{instNum}
 </select>
@@ -53,7 +53,7 @@
 	SELECT * FROM (
 	SELECT ROWNUM rnum, tb. * FROM (
 		SELECT instNum, instName, to_char(birth, 'YYYY-MM-DD') birth, 
-			 tel,instPhotoImage 
+			 tel, instPhotoImage, profile
 				FROM instructor
 				ORDER BY instNum DESC
 		<![CDATA[
@@ -63,9 +63,8 @@
 </select>
 
 <select id="listAllInstructor" resultType="com.sp.admin.inst.Instructor">
-    
 		SELECT instNum, instName, to_char(birth, 'YYYY-MM-DD') birth, 
-				 tel, instPhotoImage 
+				 tel, instPhotoImage, profile 
 				FROM instructor
 				ORDER BY instNum DESC
 	
