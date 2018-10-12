@@ -5,7 +5,11 @@
 <%
 	String cp = request.getContextPath();
 %>
-
+<style type="text/css">
+tr td {
+    width: 145px;
+}
+</style>
 <script type="text/javascript">
 $(function(){
 	var month="${month}";
