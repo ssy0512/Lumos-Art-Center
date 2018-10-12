@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="instructor">
+
+
+<sql id="where-list">
+	<if test="searchKey=='instNum'">
+		instNum=#{searchValue}
+	</if>
+	<if test="searchKey=='instName'">
+		INSTR(instName, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='tel'">
+		INSTR(tel, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='birth'">
+		TO_CHAR(birth, 'YYYY-MM-DD') = #{searchValue}
+	</if>
+</sql>
+
+<select id="dataCount" resultType="Integer" parameterType="map">
+	SELECT NVL(COUNT (*),0) FROM instructor
+	<!-- <where>
+  	<if test="searchValue!=null and searchValue != '' ">
+  	      <include refid="where-list"/>
+  	</if>
+  </where>  -->
+</select>
+
+<insert id="insertInstructor" parameterType="com.sp.admin.inst.Instructor">
+	INSERT INTO instructor(instNum, instName,birth,tel,instPhotoImage)
+		VALUES
+							(instructor_seq.NEXTVAL, #{instName},#{birth},#{tel},#{instPhotoImage})
+</insert>
+
+<update id="updateInstructor" parameterType="com.sp.admin.inst.Instructor">
+	UPDATE instructor SET instName=#{instName}, birth=#{birth}, tel=#{tel}, instPhotoImage=#{instPhotoImage}
+		WHERE instNum=#{instNum}
+</update>
+
+<delete id="deleteInstructor" parameterType="Integer">
+	DELETE FROM instructor WHERE instNum=#{instNum}
+</delete>
+
+<select id="readInstructor" parameterType="Integer" resultType="com.sp.admin.inst.Instructor">
+	SELECT instNum, instName, to_char(birth, 'YYYY-MM-DD')birth, tel, instPhotoImage
+	FROM instructor 
+	WHERE instNum=#{instNum}
+</select>
+
+<select id="listInstructor" parameterType="map" resultType="com.sp.admin.inst.Instructor">
+	SELECT * FROM (
+	SELECT ROWNUM rnum, tb. * FROM (
+		SELECT instNum, instName, to_char(birth, 'YYYY-MM-DD') birth, 
+			 tel,instPhotoImage 
+				FROM instructor
+				ORDER BY instNum DESC
+		<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+</select>
+
+<select id="listAllInstructor" resultType="com.sp.admin.inst.Instructor">
+    
+		SELECT instNum, instName, to_char(birth, 'YYYY-MM-DD') birth, 
+				 tel, instPhotoImage 
+				FROM instructor
+				ORDER BY instNum DESC
+	
+</select>
+
+</mapper>
