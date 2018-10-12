@@ -73,7 +73,7 @@
 	</select>
 	
 	<select id="getUsableMileage" parameterType="String"  resultType="Integer">
-		SELECT NVL(SUM(points),0) FROM MILEAGE WHERE userId=#{userId} AND (accumdate+365>SYSDATE)
+		SELECT totalMileage FROM MILEAGE WHERE userId=#{userId}
 	</select>
 	
 	<select id="eDataCount" resultType="Integer">
