@@ -21,4 +21,7 @@ $(function(){
        <a>
     	<button onclick="javascript:location.href='<%=cp%>/admin/staff/staffs/stafflist';">LUMOS 직원목록</button>
     </a>
+     <a>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/staff/instructor/instructorlist';">LUMOS 강사 목록</button>
+    </a>
 </div> 
