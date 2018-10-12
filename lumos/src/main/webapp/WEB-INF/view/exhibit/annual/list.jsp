@@ -47,7 +47,6 @@
 								(cnt == dto.endmonth || cnt == dto.startmonth) || 
 								(cnt == dto.endmonth && dto.endmonth<dto.startmonth)||
 								(cnt == dto.startmonth && dto.endmonth<dto.startmonth)||
-								
 								(cnt>=dto.startmonth && cnt<=dto.endmonth)}">
 						<c:set var="flag" value="1" />
 						<tr align="center" bgcolor="#ffffff" height="35"
