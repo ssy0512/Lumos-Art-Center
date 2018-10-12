@@ -134,4 +134,43 @@ public class ConcertServiceImpl implements ConcertService{
 		return result;
 	}
 
+	//------------------------------------------------------------------
+	@Override
+	public ConReview readConReviewForUpdate(Map<String, Object> map) {
+		ConReview dto = null;
+		try {
+			dto = dao.selectOne("concert.readConReviewForUpdate", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
+	}
+
+	@Override
+	public int updateConReview(ConReview dto) {
+		int result=0;
+
+		try{
+			dao.updateData("concert.updateConReview", dto);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int insertConReview(ConReview dto) {
+		int result=0;
+
+		try{
+			dao.updateData("concert.insertConReview", dto);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
+	//------------------------------------------------------------------
 }

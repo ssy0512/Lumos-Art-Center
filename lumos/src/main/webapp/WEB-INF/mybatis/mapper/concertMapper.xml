@@ -88,4 +88,20 @@
 	<update id="updateConcertHall" parameterType="com.sp.concert.Concert">
 		UPDATE concertHall SET content=#{content} WHERE hallNum=#{hallNum}
 	</update>
+	
+	
+	<!-- 공연 리뷰 -->		
+	<insert id="insertConReview" parameterType="com.sp.concert.ConReview">
+		INSERT INTO concertreview (creviewNum, userId,subject,content,concertNum,score) 
+				 VALUES(CONCERTREVIEW_SEQ.NEXTVAL,#{userId},#{subject},#{content},#{concertNum},#{score})
+	</insert>
+	
+	<select id="readConReviewForUpdate" parameterType="map"  resultType="com.sp.concert.ConReview">
+		SELECT creviewNum, subject, content, score FROM concertreview WHERE concertNum=#{concertNum} and userId=#{userId}
+	</select>
+	
+	<update id="updateConReview" parameterType="com.sp.concert.ConReview">
+		UPDATE concertreview SET subject=#{subject}, content=#{content}, score=#{score}
+			WHERE creviewNum=#{creviewNum}
+	</update>
 </mapper>

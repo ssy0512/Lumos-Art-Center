@@ -51,10 +51,10 @@ $(function () {
 				<c:forEach items="${cReviewList}" var="crl">
 					<ul>
 						<li class="posterLi" style="float: left; margin-right: 20px;">
-							<c:if test="${not empty crl.exProfileImage}">
-								<img src="<%=cp %>/uploads/image/${crl.exProfileImage}">
+							<c:if test="${not empty crl.conProfileImage}">
+								<img src="<%=cp %>/uploads/image/${crl.conProfileImage}">
 							</c:if>
-							<c:if test="${empty crl.exProfileImage}">
+							<c:if test="${empty crl.conProfileImage}">
 								<img src="<%=cp %>/resource/images/lumos/noposter.png">
 							</c:if>
 						</li>

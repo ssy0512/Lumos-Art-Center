@@ -101,4 +101,8 @@
 	<delete id="deleteEReview" parameterType="Integer">
 		DELETE FROM exreview WHERE exreviewNum=#{num}
 	</delete>
+	
+	<delete id="deleteCReview" parameterType="Integer">
+		DELETE FROM concertreview WHERE cReviewNum=#{num}
+	</delete>
 </mapper>

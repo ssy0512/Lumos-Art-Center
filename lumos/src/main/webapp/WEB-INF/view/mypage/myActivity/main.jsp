@@ -138,7 +138,7 @@ function printCReview(data) {
 			out+="				<p>"+content+"</p>";
 			out+="				<div class='clearfix' style='margin-bottom: 10px;'></div>";
 			out+="				<div style='float: right;'>";
-			out+="					<button class='btnEdit'>수정</button><button class='btnDel'>삭제</button>";
+			out+="					<button class='btnEdit' onclick='conUpdate("+concertNum+");'>수정</button><button class='btnDel' onclick='deleteCReview("+creviewNum+")'>삭제</button>";
 			out+="				</div>";
 			out+="			</div>";
 			out+="			<div class='clearfix' style='margin-bottom: 15px;'></div>";
@@ -332,7 +332,48 @@ function deleteEReview(rnum) {
 		
 	}
 }
+//--------------------------------------------------------------
 
+function conUpdate(num){
+	var url="<%=cp%>/concertReview/created?num="+num;
+	location.href=url;
+}
+
+function deleteCReview(rnum) {
+	var uid="${sessionScope.member.userId}";
+	if(! uid) {
+		alert("로그인이 필요 합니다.");
+		return;
+	}
+	
+	if(confirm("작성하신 리뷰를 삭제하시겠습니까 ? ")) {	
+		var url="<%=cp%>/concertReview/delete";
+		var query="num="+rnum;
+		$.ajax({
+			type:"post"
+			,url:url
+			,data:query
+			,dataType:"json"
+			,success:function(data) {
+				// var state=data.state;
+				$("#cReviewListBody").empty();
+				pageNo=1;
+				cReviewListPage(1);
+			}
+		    ,beforeSend:function(jqXHR) {
+		    	jqXHR.setRequestHeader("AJAX", true);
+		    }
+		    ,error:function(jqXHR) {
+		    	if(jqXHR.status==403) {
+		    		login();
+		    		return;
+		    	}
+		    	console.log(jqXHR.responseText);
+		    }
+		});
+		
+	}
+}
 </script>
 
 <div class="myActHead">

@@ -11,6 +11,17 @@ function login() {
 	location.href="<%=cp%>/member/login";
 }
 
+function createReview() {
+	var currentDay = new Date();  
+	currentDay = currentDay.getFullYear()+"-"+(currentDay.getMonth()+1)+"-"+currentDay.getDate();
+	if (currentDay<"${dto.concertStart}"){
+		alert("아직 시작되지 않은 전시입니다.");
+		return;
+	}
+	
+	window.location.href = "<%=cp%>/concertReview/created?num=${dto.concertNum}";
+}
+
 $(function(){
 	isConcertInterest(${dto.concertNum});
 	
@@ -89,10 +100,13 @@ $(function(){
 					공연 상세정보 관리
 				</button>
 			</c:if>
-			<c:if test="${sessionScope.member.userId!='admin'}">
+			<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.membertype=='개인회원'}">
 				<button type="button" class="btnSendInterest">
 					<img src="<%=cp %>/resource/images/lumos/pick_icon.png" style="margin-bottom: 3px;">
 					<span style="display:inline-block; margin-top: 2px;"></span>
+				</button>
+				<button type="button" class="pickBtn" style="width: 110px; margin-right: 10px;" onclick="createReview();">
+					<span style="display:inline-block; margin-top: 2px;">관람평 쓰기</span>
 				</button>
 			</c:if>
 		</div>

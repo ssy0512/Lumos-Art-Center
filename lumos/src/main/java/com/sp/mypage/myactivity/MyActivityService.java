@@ -13,4 +13,5 @@ public interface MyActivityService {
 	public List<All> eReviewList(Map<String, Object> map);
 	public int eDataCount(String userId);
 	public int deleteEReview(int num);
+	public int deleteCReview(int num);
 }

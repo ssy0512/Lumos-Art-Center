@@ -173,4 +173,22 @@ public class MyActivityController {
 		model.put("state", state);
 		return model;
 	}
+	
+	@RequestMapping(value="/concertReview/delete")
+	@ResponseBody
+	public Map<String, Object> deleteCReview(
+			@RequestParam(value="num") int num
+			) {
+		
+		String state;
+		int result=service.deleteCReview(num);
+		if(result==1)
+			state="true";
+		else 
+			state="false";
+		
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		return model;
+	}
 }

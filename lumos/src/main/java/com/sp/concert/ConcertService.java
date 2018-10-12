@@ -14,4 +14,8 @@ public interface ConcertService {
 	public int updateConcertHall(Concert dto);
 	public List<Concert> seatList(int num);
 	public int insertList(Map<String, Object> map);
+	
+	public ConReview readConReviewForUpdate(Map<String, Object> map);
+	public int updateConReview(ConReview dto);
+	public int insertConReview(ConReview dto);
 }

@@ -520,4 +520,72 @@ public class ConcertController {
 		
 		return "redirect:/concert/seatGuide";
 	}
+	
+	
+	//--------------------------------------------------------	
+	
+	
+	@RequestMapping(value = "/concertReview/created", method = RequestMethod.GET)
+	public String createdReviewForm(
+			@RequestParam(value="num") int num,
+			HttpSession session,
+			Model model) throws Exception {
+		Concert dto = concertService.readBoard(num);
+		if(dto==null) {
+			return "redirect:/concert/main";
+		}
+		
+		int sysDate = Integer.parseInt(dUtil.syadateToString().replaceAll("-", ""));
+		int srtDate = Integer.parseInt(dto.getConcertStart().replaceAll("-", ""));
+		
+		if(sysDate<srtDate) {
+			return "redirect:/concert/main";
+		}
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("userId", info.getUserId());
+		paramMap.put("concertNum", num);
+		
+		ConReview rdto = concertService.readConReviewForUpdate(paramMap);
+		if(rdto==null) {
+			model.addAttribute("mode", "created");
+		} else {
+			model.addAttribute("rdto", rdto);
+			model.addAttribute("mode", "update");
+		}
+		
+		model.addAttribute("dto", dto);
+		return ".concert.createdReview";
+	}
+	
+	@RequestMapping(value = "/concertReview/created", method = RequestMethod.POST)
+	public String createdReviewSubmit(
+			@RequestParam(value="num") int num,
+			ConReview dto,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		dto.setUserId(info.getUserId());
+		
+		dto.setConcertNum(num);
+		concertService.insertConReview(dto);
+		
+		model.addAttribute("dto", dto);
+		return "redirect:/mypage/myActivity";
+	}
+	
+	@RequestMapping(value = "/concertReview/update", method = RequestMethod.POST)
+	public String updateReviewSubmit(
+			@RequestParam(value="num") int num,
+			ConReview dto,
+			Model model) throws Exception {
+		
+		dto.setCreviewNum(num);
+		concertService.updateConReview(dto);
+		
+		return "redirect:/mypage/myActivity";
+	}
+	//--------------------------------------------------------
 }

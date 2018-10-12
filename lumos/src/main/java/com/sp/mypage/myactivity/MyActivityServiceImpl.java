@@ -102,4 +102,17 @@ public class MyActivityServiceImpl implements MyActivityService{
 		}
 		return result;
 	}
+	
+	@Override
+	public int deleteCReview(int num) {
+		int result=0;
+
+		try{
+			dao.deleteData("lumosMypage.deleteCReview", num);
+			result=1;
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }
