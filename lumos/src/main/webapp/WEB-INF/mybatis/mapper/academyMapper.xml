@@ -6,9 +6,14 @@
 	<sql id="date-list">
 		<if test="mode=='ing'">
 	  	  <![CDATA[ 
-			SYSDATE <= A.endDate
+			SYSDATE <= A.startDate
 	 	  ]]>	
-	  </if>	  
+	  	</if>
+	  	<if test="mode=='finish'">
+	  	  <![CDATA[ 
+			SYSDATE > A.startDate
+	 	  ]]>	
+	  	</if>
 	</sql>
 
 	<sql id="where-list">		  		
@@ -37,7 +42,8 @@
 	<select id="listAcademy" parameterType="map" resultType="com.sp.academy.Academy">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-		        SELECT academyNum, academyName, startTime, endTime, lectureDay, acProfileImage, totalCount, price, 
+		        SELECT academyNum, academyName, startTime, endTime, lectureDay, acProfileImage, instPhotoImage, I.tel, 
+		        TO_CHAR(birth, 'YYYY-MM-DD') birth, totalCount, price, 
               		   A.roomNum, R.position, R.roomName, I.instNum, instName, 
 				            TO_CHAR(startDate, 'YYYY-MM-DD') startDate,
 				            TO_CHAR(endDate, 'YYYY-MM-DD') endDate
@@ -60,7 +66,8 @@
 	</select>
 	
 	<select id="readAcademy" parameterType="Integer" resultType="com.sp.academy.Academy">
-		SELECT academyNum, academyName, startTime, endTime, lectureDay, totalCount, acProfileImage, classInfo, price, 
+		SELECT academyNum, academyName, startTime, endTime, lectureDay, totalCount, acProfileImage, instPhotoImage, I.tel, 
+		TO_CHAR(birth, 'YYYY-MM-DD') birth, classInfo, price, 
                A.roomNum, R.position, R.roomName, I.instNum, instName, 
                 TO_CHAR(startDate, 'YYYY-MM-DD') startDate,
                 TO_CHAR(endDate, 'YYYY-MM-DD') endDate

@@ -32,7 +32,11 @@ public class Academy {
 	private String lectureDay;
 	private String classInfo;
 	private String acProfileImage;
+	private String instPhotoImage;
 	private String instName;	// 강사이름
+	private String profile;
+	private String birth;
+	private String tel;
 	private String roomName;	// 강의실 이름
 	private String position;	// 강의실 위치
 	
@@ -219,6 +223,30 @@ public class Academy {
 	}
 	public void setPayMonth(String payMonth) {
 		this.payMonth = payMonth;
+	}
+	public String getInstPhotoImage() {
+		return instPhotoImage;
+	}
+	public void setInstPhotoImage(String instPhotoImage) {
+		this.instPhotoImage = instPhotoImage;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getBirth() {
+		return birth;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	
 }

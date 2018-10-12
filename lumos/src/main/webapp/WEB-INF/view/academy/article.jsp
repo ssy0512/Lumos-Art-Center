@@ -47,6 +47,25 @@ function finishClass() {
 	alert("수강신청이 끝났습니다.");
 }
 
+$(function () {
+	$("#here").click(function() {
+		$("from[name=instForm]").each(function() {
+			this.reset();
+		});
+		
+		$("#dlgmode").val("insert");
+		
+		$('#inst-dialog').dialog({
+			  modal: true,
+			  height: 800,
+			  width: 700,
+			  title: '강사 소개',
+			  close: function(event, ui) {
+			  }
+		});
+	});	
+});
+
 </script>
 
 <div class="body-content-container-a">
@@ -64,7 +83,11 @@ function finishClass() {
 	        				 <button type="button" class="btn-info" style="margin-bottom: 0px; margin-top: 0px" onclick="updateAcademy();">아카데미 관리</button>
 	        			 </c:if>
                    	</p>
-             		<p class="font13">강사<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${dto.instName}</span></p>		
+             		<p class="font13">강사
+             			<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${dto.instName} 
+             			&nbsp;&nbsp;<button type="button" style="border: 1px solid; padding: 1px 10px 1px 10px; color: #aa1717;" id="here">HERE</button> 
+             		</span></p>		
+             		
              		<p class="font13">요일.시간
              			<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;(${dto.lectureDay}) ${dto.startTime}~${dto.endTime}</span></p>	  
              		<p class="font13">수강기간
@@ -139,6 +162,26 @@ function finishClass() {
 				<td>${dto.classInfo}</td>
 			</tr>             		
 	     </table>
+     </div>
+     
+     <div id="inst-dialog" class="ui-widget-header" style="display: none; height: 420px;">
+     <form name="instForm" method="post">
+     	<div style="height: 100%; border-top: 2px solid #aa1717; border-bottom: 2px solid #aa1717; padding-top: 15px; padding-bottom: 15px;">
+     		<img src="<%=cp%>/uploads/image/${dto.instPhotoImage}" style="width: 180px; height: 180px; margin: 10px;">
+	     	<div style="width: 450px; float: right; padding: 10px;">	
+	     		<p style="padding-bottom: 110px;  font-size: 20px; font-weight: 600;">${dto.instName}</p>
+	     		<p>${dto.birth}</p>
+	     		<p>${dto.tel}</p>
+	     	</div>
+     	</div>
+     	<div style="padding: 20px;">	
+     		<p style="padding-bottom: 20px; font-size: 20px; font-weight: 600;">PROFILE</p>
+	     		<c:if test="${empty dto.profile}">
+	     			<p>등록된 정보가 없습니다.</p>
+	     		</c:if>
+     		<p>${dto.profile}</p>
+     	</div>
+     </form>
      </div>
 </div>
 

@@ -84,12 +84,12 @@ public class AcademyController {
 			data.setListNum(listNum);
 			
 			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-			Date eDate=format.parse(data.getEndDate());
+			Date eDate=format.parse(data.getStartDate());
 			
-			gap=(todayDate.getTime()-eDate.getTime())/(24*60*60*1000);
+			gap=(eDate.getTime()-todayDate.getTime())/(24*60*60*1000);
 			data.setGap(gap);
 			
-			if(gap<=0) {
+			if(gap>=0) {
 				mode="ing";
 			} else {
 				mode="finish";
@@ -101,7 +101,7 @@ public class AcademyController {
 		}
 		
 		String query="";
-		String listUrl=cp+"/academy/list";
+		String listUrl=cp+"/academy/list?";
 		String articleUrl=cp+"/academy/article?page="+current_page;
 		if(searchValue.length()!=0) {
 			query="searchKey="+searchKey+"&searchValue="+URLEncoder.encode(searchValue, "utf-8");

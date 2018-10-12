@@ -56,8 +56,8 @@ function searchList() {
 <div class="body-content-container">
      <div class="body-academy-title">
          <span class="academy-title">아카데미 수강신청 </span>       	
-         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode=finish';">전체</button>
-         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode=ing';">마감된 강의 제외</button>
+         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode=finish';">마감</button>
+         <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode=ing';">접수</button>
      </div>  
      
 
@@ -94,7 +94,7 @@ function searchList() {
 		             	
 		             	<div class="academy_desc2">	
 			             	<c:if test="${dto.mode=='finish'}">
-			             		<p class="list-finish"><span>마&nbsp;감</span></p> 	             	
+			             		<p class="list-finish" style="width: 75px;"><span>마&nbsp;감</span></p> 	             	
 			                </c:if>
 			                <c:if test="${dto.mode=='ing'}">
 			                	<p class="list-ing"><span>접수중</span></p>  	
