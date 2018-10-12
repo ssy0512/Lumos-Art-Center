@@ -179,7 +179,9 @@ public class QuestionController {
 		if(! info.getUserId().equals(dto.getUserId())) {
 			return ".customerCenter.error";
 		}
-		
+		List<Questions> listCategory = new ArrayList<>();
+		listCategory=service.listCategory();
+		model.addAttribute("listCategory",listCategory);
 		model.addAttribute("mode","update");
 		model.addAttribute("page",page);
 		model.addAttribute("dto",dto);
