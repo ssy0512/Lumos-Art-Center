@@ -129,7 +129,7 @@
 			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전시홀 선택</td>
 		      <td style="padding-left:10px;"> 
-		      <select class="selectField" name="hallNum" id="listhall">
+		      <select class="selectField" name="listHall" id="listhall">
 		      	<c:forEach var="vo" items="${listHall}">
 		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.hallNum}">${vo.hallName}</option>
@@ -141,7 +141,7 @@
 		  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">관람등급선택</td>
 		      <td style="padding-left:10px;"> 
-		      <select class="selectField" name="ratingNum" id="listRate">
+		      <select class="selectField" name="listRate" id="listRate">
 		      	<c:forEach var="vo" items="${listRate}">
 		      		<!-- <option value="">::선택::</option> -->
 		      		<option value="${vo.ratingNum}">${vo.ratingName}</option>

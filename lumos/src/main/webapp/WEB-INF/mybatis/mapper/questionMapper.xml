@@ -64,7 +64,7 @@
 
 <select id="readQuestion" resultType="com.sp.customerCenter.question.Questions" parameterType="Integer">
 		SELECT postNum, q.userId, userName, title, content, groupNum, 
-                 depth, orderNo, parent, q.created,q.qCategoryCode,qCategoryName
+                 depth, orderNo, parent, to_char(q.created,'YYYY-MM-DD')created,q.qCategoryCode,qCategoryName
 				 FROM question q JOIN member1 m ON q.userId=m.userId
 				 JOIN qcategory c ON q.qCategoryCode=c.qCategoryCode
                  WHERE postNum = #{postNum}

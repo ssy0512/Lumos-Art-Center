@@ -24,12 +24,12 @@
 
 <table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
   <tr><td height="1" colspan="5" bgcolor="#cccccc"></td></tr>
-  <tr align="center" bgcolor="#ffeff1" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-      <th width="60" style="color: #787878;">번호</th>
-      <th width="100" style="color: #787878;">카테고리</th>
-      <th width="100" style="color: #787878;">제목</th>
-      <th width="100" style="color: #787878;">작성자</th>
-      <th width="80" style="color: #787878;">작성일</th>
+  <tr align="center" bgcolor="#aa1717" height="35" style="color:#fcfcfc;border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
+      <th width="60" style="color: #fff;">번호</th>
+      <th width="100" style="color: #fff;">카테고리</th>
+      <th width="100" style="color: #fff;">제목</th>
+      <th width="100" style="color: #fff;">작성자</th>
+      <th width="80" style="color: #fff;">작성일</th>
   </tr>
  
 <c:forEach var="dto" items="${list}">

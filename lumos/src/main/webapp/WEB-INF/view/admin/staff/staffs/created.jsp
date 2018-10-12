@@ -7,18 +7,10 @@
 %>
 
 
-<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css">
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
 <link rel="stylesheet" href="<%=cp%>/resource/css/adminInputs.css" type="text/css">
-
-<!-- 
-
-<form>
-  <input required='' type='text'>
-  <label alt='Email' placeholder='Type your Email'></label>
-</form>
- -->
  <script type="text/javascript">
  function sendOk(){
 	 var f=document.createdForm;
@@ -84,7 +76,7 @@
  </script>
  
  
- <%-- 
+ 
 <div class="body-right" style="width: 700px; padding-top:50px; padding-left:30px">
     <div class="body-title" >
         <h3><span style="font-family: Webdings">2</span> LUMOS 직원 등록 </h3>
@@ -140,8 +132,8 @@
 			  
 
 			  </table>
-			 --%>
-			 
+			
+<%-- 			 
 <div class="body-right" style="width: 700px; padding-top:50px; padding-left:360px; height:800px;">
     <div class="body-title" >
         <h1> LUMOS STAFF </h1>
@@ -180,7 +172,7 @@
     <label>사원이미지
       <input class="boxTF" name="upload" type="file" accept="image/*" >
       </label>
-  
+   --%>
 			 
 			  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 			     <tr height="45"> 
