@@ -32,7 +32,13 @@
 			<span>전시 상세 정보</span>
 		</div>
 		<div class="poster left">
-			<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.exProfileImage}">
+			<c:if test="${not empty dto.exProfileImage}">
+				<img  class="list_image_crop" src="<%=cp %>/uploads/image/${dto.exProfileImage}">
+			</c:if>
+			<c:if test="${empty dto.exProfileImage}">
+				<img  class="list_image_crop" 
+					src="<%=cp%>/resource/images/lumos/noposter.png">
+			</c:if>
 		</div>
 		<div class="content right">
 			<h2>${dto.exhibitName}</h2>

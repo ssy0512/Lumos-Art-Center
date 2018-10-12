@@ -37,13 +37,18 @@
 				</th>
 				<th width="140" style="color: #434343;">기간</th>
 				<th width="140" style="color: #434343;">장르</th>
-				<th style="color: #434343;">공연명</th>
+				<th style="color: #434343;">전시명</th>
 				<th width="140">장소</th>
 			</tr>
 			<c:forEach var="cnt" begin="1" end="12">
 				<c:set var="flag" value="0" />
 				<c:forEach var="dto" items="${list }">
-					<c:if test="${cnt == dto.endmonth }">
+					<c:if test="${(cnt<=dto.startmonth && cnt>=dto.endmonth)||
+								(cnt == dto.endmonth || cnt == dto.startmonth) || 
+								(cnt == dto.endmonth && dto.endmonth<dto.startmonth)||
+								(cnt == dto.startmonth && dto.endmonth<dto.startmonth)||
+								
+								(cnt>=dto.startmonth && cnt<=dto.endmonth)}">
 						<c:set var="flag" value="1" />
 						<tr align="center" bgcolor="#ffffff" height="35"
 							style="border-bottom: 1px solid #cccccc;">
@@ -64,7 +69,7 @@
 						<td style="font-size: 27px;" rowspan="1">${cnt }월</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
-						<td style="text-align: left; padding-left: 20px;">공연 일정이
+						<td style="text-align: left; padding-left: 20px;">전시 일정이
 							없습니다.</td>
 						<td>&nbsp;</td>
 					</tr>

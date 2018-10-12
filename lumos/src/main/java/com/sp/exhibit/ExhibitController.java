@@ -261,4 +261,19 @@ public class ExhibitController {
 		
 		return "redirect:/mypage/myActivity";
 	}
+	
+	@RequestMapping(value = "/bookExhibit/form", method = RequestMethod.GET)
+	public String bookExhibitForm(
+			@RequestParam(value="exhibitNum") int num,
+			HttpSession session,
+			Model model) throws Exception {
+		
+		Exhibit dto = exhibitService.readBoard(num);
+		if(dto==null) {
+			return "redirect:/exhibit/main";
+		}
+		
+		model.addAttribute("dto", dto);
+		return ".exhibit.book.form";
+	}
 }

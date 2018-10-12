@@ -66,7 +66,7 @@ $(function () {
 				<li id="type-threemonths" data-type="threemonths"><a>3개월</a></li>
 			</ul>
 			<div class="sch_name">
-				<input onkeyup="deleteButtonShowHide();" type="text" placeholder="공연명으로 검색">
+				<input onkeyup="deleteButtonShowHide();" type="text" placeholder="전시명으로 검색">
 				<button type="button" class="delete hide" onclick="deletePerformanceName();" style="background: url(<%=cp %>/resource/images/lumos/btn_del.png) no-repeat 0 100%;"></button>
 				<button type="button" onclick="search();" style="background: url(<%=cp %>/resource/images/lumos/bg_btn_sch_board.gif) no-repeat 0 100%;"></button>
 			</div>

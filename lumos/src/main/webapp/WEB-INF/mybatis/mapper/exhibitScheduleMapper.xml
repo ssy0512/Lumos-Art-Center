@@ -68,7 +68,7 @@
 	<select id="listAnnuallySchedule" parameterType="map" resultType="com.sp.exhibit.schedule.Schedule">
 		SELECT exhibitNum,exhibitName, hallName, 
         TO_CHAR(exhibitStart,'MM-DD') exhibitStart,TO_CHAR(exhibitEnd,'MM-DD') exhibitEnd,
-			TO_CHAR(exhibitEnd,'MM') endmonth, TO_CHAR(exhibitStart,'MM') startmonth
+			TO_CHAR(exhibitEnd,'MM') endmonth, TO_CHAR(exhibitStart,'MM') startmonth,genre
 		FROM EXHIBIT e
 		JOIN exhibitHall h ON e.hallNum=h.hallNum
         WHERE

@@ -7,6 +7,8 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/exhibitArticle.css" type="text/css">
 <script type="text/javascript">
+var currentDay = new Date();  
+var currentYear = currentDay.getFullYear();
 
 function login() {
 	location.href="<%=cp%>/member/login";
@@ -88,7 +90,16 @@ $(function(){
 		});
 	}
 	
-	
+});
+
+$(function () {
+	$(".reserveButtonDiv").click(function () {
+		  var exhibitNum = "${dto.exhibitNum}";
+		  var query = "exhibitNum="+exhibitNum;
+		  var url = "<%=cp%>/bookExhibit/form?"+query;
+		  
+		  location.href=url;
+	});
 });
 
 </script>
@@ -120,8 +131,11 @@ $(function(){
 			<c:if test="${empty dto.exProfileImage}">
 				<img class="list_image_crop noposter" src="<%=cp%>/resource/images/lumos/noposter.png">
 			</c:if>
-			<div class="reserveButtonDiv">
-				<a>예매하기</a>
+			<div class="
+				<c:if test='${dto.bookableState=="예매하기"}'>reserveButtonDiv</c:if>
+				<c:if test='${dto.bookableState!="예매하기"}'>nonButtonDiv</c:if>
+			">
+				<a>${dto.bookableState}</a>
 			</div>
 		</div>
 		<div class="content right">

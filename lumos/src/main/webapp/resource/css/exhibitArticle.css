@@ -121,6 +121,29 @@
     background-color:#fff;
 }
 
+/* 예매하기 외 버튼 */
+.nonButtonDiv {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.nonButtonDiv a{
+	display: block;
+    width: 270px;
+    height: 48px;
+    border: 1px solid #c0c0c0;
+    line-height: 48px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    border-color: #c0c0c0;
+    color: #c0c0c0;
+    background-color: white;
+    cursor: default;
+}
+
+
 /* 최상단 div 우측(상세정보) */
 .content {
     position: relative;

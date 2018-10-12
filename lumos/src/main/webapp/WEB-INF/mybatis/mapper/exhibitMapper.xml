@@ -5,7 +5,13 @@
 	<select id="readExhibit" parameterType="Integer" resultType="com.sp.exhibit.Exhibit">
 		SELECT exhibitNum,exhibitName,TO_CHAR(exhibitStart, 'YYYY-MM-DD')
 		exhibitStart,content,host,supervise,admitStart,admitEnd,ratingName,
-		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, hallName, exHallLocate, exProfileImage,genre
+		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, hallName, exHallLocate, exProfileImage,genre, 
+		     CASE
+                WHEN TO_DATE(TO_CHAR(exhibitEnd,'YYYYMMDD')||' '||admitEnd,'yyyy-mm-dd
+                    hh24:mi:ss')&lt;SYSDATE THEN '마감'
+                WHEN content IS NULL THEN '예정'
+                ELSE '예매하기'
+            END AS bookableState		
 		FROM EXHIBIT e
 		JOIN exhibitHall h ON e.hallNum=h.hallNum
         JOIN rating h ON e.ratingNum=h.ratingNum

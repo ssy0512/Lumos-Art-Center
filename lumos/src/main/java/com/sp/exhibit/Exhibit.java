@@ -18,8 +18,14 @@ public class Exhibit {
 	private String supervise;
 	private String exHallImage;
 	private String exPriceString;
+	private String bookableState;
 	
-	
+	public String getBookableState() {
+		return bookableState;
+	}
+	public void setBookableState(String bookableState) {
+		this.bookableState = bookableState;
+	}
 	public String getExPriceString() {
 		return exPriceString;
 	}
