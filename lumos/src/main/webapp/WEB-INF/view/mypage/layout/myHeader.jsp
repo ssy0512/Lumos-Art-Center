@@ -55,6 +55,9 @@
 	<div class="wrap">
 		<ul class="gnb">
 			<li>
+				<a href="<%=cp%>/mypage/myActivity">활동내역</a>
+			</li>
+			<li>
 				<a>티켓예매내역</a>
 			</li>
 			<li>
@@ -62,9 +65,6 @@
 			</li>
 			<li>
 				<a>관심작품</a>
-			</li>
-			<li>
-				<a href="<%=cp%>/mypage/myActivity">활동내역</a>
 			</li>
 			<li>
 				<a>마일리지</a>

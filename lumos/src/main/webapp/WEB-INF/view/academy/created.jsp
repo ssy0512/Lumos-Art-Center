@@ -44,7 +44,7 @@ function check() {
      
      <div>		
 		<div class="imgLayout">
-             <img src="<%=cp%>/resource/images/france.jpg" width="240" height="180" border="0" onclick="javascript:article('${dto.academyNum}');">
+             <img src="<%=cp%>/uploads/image/${dto.acProfileImage}" width="240" height="180" border="0" onclick="javascript:article('${dto.academyNum}');">
              	<div class="academy_desc3">	
                    	<p class="academy_desc3-title">
                    		<span>${dto.academyName}</span> 
@@ -57,7 +57,10 @@ function check() {
              		<p class="font14">장소<span style="width: 500px; font-weight: 600; text-decoration: none; float: right;">| &nbsp;${dto.position} | ${dto.roomName}</span></p>  
              		<p class="font14">모집정원<span style="width: 500px; font-weight: 600; text-decoration: none; float: right;">| &nbsp;${dto.totalCount} 명</span></p> 
              		<p class="font14">수강료
-             			<span style="width: 500px; font-weight: 600; text-decoration: none; float: right;">| &nbsp;<font color="#aa1717">${dto.price}원</font></span></p>
+             			<span style="width: 500px; font-weight: 600; text-decoration: none; float: right;">|&nbsp;<font color="#aa1717">
+             				<fmt:formatNumber value="${dto.price}" pattern="#,###"/>원</font>
+             			</span>
+             		</p>
              	</div>            		
                    	
              <c:if test="${mode=='finish'}">
@@ -75,7 +78,9 @@ function check() {
                 <c:if test="${sessionScope.member!=userId}">    	
                    	<p style="border-top: 1px solid #666; border-bottom: 1px solid #666; padding: 20px 10px; font-size: 20px; font-weight: bold;">
                    	  	결제정보
-                   	  	<span style="float: right; color: #aa1717; padding-bottom: 10px;">${dto.price}원</span>
+                   	  	<span style="float: right; color: #aa1717; padding-bottom: 10px;">
+                   	  		<fmt:formatNumber value="${dto.price}" pattern="#,###"/>원
+                   	  	</span>
                    	</p>
                
                    	<p style="padding: 20px 0px 10px; font-size: 20px; text-align: center;">

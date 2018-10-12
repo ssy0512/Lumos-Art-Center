@@ -52,17 +52,17 @@ function finishClass() {
 <div class="body-content-container-a">
      <div class="body-academy-title">
          <span class="academy-title">아카데미 수강신청</span>
-	         <c:if test="${sessionScope.member.userId=='admin'}">
-	        	 <button type="button" class="btn-info" onclick="updateAcademy();">아카데미 관리</button>
-	         </c:if>
      </div>  
      
      <div>		
 		<div class="imgLayout" style="width: 1020px; height: 550px; border-bottom: 1px solid #ccc;">
-             <img src="<%=cp%>/resource/images/france.jpg" width="240" height="180" border="0" onclick="javascript:article('${dto.academyNum}');">
+             <img src="<%=cp%>/uploads/image/${dto.acProfileImage}" width="240" height="180" border="0" onclick="javascript:article('${dto.academyNum}');">
              	<div class="academy_desc3">	
                    	<p class="academy_desc3-title">
                    		<span>${dto.academyName}</span> 
+                   		<c:if test="${sessionScope.member.userId=='admin'}">
+	        				 <button type="button" class="btn-info" style="margin-bottom: 0px; margin-top: 0px" onclick="updateAcademy();">아카데미 관리</button>
+	        			 </c:if>
                    	</p>
              		<p class="font13">강사<span style="width: 500px; font-weight: 500; text-decoration: none; float: right;">| &nbsp;${dto.instName}</span></p>		
              		<p class="font13">요일.시간

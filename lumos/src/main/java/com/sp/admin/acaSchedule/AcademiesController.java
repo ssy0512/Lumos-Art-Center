@@ -246,7 +246,7 @@ public class AcademiesController {
 	public String updateSubmit (Academies dto, @RequestParam String page,HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"upload"+File.separator+"photo"; //수정해야할수도있음
+		String pathname=root+"uploads"+File.separator+"image"; //수정해야할수도있음
 		service.updateAcademies(dto, pathname);
 		
 		return "redirect:/menu2/academySchedule/article?listNum="+dto.getListNum()+"&page="+page;

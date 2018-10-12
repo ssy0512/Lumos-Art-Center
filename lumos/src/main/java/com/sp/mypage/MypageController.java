@@ -19,7 +19,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage/main")
 	public String main() {
-		return ".mypage.mainTest";
+		return ".mypage.myActivity.main";
 	}
 	
 	@RequestMapping(value="/mypage/myInformation")
