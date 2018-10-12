@@ -52,6 +52,27 @@ $(function () {
 		});
 	});
 });
+
+function sendOk() {
+    var f = document.boardForm;
+    
+	var $product=$("#form-cardNum").val();
+    if(! $product) {
+        alert("제목을 입력하세요. ");
+        return;
+    }
+
+	str = f.content.value;
+    if(!str) {
+        alert("내용을 입력하세요. ");
+        f.content.focus();
+        return;
+    }
+    
+	f.action="<%=cp%>";
+
+    f.submit();
+}
 	
 </script>
 
@@ -171,34 +192,34 @@ $(function () {
 		<tr>
 			<td width="150px" height="50px">
 				<p style="font-size: 14px; color: #434343; font-weight: bold; text-align: center;">
-           				구분
+           				개강 전
 				</p>
 			</td>
 			<td width="150px" height="50px">
 				<p style="font-size: 14px; color: #434343; font-weight: bold; text-align: center;">
-           				환불 수수료
+           				-
 				</p>
 			</td>
 			<td width="150px" height="50px">
 				<p style="font-size: 14px; color: #434343; font-weight: bold; text-align: center;">
-           				비고
+           				100% 환불
 				</p>
 			</td>
 		</tr>
 		<tr>
 			<td width="150px" height="50px">
 				<p style="font-size: 14px; color: #434343; font-weight: bold; text-align: center;">
-           				구분
+           				개강일 ~ 6주차
 				</p>
 			</td>
 			<td width="150px" height="50px">
 				<p style="font-size: 14px; color: #434343; font-weight: bold; text-align: center;">
-           				환불 수수료
+           				회당 수수료 차감
 				</p>
 			</td>
 			<td width="150px" height="50px">
 				<p style="font-size: 14px; color: #434343; font-weight: bold; text-align: center;">
-           				비고
+           				수강료 / 수업일수 = 1회 수수료
 				</p>
 			</td>
 		</tr>
@@ -291,7 +312,7 @@ $(function () {
 			  </tr>
 			  <tr>
 			  		<td colspan="4" width="350px" height="100px" align="center"> 
-			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px;" id="apply">결&nbsp;&nbsp;&nbsp;제</button>
+			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px;" id="apply" onclick="sendOk();">결&nbsp;&nbsp;&nbsp;제</button>
 			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px; padding-left: 15px;" id="apply">취&nbsp;&nbsp;&nbsp;소</button>
 			  		</td>
 			  </tr>    
