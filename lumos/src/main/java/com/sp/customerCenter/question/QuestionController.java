@@ -219,8 +219,10 @@ public class QuestionController {
 			return ".customerCenter.error";
 		}
 		String str="["+dto.getTitle()+"] 에 대한 관리자의 답변입니다. \n";
-		dto.setContent(str);
-		
+		dto.setTitle(str);
+		List<Questions> listCategory = new ArrayList<>();
+		listCategory=service.listCategory();
+		model.addAttribute("listCategory",listCategory);
 		model.addAttribute("dto",dto);
 		model.addAttribute("page",page);
 		model.addAttribute("mode","reply");
@@ -243,7 +245,6 @@ public class QuestionController {
 		
 		Map<String, Object> model=new HashMap<>();
 		model.put("state", state);
-
 		return model;
 	}
 	
