@@ -13,14 +13,14 @@
 
 <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 <tr height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
-    <td width="50%" align="left" style="padding-left: 5px;">
+      <td colspan="2" align="center" >
 	     [${dto.qCategoryName}] 
-    </td>
+   
 	   <c:if test="${dto.depth!=0}">
 	       [Re]
 	   </c:if>
-	   <td width="50%" align="left" style="padding-right: 120px;">
-	   ${dto.title}
+	 <!-- <td width="50%" align="left" style="padding-right: 120px;"> -->
+	  ${dto.title}
 	   </td>
 </tr>
 
@@ -38,12 +38,12 @@
       ${dto.content}
    </td>
 </tr>
-
+<%-- 
 <tr height="35" style="border-bottom: 1px solid #cccccc;">
     <td colspan="2" align="left" style="padding-left: 5px;">
        이전글 :
         <c:if test="${not empty preReadQuestion}">
-            <a href="javascript:articleBoard('${preReadQuestion.postNum}', '${page}');">${preReadDto.title}</a>
+            <a href="javascript:article('${preReadQuestion.postNum}', '${page}');">${preReadDto.title}</a>
         </c:if>
     </td>
 </tr>
@@ -52,10 +52,10 @@
     <td colspan="2" align="left" style="padding-left: 5px;">
        다음글 :
         <c:if test="${not empty nextReadQuestion}">
-            <a href="javascript:articleBoard('${nextReadQuestion.postNum}', '${page}');">${nextReadDto.title}</a>
+            <a href="javascript:article('${nextReadQuestion.postNum}', '${page}');">${nextReadDto.title}</a>
         </c:if>
     </td>
-</tr>
+</tr> --%>
 </table>
 
 <table style="width: 100%; margin: 0px auto 20px; border-spacing: 0px;">

@@ -7,16 +7,10 @@
 %>
 
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css">
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<!-- 
-
-<form>
-  <input required='' type='text'>
-  <label alt='Email' placeholder='Type your Email'></label>
-</form>
- -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
+<link rel="stylesheet" href="<%=cp%>/resource/css/adminInputs.css" type="text/css">
  <script type="text/javascript">
  function sendOk(){
 	 var f=document.createdForm;
@@ -78,7 +72,7 @@
 		changeYear:true
 	}) ;
  });
- 
+
  </script>
  
  
@@ -139,6 +133,47 @@
 
 			  </table>
 			
+<%-- 			 
+<div class="body-right" style="width: 700px; padding-top:50px; padding-left:360px; height:800px;">
+    <div class="body-title" >
+        <h1> LUMOS STAFF </h1>
+        <hr>
+    </div>
+
+<div class="form-container" style="clear:both;">
+  <form class="createdForm" method="post" enctype="multipart/form-data">
+    
+    
+    <label>직원이름
+	<input type="text" name="staffName" maxlength="100" class="boxTF" value="${dto.staffName}">      
+</label>
+ 
+
+
+  
+    <label>생년월일
+      <input class="boxTF" id="regDate" name="birth" type="date" value="${dto.birth}">
+      </label>
+
+  
+    <label>소속부서
+      <input class="boxTF" name="department" type="text" value="${dto.department}">
+      </label>
+ 
+ 
+    <label>전화번호
+      <input class="boxTF" name="tel" type="text" value="${dto.tel}">
+      </label>
+ 
+    <label>이메일
+      <input class="boxTF" name="email" type="text" value="${dto.email}">
+      </label>
+  
+    <label>사원이미지
+      <input class="boxTF" name="upload" type="file" accept="image/*" >
+      </label>
+   --%>
+			 
 			  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 			     <tr height="45"> 
 			      <td align="center" >
@@ -155,7 +190,8 @@
 			      </td>
 			    </tr>
 			  </table>
-			</form>
+  </form>
     </div>
     
 </div>
+
