@@ -158,7 +158,7 @@ public class StaffController {
 	@RequestMapping(value="/admin/staff/staffs/update",method=RequestMethod.POST)
 	public String updateSubmit(Staff dto, @RequestParam String page,HttpSession session) throws Exception{
 		String root = session.getServletContext().getRealPath("/");
-		String pathname= root+"upload"+File.separator+"image";
+		String pathname= root+"uploads"+File.separator+"image";
 		service.updateStaff(dto, pathname);
 		return "redirect:/staff/staffs/article?listNum="+dto.getListNum()+"&page="+page;
 	}
@@ -167,7 +167,7 @@ public class StaffController {
 	public String deleteStaff (@RequestParam(value="staffNum") int staffNum,
 							@RequestParam String page, HttpSession session) {
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"upload"+File.separator+"image";
+		String pathname=root+"uploads"+File.separator+"image";
 		
 		service.deleteStaff(staffNum, pathname);
 		return "redirect:/staff/staffs/stafflist?page="+page;
@@ -181,6 +181,7 @@ public class StaffController {
 		List<String> columnLabels=new ArrayList<>();
 		List<Object[]> columnValues=new ArrayList<>();
 		
+		columnLabels.add("번호");
 		columnLabels.add("사번");
 		columnLabels.add("직원명");
 		columnLabels.add("생년월일");
@@ -190,7 +191,7 @@ public class StaffController {
 		
 		List<Staff> list=service.listAllStaff();
 		for(Staff dto:list) {
-			columnValues.add(new Object[] {dto.getStaffNum(),dto.getStaffName(),dto.getBirth(),dto.getDepartment(),dto.getTel(),dto.getEmail()});
+			columnValues.add(new Object[] {dto.getListNum(),dto.getStaffNum(),dto.getStaffName(),dto.getBirth(),dto.getDepartment(),dto.getTel(),dto.getEmail()});
 		}
 		
 		model.put("sheetName",sheetName);

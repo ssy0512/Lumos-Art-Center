@@ -83,6 +83,7 @@
 	<c:if test="${dataCount!=0}">
 		<div class="staff-top">
 			<div class="staff-top-page">
+				<a href="<%=cp%>/admin/staff/staffs/excel">엑셀다운로드</a>
 				전체 ${dataCount} (${page}/${total_page} 페이지)
 			</div>
 
@@ -96,17 +97,7 @@
 					</select>
 					<input type="text" name="searchValue" class="boxTF">
 					<button type="button" class="btn" onclick="searchList()" style="margin: 5px">&nbsp;검색&nbsp;</button>
-					
-					<%-- <div class="staff-top-layout">
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/staff/staffs/stafflist';">
-							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
-								&nbsp;&nbsp;목록형&nbsp;&nbsp;
-						</button>
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academyCards';">
-							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
-								&nbsp;&nbsp;앨범형&nbsp;&nbsp;
-						</button>
-					</div> --%>
+				
 				</form>
 			</div>
 		</div>
