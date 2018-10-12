@@ -13,7 +13,21 @@
 
 	// tr rowspan 동적 추가
 	$(".first").each(function() {
-		var rows = $(".first:contains('" + $(this).text() + "')");
+		var text=$(this).text();
+		var rows = $(".first:contains('" + text + "')");
+		var rows2 = $(".first:contains('11월')");
+		var rows3 = $(".first:contains('12월')");
+		
+		if(text==="1월"){
+			rows = $(".first:contains('1월')");
+			
+			rows.length=rows.length-rows2.length;
+		}else if(text === "2월"){
+			rows = $(".first:contains('2월')");
+			
+			rows.length=rows.length-rows3.length;
+		}
+		
 		if (rows.length > 1) {
 			rows.eq(0).attr("rowspan", rows.length);
 			rows.not(":eq(0)").remove();
@@ -43,11 +57,7 @@
 			<c:forEach var="cnt" begin="1" end="12">
 				<c:set var="flag" value="0" />
 				<c:forEach var="dto" items="${list }">
-					<c:if test="${(cnt<=dto.startmonth && cnt>=dto.endmonth)||
-								(cnt == dto.endmonth || cnt == dto.startmonth) || 
-								(cnt == dto.endmonth && dto.endmonth<dto.startmonth)||
-								(cnt == dto.startmonth && dto.endmonth<dto.startmonth)||
-								(cnt>=dto.startmonth && cnt<=dto.endmonth)}">
+					<c:if test="${(cnt == dto.endmonth || cnt == dto.startmonth) || (cnt>=dto.startmonth && cnt<=dto.endmonth)}">
 						<c:set var="flag" value="1" />
 						<tr align="center" bgcolor="#ffffff" height="35"
 							style="border-bottom: 1px solid #cccccc;">

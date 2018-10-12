@@ -6,38 +6,6 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-	/* // tr rowspan 동적 추가
-	$(".first").each(function() {
-		var text=$(this).text();
-		var subtext=text.substring(0,text.length-1);
-		var rows="";
-		var rows2=$(".first:contains(' 10 ')");
-		var rows3=$(".first:contains(' 11 ')");
-		var rows4=$(".first:contains(' 12 ')");
-		if(subtext.length==1){
-			if(subtext=="1"){
-				rows = $(".first:contains('" + subtext + "')");
-				
-				rows.length=rows.length-(rows2.length+rows3.length+rows4.length);
-				alert("1++++"+rows.length);
-			}else if(subtext=="2"){
-				rows = $(".first:contains('" + subtext + "')");
-				
-				rows.length=rows.length-rows4.length;
-				alert("2++++"+rows.length);
-			}else{
-				rows = $(".first:contains('" + subtext + "')");
-			}
-			
-		}else{
-			rows = $(".first:contains('" + subtext + "')");
-		}
-		
-		if (rows.length > 1) {
-			rows.eq(0).attr("rowspan", rows.length);
-			rows.not(":eq(0)").remove();
-		}
-	}); */
 	// tr rowspan 동적 추가
 	$(".first").each(function() {
 		var text=$(this).text();
