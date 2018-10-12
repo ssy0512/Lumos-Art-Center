@@ -42,7 +42,7 @@ public class AcademyController {
 		
 		String cp=req.getContextPath();
 		
-		int rows=4;
+		int rows=8;
 		int total_page=0;
 		int dataCount=0;
 		int applyDateCount=0;
@@ -201,7 +201,7 @@ public class AcademyController {
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"academy";
+		String pathname=root+"uploads"+File.separator+"image";
 		
 		service.updateInfo(dto, pathname);
 		

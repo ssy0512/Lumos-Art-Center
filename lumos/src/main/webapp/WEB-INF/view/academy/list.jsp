@@ -60,7 +60,7 @@ function searchList() {
          <button type="button" class="btn-academy-filter" onclick="javascript:location.href='<%=cp%>/academy/list?mode=ing';">마감된 강의 제외</button>
      </div>  
      
-     <div>
+
 		<table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
 		   <tr height="35">
 		      <td align="left">
@@ -77,12 +77,12 @@ function searchList() {
         <c:if test="${status.index==0}">	
 			<tr>
 		</c:if>
-		<c:if test="${status.index!=0 && status.index%3==0}">
+		<c:if test="${status.index!=0 && status.index%4==0}">
         	 <c:out value="</tr><tr>" escapeXml="false"/>
         </c:if>
 		     <td width="210" align="center">
 		        <div class="imgLayout">
-		             <img src="<%=cp%>/resource/images/france.jpg" width="240" height="180" border="0" onclick="javascript:article('${dto.academyNum}');">
+		             <img src="<%=cp%>/uploads/image/${dto.acProfileImage}" width="240" height="180" border="0" onclick="javascript:article('${dto.academyNum}');">
 		             	<div class="academy_desc">		             	
 		                   	<p style="font-size: 15px; font-weight: bold; padding: 10px 10px 35px 0px; height: 85px;">
 		                   		<span><a href="${articleUrl}&academyNum=${dto.academyNum}&mode=${dto.mode}">${dto.academyName}</a></span> 
@@ -138,5 +138,5 @@ function searchList() {
 			    </c:if>
 			   </tr>
 			</table>
-     </div>
+
 </div>
