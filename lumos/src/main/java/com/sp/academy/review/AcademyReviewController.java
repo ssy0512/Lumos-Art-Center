@@ -153,6 +153,8 @@ public class AcademyReviewController {
 		if(dto==null)
 			return "redirect:/academy/view/list?"+query;
 		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);

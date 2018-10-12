@@ -56,7 +56,7 @@
 		  <tr align="center" style="border-bottom: 1px solid #cccccc; height: 47px; color: #434343;"> 
 		      <td>${dto.listNum}</td>
 		      <td>${dto.academyName}</td>
-		      <td align="left" style="padding-left: 10px;">
+		      <td align="left" style="padding-left: 20px;">
 		           <a href="${articleUrl}&classReviewNum=${dto.classReviewNum}">${dto.subject}</a>
 		      </td>
 		      <td>${dto.userName}</td>
@@ -82,11 +82,11 @@
 		<table style="width: 900px; margin: 10px auto; border-spacing: 0px; padding-bottom: 40px;">
 		   <tr height="40">
 		      <td align="left" width="100">
-		      	  <button type="button" class="list-ing" style="width: 71px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/academy/review/list';">새로고침</button>
+		      	  <button type="button" class="list-ing" style="width: 90px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/academy/review/list';">새로고침</button>
 		      </td>
 		      <c:if test="${not empty sessionScope.member}"> 
 		      <td align="right" width="100">
-		          <button type="button" class="list-ing" style="width: 71px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/academy/review/created';">글올리기</button>
+		          <button type="button" class="list-ing" style="width: 90px; cursor: pointer;" onclick="javascript:location.href='<%=cp%>/academy/review/created';">글올리기</button>
 		      </td>
 		      </c:if>
 		   </tr>
