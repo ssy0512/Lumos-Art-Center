@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+.wrap {
+	width: 1020px;
+	margin: 0 auto;
+}
+
+.title {
+	font-weight: 300;
+	display: block;
+	padding-bottom : 10px;
+	border-bottom: 1px solid #b4b4b4;
+	margin-bottom: 20px;
+}
+
+/* 최상단 div (포스터 + 상세정보) */
+.exhibit_detail{
+	max-width: 1920px;
+    min-height: 500px;
+    margin: 0 auto;
+    margin-top: 25px;
+    position: relative;
+}
+
+.wrap {
+	width: 1020px;
+    margin: 0 auto;
+}
+
+/* 최상단 div 좌측(포스터) */
+.poster {
+	width: 270px;
+}
+
+.left {
+	float: left;
+}
+
+.list_image_crop {
+	width: 230px;
+    height: 293px;
+    object-fit: cover;
+}
+
+.noposter {
+	border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+.exInfo {
+	float: left;
+}
+
+.detail_inform {
+	margin-left: 20px;
+}
+
+.detail_inform th {
+	text-align: left;
+}
+
+.detail_inform td {
+	padding-left: 10px;
+}
+
+.detail_inform tr {
+	height: 30px;
+}
+
+.content h2 {
+	margin-left: 20px;
+}
+
+.war h2 {
+	display: block;
+	height: 35px;
+	border-bottom: 1px solid #b4b4b4;
+	margin-bottom: 10px; 
+}
+
+.linet {
+	display: block;
+	height: 35px;
+	border-bottom: 1px solid #b4b4b4;
+	margin-bottom: 10px; 
+}
+
+.audt {
+	border-collapse: collapse;
+}
+
+.audt tr {
+	height: 30px;
+}
+
+.audt th,.audt td {
+	border : 1px solid #eee;
+	padding: 5px;
+}
+.audt th {
+	background-color: #eee;
+}
+
+.pricetable{
+	border-collapse: collapse;
+}
+
+.pricetable th,.pricetable td {
+	border : 1px solid #eee;
+	padding: 5px;
+}
+
+.pricetable .mn{
+	text-align: right;
+	padding-right: 10px;
+}
+
+.pricetable .box{
+	text-align: center;
+}
+
+.pricetable .head{
+	background-color: #eee;
+}
+
+.bb{
+	border-bottom: 1.5px solid gray!important;
+}
+
+.selectList {
+	background-color: #a6a6a6;
+	font-weight: bold;
+	padding-left: 15px!important;
+}

@@ -273,6 +273,20 @@ public class ExhibitController {
 			return "redirect:/exhibit/main";
 		}
 		
+		List<String> listPrice = exhibitService.exhibitPrice(num);
+		
+		if(listPrice!=null && listPrice.size() > 0) {
+			String exPriceString="";
+			for( String s : listPrice) {
+				exPriceString+=s+" / ";
+			}
+			exPriceString=exPriceString.substring(0, exPriceString.length()-3);
+			dto.setExPriceString(exPriceString);
+		}
+		
+		List<Exhibit> audienceList = exhibitService.audienceList(num);
+		
+		model.addAttribute("audienceList", audienceList);
 		model.addAttribute("dto", dto);
 		return ".exhibit.book.form";
 	}

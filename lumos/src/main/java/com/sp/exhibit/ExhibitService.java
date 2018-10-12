@@ -16,4 +16,5 @@ public interface ExhibitService {
 	public ExReview readExReviewForUpdate(Map<String, Object> map);
 	public int updateExReview(ExReview dto);
 	public int insertExReview(ExReview dto);
+	public List<Exhibit> audienceList(int num);
 }

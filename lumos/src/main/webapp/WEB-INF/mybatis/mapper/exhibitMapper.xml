@@ -64,4 +64,14 @@
 		UPDATE exreview SET subject=#{subject}, content=#{content}, score=#{score}
 			WHERE exreviewNum=#{exreviewNum}
 	</update>
+	
+		
+	<select id="audienceList" parameterType="Integer" resultType="com.sp.exhibit.Exhibit">
+		SELECT ep.exhibitNum, ep.audienceLevelNum, audience, exPrice 
+		FROM exhibitPrice ep 
+		JOIN audienceLevel al ON ep.audienceLevelNum=al.audienceLevelNum 
+		JOIN exhibit e ON ep.exhibitNum=e.exhibitNum 
+		WHERE ep.exhibitNum=#{num} 
+		ORDER BY ep.audienceLevelNum ASC
+	</select>
 </mapper>

@@ -160,4 +160,16 @@ public class ExhibitServiceImpl implements ExhibitService{
 		}
 		return result;
 	}
+
+	@Override
+	public List<Exhibit> audienceList(int num) {
+		List<Exhibit> list = null;
+		try {
+			list=dao.selectList("exhibit.audienceList",num);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

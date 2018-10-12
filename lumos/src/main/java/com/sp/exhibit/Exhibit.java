@@ -19,7 +19,29 @@ public class Exhibit {
 	private String exHallImage;
 	private String exPriceString;
 	private String bookableState;
+	private String audience;
+	private int exPrice;
+	private int audienceLevelNum;
 	
+	
+	public String getAudience() {
+		return audience;
+	}
+	public void setAudience(String audience) {
+		this.audience = audience;
+	}
+	public int getExPrice() {
+		return exPrice;
+	}
+	public void setExPrice(int exPrice) {
+		this.exPrice = exPrice;
+	}
+	public int getAudienceLevelNum() {
+		return audienceLevelNum;
+	}
+	public void setAudienceLevelNum(int audienceLevelNum) {
+		this.audienceLevelNum = audienceLevelNum;
+	}
 	public String getBookableState() {
 		return bookableState;
 	}
