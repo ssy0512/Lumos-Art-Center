@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="readExhibitSales" resultType="com.sp.admin.sales.ExhibitSales" parameterType="Integer">
-		SELECT e.exhibitNum, e.exhibitName, TO_CHAR(exhibitStart, 'YYYY-MM-DD') exhibitStart,
+		SELECT e.exhibitNum, e.exhibitName, TO_CHAR(exhibitStart, 'YYYY-MM-DD') exhibitStart, exprofileImage,
 		TO_CHAR(exhibitEnd, 'YYYY-MM-DD') exhibitEnd, host, supervise, h.hallName
 		FROM exhibit e
 		JOIN exhibitHall h ON e.hallNum=h.hallNum

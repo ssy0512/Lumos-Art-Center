@@ -6,14 +6,16 @@
    String cp = request.getContextPath();
 %>
 <style type="text/css">
+.sales-top {
+	margin: 20px 0;
+	width: 1380px;
+}
 .salesList-main {
-	margin: 20px 100px;
 	width: 1380px;
 	clear: both;
 	font-size: 12pt;
 }
 .salesList-main-table {
-	margin: 0 auto;
 	width: 1380px;
 	text-align: center;
 	border-spacing: 0px;

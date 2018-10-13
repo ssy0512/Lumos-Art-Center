@@ -7,20 +7,25 @@
 %>
 <style type="text/css">
 .total-top {
-	width: 800px;
+	width: 1300px;
 	margin: 20px auto;
 	text-align: left;
 }
 
 .exhibit-table {
-	width: 800px;
+	width: 1300px;
 	margin: 10px auto;
 	border-spacing: 0px;
 	border-collapse: collapse;
 }
 
+.exhibit-table thead {
+	background-color: #072659;
+	color: #ffffff;
+}
+
 .exhibit-table tr, td {
-	height: 30px;
+	height: 40px;
 	text-align: center;
 }
 .exhibit-table tr {

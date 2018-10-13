@@ -133,7 +133,7 @@ section:first-child:after, section:last-child:after {
 
 section:nth-child(3):before {
 	background-image:
-		url("<%=cp%>/resource/images/lumos/adminMain-member.jpg");
+		url("<%=cp%>/resource/images/lumos/adminMain-staff.jpg");
 }
 
 .hide-images section:nth-child(3):before {
@@ -146,7 +146,7 @@ section:child:after {
 
 section:nth-child(4):before {
 	background-image:
-		url("<%=cp%>/resource/images/lumos/adminMain-rent.png");
+		url("<%=cp%>/resource/images/lumos/adminMain-membership.png");
 }
 
 .hide-images section:nth-child(4):before {
@@ -213,12 +213,6 @@ p {
 
 
 
-
-
-
-
-
-
 </style>
 
 <div class="body-container">
@@ -239,21 +233,23 @@ p {
 		</section>
 		<section>
 			<article
+				onclick="location.href='<%=cp%>/admin/staff/staffs/stafflist';">
+				<h2>직원관리</h2>
+				<p>LUMOS 직원 목록, LUMOS 강사 목록</p>
+			</article>
+		</section>
+		<section>
+			<article
 				onclick="location.href='<%=cp%>/admin/membership/regular/regularList';">
 				<h2>회원관리</h2>
 				<p>일반 회원, 기업 회원</p>
 			</article>
 		</section>
 		<section>
-			<article>
-				<h2>대관 관리</h2>
-				<p>대관 신청 목록, 대관 승인</p>
-			</article>
-		</section>
-		<section>
-			<article>
+			<article
+				onclick="location.href='<%=cp%>/admin/customer/question/questionlist';">
 				<h2>고객 관리</h2>
-				<p>This is some description text for this panel.</p>
+				<p>문의글 목록 조회, 유실물 목록 관리</p>
 			</article>
 		</section>
 	</div>

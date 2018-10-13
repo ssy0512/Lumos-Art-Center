@@ -105,17 +105,17 @@ ul.nav .current a, ul.nav li:hover > a {
 
 /* body 사이드 메뉴 */
 .body-left {
+	background-color: #072659;
 	float:left;
     width: 250px;
     height: 800px;
     font-size: 15pt;
     font-weight : 500;
-    border-right: 1px solid #072659;
 }
 .list-group-item-lefthead {
-    width: 220px;
+    width: 250px;
     height: 50px;
-    border-bottom: 2px solid #072659;
+    background-color: #ffffff;
     color: #072659;
     display: block;
     padding-top: 30px;
@@ -126,8 +126,7 @@ ul.nav .current a, ul.nav li:hover > a {
 .list-group {
     width: 200px;
     text-align: center;
-    color: #072659;
-    margin: 15px;
+    color: #ffffff;
 } 
 
 .list-group-item {
@@ -147,27 +146,31 @@ ul.nav .current a, ul.nav li:hover > a {
 }
 
 .list-group button {
+	margin-left: 25px;
 	width: 200px;
 	height: 50px;
 	left: 300px;
-	top: 50;
 	font-family: 'Varela Round', sans-serif;
 	font-size: 13pt;
 	letter-spacing: 0.1em;
-	color: #4274D3;
-	border: 1px solid #4274D3;
-	border-radius: 10px;
+	color: #ffffff;
+	border-style: none;
+	
 	outline: none;
-/*   background: linear-gradient(45deg,#4274D3,teal,#4274D3); */
-	background: #ffffff;
-	box-shadow: 0.9vw 0.7vw 0 #072659;
+	background: #072659;
 	cursor: pointer;
 	transition: all 0.3s ease;
 }
 
 .list-group button:hover {
-    animation: gradient 10s ease infinite;
-    box-shadow: 0.2vw 0.2vw 0 #072659;
+	background-color: #ffffff;
+	color: #072659;
+	border-radius: 15px;
+    cursor: pointer;
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	transform: scale(1.1);
+	text-decoration: none;
   }
 
 @keyframes gradient {
@@ -180,7 +183,6 @@ a.list-group-item:hover {
 	width: 200px;
     color: #1f55ad;
     text-decoration: none;
-    background: #ffffff;  
 }
 
 /* body 메인 */
@@ -189,18 +191,6 @@ a.list-group-item:hover {
     width: 850px;
     padding : 0px 10px;    
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

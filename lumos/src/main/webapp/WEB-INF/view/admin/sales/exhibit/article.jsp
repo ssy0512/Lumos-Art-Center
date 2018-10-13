@@ -8,37 +8,37 @@
 <style type="text/css">
 .exhibit-article {
 	margin: 50px auto;
-	width: 850px;
-	height: 720px;
+	width: 1300px;
+	height: 650px;
 	clear: both;
-	border: 1px solid #333333;
+	border-top: 3px solid #072659;
+	border-bottom: 3px solid #072659;
 	border-radius: 50px;
 }
 
+.exhibitNum {
+	float: right;
+	margin: 25px 40px 20px 600px;
+}
+
 .exhibit-article-image {
-	margin: 20px 320px;
+	margin: 80px 0px 80px 80px;
+	float: left;
 }
 
 .exhibit-title {
-	width: 700px;
-	margin: 10px auto;
+	width: 900px;
+	margin: 30px auto;
+	float: left;
 	border-spacing: 0px;
 	border-collapse: collapse;
 }
 
-.exhibit-Info {
-	width: 550px;
-	margin: auto;
-	text-align: center;
-}
-.exhibit-Info p {
-	width: 180px;
-	float: left;
-}
-
 .exhibit-table {
-	width: 700px;
-	margin: 10px auto;
+	width: 650px;
+	margin: 20px auto;
+	float: left;
+	line-height: 50px;
 	border-spacing: 0px;
 	border-collapse: collapse;
 }
@@ -50,7 +50,7 @@
 
 /* 버튼 css */
 .myButt {
-	margin: 20px;
+	margin: 0 30px;
 	width: 100px;
 	height: 40px;
 	outline: none;
@@ -109,52 +109,62 @@
 	left: 135px;
 }
 .btn-div {
-	width: 290px;
+	width: 350px;
 	margin: auto;
+	clear: both;
 }
+
 </style>
 <div class="body-right" style="width: 1380px; height: 800px; margin: 0;">
 	<div class="exhibit-article">
-		<div style="float: right; margin: 25px 40px 20px 600px;">전시번호
-			No.${dto.exhibitNum}</div>
-		<div class="exhibit-article-image">
-			<img
-				src="https://cdn.pixabay.com/photo/2015/02/02/15/28/bar-621033_960_720.jpg"
-				style="width: 220px; height: 220px; border-radius: 110px;">
+		<div class="exhibitNum">전시번호 No.${dto.exhibitNum}
 		</div>
+		<c:if test="${not empty dto.exProfileImage}">
+			<div class="exhibit-article-image">
+				<img src="<%=cp %>/uploads/image/${dto.exProfileImage}"
+					style="width: 300px; height: 400px;">
+			</div>
+		</c:if>
+		<c:if test="${empty dto.exProfileImage}">
+			<div class="exhibit-article-image">
+				<img src="<%=cp%>/resource/images/lumos/noposter.png"
+					style="width: 300px; height: 400px; border: 1px solid #eeeeee;">
+			</div>
+		</c:if>
 		<table class="exhibit-title">
 			<tr>
 				<td style="font-size: 20pt;">${dto.exhibitName}</td>
 			</tr>
-		</table>
-		<br><br><br>
-		<div class="exhibit-Info">
-				<p><b>주최</b> ${dto.host}</p>
-				<c:if test="${dto.host!='lac' && not empty dto.supervise}">
-					<p><b>주관</b> ${dto.supervise}</p>
-				</c:if>
-				<p><b>전시장</b> ${dto.hallName}</p>
-		</div>
-		<br>
+		</table><br><br>
 		<table class="exhibit-table">
+			<tr>
+				<th>주최</th>
+				<td>${dto.host}</td>
+			</tr>
+			<tr>
+				<c:if test="${dto.host!='lac' && not empty dto.supervise}">
+					<th>주관</th>
+					<td>${dto.supervise}</td>
+				</c:if>
+			</tr>
+			<tr>
+				<th>전시장</th>
+				<td>${dto.hallName}</td>
+			</tr>
 			<tr>
 				<th style="width: 230px;">전시일</th>
 				<td style="width: 300px;">${dto.exhibitStart}~
 					${dto.exhibitEnd}</td>
 			</tr>
-		</table>
-		<table class="exhibit-table">
 			<tr>
 				<th style="min-width: 260px;">가격</th>
 				<td>${dto.exPriceString}</td>
 			</tr>
-		</table>
-		<table class="exhibit-table">
 			<tr>
 				<th>총매출</th>
 				<td>${totalSum}</td>
 			</tr>
-		</table><br>
+		</table>
 		<div class="btn-div">
 			<button type="button" class="myButt one"
 				onclick="javascript:location.href='<%=cp%>/admin/sales/exhibit/salesList';">
