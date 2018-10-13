@@ -10,7 +10,7 @@ public interface TicketingService {
 	public int seatCount(int sessionNum);
 	public int selectHallNum(int sessionNum);
 	
-	public List<Ticketing> seatPrice(int hallNum);
+	public List<Ticketing> seatPrice(Map<String, Object> map);
 	public int myMileage(String userId);
 	public List<Ticketing> sessionDate(int sessionNum);
 }

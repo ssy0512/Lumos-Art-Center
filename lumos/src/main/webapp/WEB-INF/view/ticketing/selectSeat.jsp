@@ -254,7 +254,7 @@ function goTicketing(){
 	<div style="font-size:20pt;background-color:#cccccc;border-radius: 4px;height:115px;text-align:center;line-height:105px;margin-bottom:15px;">stage</div>
 		
 		<p style="padding:20px 0px; text-align:left;">
-			<span style="font-weight:bold;margin:40px;">2F</span>
+			<span style="font-weight:bold;margin:20px;">2F</span>
 			<span style="font-weight:bold;margin:600px;">1F</span><br> 
 		</p>
 			<div class="second" style="border:1px solid #d3d3d3; border-top:none; width:1400px;">

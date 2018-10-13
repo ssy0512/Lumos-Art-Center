@@ -125,17 +125,22 @@ public class TicketingController {
 				acnt++;
 			}
 		}
-		
 		int total=rcnt+scnt+acnt;
 		String bookedSeatNum=r+s+a;
 		bookedSeatNum=bookedSeatNum.substring(0,bookedSeatNum.length()-1);
-		// 좌석 가격 정보(+할인된 금액)
-		List<Ticketing> priceList=service.seatPrice(hallNum);
 		
+		Map<String, Object> map = new HashMap<>();
+		map.put("hallNum", hallNum);
+		map.put("sessionNum", sessionNum);
+		
+		// 좌석 가격 정보(+할인된 금액)
+		List<Ticketing> priceList=service.seatPrice(map);
+
 		int[] array=new int[3];
 		int size=0;
 		for(Ticketing ddto : priceList) {
-			array[size++]=ddto.getSeatPrice();
+			array[size]=ddto.getSeatPrice();
+			size++;
 		}
 		
 		int rprice=(int)array[0]/2;
@@ -150,9 +155,9 @@ public class TicketingController {
 		model.addAttribute("rprice",rprice);
 		model.addAttribute("sprice",sprice);
 		model.addAttribute("aprice",aprice);
-		model.addAttribute("array[0]",array[0]);
-		model.addAttribute("array[1]",array[1]);
-		model.addAttribute("array[2]",array[2]);
+		model.addAttribute("array0",array[0]);
+		model.addAttribute("array1",array[1]);
+		model.addAttribute("array2",array[2]);
 		model.addAttribute("totalMileage",totalMileage);
 		model.addAttribute("total",total);
 		model.addAttribute("rcnt",rcnt);
@@ -168,9 +173,9 @@ public class TicketingController {
 	public String finalBook(
 			@RequestParam(value="hallNum") int hallNum,
 			@RequestParam(value="sessionNum") int sessionNum,
-			@RequestParam(value="array[0]", defaultValue="0") int array0,
-			@RequestParam(value="array[1]", defaultValue="0") int array1,
-			@RequestParam(value="array[2]", defaultValue="0") int array2,
+			@RequestParam(value="array0", defaultValue="0") int array0,
+			@RequestParam(value="array1", defaultValue="0") int array1,
+			@RequestParam(value="array2", defaultValue="0") int array2,
 			@RequestParam(value="bookedSeatNum") String bookedSeatNum,
 			@RequestParam(value="trcnt", defaultValue="0") int trcnt,
 			@RequestParam(value="salercnt", defaultValue="0") int salercnt,
@@ -181,7 +186,6 @@ public class TicketingController {
 			@RequestParam(value="mileage", defaultValue="0") int mileage,
 			Ticketing dto,
 			Model model) {
-		System.out.println(array0+"++++++++++++++");
 		
 		List<Ticketing> list=service.sessionDate(sessionNum);
 		for(Ticketing ddto:list) {
@@ -200,12 +204,18 @@ public class TicketingController {
 		int discount=rprice*salercnt+sprice*salescnt+aprice+saleacnt+mileage;
 		int price=totalPrice-discount;
 		
+		int time=Integer.parseInt(dto.getSessionTime().substring(0, 2))-1;
+		String min=dto.getSessionTime().substring(2);
+		
+		String cancelTime=dto.getSessionDate() +"  "+ time + min;
+		
 		model.addAttribute("dto",dto);
 		model.addAttribute("bookedSeatNum",bookedSeatNum);
 		model.addAttribute("total",total);
 		model.addAttribute("totalPrice",totalPrice);
 		model.addAttribute("discount",discount);
 		model.addAttribute("price",price);
+		model.addAttribute("cancelTime",cancelTime);
 		
 		return ".ticketing.finalBook";
 	}

@@ -70,7 +70,7 @@ function goCheck(){
 				<tr style="border-bottom:1px solid #434343;height:31px;">
 					<td style="width:110px;text-align:center;background: #f7f7f7;">기본가</td>
 					<td style="padding-left:9px;">일반</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${array[0] }원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;">${array0 }원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="trcnt" name="trcnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -107,7 +107,7 @@ function goCheck(){
 				<tr style="border-bottom:1px solid #434343;height:31px;">
 					<td style="width:110px;height:28px;text-align:center;background: #f7f7f7;">기본가</td>
 					<td style="padding-left:9px;">일반</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${array[1] }원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;">${array1 }원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="tscnt" name="tscnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -144,7 +144,7 @@ function goCheck(){
 				<tr style="border-bottom:1px solid #434343;height:31px;">
 					<td style="width:110px;height:28px;text-align:center;background: #f7f7f7;">기본가</td>
 					<td style="padding-left:9px;">일반</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${array[2] }원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;">${array2 }원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="tacnt" name="tacnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -198,9 +198,9 @@ function goCheck(){
 	</div>
 	<input type="hidden" name="sessionNum" value="${sessionNum }">
 	<input type="hidden" name="hallNum" value="${hallNum }">
-	<input type="hidden" name="array[0]" value="${array[0]}">
-	<input type="hidden" name="array[1]" value="${array[1]}">
-	<input type="hidden" name="array[2]" value="${array[2]}">
+	<input type="hidden" name="array0" value="${array0}">
+	<input type="hidden" name="array1" value="${array1}">
+	<input type="hidden" name="array2" value="${array2}">
 	<input type="hidden" name="bookedSeatNum" value="${bookedSeatNum}">
 </form>
 </div>

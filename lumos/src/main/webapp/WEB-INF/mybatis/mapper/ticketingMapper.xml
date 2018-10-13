@@ -53,7 +53,8 @@
 		FROM seatPrice sp
 		JOIN concert c ON c.concertNum=sp.concertNum
 		JOIN concertHall ch ON ch.hallNum=c.hallNum
-		WHERE ch.hallNum=#{hallNum}
+		JOIN concertSession cs ON cs.concertNum=c.concertNum
+		WHERE ch.hallNum=#{hallNum} AND cs.sessionNum=#{sessionNum}
 		ORDER BY seatLevelNum ASC
 	</select>
 	

@@ -80,10 +80,10 @@ public class TicketingServiceImpl implements TicketingService{
 	}
 
 	@Override
-	public List<Ticketing> seatPrice(int hallNum) {
+	public List<Ticketing> seatPrice(Map<String, Object> map) {
 		List<Ticketing> list=null;
 		try {
-			list=dao.selectList("ticketing.seatPrice",hallNum);
+			list=dao.selectList("ticketing.seatPrice",map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
