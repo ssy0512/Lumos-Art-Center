@@ -191,6 +191,7 @@ public class TicketingController {
 		for(Ticketing ddto:list) {
 			dto.setSessionDate(ddto.getSessionDate());
 			dto.setSessionTime(ddto.getSessionTime());
+			dto.setConcertName(ddto.getConcertName());
 		}
 		
 		String[] sp=bookedSeatNum.split(",");

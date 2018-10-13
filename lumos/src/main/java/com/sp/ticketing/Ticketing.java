@@ -11,6 +11,7 @@ public class Ticketing {
 	private int totalMileage;
 	private int seatLevelNum;
 	private int seatPrice;
+	private String concertName;
 	
 	public String getSessionDate() {
 		return sessionDate;
@@ -98,5 +99,13 @@ public class Ticketing {
 
 	public void setSeatPrice(int seatPrice) {
 		this.seatPrice = seatPrice;
+	}
+
+	public String getConcertName() {
+		return concertName;
+	}
+
+	public void setConcertName(String concertName) {
+		this.concertName = concertName;
 	}
 }

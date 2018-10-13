@@ -70,7 +70,7 @@ function goCheck(){
 				<tr style="border-bottom:1px solid #434343;height:31px;">
 					<td style="width:110px;text-align:center;background: #f7f7f7;">기본가</td>
 					<td style="padding-left:9px;">일반</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${array0 }원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;"><fmt:formatNumber value="${array0 }" type="number"/>원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="trcnt" name="trcnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -83,7 +83,7 @@ function goCheck(){
 				<tr style="height:31px;">
 					<td style="width:110px;text-align:center;background: #f7f7f7;">기본할인</td>
 					<td style="padding-left:9px;">장애인/국가유공자 할인 50%</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${rprice}원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;"><fmt:formatNumber value="${rprice }" type="number"/>원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="salercnt" name="salercnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -107,7 +107,7 @@ function goCheck(){
 				<tr style="border-bottom:1px solid #434343;height:31px;">
 					<td style="width:110px;height:28px;text-align:center;background: #f7f7f7;">기본가</td>
 					<td style="padding-left:9px;">일반</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${array1 }원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;"><fmt:formatNumber value="${array1 }" type="number"/>원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="tscnt" name="tscnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -120,7 +120,7 @@ function goCheck(){
 				<tr style="height:31px;">
 					<td style="width:110px;height:28px;text-align:center;background: #f7f7f7;">기본할인</td>
 					<td style="padding-left:9px;">장애인/국가유공자 할인 50%</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${sprice}원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;"><fmt:formatNumber value="${sprice }" type="number"/>원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="salescnt" name="salescnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -144,7 +144,7 @@ function goCheck(){
 				<tr style="border-bottom:1px solid #434343;height:31px;">
 					<td style="width:110px;height:28px;text-align:center;background: #f7f7f7;">기본가</td>
 					<td style="padding-left:9px;">일반</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${array2 }원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;"><fmt:formatNumber value="${array2 }" type="number"/>원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="tacnt" name="tacnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -157,7 +157,7 @@ function goCheck(){
 				<tr style="height:31px;">
 					<td style="width:110px;height:28px;text-align:center;background: #f7f7f7;">기본할인</td>
 					<td style="padding-left:9px;">장애인/국가유공자 할인 50%</td>
-					<td style="text-align:right;padding-right:9px;width:100px;">${aprice }원</td>
+					<td style="text-align:right;padding-right:9px;width:100px;"><fmt:formatNumber value="${aprice }" type="number"/>원</td>
 					<td style="text-align:center;width:100px;">
 						<select id="saleacnt" name="saleacnt" class="selectField" style="height:28px;width: 60px;">
 			                  <option value="0">0매</option>
@@ -176,7 +176,7 @@ function goCheck(){
 		<tr style="height:31px;">
 			<td style="text-align:center;width:130px;background: #f7f7f7;">마일리지 사용</td>
 			<td style="text-align:right;padding-right:15px;width:650px;"><input type="text" name="mileage"> P</td>
-			<td style="text-align:center;background: #f7f7f7;">사용 가능한 마일리지 : ${totalMileage }P</td>
+			<td style="text-align:center;background: #f7f7f7;">사용 가능한 마일리지 : <fmt:formatNumber value="${totalMileage }" type="number"/>P</td>
 		</tr>
 	</table>
 	<h3 class="title">결제수단 선택</h3>

@@ -59,8 +59,9 @@
 	</select>
 	
 	<select id="sessionDate" parameterType="Integer" resultType="com.sp.ticketing.Ticketing">
-		SELECT TO_CHAR(sessionDate,'YYYY-MM-DD') sessionDate,sessionTime
-		FROM concertSession
+		SELECT TO_CHAR(sessionDate,'YYYY-MM-DD') sessionDate,sessionTime,concertName
+		FROM concertSession cs
+		JOIN concert c ON c.concertNum=cs.concertNum
 		WHERE sessionNum=#{sessionNum}
 	</select>
 </mapper>
