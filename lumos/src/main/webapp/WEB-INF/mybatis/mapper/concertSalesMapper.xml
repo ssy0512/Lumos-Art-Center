@@ -10,7 +10,7 @@
 	<select id="readConcertSales" resultType="com.sp.admin.sales.ConcertSales" parameterType="Integer">
 		SELECT c.concertNum, c.concertName, c.host, c.supervise,
 		TO_CHAR(concertStart, 'YYYY-MM-DD') concertStart, TO_CHAR(concertEnd, 'YYYY-MM-DD') concertEnd,
-		 h.hallName, c.genre, seatPriceList
+		conProfileImage, h.hallName, c.genre, seatPriceList
 		FROM concert c
 		JOIN concertHall h ON c.hallNum=h.hallNum
         WHERE concertNum=#{concertNum}

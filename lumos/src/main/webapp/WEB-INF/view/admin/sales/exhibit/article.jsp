@@ -14,6 +14,7 @@
 	border-top: 3px solid #072659;
 	border-bottom: 3px solid #072659;
 	border-radius: 50px;
+	background-image: url("<%=cp%>/resource/images/lumos/sample5.png");
 }
 
 .exhibitNum {
@@ -24,6 +25,10 @@
 .exhibit-article-image {
 	margin: 80px 0px 80px 80px;
 	float: left;
+}
+
+.exhibit-article-image img {
+	width: 300px; height: 400px;
 }
 
 .exhibit-title {
@@ -119,18 +124,15 @@
 	<div class="exhibit-article">
 		<div class="exhibitNum">전시번호 No.${dto.exhibitNum}
 		</div>
-		<c:if test="${not empty dto.exProfileImage}">
 			<div class="exhibit-article-image">
-				<img src="<%=cp %>/uploads/image/${dto.exProfileImage}"
-					style="width: 300px; height: 400px;">
+				<c:if test="${not empty dto.exProfileImage}">
+					<img src="<%=cp %>/uploads/image/${dto.exProfileImage}">
+				</c:if>
+				<c:if test="${empty dto.exProfileImage}">
+					<img src="<%=cp%>/resource/images/lumos/noposter.png"
+					style="border: 1px solid #eeeeee;">
+				</c:if>
 			</div>
-		</c:if>
-		<c:if test="${empty dto.exProfileImage}">
-			<div class="exhibit-article-image">
-				<img src="<%=cp%>/resource/images/lumos/noposter.png"
-					style="width: 300px; height: 400px; border: 1px solid #eeeeee;">
-			</div>
-		</c:if>
 		<table class="exhibit-title">
 			<tr>
 				<td style="font-size: 20pt;">${dto.exhibitName}</td>

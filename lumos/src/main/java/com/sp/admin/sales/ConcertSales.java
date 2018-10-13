@@ -11,6 +11,7 @@ public class ConcertSales {
 	private String supervise;
 	private int hallNum;
 	private String hallName;
+	private String conProfileImage;
 	
 	private String approveNum;
 	private String orderDate;
@@ -28,12 +29,6 @@ public class ConcertSales {
 	private int ticketcount;
 	private String discountName;
 	
-	public int getSeatCount() {
-		return seatCount;
-	}
-	public void setSeatCount(int seatCount) {
-		this.seatCount = seatCount;
-	}
 	public int getListNum() {
 		return listNum;
 	}
@@ -94,6 +89,12 @@ public class ConcertSales {
 	public void setHallName(String hallName) {
 		this.hallName = hallName;
 	}
+	public String getConProfileImage() {
+		return conProfileImage;
+	}
+	public void setConProfileImage(String conProfileImage) {
+		this.conProfileImage = conProfileImage;
+	}
 	public String getApproveNum() {
 		return approveNum;
 	}
@@ -118,6 +119,12 @@ public class ConcertSales {
 	public void setSeatPrice(int seatPrice) {
 		this.seatPrice = seatPrice;
 	}
+	public int getSeatCount() {
+		return seatCount;
+	}
+	public void setSeatCount(int seatCount) {
+		this.seatCount = seatCount;
+	}
 	public String getSeatLevel() {
 		return seatLevel;
 	}
@@ -130,6 +137,30 @@ public class ConcertSales {
 	public void setSeatPriceList(String seatPriceList) {
 		this.seatPriceList = seatPriceList;
 	}
+	public int getSeatLevelNum() {
+		return seatLevelNum;
+	}
+	public void setSeatLevelNum(int seatLevelNum) {
+		this.seatLevelNum = seatLevelNum;
+	}
+	public int getUseMileage() {
+		return useMileage;
+	}
+	public void setUseMileage(int useMileage) {
+		this.useMileage = useMileage;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getTotalSeat() {
+		return totalSeat;
+	}
+	public void setTotalSeat(int totalSeat) {
+		this.totalSeat = totalSeat;
+	}
 	public int getTicketcount() {
 		return ticketcount;
 	}
@@ -141,29 +172,5 @@ public class ConcertSales {
 	}
 	public void setDiscountName(String discountName) {
 		this.discountName = discountName;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public int getSeatLevelNum() {
-		return seatLevelNum;
-	}
-	public void setSeatLevelNum(int seatLevelNum) {
-		this.seatLevelNum = seatLevelNum;
-	}
-	public int getTotalSeat() {
-		return totalSeat;
-	}
-	public void setTotalSeat(int totalSeat) {
-		this.totalSeat = totalSeat;
-	}
-	public int getUseMileage() {
-		return useMileage;
-	}
-	public void setUseMileage(int useMileage) {
-		this.useMileage = useMileage;
 	}
 }

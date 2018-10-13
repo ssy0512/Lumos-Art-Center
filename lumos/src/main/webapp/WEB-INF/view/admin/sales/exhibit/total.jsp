@@ -12,23 +12,23 @@
 	text-align: left;
 }
 
-.exhibit-table {
+.total-table {
 	width: 1300px;
 	margin: 10px auto;
 	border-spacing: 0px;
 	border-collapse: collapse;
 }
 
-.exhibit-table thead {
+.total-table thead {
 	background-color: #072659;
 	color: #ffffff;
 }
 
-.exhibit-table tr, td {
+.total-table tr, td {
 	height: 40px;
 	text-align: center;
 }
-.exhibit-table tr {
+.total-table tr {
 	border-bottom: 1px solid #072659;
 }
 
@@ -99,7 +99,7 @@
 			<div class="total-top">
 			전체 ${totalCount} (${page}/${total_page} 페이지)
 			</div>
-			<table class="exhibit-table">
+			<table class="total-table">
 				<thead>
 					<tr>
 						<th>승인번호</th>

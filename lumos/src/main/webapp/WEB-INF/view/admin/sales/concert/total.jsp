@@ -7,14 +7,13 @@
 %>
 <style type="text/css">
 .total-top {
-	width: 800px;
+	width: 1300px;
 	margin: 20px auto;
 	text-align: left;
-	border: 1px solid #eee;
 }
 
 .total-table {
-	width: 800px;
+	width: 1300px;
 	margin: 10px auto;
 	border-spacing: 0px;
 	border-collapse: collapse;

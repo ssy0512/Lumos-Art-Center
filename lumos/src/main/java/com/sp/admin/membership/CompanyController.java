@@ -118,7 +118,7 @@ public class CompanyController {
 		
 		String cp = req.getContextPath();
 		
-		int rows = 16;
+		int rows = 8;
 		int total_page = 0;
 		int dataCount = 0;
 		

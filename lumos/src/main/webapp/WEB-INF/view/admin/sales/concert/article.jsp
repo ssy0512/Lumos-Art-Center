@@ -6,39 +6,45 @@
 	String cp = request.getContextPath();
 %>
 <style type="text/css">
-.exhibit-article {
+.article {
 	margin: 50px auto;
-	width: 850px;
-	height: 740px;
+	width: 1300px;
+	height: 650px;
 	clear: both;
-	border: 1px solid #333333;
+	border-top: 3px solid #072659;
+	border-bottom: 3px solid #072659;
 	border-radius: 50px;
+	background-image: url("<%=cp%>/resource/images/lumos/sample4.png");
 }
-
-.exhibit-article-image {
-	margin: 20px 320px;
+.concertNum {
+	float: right;
+	margin: 25px 40px 20px 600px;
 }
-
-.exhibit-title {
-	width: 700px;
-	margin: 10px auto;
+.article-image {
+	margin: 80px 0px 80px 80px;
+	float: left;
+}
+.article-image img {
+	width: 300px; height: 400px;
+}
+.title {
+	width: 900px;
+	margin: 30px auto;
+	float: left;
 	border-spacing: 0px;
 	border-collapse: collapse;
 }
-
-.exhibit-table {
+.article table {
 	width: 700px;
-	margin: 10px auto;
+	margin: 20px auto;
+	float: left;
+	line-height: 50px;
 	border-spacing: 0px;
 	border-collapse: collapse;
 }
-
-.exhibit-table tr, td {
+.article table tr, td {
 	height: 30px;
 	text-align: center;
-}
-.exhibit-table tr {
-	border-bottom: 1px solid #072659;
 }
 
 /* 버튼 css */
@@ -108,47 +114,47 @@
 }
 </style>
 <div class="body-right" style="width: 1380px; height: 800px; margin: 0;">
-	<div class="exhibit-article">
-		<div style="float: right; margin: 25px 40px 20px 600px;">공연번호
-			No.${dto.concertNum}</div>
-		<div class="exhibit-article-image">
-			<img
-				src="https://cdn.pixabay.com/photo/2015/02/02/15/28/bar-621033_960_720.jpg"
-				style="width: 220px; height: 220px; border-radius: 110px;">
+	<div class="article">
+		<div class="concertNum">공연번호 No.${dto.concertNum}</div>
+		<div class="article-image">
+			<c:if test="${not empty dto.conProfileImage}">
+				<img src="<%=cp %>/uploads/image/${dto.conProfileImage}">
+			</c:if>
+			<c:if test="${empty dto.conProfileImage}">
+				<img src="<%=cp %>/resource/images/lumos/noposter.png" style="border: 1px solid #eeeeee;">
+			</c:if>
 		</div>
-		<table class="exhibit-title">
+		<table class="title">
 			<tr>
 				<td style="font-size: 20pt;">${dto.concertName}</td>
 			</tr>
 		</table>
 		<br>
-		<table class="exhibit-table">
+		<table>
 			<tr>
-				<th colspan="2">주최</th>
+				<th>주최</th>
 				<td>${dto.host}</td>
+			</tr>
+			<tr>
 				<c:if test="${dto.host!='lac' && not empty dto.supervise}">
-					<th colspan="2">주관</th>
+					<th>주관</th>
 				</c:if>
 				<c:if test="${dto.host!='lac' && not empty dto.supervise}">
 					<td>${dto.supervise}</td>
 				</c:if>
+			</tr>
+			<tr>
 				<th>공연장</th>
 				<td>${dto.hallName}</td>
 			</tr>
-		</table>
-		<table class="exhibit-table">
 			<tr>
-				<th style="width: 230px;">공연일정</th>
-				<td style="width: 300px;">${dto.concertStart}~${dto.concertEnd}</td>
+				<th>공연일정</th>
+				<td>${dto.concertStart}~${dto.concertEnd}</td>
 			</tr>
-		</table>
-		<table class="exhibit-table">
 			<tr>
-				<th style="min-width: 190px;">가격</th>
+				<th>가격</th>
 				<td>${dto.seatPriceList}</td>
 			</tr>
-		</table>
-		<table class="exhibit-table">
 			<tr>
 				<th>총매출</th>
 				<td>${totalSum}</td>

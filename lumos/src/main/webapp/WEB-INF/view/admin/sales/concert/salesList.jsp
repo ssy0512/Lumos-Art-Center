@@ -6,11 +6,11 @@
    String cp = request.getContextPath();
 %>
 <style type="text/css">
-.sales-top {
-	margin: 20px 0;
-	width: 1380px;
+.top {
+	margin-top: 15px;
 }
 .salesList-main {
+	margin-top: 20px;
 	width: 1380px;
 	clear: both;
 	font-size: 12pt;
@@ -20,7 +20,6 @@
 	text-align: center;
 	border-spacing: 0px;
 	border-collapse: collapse;
-	overflow: hidden;
 }
 .salesList-main-table thead {
 	border-top: 1px solid #072659;
@@ -32,18 +31,21 @@
 .salesList-main-table tbody tr {
 	height: 41px;
 	border-bottom: 1px solid #cccccc;
+	overflow: hidden;
 }
 .salesList-main-table tbody tr:hover {
 	cursor: pointer;
+}
+.bottom-dataCount {
+	margin: 20px 0;
+	width: 1380px;
 }
 </style>
 
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<c:if test="${dataCount!=0}">
-		<div class="sales-top">
-			<div class="sales-top-page">
-				전체 ${dataCount} (${page}/${total_page} 페이지)
-			</div>
+		<div class="top">
+			<img src="<%=cp %>/resource/images/lumos/adminSalesConcert.png">
 		</div>
 		
 		<div class="salesList-main">
@@ -63,7 +65,7 @@
 					<c:forEach var="dto" items="${list}">
 						<tr onclick="location.href='<%=cp%>/admin/sales/concert/article?page=${page}&concertNum=${dto.concertNum}';">
 							<td>${dto.concertNum}</td>
-							<td>${dto.concertName}</td>
+							<td style="width: 350px;">${dto.concertName}</td>
 							<td>${dto.concertStart} ~ ${dto.concertEnd}</td>
 							<td>${dto.genre}</td>
 							<td>${dto.host}</td>
@@ -73,6 +75,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
+		<div class="bottom-dataCount">
+			전체 ${dataCount} (${page}/${total_page} 페이지)
 		</div>
 	</c:if>
 	
