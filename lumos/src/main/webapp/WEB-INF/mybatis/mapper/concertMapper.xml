@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="listHall" resultType="String">
-		SELECT hallName FROM concertHall 
+		SELECT hallName FROM concertHall ORDER BY hallNum asc
 	</select>
 	
 	

@@ -93,10 +93,10 @@
                         <include refid="where-list"/>
                     </if>
                     <![CDATA[
-                        AND (eventNum > #{eventNum})
+                        AND (eventWin > #{eventWin})
                     ]]>
                 </where>
-                ORDER BY eventNum ASC
+                ORDER BY eventWin ASC
             ) tb WHERE ROWNUM=1
     </select>
 
@@ -109,10 +109,10 @@
                               <include refid="where-list"/>
                          </if>
                        <![CDATA[
-                         AND (eventNum < #{eventNum})
+                         AND (eventWin < #{eventWin})
                          ]]>
                     </where>
-                ORDER BY eventNum DESC
+                ORDER BY eventWin DESC
             ) tb WHERE ROWNUM=1
     </select>
 	
