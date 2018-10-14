@@ -57,7 +57,7 @@ $(function () {
 		
 		$('#inst-dialog').dialog({
 			  modal: true,
-			  height: 800,
+			  height: 600,
 			  width: 700,
 			  title: '강사 소개',
 			  close: function(event, ui) {
@@ -173,21 +173,21 @@ $(function () {
      		<c:if test="${! empty dto.instPhotoImage}">
      			<img src="<%=cp%>/uploads/image/${dto.instPhotoImage}" style="width: 180px; height: 180px; margin: 10px;">
 	     	</c:if>
-	     	<div style="width: 450px; float: right; padding: 10px;">	
-	     		<p style="padding-bottom: 110px;  font-size: 20px; font-weight: 600;">${dto.instName}</p>
+	     	<div style="width: 450px; height:100%; float: right; padding: 10px;">	
+	     		<p style=" font-size: 20px; font-weight: 600;">${dto.instName}</p>
 	     		<p>${dto.birth}</p>
-	     		<p>${dto.tel}</p>
+	     		<div style="padding-top: 20px;">	
+		     		<p style=" font-size: 20px; font-weight: 400;">PROFILE</p>
+		     		<c:if test="${empty dto.profile}">
+		     			<p>등록된 정보가 없습니다.</p>
+		     		</c:if>
+		     		<c:if test="${! empty dto.profile}">
+		     			<p>${dto.profile}</p>
+		     		</c:if>
+     			</div>
 	     	</div>
      	</div>
-     	<div style="padding: 20px;">	
-     		<p style="padding-bottom: 20px; font-size: 20px; font-weight: 600;">PROFILE</p>
-	     		<c:if test="${empty dto.profile}">
-	     			<p>등록된 정보가 없습니다.</p>
-	     		</c:if>
-	     		<c:if test="${! empty dto.profile}">
-	     			<p>${dto.profile}</p>
-	     		</c:if>
-     	</div>
+
      </form>
      </div>
 </div>

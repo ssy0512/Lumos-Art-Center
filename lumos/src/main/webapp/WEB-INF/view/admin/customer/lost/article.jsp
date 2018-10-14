@@ -55,56 +55,56 @@ $(document).ready(function(){
 			  
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실자명</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실자명</td>
 			      <td style="padding-left:10px;"> 
 			        ${dto.lostPerson}
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실물품</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실물품</td>
 			      <td style="padding-left:10px;"> 
 			        ${dto.lostName}
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전화번호</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">전화번호</td>
 			      <td style="padding-left:10px;"> 
 			        ${dto.tel}
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">이메일</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">이메일</td>
 			      <td style="padding-left:10px;"> 
 			         ${dto.email}
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실일자</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실일자</td>
 			      <td style="padding-left:10px;"> 
 			        ${dto.lostDate}
 			      </td>
 			  </tr>
 			  
 			 <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실장소</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실장소</td>
 			      <td style="padding-left:10px;"> 
 			        ${dto.lostPlace}
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">내용</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">내용</td>
 			      <td style="padding-left:10px;"> 
 			        ${dto.content}
 			      </td>
 			  </tr>
 			  
 			   <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">처리상태</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">처리상태</td>
 			      <td style="padding-left:10px;"> 
 			        <select style="width:150px" name="selectStatus" id="selectStatus" class="selectField">
 		                <option value="1">접수</option>

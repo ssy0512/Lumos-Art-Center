@@ -12,7 +12,7 @@ function deleteAcademies(){
 	var academyNum="${dto.academyNum}";
 	var page="${page}";
 	var query="academyNum="+academyNum+"&page="+page;
-	var url="<%=cp%>/admin/academySchedule/delete?"+query;
+	var url="<%=cp%>/admin/menu2/academySchedule/delete?"+query;
 	
 	if(confirm("이 강의를 삭제 하시겠습니까?"))
 		location.href=url;
@@ -24,7 +24,7 @@ function updateAcademies(){
 	var academyNum="${dto.academyNum}";
 	var page="${page}";
 	var query = "academyNum="+academyNum+"&page="+page;
-	var url="<%=cp%>/admin/academySchedule/update?"+query; 
+	var url="<%=cp%>/admin/menu2/academySchedule/update?"+query; 
 	
 	location.href=url;
 	if(success)
@@ -34,10 +34,10 @@ function updateAcademies(){
 <div class="exhibit_detail">
 	<div class="wrap">
 		<div class="pageTitleAndButton">
-			<span>공연 상세 정보</span>
+			<span>강의 상세 정보</span>
 			<c:if test="${sessionScope.member.userId=='admin'}">
-				<button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/admin/menu2/concertSchedule/created2';">
-					공연 회차 관리
+				<button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/admin/menu2/academySchedule/academylist';">
+					목록으로
 				</button>
 			</c:if>
 			<%-- <c:if test="${sessionScope.member.userId!='admin'}">
@@ -49,12 +49,12 @@ function updateAcademies(){
 		</div>
 		<div class="poster left">
 			<c:if test="${not empty dto.acProfileImage }">
-				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.acProfileImage}">
+				<img class="list_image_crop" src="<%=cp %>/uploads/image/${dto.acProfileImage}">
 			</c:if>
 			<c:if test="${empty dto.acProfileImage }">
 				<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/noposter.png">
 			</c:if>
-			<div class="updateButtonDiv" onclick="updateAcademy();">
+			<div class="updateButtonDiv" onclick="updateAcademies();">
 				<a>수정하기</a>
 			</div>
 		</div>

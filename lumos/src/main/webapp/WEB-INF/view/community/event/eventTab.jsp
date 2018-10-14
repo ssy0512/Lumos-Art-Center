@@ -56,13 +56,31 @@ $(function () {
 	});
 });
 
-function searchList(page) {
+function searchList(pageNo) {
 	var url="<%=cp%>/community/event/past";
 	
-	var query="pageNo="+page;
+	var query="pageNo="+pageNo;
 	var search=$('form[name=searchForm]').serialize();
 	query=query+"&"+search;
-	ajaxHTML(url, "get", query);
+	$.ajax({
+		type:"get"
+		,url:url
+		,data:query
+		,success:function(data) {
+			$("#event_info").html(data);
+		}
+		,beforeSend : function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		location.href="<%=cp%>/member/login";
+	    		return;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+	//ajaxHTML(url, "get", query);
 }
 
 function ajaxHTML(url, type, query) {
@@ -77,7 +95,6 @@ function ajaxHTML(url, type, query) {
 			}else{
 				listPage(page);
 			}
-			$("#event_info").html(data);
 		}
 		,beforeSend : function(jqXHR) {
 	        jqXHR.setRequestHeader("AJAX", true);

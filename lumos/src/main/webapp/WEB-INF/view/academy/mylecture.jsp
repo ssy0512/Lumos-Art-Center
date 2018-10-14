@@ -38,9 +38,8 @@ $(function () {
 			this.reset();
 		});
 		
-		$("#dlgmode").val("insert");
-		$("#btnProductSendOk").text("등록하기");
-		$("#btnProductSendCancel").text("등록취소");
+		$("#apply").text("결제하기");
+		$("#close").text("등록취소");
 		
 		$('#apply-dialog').dialog({
 			  modal: true,
@@ -53,23 +52,29 @@ $(function () {
 	});
 });
 
+//대화상자 닫기
+$(function(){
+	$("#close").click(function(){
+		$('#apply-dialog').dialog("close");
+	});
+});
+
 function sendOk() {
     var f = document.boardForm;
-    
+    var pat1=/[0-9]{4}/;
+   
 	var $product=$("#form-cardNum").val();
     if(! $product) {
-        alert("제목을 입력하세요. ");
-        return;
-    }
-
-	str = f.content.value;
-    if(!str) {
-        alert("내용을 입력하세요. ");
-        f.content.focus();
+        alert("카드 번호를 입력하세요. ");
         return;
     }
     
-	f.action="<%=cp%>";
+    if(! /[0-9{4}]/i.test($product)) { 
+		alert("카드 번호는 숫자만 입력하세요.");
+		return;
+	}
+    
+	f.action="<%=cp%>/academy/compleate";
 
     f.submit();
 }
@@ -147,19 +152,19 @@ function sendOk() {
             	<table>
             		<tr>
             			<td class="font12" width="200px">강사</td>
-            			<td class="font12" style="width: 550px; font-weight: 600; text-decoration: none;">| &nbsp;${dto.instName}</td>
+            			<td class="font12" style="width: 550px; text-decoration: none;">| &nbsp;${dto.instName}</td>
             		</tr>
             		<tr>
             			<td class="font12" width="200px">요일.시간</td>
-            			<td class="font12" style="width: 550px; font-weight: 600; text-decoration: none;">| &nbsp;(${dto.lectureDay}) ${dto.startTime}~${dto.endTime}</td>
+            			<td class="font12" style="width: 550px; text-decoration: none;">| &nbsp;(${dto.lectureDay}) ${dto.startTime}~${dto.endTime}</td>
             		</tr>	
             		<tr>
             			<td class="font12" width="200px">수강기간</td>
-            			<td class="font12" style="width: 550px; font-weight: 600; text-decoration: none;">| &nbsp;${dto.startDate}(${dto.lectureDay})~${dto.endDate}(${dto.lectureDay})</td>
+            			<td class="font12" style="width: 550px; text-decoration: none;">| &nbsp;${dto.startDate}(${dto.lectureDay})~${dto.endDate}(${dto.lectureDay})</td>
             		</tr>
             		<tr>
             			<td class="font12" width="200px">장소</td>
-            			<td class="font12" style="width: 550px; font-weight: 600; text-decoration: none;">| &nbsp;${dto.position} | ${dto.roomName}</td>
+            			<td class="font12" style="width: 550px; text-decoration: none;">| &nbsp;${dto.position} | ${dto.roomName}</td>
             		</tr>
             	</table>	
             </div>
@@ -261,7 +266,7 @@ function sendOk() {
 			      		<input type="radio" id="c4" name="cardCom" value="KB카드"><label for="c4" style="padding-right: 25px;"> KB카드</label> 
 						<input type="radio" id="c4" name="cardCom" value="우리카드"><label for="c4" style="padding-right: 25px;"> 우리카드</label>
 						<span style="padding-left: 15px;"></span> 
-						<select name="card">
+						<select name="card" class="selectField">
 						    <option value="">그 외의 카드</option>
 						    <option value="비씨카드">비씨카드</option>
 						    <option value="하나카드">하나카드</option>
@@ -279,10 +284,10 @@ function sendOk() {
 			            <label style="font-weight: 600; font-size: 12px;">카드번호</label>
 			      </td>
 			      <td colspan="3" width="200px" align="left" style="padding-left: 15px; border-top: 2px solid #434343;">
-			            <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
-			            - <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
-			            - <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
-			            - <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            <input type="text" name="product" id="form-cardNum" maxlength="4" class="applyTF" style="width: 65px; height: 25px; ">
+			            - <input type="text" name="product" id="form-cardNum" maxlength="4" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="password" name="product" id="form-cardNum" maxlength="4" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="password" name="product" id="form-cardNum" maxlength="4" class="applyTF" style="width: 65px; height: 25px;">
 			     	<span style="padding-left: 20px;">	
 			     		<select name="month">
 						    <option value="">할부개월</option>
@@ -307,13 +312,13 @@ function sendOk() {
 			            <label style="font-weight: 600; font-size: 12px;">CVC</label>
 			       </td>
 			       <td width="200px" align="left" style="padding-left: 15px; border-bottom: 2px solid #434343;">
-			            <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            <input type="password" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
 			       </td>      
 			  </tr>
 			  <tr>
 			  		<td colspan="4" width="350px" height="100px" align="center"> 
-			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px;" id="apply" onclick="sendOk();">결&nbsp;&nbsp;&nbsp;제</button>
-			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px; padding-left: 15px;" id="apply">취&nbsp;&nbsp;&nbsp;소</button>
+			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px;" id="apply" onclick="sendOk();">결제</button>
+			  			<button type="button" class="btn-Count" style="width: 100px; font-size: 13px; padding-left: 15px;" id="close" onclick="close();"></button>
 			  		</td>
 			  </tr>    
 			</table>

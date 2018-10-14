@@ -175,7 +175,7 @@ public class ExhibitsController {
 	}
 	
 	@RequestMapping(value="/admin/menu2/exhibitSchedule/created2",method=RequestMethod.POST)
-	public String createdOk (Exhibits dto) throws Exception {
+	public String createdOk2 (Exhibits dto) throws Exception {
 		service.insertprice(dto);
 		
 		return "redirect:/admin/menu2/exhibitSchedule/article";

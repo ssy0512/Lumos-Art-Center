@@ -8,11 +8,10 @@
 
 <div class="body-container" style="width: 700px;">
     <div class="body-title">
-		[공지 글보기 화면 입니다 ]
     <div>
     
 			<table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
-			<tr height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
+			<tr height="35" style="border-top: 1px solid #aa1717; border-bottom: 1px solid #aa1717;">
 			    <td colspan="2" align="center" >
 			    ${dto.noticeNum} .
 				${dto.title}
@@ -20,7 +19,7 @@
 			    </td>
 			</tr>
 			
-			<tr height="35" style="border-bottom: 1px solid #cccccc;">
+			<tr height="35" style="border-bottom: 1px solid #aa1717;">
 			    <td width="50%" align="left" style="padding-left: 5px;">
 			       이름 : ${dto.userId}
 			    </td>
@@ -29,7 +28,7 @@
 			    </td>
 			</tr>
 			
-			<tr style="border-bottom: 1px solid #cccccc;">
+			<tr style="border-bottom: 1px solid #aa1717;">
 			  <td colspan="2" align="left" style="padding: 10px 5px;" valign="top" height="200">
 			      ${dto.content}
 			   </td>
@@ -37,7 +36,7 @@
 			
 		
 			
-			<tr height="35" style="border-bottom: 1px solid #cccccc;">
+			<tr height="35" style="border-bottom: 1px solid #aa1717;">
 			    <td colspan="2" align="left" style="padding-left: 5px;">
 			       이전글 :
 			         <c:if test="${not empty preReadDto}">
@@ -46,7 +45,7 @@
 			    </td>
 			</tr>
 			
-			<tr height="35" style="border-bottom: 1px solid #cccccc;">
+			<tr height="35" style="border-bottom: 1px solid #aa1717;">
 			    <td colspan="2" align="left" style="padding-left: 5px;">
 			       다음글 :
 			         <c:if test="${not empty nextReadDto}">

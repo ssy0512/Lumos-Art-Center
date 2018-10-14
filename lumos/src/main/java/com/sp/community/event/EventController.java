@@ -318,6 +318,7 @@ public class EventController {
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
 		map.put("eventNum", eventNum);
+		map.put("eventWin", dto.getEventWin());
 	
 		Event preReadDto = service.preReadEvent(map);
 		Event nextReadDto = service.nextReadEvent(map);

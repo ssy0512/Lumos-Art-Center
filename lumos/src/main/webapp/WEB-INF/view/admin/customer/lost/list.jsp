@@ -7,7 +7,7 @@
 %>
 <style type="text/css">
 .concert-top {
-	width: 1200px; height: 50px; margin-top: 40px;
+	width: 1580px; height: 50px; margin-top: 40px;
 }
 .concert-top-page {
 	float: left; margin: 10px 0 0 7px;
@@ -17,7 +17,7 @@
 	align-content: center; text-align: center;
 }
 .concertlist-table {
-	width: 1200px; margin: 0px;
+	width: 1580px; margin: 0px;
 	border-spacing: 0px;
 	border-collapse: collapse;
 	overflow: hidden;
@@ -79,7 +79,7 @@
 	}
 </script>
 
-<div class="body-right" style="width: 1200px; height: 800px;">
+<div class="body-right" style="width: 1580px; height: 800px;">
 	<c:if test="${dataCount!=0}">
 		<div class="concert-top">
 			<div class="concert-top-page">
@@ -120,7 +120,7 @@
 				</tbody>
 			</table>
 			
-				<table style="width:1200px; margin:10px auto; border-spacing:0px">
+				<table style="width:1580px; margin:10px auto; border-spacing:0px">
 		<tr height="40">
 				<td align="left" width="100">
 					<button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/admin/customer/lost/main';">새로고침</button>
@@ -131,7 +131,7 @@
 	</c:if>
 
 	<div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-		<c:if test="${dataCount==0}">등록된 전시가 없습니다.</c:if>
+		<c:if test="${dataCount==0}">등록된 유실물 접수가 없습니다.</c:if>
 		<c:if test="${dataCount!=0}">${paging}</c:if>
 	</div>
 </div>

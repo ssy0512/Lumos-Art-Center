@@ -113,7 +113,7 @@
 			            <input type="text" name="searchValue" class="boxTF" style="width:480px;height:33px;">
 			            <!-- 엔터키 막기 -->
 			            <input type="text" style="display:none;">
-			            <button type="button" class="adBtn" onclick="searchList(1);" style="float:none;">검색</button>
+			            <button type="button" class="adBtn" onclick="searchList(${pageNo});" style="float:none;">검색</button>
 			        </form>
 			      </td>
 		   		</tr>
