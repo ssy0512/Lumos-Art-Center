@@ -172,4 +172,15 @@ public class ExhibitServiceImpl implements ExhibitService{
 		}
 		return list;
 	}
+
+	@Override
+	public int getUsableMileage(String userId) {
+		int result=0;
+		try {
+			result=dao.selectOne("exhibit.getUsableMileage",userId);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }

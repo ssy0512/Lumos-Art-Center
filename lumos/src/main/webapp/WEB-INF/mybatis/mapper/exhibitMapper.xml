@@ -74,4 +74,9 @@
 		WHERE ep.exhibitNum=#{num} 
 		ORDER BY ep.audienceLevelNum ASC
 	</select>
+	
+	<select id="getUsableMileage" parameterType="String"  resultType="Integer">
+		SELECT totalMileage FROM MILEAGE WHERE userId=#{userId}
+	</select>
+
 </mapper>

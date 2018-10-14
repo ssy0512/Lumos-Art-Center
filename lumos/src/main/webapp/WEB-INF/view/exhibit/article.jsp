@@ -114,7 +114,7 @@ $(function () {
 					전시 상세정보 관리
 				</button>
 			</c:if>
-			<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.membertype=='개인회원'}">
+			<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.membertype=='개인 회원'}">
 				<button type="button" class="btnSendInterest">
 					<img src="<%=cp %>/resource/images/lumos/pick_icon.png" style="margin-bottom: 3px;">
 					<span style="display:inline-block; margin-top: 2px;"></span>

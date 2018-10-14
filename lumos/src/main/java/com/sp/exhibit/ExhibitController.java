@@ -1,5 +1,6 @@
 package com.sp.exhibit;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -268,6 +269,7 @@ public class ExhibitController {
 			HttpSession session,
 			Model model) throws Exception {
 		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		Exhibit dto = exhibitService.readBoard(num);
 		if(dto==null) {
 			return "redirect:/exhibit/main";
@@ -285,9 +287,43 @@ public class ExhibitController {
 		}
 		
 		List<Exhibit> audienceList = exhibitService.audienceList(num);
-		
+		int mile = exhibitService.getUsableMileage(info.getUserId());
 		model.addAttribute("audienceList", audienceList);
 		model.addAttribute("dto", dto);
+		model.addAttribute("mile", mile);
 		return ".exhibit.book.form";
+	}
+	
+	@RequestMapping(value = "/bookExhibit/pay", method = RequestMethod.POST)
+	public String calPrice(
+			@RequestParam String customers,
+			@RequestParam int total,
+			@RequestParam(value="discount", defaultValue="0") int discount,
+			@RequestParam int num,
+			HttpServletRequest req,
+			HttpSession session, Model model) throws Exception {
+		
+		//SessionInfo info = (SessionInfo) session.getAttribute("member");
+		if (req.getMethod().equalsIgnoreCase("GET")) {
+			customers = URLDecoder.decode(customers, "UTF-8");
+		}
+		Exhibit dto = exhibitService.readBoard(num);
+		if(dto==null) {
+			return "redirect:/exhibit/main";
+		}
+		
+		model.addAttribute("dto",dto);
+		model.addAttribute("customers",customers);
+		model.addAttribute("total",total);
+		model.addAttribute("discount",discount);
+		
+		return ".exhibit.book.last";
+	}
+	
+	
+	@RequestMapping(value = "/exhibit/book/finish", method = RequestMethod.GET)
+	public String bookfinish(
+		){
+		return ".exhibit.book.finish";
 	}
 }

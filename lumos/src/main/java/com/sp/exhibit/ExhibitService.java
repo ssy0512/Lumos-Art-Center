@@ -17,4 +17,5 @@ public interface ExhibitService {
 	public int updateExReview(ExReview dto);
 	public int insertExReview(ExReview dto);
 	public List<Exhibit> audienceList(int num);
+	public int getUsableMileage(String userId);
 }

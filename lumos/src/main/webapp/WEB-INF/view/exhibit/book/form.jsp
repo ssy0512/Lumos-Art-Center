@@ -17,7 +17,7 @@ $(function(){ //숫자만 입력토록 함.
 		$("input.form01").each(function () {
 			sum+=$(this).val()*1;
 		});
-		$("#total").html(sum);
+		$("#totalcount").html(sum);
 	}); 
 
 	$("input").keypress(function(evt) {
@@ -34,8 +34,8 @@ $(function(){ //숫자만 입력토록 함.
 		});
 	});
 	
-	function asd() {
-		if($("#total").html()!=0){
+	function go2() {
+		if($("#totalcount").html()!=0){
 			$("#step1").css("display","none");
 		}
 		
@@ -53,33 +53,35 @@ $(function(){ //숫자만 입력토록 함.
 			out+="<tr>";
 			out+="<td class='selectList' colspan='4'>"+sl+" 선택하셨습니다.</td>";
 			out+="</tr>";			
-			$("#second table").html(out);
+			$("#step2 table").html(out);
 		}
 		
 		out="";
 		$("input.form01").each(function () {
-			var total = $("#total").html()*1;
+			var totalcount = $("#totalcount").html()*1;
 			var count = $(this);
 			var price = $(this).attr("data-price");
 			var level = $(this).attr("data-al");
 			if($(this).val()!=0&&$(this).val()!=""){
-				out+="					<tr>";
+				$("#step2").css("display","unset");
+				$("#step3").css("display","unset");
+				out+="					<tr class='pricetr' data-type='df' data-level="+level+" data-p="+price+">";
 				out+="						<th width='70' class='head bb' rowspan='2'>"+$(this).attr("data-name")+"</th>";
 				out+="						<td width='100'>기본가</td>";
 				out+="						<td width='50' class='mn'>"+Number(price).toLocaleString('en')+"원</td>";
 				out+="						<td width='50' class='box'>";
-				out+="							<select id='"+level+"normalP' name='normalP' onchange='selP();'>";
+				out+="							<select id='"+level+"normalP' name='normalP' onchange='selP("+level+");'>";
 					for(var i=0;i<=count.val();i++){
 				out+="									<option value='"+i+"'>"+i+"매</option>";
 					}
 				out+="							</select>";
 				out+="						</td>";
 				out+="					</tr>";
-				out+="					<tr class='bb'>";
+				out+="					<tr class='bb pricetr' data-type='dc' data-level="+level+" data-p="+(price/2)+">";
 				out+="						<td>국가유공자/장애인 할인가 (본인 50% 할인)</td>";
 				out+="						<td class='mn'>"+Number(price/2).toLocaleString('en')+"원</td>";
 				out+="						<td class='box'>";
-				out+="							<select id='"+level+"halfP' name='halfP' onchange='selP();'>";
+				out+="							<select id='"+level+"halfP' name='halfP' onchange='selP("+level+");'>";
 				for(var i=0;i<=count.val();i++){
 					out+="							<option value='"+i+"'>"+i+"매</option>";
 				}
@@ -88,15 +90,54 @@ $(function(){ //숫자만 입력토록 함.
 				out+="					</tr>";
 			}
 		});
-		$("#second table").append(out);
+		$("#step2 table").append(out);
 	}
 	
-	function selP() {
-		alert($(this).parent().parent().find("td select").eq(0).val());
-		alert($(this).parent().parent().find("td select").eq(1).val());
+	function selP(level) {
+		//alert($("#"+level+"normalP").val());
 	}
+	
+	function gogo() {
+		var tsum=0;
+		var p, count;
+		
+		var customers="";
+		var total=0;
+		$("input.form01").each(function () {
+			if($(this).val()!=0&&$(this).val()!=""){
+				customers+=$(this).attr("data-name");
+				customers+=" "+$(this).val()+"매,"
+				total+=$(this).attr("data-price")*$(this).val();
+			}
+		});
+		if(customers.length!=0){
+			customers=customers.substring(0,customers.length-1);
+		}
+		
+		var discount=0;
+		$("#step2 .pricetr").each(function () {
+			p = $(this).attr("data-p");
+			count=$(this).find("select").val();
+			tsum+=(p*count);
+		});
+		tsum-=$("#useMile").val();
+		discount=total-tsum;
+		
+		$("#customers").val(customers);
+		$("#total").val(total);
+		$("#discount").val(discount);
+		
+		var f = document.payForm;
+		f.submit();
+	}
+	
 </script>
-
+<form name="payForm" action="<%=cp%>/bookExhibit/pay" method="post">
+	<input type="hidden" id="customers" name="customers" value="">
+	<input type="hidden" id="total" name="total" value="">
+	<input type="hidden" id="discount" name="discount" value="">
+	<input type="hidden" name="num" value="${dto.exhibitNum}">
+</form>
 <div>
 	<div class="wrap">
 		<div class="titleDiv">
@@ -173,7 +214,7 @@ $(function(){ //숫자만 입력토록 함.
 							</tr>
 							<tr>
 								<td colspan="${als.count*2}" style="text-align: right; padding-right: 10px;">
-									총 <span id="total">0</span>매 선택
+									총 <span id="totalcount">0</span>매 선택
 								</td>
 							</tr>
 						</c:if>
@@ -181,20 +222,48 @@ $(function(){ //숫자만 입력토록 함.
 				</table>
 				
 				<div style="clear: both;height: 30px;display: block;"></div>
-				<button onclick="asd();">다음으로</button>
-				
+				<div style="width:250px; margin: 0 auto;">
+				<button style="margin-right: 10px; float: left;" 
+					onclick="location.href='<%=cp %>/exhibit/article?num=${dto.exhibitNum}'">취소하기</button>
+				<button style="float: left;" onclick="go2();">다음으로</button>
+				</div>
 
 			</div>
-			<div id="second">
+			<div id="step2" style="display: none;">
 				<h2 class="linet" style="font-weight: 300;">가격 선택</h2>
-				<table style="width: 100%;" class="pricetable">
+				<table style="width: 100%;margin-bottom: 30px;" class="pricetable">
 				</table>
 			</div>
 			
 			<div style="clear: both;height: 30px;display: block;"></div>
 			
+			<div id="step3" style="display: none;">
+				<h2 class="linet" style="font-weight: 300;">마일리지 사용</h2>
+				<table style="width: 100%;" class="pricetable">
+					<tr class="bb bt">
+						<td width="174px" style="background-color: #eee;">사용 마일리지</td>
+						<td style="text-align: right;" width="600">
+							<input type="text" id="useMile" value="0">P</td>
+						<td style="text-align: right;" >사용가능 마일리지 : ${mile}</td>
+					</tr>
+				</table>
+				
+				<h2 class="linet" style="font-weight: 300; margin-top: 30px;">결제 수단</h2>
+				<table style="width: 100%;margin-bottom: 30px;" class="pricetable">
+					<tr class="bb bt">
+						<td style="text-align: left; background-color: #eee;">
+						<input type="radio" checked="checked">신용카드</td>
+					</tr>
+				</table>
+				<div style="width:250px; margin: 0 auto;">
+				<button style="margin-right: 10px; float: left;" 
+					>이전으로</button>
+				<button style="float: left;" onclick="gogo();">결제하기</button>
+				</div>
+			</div>
+			
 			<div class="war" style="clear: both;">
-				<h2 style="font-weight: 300;">유의사항</h2>
+				<h2 style="font-weight: 300; margin-top: 30px;">유의사항</h2>
 				- 증빙이 필요한 할인 (장애인, 국가유공자 등)을 받은 경우, 해당자 본인이 직접 증빙 자료를 제시해야 하며 미지참시 할인받은 만큼 차액을 지불해야 합니다.<br>
 - 예매 변경은 결제 건을 취소 후 재예매하는 절차이므로 환불과 동일한 수수료가 부과됩니다. (할인은 재예매 시점에 적용되는 할인율로만 적용 가능합니다.)<br>
 - 취소수수료와 취소 가능 일자는 상품별로 다르니, 오른쪽 하단 My예매정보를 확인해주시기 바랍니다.<br>
@@ -205,3 +274,4 @@ $(function(){ //숫자만 입력토록 함.
 		</div>
 	</div>
 </div>
+

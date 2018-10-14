@@ -127,8 +127,30 @@
 	border-bottom: 1.5px solid gray!important;
 }
 
+.bt{
+	border-top: 1.5px solid gray!important;
+}
+
 .selectList {
 	background-color: #a6a6a6;
 	font-weight: bold;
 	padding-left: 15px!important;
+}
+
+button {
+	width: 120px;
+	height : 33px;
+    color: #ffffff;
+    font-weight: 700;
+    float: right;
+    border: 1px solid #aa1717;
+    background-color: #aa1717;
+    border-radius: 4px;
+    margin-bottom: 15px;	
+}
+
+
+button:hover {
+	color: #aa1717;
+	background-color: #ffffff;
 }
