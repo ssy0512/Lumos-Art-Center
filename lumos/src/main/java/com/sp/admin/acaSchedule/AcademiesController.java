@@ -219,7 +219,7 @@ public class AcademiesController {
 	public String createdOk (Academies dto,HttpSession session) throws Exception {
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"images";
+		String pathname=root+"uploads"+File.separator+"image";
 		service.insertAcademies(dto, pathname);
 		
 		return "redirect:/admin/menu2/academySchedule/academylist";
@@ -257,7 +257,7 @@ public class AcademiesController {
 							@RequestParam String page, HttpSession session) throws Exception{
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"upload"+File.separator+"photo";
+		String pathname=root+"uploads"+File.separator+"image";
 		service.deleteAcademies(academyNum, pathname);
 	
 		return "redirect:/menu2/academySchedule/academylist?page="+page;

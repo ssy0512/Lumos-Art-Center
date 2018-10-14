@@ -61,7 +61,7 @@
 </update>
 
 <select id="readAcademies" parameterType="Integer" resultType="com.sp.admin.acaSchedule.Academies">
-	SELECT academyNum, academyName,startDate,endDate,totalCount,a.roomNum,roomName,a.instNum,instName,startTime,endTime,
+	SELECT academyNum, academyName,to_char(startDate,'YYYY-MM-DD') startDate,to_char(endDate,'YYYY-MM-DD') endDate,totalCount,a.roomNum,roomName,a.instNum,instName,startTime,endTime,
 				price,lectureDay, acProfileImage 
 				FROM academy a
 				JOIN roomInfo r ON a.roomNum=r.roomNum

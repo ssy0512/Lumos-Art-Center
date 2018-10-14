@@ -106,22 +106,23 @@
  
 <div class="body-right" style="width: 700px; padding-top:50px; padding-left:30px">
     <div class="body-title" >
-        <h3><span style="font-family: Webdings">2</span> 강의 일정 등록 </h3>
-        <hr>
+         <div class="top">
+			<img src="<%=cp %>/resource/images/lumos/aca.JPG">
+		</div>
     </div>
     
     <div style="clear:both;">
 			<form name="createdForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의명</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">강의명</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="academyName" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.academyName}">
 			      </td>
 			  </tr>
 			
 			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의실 선택</td>
+		      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">강의실 선택</td>
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="roomNum" id="listRoom">
 		      	<c:forEach var="vo" items="${listRoom}">
@@ -133,7 +134,7 @@
 		  </tr>
 		  
 		  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강사 선택</td>
+		      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">강사 선택</td>
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="instNum" id="listInst">
 		      	<c:forEach var="vo" items="${listInst}">
@@ -144,7 +145,7 @@
 		      </td>
 		  </tr>
   		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의시작일</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">강의시작일</td>
 			      <td style="padding-left:10px;"> 
 			            <input type="text" id="regDate" name="startDate" readonly="readonly" value="${dto.startDate}"><button></button>
 			            ~
@@ -153,7 +154,7 @@
 			  </tr>
 			  
 		<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의일자</td>
+		      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">강의일자</td>
 		      <td style="padding-left:10px;"> 
 		      <select class="selectField" name="lectureDay">
 		      	<option value="">::선택::</option>
@@ -167,31 +168,31 @@
 		      </td>
 		  </tr>			
 			<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">시작시간</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">시작시간</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="startTime" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.startTime}">
 			      </td>
 			  </tr>
 			  	<tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">종료시간</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">종료시간</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="endTime" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.endTime}">
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">가&nbsp;&nbsp;격</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">가&nbsp;&nbsp;격</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="price" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.price}">원
 			      </td>
 			  </tr>
 			  	  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">모집인원</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center;color:#fff;">모집인원</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="totalCount" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.totalCount}">명
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강의이미지</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">강의이미지</td>
 			      <td style="padding-left:10px;"> 
 			          <input type="file" name="upload" class="boxTF" size="53"
 			                     accept="image/*" 
