@@ -121,35 +121,35 @@
 			  
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실물품</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실물품</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="subject" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.exhibitName}">
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실장소</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실장소</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="subject" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.exhibitName}">
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">내용</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">내용</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="subject" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.exhibitName}">
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실일자</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실일자</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" id="regDate" name="exhibitStart" readonly="readonly" value="${dto.concertStart}"><button></button>
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실일자</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실일자</td>
 			      <td style="padding-left:10px;"> 
 			      	<br/>
 			        <textarea name="content" id="content" style="width: 97%; height: 150px;">${dto.content}</textarea>

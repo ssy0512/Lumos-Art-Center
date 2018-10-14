@@ -150,14 +150,14 @@ $(function(){
 			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tbody id="tb">
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;" >분실자명</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;" >분실자명</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="lostPerson" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.lostPerson}" >
 			      </td>
 			  </tr>
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실품목</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실품목</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="lostName" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.lostName}" placeholder = "예)가방,파우치,안경...">
 			      </td>
@@ -165,7 +165,7 @@ $(function(){
 			  
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전화번호</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">전화번호</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" id="tel" name="tel" onkeyup="checkPhoneNumber()" class="boxTF" maxlength="13">
 			      </td>
@@ -173,7 +173,7 @@ $(function(){
 			  
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">이메일</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">이메일</td>
 			      <td style="padding-left:10px;"> 
 			        <p style="margin-top: 1px; margin-bottom: 5px;">
 			            <select name="selectEmail" id="selectEmail" onchange="changeEmail();" class="selectField">
@@ -196,7 +196,7 @@ $(function(){
 			 
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실일자</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실일자</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" id="regDate" name="lostDate" readonly="readonly"><button></button>
 			      </td>
@@ -204,7 +204,7 @@ $(function(){
 			  
 			  
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">분실장소</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center;">분실장소</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="lostPlace" maxlength="100" class="boxTF" 
 			        style="width: 95%;" value="${dto.lostPlace}" placeholder = "예)제1전시장 입구 맞은편 벤치 ">
@@ -212,7 +212,7 @@ $(function(){
 			  </tr>
 			  
 			  <tr align="left" style="border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center; padding-top:5px;" valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
+			      <td width="100" bgcolor="#fafafa" style="text-align: center; padding-top:5px;" valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
 			      <td valign="top" style="padding:5px 0px 5px 10px;"> 
 			        <textarea name="content" rows="12" class="boxTA" style="width: 95%;">${dto.content}</textarea>
 			      </td>

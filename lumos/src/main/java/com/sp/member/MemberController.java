@@ -331,7 +331,8 @@ public class MemberController {
 		{
 
 		}
-		return".mainMainLayout";
+		//return ".mainMainLayout";
+		return "redirect:/";
 	}
 
 
