@@ -135,7 +135,10 @@ function updateInstructor() {
 					<th>전화번호</th>
 					<td>${dto.tel}</td>
 				</tr>
-				
+				<tr>
+					<th>강사이력</th>
+					<td>${dto.profile}</td>					
+				</tr>
 			</table>
 	<br>
 	
