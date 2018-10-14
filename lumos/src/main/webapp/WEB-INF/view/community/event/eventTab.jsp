@@ -74,11 +74,37 @@ function ajaxHTML(url, type, query) {
 			if($.trim(data)=="error") {
 				listPage(1);
 				return;
+			}else{
+				listPage(page);
 			}
 			$("#event_info").html(data);
 		}
 		,beforeSend : function(jqXHR) {
 	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		location.href="<%=cp%>/member/login";
+	    		return;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+function listPage(page) {
+	var url="<%=cp%>/community/event/past";
+	var query="pageNo="+page;
+	
+	$.ajax({
+		type:"get"
+		,url:url
+		,data:query
+		,success:function(data) {
+			$("#event_info").html(data);
+		}
+	    ,beforeSend :function(jqXHR) {
+	    	jqXHR.setRequestHeader("AJAX", true);
 	    }
 	    ,error:function(jqXHR) {
 	    	if(jqXHR.status==403) {
@@ -104,8 +130,6 @@ function articleBoard(num, page) {
 </script>
 
 <div class="body-container" style="width:100%">
-<%-- 	<img src="<%=cp %>/resource/images/lumos/concertHall.jpg" style="min-width: 1438px;
-    max-width: 100%;"> --%>
 <div class="placewrap" style="width:100%">
 	<div class="wrap">
 		<ul>

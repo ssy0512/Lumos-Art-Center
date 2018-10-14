@@ -33,10 +33,10 @@ function check() {
 <div class="exhibit_detail" style="min-height:450px;">
 	<div class="wrap">
 		<div class="pageTitleAndButton">
-			<span>이벤트 등록</span>
+			<span>이벤트 수정</span>
 		</div>
 		<div class="poster left">
-			<img class="list_image_crop" src="<%=cp %>/resource/images/lumos/${dto.saveFilename}">
+			<img class="list_image_crop" src="<%=cp %>/uploads/image/${dto.saveFilename}">
 		</div>
 		<div class="content right" style="min-height:350px;">
 			<table class="detail_inform">
@@ -58,7 +58,7 @@ function check() {
 					<tr style="height:40px">
 						<th>이벤트 방식</th>
 						<td>
-							<div class="selectOption" style="margin-top:50px;">
+							<div class="selectOption">
 								<c:if test="${dto.selectOption == 'reply' }">
 									<p  style="border-color: #fd8424;color: #fd8424;">
 										댓글 이벤트</p>

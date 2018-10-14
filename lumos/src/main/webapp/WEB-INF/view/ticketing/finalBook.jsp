@@ -37,28 +37,57 @@ $(function () {
 			  close: function(event, ui) {
 			  }
 		});
+	$("#close").madal("hide");
 	});	
 	
-	$("#close").madal("hide");
 });
 
 function sendOk() {
-    var f = document.boardForm;
-    
-	var $product=$("#form-cardNum").val();
-    if(! $product) {
-        alert("제목을 입력하세요. ");
-        return;
+	var d = new Date();
+	var year = d.getFullYear()
+	year = year.toString().substr(2,3);
+    var f = document.applyForm;
+    var str=0;
+   	$("input[type=radio]:checked").each(function(){
+   		str++;
+   	});
+    var chk = $("#card option:selected").val();
+    if(!(str==1&&!chk)&&!(str==0&&chk)){
+    	alert("카드종류를 선택해주세요.");
+    	return;
     }
-
-	str = f.content.value;
-    if(!str) {
-        alert("내용을 입력하세요. ");
-        f.content.focus();
-        return;
+    if(str!=0&&chk){
+    	alert("카드종류를 하나만 선택해주세요.");
+    	return;
     }
     
-	f.action="<%=cp%>";
+    var text1 = $("input[name=product1]").val().length;
+    var text2 = $("input[name=product2]").val().length;
+    var text3 = $("input[name=product3]").val().length;
+    var text4 = $("input[name=product4]").val().length;
+    if(!(text1==4 && text2==4 && text3==4 && text4==4)){
+    	alert("카드번호가 잘못 입력되었습니다.");
+    	return;
+    }
+    
+    text1 = $("#form-cardNum5").val();
+    text2 = $("#form-cardNum6").val();
+    if(!(text1 && text2)){
+    	alert("유효기간을 입력해주세요.");
+    	return;
+    }
+    if(text1<year || text2>12){
+    	alert("유효기간이 잘못 입력되었습니다.");
+    	return;
+    }
+    
+    text1 = $("#form-cardNum7").val().length;
+    if(text1!=3){
+    	alert("CVC를 입력해주세요.");
+    	return;
+    }
+   
+	f.action="<%=cp%>/ticketing/finish";
 
     f.submit();
 }
@@ -160,14 +189,14 @@ function sendOk() {
 			  	 <td colspan="5" width="100px" height="40px" align="left" 
 			  	 		style="font-size: 12px; font-weight: 500; padding-left: 15px; padding-top: 20px;    line-height: 25px;">
 			  	 		<div style="float:left;">
-			      		<input type="radio" id="c1" name="cardCom" value="신한카드"><label for="c1" style="padding-right: 20px;"> 신한카드</label>
-			      		<input type="radio" id="c2" name="cardCom" value="삼성카드"><label for="c2" style="padding-right: 20px;"> 삼성카드</label> 
-			      		<input type="radio" id="c3" name="cardCom" value="롯데카드"><label for="c3" style="padding-right: 20px;"> 롯데카드</label> 
-			      		<input type="radio" id="c4" name="cardCom" value="KB카드"><label for="c4" style="padding-right: 20px;"> KB카드</label> 
-						<input type="radio" id="c4" name="cardCom" value="우리카드"><label for="c4" style="padding-right: 20px;"> 우리카드</label>
+			      		<input type="radio" id="c1" name="cardCom1" value="신한카드"><label for="c1" style="padding-right: 20px;"> 신한카드</label>
+			      		<input type="radio" id="c2" name="cardCom2" value="삼성카드"><label for="c2" style="padding-right: 20px;"> 삼성카드</label> 
+			      		<input type="radio" id="c3" name="cardCom3" value="롯데카드"><label for="c3" style="padding-right: 20px;"> 롯데카드</label> 
+			      		<input type="radio" id="c4" name="cardCom4" value="KB카드"><label for="c4" style="padding-right: 20px;"> KB카드</label> 
+						<input type="radio" id="c5" name="cardCom5" value="우리카드"><label for="c4" style="padding-right: 20px;"> 우리카드</label>
 						</div>
 						<div style="float:left;">
-						<select name="card" class="selectField">
+						<select name="card" id="card" class="selectField">
 						    <option value="">그 외의 카드</option>
 						    <option value="비씨카드">비씨카드</option>
 						    <option value="하나카드">하나카드</option>
@@ -186,10 +215,10 @@ function sendOk() {
 			            <label style="font-weight: 600; font-size: 12px;">카드번호</label>
 			      </td>
 			      <td colspan="3" width="200px" align="left" style="padding-left: 15px; border-top: 2px solid #434343;">
-			            <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
-			            - <input type="password" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
-			            - <input type="password" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
-			            - <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            <input type="text" name="product1" id="form-cardNum1" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="password" name="product2" id="form-cardNum2" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="password" name="product3" id="form-cardNum3" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            - <input type="text" name="product4" id="form-cardNum4" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
 			     	<span style="padding-left: 10px;">	
 			     		<select name="month" class="selectField">
 						    <option value="">할부개월</option>
@@ -207,14 +236,14 @@ function sendOk() {
 			            <label style="font-weight: 600; font-size: 12px;">유효기간</label>
 			       </td>
 			       <td width="140px" align="left" style="padding-left: 15px; border-top: 2px solid #ccc; border-bottom: 2px solid #434343;">
-			            <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 35px; height: 25px;" placeholder="YY">
-			            / <input type="text" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 35px; height: 25px;" placeholder="MM">
+			            <input type="text" name="product5" id="form-cardNum5" maxlength="100" class="applyTF" style="width: 35px; height: 25px;" placeholder="YY">
+			            / <input type="text" name="product6" id="form-cardNum6" maxlength="100" class="applyTF" style="width: 35px; height: 25px;" placeholder="MM">
 			       </td>
 			       <td class="apply-td-left" width="120px" height="50px" align="right" style="border-bottom: 2px solid #434343;">
 			            <label style="font-weight: 600; font-size: 12px;">CVC</label>
 			       </td>
 			       <td width="200px" align="left" style="padding-left: 15px; border-bottom: 2px solid #434343;">
-			            <input type="password" name="product" id="form-cardNum" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
+			            <input type="password" name="product7" id="form-cardNum7" maxlength="100" class="applyTF" style="width: 65px; height: 25px;">
 			       </td>      
 			  </tr>
 			  <tr>

@@ -15,9 +15,16 @@ function goCheck(){
 	var $acnt="${acnt}";
 	var totalCount="${total}";
 	
-	var rcount=Number($("#trcnt").val())+Number($("#salercnt").val());
-	var scount=Number($("#tscnt").val())+Number($("#salescnt").val());
-	var acount=Number($("#tacnt").val())+Number($("#saleacnt").val());
+	var rcount=0;var scount=0;var acount=0;
+	if($rcnt!=0){
+		rcount=Number($("#trcnt").val())+Number($("#salercnt").val());
+	}
+	if($scnt!=0){
+		var scount=Number($("#tscnt").val())+Number($("#salescnt").val());
+	}
+	if($acnt!=0){
+		var acount=Number($("#tacnt").val())+Number($("#saleacnt").val());
+	}
 	
 	if(rcount!=$rcnt || scount!=$scnt || acount!=$acnt || (rcount+scount+acount)!=totalCount){
 		alert("매수를 다시 선택해주세요.");

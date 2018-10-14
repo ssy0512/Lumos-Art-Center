@@ -220,4 +220,9 @@ public class TicketingController {
 		
 		return ".ticketing.finalBook";
 	}
+	
+	@RequestMapping(value="/ticketing/finish")
+	public String finish() {
+		return ".ticketing.finish";
+	}
 }
