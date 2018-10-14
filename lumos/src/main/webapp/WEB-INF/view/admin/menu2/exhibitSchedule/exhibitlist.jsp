@@ -6,6 +6,7 @@
 	String cp = request.getContextPath();
 %>
 <style type="text/css">
+
 .exhibit-top {
 	width: 1580px; height: 50px; margin-top: 40px;
 }
@@ -82,6 +83,7 @@
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<c:if test="${dataCount!=0}">
 		<div class="exhibit-top">
+		
 			<div class="exhibit-top-page">
 				전체 ${dataCount} (${page}/${total_page} 페이지)
 			</div>

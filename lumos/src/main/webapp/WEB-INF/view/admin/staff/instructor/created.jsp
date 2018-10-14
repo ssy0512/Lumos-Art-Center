@@ -71,15 +71,18 @@
  
 <div class="body-right" style="width: 700px; padding-top:50px; padding-left:30px">
     <div class="body-title" >
-        <h3><span style="font-family: Webdings">2</span> LUMOS 강사 등록 </h3>
-        <hr>
+      <!--   <h3><span style="font-family: Webdings">2</span> LUMOS 강사 등록 </h3>
+        <hr> -->
+        <div class="top">
+			<img src="<%=cp %>/resource/images/lumos/instructor.PNG">
+		</div>
     </div>
     
     <div style="clear:both;">
 			<form name="createdForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강사이름</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">강사이름</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="instName" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.instName}">
 			      </td>
@@ -87,14 +90,14 @@
 			
 			
   		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">생년월일</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">생년월일</td>
 			      <td style="padding-left:10px;"> 
 			            <input type="date" id="regDate" name="birth" readonly="readonly" value="${dto.birth}"><button></button>
 			      </td>
 			  </tr>
 			
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전화번호</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">전화번호</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="tel" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.tel}">
 			      </td>
@@ -102,14 +105,14 @@
 			  
 			  <!-- ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강사정보</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">강사정보</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="profile" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.profile}">
 			      </td>
 			  </tr>
 			   
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">강사 사진</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">강사 사진</td>
 			      <td style="padding-left:10px;"> 
 			          <input type="file" name="upload" class="boxTF" size="53"
 			                     accept="image/*" 
@@ -119,7 +122,7 @@
 			  
 
 			  </table>
-			
+			<br>
 <%-- 			 
 <div class="body-right" style="width: 700px; padding-top:50px; padding-left:360px; height:800px;">
     <div class="body-title" >

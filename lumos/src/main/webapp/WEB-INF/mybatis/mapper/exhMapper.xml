@@ -61,7 +61,7 @@
 </delete>
 
 <select id="readExhibits" parameterType="Integer" resultType="com.sp.admin.exh.Exhibits">
-	SELECT exhibitNum, exhibitName, exhibitStart, exhibitEnd,admitStart,admitEnd,genre, e.ratingNum, ratingName, e.hallNum, hallName,
+	SELECT exhibitNum, exhibitName, to_char(exhibitStart, 'YYYY-MM-DD') exhibitStart, to_char(exhibitEnd, 'YYYY-MM-DD') exhibitEnd,admitStart,admitEnd,genre, e.ratingNum, ratingName, e.hallNum, hallName,
 			host,supervise, exProfileImage 
 			FROM exhibit e 
 			JOIN exhibitHall ex ON e.hallNum=ex.hallNum

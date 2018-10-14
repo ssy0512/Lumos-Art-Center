@@ -67,14 +67,18 @@ function updateExhibits(){
 	</div>
 </div>
  --%>
+<div class="body-right" style="margin-left:150px; margin-top:100px;">
 <div class="exhibit_detail">
 	<div class="wrap">
 		<div class="pageTitleAndButton">
 			<span>전시 상세 정보</span>
 			<c:if test="${sessionScope.member.userId=='admin'}">
-				<button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/admin/menu2/exhibitSchedule/created2';">
+				 <button type="button" class="adBtn" onclick="javascript:location.href='<%=cp%>/admin/menu2/exhibitSchedule/created2';">
 					전시 가격 관리
-				</button>
+				</button> 
+				<%-- <div style="align:right;" class="updateButtonDiv" onclick="javascript:location.href='<%=cp%>/admin/menu2/exhibitSchedule/created2';">
+				<a>전시가격관리</a>
+			</div> --%>
 			</c:if>
 			<%-- <c:if test="${sessionScope.member.userId!='admin'}">
 				<button type="button" class="btnSendInterest">
@@ -139,5 +143,6 @@ function updateExhibits(){
 			</table>
 		</div>
 	</div>
+</div>
 </div>
  

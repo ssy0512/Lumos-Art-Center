@@ -115,13 +115,19 @@ function updateInstructor() {
 
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<!-- 메인 -->
+	
 	<div class="instructor-article">
+	<!-- <button type="button" class="btn" onclick="updateInstructor();">
+			수정하기
+		</button> -->
 		<p style="clear: both; margin: 30px 35px 20px 700px; font-size: 12pt;">강사번호  No.${dto.instNum}</p>
 		<p class="instructor-article-userId">${dto.instName}</p>
 		<div class="instructor-article-image">
 			<img src="<%=cp%>/uploads/image/${dto.instPhotoImage}" style="width: 220px; height: 220px; border-radius: 110px;">
 		</div>
+		
 			<table class="instructor-article-userInfo">
+			
 				<thead>
 					<tr>
 						<th colspan="6" style="text-align: left; font-size: 15pt; border-bottom: 1px solid #072659">강사정보</th>
@@ -140,16 +146,12 @@ function updateInstructor() {
 					<td>${dto.profile}</td>					
 				</tr>
 			</table>
-	<br>
 	
 		
 		<button type="button" class="myButt one" onclick="javascript:location.href='<%=cp%>/admin/staff/instructor/instructorlist';">
 			<div class='insider'></div>
 			목록으로
 		</button>
-		<button type="button" class="myButt one" onclick="updateInstructor();">
-			<div class='insider'></div>
-			수정하기
-		</button>
+		
 	</div>
 </div>

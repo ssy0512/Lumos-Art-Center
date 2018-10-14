@@ -11,6 +11,11 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
 <link rel="stylesheet" href="<%=cp%>/resource/css/adminInputs.css" type="text/css">
+ <style type="text/css">
+ .top {
+	margin-top: 15px;
+}
+ </style>
  <script type="text/javascript">
  function sendOk(){
 	 var f=document.createdForm;
@@ -77,17 +82,19 @@
  
  
  
-<div class="body-right" style="width: 700px; padding-top:50px; padding-left:30px">
+<div class="body-right" style="width: 700px; padding-top:50px; padding-left:100px">
     <div class="body-title" >
-        <h3><span style="font-family: Webdings">2</span> LUMOS 직원 등록 </h3>
-        <hr>
+       <!--  <h3><span style="font-family: Webdings">2</span> LUMOS 직원 등록 </h3>
+        <hr> -->
+        <div class="top">
+			<img src="<%=cp %>/resource/images/lumos/staff.PNG">
+		</div>
     </div>
-    
     <div style="clear:both;">
 			<form name="createdForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">사원명</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">사원명</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="staffName" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.staffName}">
 			      </td>
@@ -95,34 +102,34 @@
 			
 			
   		<tr align="left" height="45" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">생년월일</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">생년월일</td>
 			      <td style="padding-left:10px;"> 
 			            <input type="date" id="regDate" name="birth" readonly="readonly" value="${dto.birth}"><button></button>
 			      </td>
 			  </tr>
 			
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">소속부서</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">소속부서</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="department" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.department}">
 			      </td>
 			  </tr>
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">전화번호</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">전화번호</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="tel" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.tel}">
 			      </td>
 			  </tr>
 			   
 			   <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">이메일</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">이메일</td>
 			      <td style="padding-left:10px;"> 
 			        <input type="text" name="email" maxlength="100" class="boxTF" style="width: 95%;" value="${dto.email}">
 			      </td>
 			 
 			  </tr>
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;">
-			      <td width="100" bgcolor="#eeeeee" style="text-align: center;">사원이미지</td>
+			      <td width="100" bgcolor="#072659" style="text-align: center; color:#fff;">사원이미지</td>
 			      <td style="padding-left:10px;"> 
 			          <input type="file" name="upload" class="boxTF" size="53"
 			                     accept="image/*" 
@@ -133,6 +140,7 @@
 
 			  </table>
 			
+			<br>
 <%-- 			 
 <div class="body-right" style="width: 700px; padding-top:50px; padding-left:360px; height:800px;">
     <div class="body-title" >

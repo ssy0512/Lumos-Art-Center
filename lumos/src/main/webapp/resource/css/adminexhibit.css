@@ -15,14 +15,14 @@
     color: #ffffff;
     font-weight: 700;
     float: right;
-    border: 1px solid #aa1717;
-    background-color: #aa1717;
+    border: 1px solid #072659;
+    background-color: #072659;
     border-radius: 4px;
     margin-bottom: 15px;
 }
 
 .pageTitleAndButton .adBtn:hover {
-	color: #aa1717;
+	color: #072659;
 	background-color: #ffffff;
 }
 
