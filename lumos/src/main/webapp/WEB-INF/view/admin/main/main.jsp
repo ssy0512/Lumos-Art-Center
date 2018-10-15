@@ -9,7 +9,6 @@
 * {
 	box-sizing: border-box;
 }
-
 .main {
 	display: flex;
 	flex-direction: column;
@@ -63,7 +62,6 @@ section {
 	transition: flex-grow .2s, opacity .2s;
 	cursor: pointer;
 }
-
 /*  first    last      */
 section:before {
 	content: "";

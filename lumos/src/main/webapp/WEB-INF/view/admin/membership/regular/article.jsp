@@ -23,7 +23,6 @@
 	text-align: center;
 	font-size: 27pt;
 	font-weight: 700;
-	
 }
 .regular-article-userInfo tr th, tr td, .regular-article-id-Info thead tr th, tbody tr td {
 	height: 40px;
@@ -35,7 +34,6 @@
 	text-align: center;
 	margin: 20px auto;
 }
-
 .myButt {
 	width: 100px; height: 40px;
   outline: none;
@@ -53,7 +51,6 @@
   -o-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
 }
-
 .one {
   border-color: #072659;
   overflow: hidden;

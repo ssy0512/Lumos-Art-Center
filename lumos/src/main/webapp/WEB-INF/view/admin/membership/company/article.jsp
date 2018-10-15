@@ -17,7 +17,6 @@
 	clear: both;
 	text-align: left;
 }
-
 .company-table tr th, td{
 	height: 33px;
 }
