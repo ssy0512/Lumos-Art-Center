@@ -38,7 +38,6 @@
 					<th style="width: 200px;">주소</th>
 				</tr>
 			</thead>
-			
 			<tbody>
 				<tr>
 					<td></td>

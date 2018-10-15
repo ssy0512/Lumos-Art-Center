@@ -36,11 +36,6 @@
 	margin: 20px auto;
 }
 
-
-
-
-
-
 .myButt {
 	width: 100px; height: 40px;
   outline: none;

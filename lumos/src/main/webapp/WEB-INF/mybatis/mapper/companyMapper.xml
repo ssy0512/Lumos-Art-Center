@@ -55,6 +55,7 @@
 		                        FROM companyCharge
 								WHERE companyIndex = 1
 							) c ON cp1.companyIndex = cc.companyIndex
+							ORDER BY cp1.companyIndex ASC
 					<where>
 						<if test="searchValue != null and searchValue != ''">
 							<include refid="where-list"/>

@@ -28,6 +28,7 @@
 				FROM rent r
 				JOIN companyCharge cc ON r.chargeId=cc.chargeId
 				JOIN rentProcess p ON r.processNum=p.processNum
+				ORDER BY r.rentNum ASC
 	<![CDATA[
 	    	) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}

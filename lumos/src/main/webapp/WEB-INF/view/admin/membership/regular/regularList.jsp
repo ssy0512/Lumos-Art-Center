@@ -29,7 +29,6 @@
 	cursor: pointer;
 }
 </style>
-
 <script type="text/javascript">
 	function searchList() {
 		var f = document.searchForm;
@@ -91,7 +90,6 @@
 					</select>
 					
 					<input type="text" name="searchValue" class="boxTF">
-					
 					<button type="button" class="btn" onclick="searchList()" style="width: 60px;">검색</button>
 				</form>
 			</div>
