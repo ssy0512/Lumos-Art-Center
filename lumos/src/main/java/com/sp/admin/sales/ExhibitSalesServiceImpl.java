@@ -72,7 +72,7 @@ public class ExhibitSalesServiceImpl implements ExhibitSalesService {
 	public List<ExhibitSales> totalSum(int exhibitNum) {
 		List<ExhibitSales> list = null;
 		try {
-			list=dao.selectList("exhibitSales.totalSum",exhibitNum);
+			list=dao.selectList("exhibitSales.totalSum", exhibitNum);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

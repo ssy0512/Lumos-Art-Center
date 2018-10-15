@@ -6,35 +6,39 @@
 	String cp = request.getContextPath();
 %>
 <style type="text/css">
+.top {
+	margin-top: 15px;
+}
 .total-top {
-	width: 1300px;
+	width: 1380px;
 	margin: 20px auto;
 	text-align: left;
 }
 
 .total-table {
-	width: 1300px;
+	width: 1380px;
 	margin: 10px auto;
 	border-spacing: 0px;
 	border-collapse: collapse;
 }
 
 .total-table thead {
-	background-color: #072659;
-	color: #ffffff;
+	border-top: 1px solid #072659;
+	border-bottom: 1px solid #072659;
 }
 
 .total-table tr, td {
 	height: 40px;
 	text-align: center;
 }
-.total-table tr {
-	border-bottom: 1px solid #072659;
+.total-table tbody tr {
+	border-bottom: 1px solid #86888a;
 }
 
 /* 버튼 css */
 .myButt {
-	margin: 20px auto;
+	float: right;
+	margin-bottom: 15px; 
 	width: 100px;
 	height: 40px;
 	outline: none;
@@ -96,9 +100,10 @@
 <div class="body-right" style="width: 1380px; height: 800px; margin: 0;">
 	<div class="exhibit-article">
 		<c:if test="${totalCount!=0}">
-			<div class="total-top">
-			전체 ${totalCount} (${page}/${total_page} 페이지)
+			<div class="top">
+				<img src="<%=cp %>/resource/images/lumos/adminSalesExhibit.png">
 			</div>
+		
 			<table class="total-table">
 				<thead>
 					<tr>
@@ -123,17 +128,22 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
+			<div class="total-top">
+				전체 ${totalCount} (${page}/${total_page} 페이지)
+				
+				<button type="button" class="myButt one"
+				onclick="javascript:location.href='<%=cp%>/admin/sales/exhibit/salesList';">
+				<div class='insider'></div>
+				목록으로
+				</button>
+			</div>
 		</c:if>
 	<br>
 	<div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
-		<c:if test="${totalCount==0}">등록된 공연이 없습니다.</c:if>
+		<c:if test="${totalCount==0}">결제된 내역이 없습니다.</c:if>
 		<c:if test="${totalCount!=0}">${paging}</c:if>
 	</div>
-	<br>
-		<button type="button" class="myButt one"
-			onclick="javascript:location.href='<%=cp%>/admin/sales/exhibit/salesList';">
-			<div class='insider'></div>
-			목록으로
-		</button>
+
 	</div>
 </div>

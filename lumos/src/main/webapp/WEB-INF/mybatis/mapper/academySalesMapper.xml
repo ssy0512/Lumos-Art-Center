@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="academySales">
+	<sql id="date-list">
+		<if test="mode=='ing'">
+	  	  <![CDATA[ 
+			SYSDATE <= A.startDate
+	 	  ]]>	
+	  	</if>
+	  	<if test="mode=='finish'">
+	  	  <![CDATA[ 
+			SYSDATE > A.startDate
+	 	  ]]>	
+	  	</if>
+	</sql>
+
+	<sql id="where-list">		  		
+	  <if test="searchKey=='academyName'">
+	      <![CDATA[
+	       INSTR(academyName, #{searchValue}) > 0
+	      ]]>
+	  </if>	 	    
+	</sql>
+
+	<select id="dataCount" resultType="Integer" parameterType="map">
+	SELECT NVL(Count(*), 0) 
+		FROM academy A
+		JOIN roomInfo R ON A.roomNum=R.roomNum
+		JOIN instructor I ON A.instNum=I.instNum
+		<where>
+			<include refid="date-list"/>
+				<if test="searchValue!=null and searchValue!='' ">AND
+					<include refid="where-list"/>
+				</if>
+		</where>	
+	</select>
+
+	<select id="listAcademy" parameterType="map" resultType="com.sp.admin.sales.AcademySales">
+	SELECT * FROM (
+		SELECT ROWNUM rnum, tb.* FROM (
+			SELECT academyNum, academyName, startTime, endTime, lectureDay, acProfileImage,
+				TO_CHAR(birth, 'YYYY-MM-DD') birth, totalCount, price, 
+				A.roomNum, R.position, R.roomName, I.instNum, instName, 
+				TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate
+			FROM academy A
+			JOIN roomInfo R ON A.roomNum=R.roomNum
+			JOIN instructor I ON A.instNum=I.instNum
+			<where>
+				<include refid="date-list"/>	     					
+				<if test="searchValue!=null and searchValue!='' ">AND
+					<include refid="where-list"/>
+				</if>
+			</where>
+			ORDER BY academyNum DESC
+	<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>			
+	</select>
+	
+	<select id="readAcademy" parameterType="Integer" resultType="com.sp.admin.sales.AcademySales">
+	SELECT academyNum, academyName, startTime, endTime, lectureDay, totalCount, acProfileImage,
+		TO_CHAR(birth, 'YYYY-MM-DD') birth, classInfo, price, A.roomNum, R.position, R.roomName, I.instNum, instName, 
+		TO_CHAR(startDate, 'YYYY-MM-DD') startDate, TO_CHAR(endDate, 'YYYY-MM-DD') endDate
+		FROM academy A
+		JOIN roomInfo R ON A.roomNum=R.roomNum
+		JOIN instructor I ON A.instNum=I.instNum
+		WHERE academyNum=#{academyNum}
+	</select>
+	
+	<select id="totalSum" parameterType="map" resultType="Long">
+		SELECT SUM(price)
+		FROM academy a
+        JOIN classRegister cr ON a.academyNum=cr.academyNum
+        JOIN member1 m ON cr.userId=m.userId
+		WHERE a.academyNum=#{academyNum}
+	</select>
+	
+	<select id="totalCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM academy a
+		JOIN classRegister cr ON a.academyNum=cr.academyNum
+        JOIN member1 m ON cr.userId=m.userId
+		WHERE a.academyNum=#{academyNum}
+	</select>
+	
+ 	<select id="listOrders" parameterType="map" resultType="com.sp.admin.sales.AcademySales">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT a.academyNum, cr.approveNum, a.price, cr.USERID, m.memberIndex
+				FROM academy a
+                JOIN classRegister cr ON a.academyNum=cr.academyNum
+		        JOIN member1 m ON cr.userId=m.userId
+				ORDER BY cr.approveNum ASC
+        <![CDATA[
+			) tb WHERE academyNum=#{academyNum} AND ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rental">
+
+	<select id="dataCount" resultType="Integer" parameterType="map">
+		SELECT NVL(Count(*),0) FROM rent
+	</select>
+
+	<select id="readRental" resultType="com.sp.admin.rent.Rental" parameterType="Integer">
+		SELECT r.rentNum, TO_CHAR(startDate,'YYYY-MM-DD') startDate, TO_CHAR(endDate,'YYYY-MM-DD') endDate,
+				eventCount, planName, genre, r.ratingNum, placeNum, host, supervise, purpose, person,
+        		c1.companyName, cc.chargeId, cc.chargeName, cc.chargeTel, cc.chargeEmail,
+        		rt.ratingName, p.processName
+		FROM rent r
+		JOIN companyCharge cc ON r.chargeId=cc.chargeId
+		LEFT OUTER JOIN company1 c1 ON cc.companyIndex=c1.companyIndex
+		JOIN rating rt ON r.ratingNum=rt.ratingNum
+		JOIN rentProcess p ON r.processNum=p.processNum
+		WHERE rentNum=#{rentNum}
+	</select>
+	
+	<select id="listRental" parameterType="map" resultType="com.sp.admin.rent.Rental">
+		SELECT * FROM (
+		    SELECT ROWNUM rnum, tb.* FROM (
+		        SELECT rentNum, TO_CHAR(startDate,'YYYY-MM-DD') startDate, TO_CHAR(endDate,'YYYY-MM-DD') endDate,
+		        	eventCount, planName, genre, r.ratingNum, placeNum, host, r.chargeId, p.processName
+				FROM rent r
+				JOIN companyCharge cc ON r.chargeId=cc.chargeId
+				JOIN rentProcess p ON r.processNum=p.processNum
+	<![CDATA[
+	    	) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
+</mapper>

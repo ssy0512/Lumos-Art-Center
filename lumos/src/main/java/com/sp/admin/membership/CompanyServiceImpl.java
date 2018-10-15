@@ -17,7 +17,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public int insertCompany(Company dto, String pathname) {
 		int result=0;
 		try {
-			result = dao.insertData("company.insertCompany", dto);
+			result=dao.insertData("company.insertCompany",dto);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

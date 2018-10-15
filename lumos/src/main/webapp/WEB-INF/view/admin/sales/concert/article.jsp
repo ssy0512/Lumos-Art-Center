@@ -14,7 +14,7 @@
 	border-top: 3px solid #072659;
 	border-bottom: 3px solid #072659;
 	border-radius: 50px;
-	background-image: url("<%=cp%>/resource/images/lumos/sample4.png");
+	background-image: url("<%=cp%>/resource/images/lumos/adminConArticle.png");
 }
 .concertNum {
 	float: right;

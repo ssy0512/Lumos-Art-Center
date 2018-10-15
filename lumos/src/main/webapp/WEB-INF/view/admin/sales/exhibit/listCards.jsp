@@ -83,7 +83,7 @@
 	width: 1300px; height: 40px; margin-top: 20px;
 }
 .bottom-page {
-	float: left; margin: 10px 0 0 20px;
+	float: left; margin: 10px 20px 0 20px;
 	font-size: 12pt;
 }
 .search {
@@ -112,8 +112,9 @@
 		<c:forEach var="dto" items="${list}">
 			<div class="Listcards">
 				<a href="<%=cp%>/admin/sales/exhibit/article?&page=${page}&exhibitNum=${dto.exhibitNum}">
-					<div style="width: 540px; height: 230px; border-radius: 25px;
-					 box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);">
+					<div style="width: 540px; height: 230px;
+						border-top: 3px solid #072659; border-bottom: 3px solid #072659;
+						border-radius: 25px;">
 						<div class="exhibit-image">
 							<c:if test="${not empty dto.exProfileImage}">
 								<img src="<%=cp %>/uploads/image/${dto.exProfileImage}">
@@ -128,12 +129,9 @@
 							<p style="margin-bottom: 10px; width: 290px; text-align: center; font-size: 12pt; font-weight: bold; text-overflow: ellipsis; white-space: nowrap;">
 								${dto.exhibitName}
 							</p>
-							<p>
-								<img alt="Charge" src="<%=cp%>/resource/images/lumos/membershipCharge.png" style="width: 15px; height: 20px; margin: 0 10px 0 17px;">
-								${dto.exhibitStart} ~ ${dto.exhibitEnd}
-							</p>
-							<p><img alt="Tel" src="<%=cp%>/resource/images/lumos/membershipTel.png" style="width: 18px; height: 19px; margin: 0 15px;">${dto.host}</p>
-							<p><img alt="Email" src="<%=cp%>/resource/images/lumos/membershipEmail.png" style="width: 20px; height: 15px; margin: 0 15px;">${dto.supervise}</p>
+							<p><b>전시일</b> ${dto.exhibitStart} ~ ${dto.exhibitEnd}</p>
+							<p><b>주최</b> ${dto.host}</p>
+							<p><b>주관</b> ${dto.supervise}</p>
 						</div>
 					</div>
 				</a>
@@ -171,7 +169,7 @@
 			</div>
 		</div>
 	</c:if>
-	<div class="paging" style="">
+	<div class="paging">
 		<c:if test="${dataCount==0}">등록된 게시물이 없습니다.</c:if>
 		<c:if test="${dataCount!=0}">${paging}</c:if>
 	</div>

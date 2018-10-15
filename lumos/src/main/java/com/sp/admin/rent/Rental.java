@@ -4,21 +4,33 @@ public class Rental {
 	public int rentNum;
 	public String startDate;
 	public String endDate;
+	
 	public int eventCount;
-	public String planname;
+	public String planName;
 	public String genre;
+	
 	public int ratingNum;
 	public String ratingName;
 	public int placeNum; //not sure what it is 
+	
 	public String host;
 	public String supervise;
 	public String purpose;
 	public int person;
+	
 	public int processNum;
 	public String processName;
-	public String chargeId;
 	public int locationNum;
 	public String locationName;
+	
+	public String chargeId;
+	public String chargeName;
+	public String companyName;
+	public String chargeTel;
+	public String chargeEmail;
+	
+	private int listNum;
+	
 	public int getRentNum() {
 		return rentNum;
 	}
@@ -43,11 +55,11 @@ public class Rental {
 	public void setEventCount(int eventCount) {
 		this.eventCount = eventCount;
 	}
-	public String getPlanname() {
-		return planname;
+	public String getPlanName() {
+		return planName;
 	}
-	public void setPlanname(String planname) {
-		this.planname = planname;
+	public void setPlanName(String planName) {
+		this.planName = planName;
 	}
 	public String getGenre() {
 		return genre;
@@ -127,6 +139,35 @@ public class Rental {
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
 	}
-	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public String getChargeName() {
+		return chargeName;
+	}
+	public void setChargeName(String chargeName) {
+		this.chargeName = chargeName;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public String getChargeTel() {
+		return chargeTel;
+	}
+	public void setChargeTel(String chargeTel) {
+		this.chargeTel = chargeTel;
+	}
+	public String getChargeEmail() {
+		return chargeEmail;
+	}
+	public void setChargeEmail(String chargeEmail) {
+		this.chargeEmail = chargeEmail;
+	}
 	
 }

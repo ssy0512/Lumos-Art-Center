@@ -6,6 +6,9 @@
 	String cp = request.getContextPath();
 %>
 <style type="text/css">
+.top {
+	margin-top: 15px;
+}
 .company-top {
 	width: 1380px; height: 50px; margin-top: 40px;
 }
@@ -81,35 +84,9 @@
 
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<c:if test="${dataCount!=0}">
-		<div class="company-top">
-			<div class="company-top-page">
-				전체 ${dataCount} (${page}/${total_page} 페이지)
-			</div>
-
-			<div class="company-top-search">
-				<form action="searchForm" action="<%=cp%>/admin/membership/company/companyList" method="post">
-					<select name="searchKey" class="selectField">
-						<option value="companyIndex">회원번호</option>
-						<option value="companyName">회사명</option>
-						<option value="repname">대표명</option>
-					</select>
-					<input type="text" name="searchValue" class="boxTF">
-					<button type="button" class="btn" onclick="searchList()" style="margin: 5px">&nbsp;검색&nbsp;</button>
-					
-					<div class="company-top-layout">
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
-							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
-								&nbsp;&nbsp;목록형&nbsp;&nbsp;
-						</button>
-						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyListCards';">
-							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
-								&nbsp;&nbsp;앨범형&nbsp;&nbsp;
-						</button>
-					</div>
-				</form>
-			</div>
+		<div class="top">
+			<img src="<%=cp %>/resource/images/lumos/adminMemCompany.png">
 		</div>
-		
 		<div style="clear: both; margin-top: 20px; font-size: 12pt;">
 			<table class="companyList-table">
 				<thead>
@@ -140,6 +117,35 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
+		
+		<div class="company-top">
+			<div class="company-top-page">
+				전체 ${dataCount} (${page}/${total_page} 페이지)
+			</div>
+
+			<div class="company-top-search">
+				<form action="searchForm" action="<%=cp%>/admin/membership/company/companyList" method="post">
+					<select name="searchKey" class="selectField">
+						<option value="companyIndex">회원번호</option>
+						<option value="companyName">회사명</option>
+						<option value="repname">대표명</option>
+					</select>
+					<input type="text" name="searchValue" class="boxTF">
+					<button type="button" class="btn" onclick="searchList()" style="margin: 5px">&nbsp;검색&nbsp;</button>
+					
+					<div class="company-top-layout">
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyList';">
+							<img src="<%=cp%>/resource/images/lumos/membershipListBtn.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
+								&nbsp;&nbsp;목록형&nbsp;&nbsp;
+						</button>
+						<button type="button" class="list-btn" onclick="javascript:location.href='<%=cp%>/admin/membership/company/companyListCards';">
+							<img src="<%=cp%>/resource/images/lumos/membershipCards.png" style="width: 17px; height: 17px; margin: 5px 0 3px 5px;">
+								&nbsp;&nbsp;앨범형&nbsp;&nbsp;
+						</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</c:if>
 

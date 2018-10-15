@@ -1,12 +1,18 @@
 package com.sp.admin.sales;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller("admin.sales.salesChartController")
+@Controller("sales.salesChartController")
 public class SalesChartController {
 	@RequestMapping(value="/admin/sales/salesSub/salesMain")//얘는 이름 자유로움
 	public String main() throws Exception {
@@ -15,14 +21,17 @@ public class SalesChartController {
 	
 	@RequestMapping(value="/admin/sales/salesSub/bar", produces="application/json; charset=utf-8")
 	@ResponseBody
-	public String bar() throws Exception {
+	public String bar(HttpServletRequest req, Model model) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		JSONArray arr = new JSONArray();
 		JSONObject ob;
 		
-		ob=new JSONObject();
-		ob.put("name", "공연");
-		ob.put("data", new double[]{9,1.0,6.3,13.3,18.9,23.6,25.8,26.3,22.4,15.5,8.9,1.6});
-		arr.put(ob);
+		map = new HashMap<String, Object>();
+		map.put("name", "공연");
+		map.put("data", new double[]{9,1.0,6.3,13.3,18.9,23.6,25.8,26.3,22.4,15.5,8.9,1.6});
+		arr.put(map);
 		
 		ob=new JSONObject();
 		ob.put("name", "전시");

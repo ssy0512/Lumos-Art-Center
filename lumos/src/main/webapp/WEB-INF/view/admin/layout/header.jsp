@@ -8,7 +8,9 @@
 <div class="header-top">
     <div class="header-left">        
         <a href="<%=cp%>/" style="text-decoration: none;">
-            <span style="width: 100%; height: 70; position: relative; left: 20px; top:5px; color: #aa1717; filter: mask(color=red) shadow(direction=135) chroma(color=red); font-family: 맑은 고딕; font-size: 50px; font-weight: bold;">LUMOS BUSINESS</span>
+            <span style="width: 100%; height: 70; position: relative; left: 20px; top:5px;
+            color: #aa1717; filter: mask(color=red) shadow(direction=135) chroma(color=red);
+            font-family: 맑은 고딕; font-size: 50px; font-weight: 300;">LUMOS ART CENTER</span>
         </a>        
     </div>
     <div class="header-right">
@@ -60,7 +62,7 @@
 		  	</a>
 	  	</li>
         <li class="basicBox">
-        	<a href="#">
+        	<a href="<%=cp%>/admin/rent/rental/list">
         		<span style="font-size: 13pt">대관관리</span>
         		<svg width="130" height="50" viewBox="0 0 130 35" xmlns="http://www.w3.org/2000/svg">
 			    	<rect x='0' y='0' fill='none' width='130' height='40'/>

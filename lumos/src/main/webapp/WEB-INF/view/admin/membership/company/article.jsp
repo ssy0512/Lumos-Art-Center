@@ -12,9 +12,6 @@
 	clear: both;
 	border: 1px solid #333333; border-radius: 50px;
 }
-.company-article-image {
-	margin: 20px 320px;
-}
 .company-table {
 	margin: auto;
 	clear: both;
@@ -86,9 +83,6 @@
 	<div class="company-article">
 		<div style="float: right; margin: 25px 40px 20px 600px;">
 			회원번호  No.${dto.companyIndex}
-		</div>
-		<div class="company-article-image">
-			<img src="https://cdn.pixabay.com/photo/2015/02/02/15/28/bar-621033_960_720.jpg" style="width: 220px; height: 220px; border-radius: 110px;">
 		</div>
 		<table class="company-table" style="width: 700px;">
 			<tr>

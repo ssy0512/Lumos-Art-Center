@@ -146,7 +146,7 @@ section:child:after {
 
 section:nth-child(4):before {
 	background-image:
-		url("<%=cp%>/resource/images/lumos/adminMain-membership.png");
+		url("<%=cp%>/resource/images/lumos/adminMain-membership.jpg");
 }
 
 .hide-images section:nth-child(4):before {
@@ -159,10 +159,23 @@ section:first-child:after, section:last-child:after {
 
 section:nth-child(5):before {
 	background-image:
-		url("<%=cp%>/resource/images/lumos/adminMain-customer.jpg");
+		url("<%=cp%>/resource/images/lumos/adminMain-rent.png");
 }
 
 .hide-images section:nth-child(5):before {
+	background-image: none;
+}
+
+section:first-child:after, section:last-child:after {
+	opacity: .5;
+}
+
+section:nth-child(6):before {
+	background-image:
+		url("<%=cp%>/resource/images/lumos/adminMain-customer.jpg");
+}
+
+.hide-images section:nth-child(6):before {
 	background-image: none;
 }
 
@@ -206,14 +219,118 @@ h2 {
 	margin-bottom: 12px;
 }
 
-p {
+.main p {
 	font-size: 20px;
 }
 
 
 
 
+
+
+
+
+
+
+
+
+.logo {
+	margin-left: 200px;
+  font-size: 60pt;
+  text-transform: uppercase;
+  font-family: Lato;
+  font-weight: 300;
+}
+.logo span:nth-child(1) {
+  -webkit-animation: white_char 2s ease-in-out;
+          animation: white_char 2s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.logo span:nth-child(2) {
+  -webkit-animation: white_char 2.5s ease-in-out;
+          animation: white_char 2.5s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.logo span:nth-child(3) {
+  -webkit-animation: white_char 3s ease-in-out;
+          animation: white_char 3s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.logo span:nth-child(4) {
+  -webkit-animation: white_char 3.5s ease-in-out;
+          animation: white_char 3.5s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.logo span:nth-child(5) {
+  -webkit-animation: white_char 4s ease-in-out;
+          animation: white_char 4s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.logo span:nth-child(6) {
+  -webkit-animation: mint_char 5s ease-in-out;
+          animation: mint_char 5s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+.logo span:nth-child(7), .logo span:nth-child(8) {
+  -webkit-animation: mint_char 5.5s ease-in-out;
+          animation: mint_char 5.5s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+.logo span:nth-child(9), .logo span:nth-child(10), .logo span:nth-child(11) {
+  -webkit-animation: mint_char 6s ease-in-out;
+          animation: mint_char 6s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+}
+.logo span:nth-child(12), .logo span:nth-child(13) {
+  -webkit-animation: mint_char 6.5s ease-in-out;
+          animation: mint_char 6.5s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 2.5s;
+          animation-delay: 2.5s;
+}
+
+@-webkit-keyframes white_char {
+  100% {
+    color: #072659;
+    transition-property: color;
+  }
+}
+
+@keyframes white_char {
+  100% {
+    color: #072659;
+    transition-property: color;
+  }
+}
+@-webkit-keyframes mint_char {
+  100% {
+    color: #aa1717;
+    transition-property: color;
+  }
+}
+@keyframes mint_char {
+  100% {
+    color: #aa1717;
+    transition-property: color;
+  }
+}
 </style>
+<script src="https://codepen.io/shshaw/pen/QmZYMG.js"></script>
 
 <div class="body-container">
 	<div class="main" style="clear: both;">
@@ -247,19 +364,41 @@ p {
 		</section>
 		<section>
 			<article
+				onclick="location.href='<%=cp%>/admin/rent/rental/list';">
+				<h2>대관관리</h2>
+				<p>대관 신청 목록, 대관 현황</p>
+			</article>
+		</section>
+		<section>
+			<article
 				onclick="location.href='<%=cp%>/admin/customer/question/questionlist';">
 				<h2>고객 관리</h2>
 				<p>문의글 목록 조회, 유실물 목록 관리</p>
 			</article>
 		</section>
 	</div>
+
+
+
+
+<div class="logo">
+		<span>L</span>
+		<span>u</span>
+		<span>m</span>
+		<span>o</span>
+		<span>s</span>
+		<span>B</span>
+		<span>u</span>
+		<span>s</span>
+		<span>i</span>
+		<span>n</span>
+		<span>e</span>
+		<span>s</span>
+		<span>s</span>
+</div>
+
+
 	
-	<div>
-		<video autoplay="autoplay"
-			poster="">
-			<source src="">
-		</video>
-	</div>
 </div>
 
 

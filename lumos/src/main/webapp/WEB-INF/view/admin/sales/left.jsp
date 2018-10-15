@@ -24,12 +24,12 @@ $(function(){
     	<button onclick="javascript:location.href='<%=cp%>/admin/sales/concert/salesList';">공연 매출 조회</button>
     </a>
     <a>
-    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/exhibit/exhibitSales';">전시 매출 조회</button>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/exhibit/salesList';">전시 매출 조회</button>
     </a>
     <a>
-    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/academy/academySales';">아카데미 매출 조회</button>
+    	<button onclick="javascript:location.href='<%=cp%>/admin/sales/academy/salesList';">아카데미 매출 조회</button>
     </a>
-    <a>
+<!--     <a>
     	<button onclick="javascript:location.href='#';">상품 매출 조회</button>
-    </a>
+    </a> -->
 </div> 

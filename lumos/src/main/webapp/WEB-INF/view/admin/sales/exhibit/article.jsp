@@ -14,7 +14,7 @@
 	border-top: 3px solid #072659;
 	border-bottom: 3px solid #072659;
 	border-radius: 50px;
-	background-image: url("<%=cp%>/resource/images/lumos/sample5.png");
+	background-image: url("<%=cp%>/resource/images/lumos/adminExArticle.png");
 }
 
 .exhibitNum {
@@ -154,8 +154,8 @@
 				<td>${dto.hallName}</td>
 			</tr>
 			<tr>
-				<th style="width: 230px;">전시일</th>
-				<td style="width: 300px;">${dto.exhibitStart}~
+				<th style="width: 300px;">전시일</th>
+				<td>${dto.exhibitStart}~
 					${dto.exhibitEnd}</td>
 			</tr>
 			<tr>

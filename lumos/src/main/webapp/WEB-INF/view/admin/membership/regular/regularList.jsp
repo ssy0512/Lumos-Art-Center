@@ -6,10 +6,25 @@
 	String cp = request.getContextPath();
 %>
 <style>
-.regularList-tr td{
-	height: 35px;
+.top {
+	margin-top: 15px;
 }
-
+.regularList {
+	margin: 0px;
+	width: 1380px;
+	border-spacing: 0px; border-collapse: collapse;
+}
+.regularList thead th, tbody td {
+	height: 45px;
+	text-align: center;
+}
+.regularList thead tr {
+	border-top: 1px solid #072659;
+	border-bottom: 1px solid #072659;
+}
+.regularList tbody td {
+	border-bottom: 1px solid #86888a;
+}
 .regularList-tr:hover{
 	cursor: pointer;
 }
@@ -24,27 +39,12 @@
 
 <div class="body-right" style="width: 1380px; height: 800px;">
 	<c:if test="${dataCount!=0}">
-		<div style="width: 1380px; height: 35px; margin-top: 15px;">
-			<div style="width: 200px; float: left; margin-left: 10px">
-				${dataCount}개(${page}/${total_page} 페이지)
-			</div>
-			
-			<div style="float: right; text-align: center;">
-				<form action="searchForm" action="<%=cp%>/admin/membership/regular/regularList" method="post">
-					<select name="searchKey" class="selectField">
-						<option value="memberIndex">회원번호</option>
-						<option value="userId">아이디</option>
-						<option value="userName">이름</option>
-						<option value="phone">연락처</option>
-					</select> <input type="text" name="searchValue" class="boxTF">
-					<button type="button" class="btn" onclick="searchList()" style="width: 60px;">검색</button>
-				</form>
-			</div>
+		<div class="top">
+			<img src="<%=cp %>/resource/images/lumos/adminMemRegular.png">
 		</div>
-
 		<div style="clear: both; margin-top: 5px;">
-			<table style="width: 1380px; margin: 0px; border-spacing: 0px; border-collapse: collapse;">
-				<thead style="background-color: #efefef;">
+			<table class="regularList">
+				<thead>
 					<tr style="height: 30px;">
 						<th style="width: 100px;">회원번호</th>
 						<th style="width: 130px;">아이디</th>
@@ -60,8 +60,7 @@
 
 				<tbody>
 					<c:forEach var="dto" items="${list}">
-						<tr class="regularList-tr" align="center" style="border-bottom: 1px solid #cccccc;"
-							onclick="location.href='<%=cp%>/admin/membership/regular/article?page=${page}&memberIndex=${dto.memberIndex}'">
+						<tr onclick="location.href='<%=cp%>/admin/membership/regular/article?page=${page}&memberIndex=${dto.memberIndex}'">
 							<td>${dto.memberIndex}</td>
 							<td>${dto.userId}</td>
 							<td>${dto.userName}</td>
@@ -76,6 +75,28 @@
 				</tbody>
 			</table>
 		</div>
+		
+		<div style="width: 1380px; height: 35px; margin-top: 15px;">
+			<div style="width: 200px; float: left; margin-left: 10px">
+				${dataCount}개(${page}/${total_page} 페이지)
+			</div>
+			
+			<div style="float: right; text-align: center;">
+				<form action="searchForm" action="<%=cp%>/admin/membership/regular/regularList" method="post">
+					<select name="searchKey" class="selectField">
+						<option value="memberIndex">회원번호</option>
+						<option value="userId">아이디</option>
+						<option value="userName">이름</option>
+						<option value="phone">연락처</option>
+					</select>
+					
+					<input type="text" name="searchValue" class="boxTF">
+					
+					<button type="button" class="btn" onclick="searchList()" style="width: 60px;">검색</button>
+				</form>
+			</div>
+		</div>
+		
 	</c:if>
 	<div class="paging"
 		style="text-align: center; min-height: 50px; line-height: 50px;">

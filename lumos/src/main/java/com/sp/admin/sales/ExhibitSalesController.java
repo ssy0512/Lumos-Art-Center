@@ -213,12 +213,6 @@ public class ExhibitSalesController {
 		return ".admin4.sales.exhibit.article";
 	}
 	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/admin/sales/exhibit/total")
 	public String listTotal(
 			@RequestParam(value = "page", defaultValue = "1") int current_page,

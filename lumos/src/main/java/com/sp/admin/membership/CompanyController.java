@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sp.common.AdminUtil;
@@ -166,7 +167,6 @@ public class CompanyController {
         }
         
         String paging = adminUtil.paging(current_page, total_page, listUrl);
-        model.addAttribute("subMenu", "2");
         
         model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);
@@ -178,13 +178,14 @@ public class CompanyController {
 		return ".admin4.membership.company.companyListCards";
 	}
 
-	@RequestMapping(value="/admin/membership/company/article")
+	@RequestMapping(value="/admin/membership/company/article", method = RequestMethod.GET)
 	public String article(
 			@RequestParam(value="companyIndex") int companyIndex,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="searchKey", defaultValue="companyIndex") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
 			HttpSession session,
+			HttpServletRequest req,
 			Model model) throws Exception {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
